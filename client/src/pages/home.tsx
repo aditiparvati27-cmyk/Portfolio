@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Mail, Linkedin, FileText, Download, ArrowRight, BookOpen, ExternalLink } from "lucide-react";
 import heroBg from "@assets/generated_images/minimalist_abstract_architectural_shapes_in_soft_white_and_light_gray.png";
+import profilePhoto from "@assets/WhatsApp_Image_2025-12-26_at_7.27.54_PM_1766757495634.jpeg";
 
 export default function Home() {
   const experiences = [
@@ -134,6 +135,19 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="space-y-6 relative z-10"
           >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="inline-block"
+            >
+              <img 
+                src={profilePhoto} 
+                alt="Aditi Parvati" 
+                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-border shadow-sm"
+              />
+            </motion.div>
+            
             <div className="inline-block">
               <Badge variant="outline" className="px-3 py-1 text-sm font-normal rounded-full border-primary/20 bg-primary/5 text-primary">
                 Product Manager
