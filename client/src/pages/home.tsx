@@ -129,50 +129,54 @@ export default function Home() {
         
         {/* Hero Section */}
         <section className="mb-32 relative">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6 relative z-10"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+            {/* Text Content */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6 relative z-10"
+            >
+              <div className="inline-block">
+                <Badge variant="outline" className="px-3 py-1 text-sm font-normal rounded-full border-primary/20 bg-primary/5 text-primary">
+                  Product Manager
+                </Badge>
+              </div>
+              <h1 className="font-serif text-5xl md:text-6xl font-medium leading-[1.1] tracking-tight text-primary">
+                Aditi Parvati
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
+                Designing scalable solutions and driving product growth through data-driven strategies and empathetic user experiences.
+              </p>
+              
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Button className="rounded-full px-8 py-6 text-base" asChild>
+                  <a href="mailto:aditiparvati27@gmail.com">
+                    <Mail className="mr-2 h-4 w-4" /> Get in Touch
+                  </a>
+                </Button>
+                <Button variant="outline" className="rounded-full px-8 py-6 text-base" asChild>
+                  <a href="/attached_assets/Aditi-Parvati_Resume_(26)_1766756461117.pdf" target="_blank" download>
+                    <Download className="mr-2 h-4 w-4" /> Download Resume
+                  </a>
+                </Button>
+              </div>
+            </motion.div>
+
+            {/* Profile Photo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="inline-block"
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden md:flex justify-end items-start"
             >
               <img 
                 src={profilePhoto} 
                 alt="Aditi Parvati" 
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-border shadow-sm"
+                className="w-80 h-80 object-cover border border-border shadow-sm"
               />
             </motion.div>
-            
-            <div className="inline-block">
-              <Badge variant="outline" className="px-3 py-1 text-sm font-normal rounded-full border-primary/20 bg-primary/5 text-primary">
-                Product Manager
-              </Badge>
-            </div>
-            <h1 className="font-serif text-5xl md:text-7xl font-medium leading-[1.1] tracking-tight text-primary">
-              Aditi Parvati
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-light">
-              Designing scalable solutions and driving product growth through data-driven strategies and empathetic user experiences.
-            </p>
-            
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button className="rounded-full px-8 py-6 text-base" asChild>
-                <a href="mailto:aditiparvati27@gmail.com">
-                  <Mail className="mr-2 h-4 w-4" /> Get in Touch
-                </a>
-              </Button>
-              <Button variant="outline" className="rounded-full px-8 py-6 text-base" asChild>
-                <a href="/attached_assets/Aditi-Parvati_Resume_(26)_1766756461117.pdf" target="_blank" download>
-                  <Download className="mr-2 h-4 w-4" /> Download Resume
-                </a>
-              </Button>
-            </div>
-          </motion.div>
+          </div>
 
            {/* Abstract Background Element */}
            <motion.div 
