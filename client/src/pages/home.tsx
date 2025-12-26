@@ -3,7 +3,7 @@ import { Roadmap } from "@/components/roadmap";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Mail, Linkedin, FileText, Download, ArrowRight } from "lucide-react";
+import { Mail, Linkedin, FileText, Download, ArrowRight, BookOpen, ExternalLink } from "lucide-react";
 import heroBg from "@assets/generated_images/minimalist_abstract_architectural_shapes_in_soft_white_and_light_gray.png";
 
 export default function Home() {
@@ -68,7 +68,9 @@ export default function Home() {
       location: "Hanover, NH",
       period: "Expected Dec 2026",
       description: [
-        "Coursework: Marketing, Product Management, Operations Management, Strategy, Technology Assessment, Negotiations"
+        "Coursework: Marketing, Product Management, Operations Management, Strategy, Technology Assessment, Negotiations",
+        "Teaching Assistant for Technology Assessment",
+        "Focus Areas: Product Management and New Product Development"
       ]
     },
     {
@@ -77,7 +79,10 @@ export default function Home() {
       company: "Dayananda Sagar College of Engineering",
       location: "Bengaluru, India",
       period: "Jun 2024",
-      description: []
+      description: [
+        "Core Member of the Finance Club",
+        "Active in Entrepreneurship and Innovation Club and Public Relations and Operations"
+      ]
     }
   ];
 
@@ -113,6 +118,7 @@ export default function Home() {
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#experience" className="hover:text-primary transition-colors">Experience</a>
             <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
+            <a href="#blogs" className="hover:text-primary transition-colors">Blogs</a>
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           </div>
         </div>
@@ -234,6 +240,62 @@ export default function Home() {
                 </p>
               </motion.div>
             ))}
+          </div>
+        </section>
+
+        {/* Blogs Section */}
+        <section id="blogs" className="mb-32">
+          <h2 className="font-serif text-3xl mb-12">Latest Articles</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <motion.a
+              href="https://medium.com/@aditiparvati2/password-less-authentication-85cef1b67181"
+              target="_blank"
+              rel="noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="group relative p-6 bg-card border border-border/50 hover:border-border transition-colors rounded-lg hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <BookOpen className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">Medium</span>
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold group-hover:text-primary transition-colors">Passwordless Authentication</h3>
+                </div>
+                <ExternalLink className="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all text-muted-foreground shrink-0 ml-2" />
+              </div>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Exploring the future of authentication and how passwordless systems are transforming security.
+              </p>
+            </motion.a>
+
+            <motion.a
+              href="https://medium.com/@aditiparvati2/the-new-era-of-brand-discovery-why-enterprises-need-visibility-inside-ai-models-45ab91388a92"
+              target="_blank"
+              rel="noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="group relative p-6 bg-card border border-border/50 hover:border-border transition-colors rounded-lg hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <BookOpen className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">Medium</span>
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold group-hover:text-primary transition-colors">Brand Discovery in AI Models</h3>
+                </div>
+                <ExternalLink className="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all text-muted-foreground shrink-0 ml-2" />
+              </div>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                The new era of brand discovery: Why enterprises need visibility inside AI models.
+              </p>
+            </motion.a>
           </div>
         </section>
 
