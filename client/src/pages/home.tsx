@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Roadmap } from "@/components/roadmap";
+import { CaseStudyCard } from "@/components/case-study-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -270,83 +271,24 @@ export default function Home() {
 
         {/* Case Studies Section */}
         <section id="case-studies" className="mb-32">
-          <h2 className="font-serif text-3xl mb-12">Case Studies</h2>
-          {caseStudies.map((caseStudy, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="space-y-3">
-                <h3 className="font-serif text-3xl font-semibold text-foreground">{caseStudy.title}</h3>
-                <p className="text-lg text-muted-foreground font-light">{caseStudy.subtitle}</p>
-                <Badge variant="secondary" className="text-sm py-1.5 px-3 font-normal">{caseStudy.company}</Badge>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                    <span className="inline-block w-1 h-1 rounded-full bg-primary" />
-                    The Situation
-                  </h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {caseStudy.situation}
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                    <span className="inline-block w-1 h-1 rounded-full bg-primary" />
-                    My Approach
-                  </h4>
-                  <ul className="space-y-2">
-                    {caseStudy.approach.map((item, idx) => (
-                      <li key={idx} className="flex gap-3 text-muted-foreground leading-relaxed">
-                        <span className="block mt-1.5 h-1 w-1 rounded-full bg-muted-foreground shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="bg-secondary/30 border border-border/50 rounded-lg p-6">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                    <TrendingUp className="h-6 w-6 text-primary shrink-0" />
-                    <div>
-                      <p className="text-sm uppercase tracking-wider text-muted-foreground font-medium mb-1">Impact</p>
-                      <p className="text-foreground font-semibold">{caseStudy.impact}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-card border border-border/50 rounded-lg p-6">
-                  <p className="text-foreground leading-relaxed">
-                    <span className="font-semibold">Outcome: </span>
-                    <span className="text-muted-foreground">{caseStudy.outcome}</span>
-                  </p>
-                </div>
-
-                {caseStudy.screenshot && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true }}
-                    className="mt-8"
-                  >
-                    <img 
-                      src={caseStudy.screenshot} 
-                      alt={`${caseStudy.title} screenshot`}
-                      className="w-full rounded-lg border border-border/50 shadow-sm"
-                    />
-                  </motion.div>
-                )}
-              </div>
-            </motion.div>
-          ))}
+          <h2 className="font-serif text-3xl mb-8">Case Studies</h2>
+          <p className="text-muted-foreground mb-8">Click on any case study to explore the details of my work</p>
+          <div className="space-y-4">
+            {caseStudies.map((caseStudy, i) => (
+              <CaseStudyCard
+                key={i}
+                title={caseStudy.title}
+                subtitle={caseStudy.subtitle}
+                company={caseStudy.company}
+                situation={caseStudy.situation}
+                approach={caseStudy.approach}
+                impact={caseStudy.impact}
+                outcome={caseStudy.outcome}
+                screenshot={caseStudy.screenshot}
+                index={i}
+              />
+            ))}
+          </div>
         </section>
 
         {/* Projects Section */}
