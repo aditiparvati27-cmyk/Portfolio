@@ -224,6 +224,11 @@ export default function Home() {
               
               <div className="flex flex-wrap gap-4 pt-4">
                 <Button className="rounded-full px-8 py-6 text-base" asChild>
+                  <a href="https://www.linkedin.com/in/aditi-parvati/" target="_blank" rel="noreferrer">
+                    <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
+                  </a>
+                </Button>
+                <Button className="rounded-full px-8 py-6 text-base" asChild>
                   <a href="mailto:aditiparvati27@gmail.com">
                     <Mail className="mr-2 h-4 w-4" /> Get in Touch
                   </a>
@@ -241,12 +246,12 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="hidden md:flex justify-end items-start"
+              className="hidden md:flex justify-center md:justify-end items-start pt-4"
             >
               <img 
                 src={profilePhoto} 
                 alt="Aditi Parvati" 
-                className="w-80 h-80 object-cover border border-border shadow-sm"
+                className="w-72 h-72 md:w-80 md:h-80 object-cover border border-border shadow-sm rounded-sm"
               />
             </motion.div>
           </div>
@@ -431,7 +436,7 @@ export default function Home() {
                 <span>Email</span>
               </a>
               <a 
-                href="https://www.linkedin.com" 
+                href="https://www.linkedin.com/in/aditi-parvati/" 
                 target="_blank" 
                 rel="noreferrer"
                 className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors"
