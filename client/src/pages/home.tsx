@@ -116,30 +116,67 @@ export default function Home() {
       subtitle: "How I generated $1.5M in upsell revenue and gave teams their time back",
       company: "Apsona Inc.",
       situation: "When I joined Apsona's Renewals team, I noticed something: we were losing revenue not because customers didn't want to renew, but because our procurement process was clunky. Payment delays meant late renewals. Manual outreach meant missed opportunities. A 3-person team was drowning in administrative work instead of strategic customer conversations.",
-      approach: [
-        "Shadowed the renewals team for about a month, understanding the key pain points—broken workflows and technical bugs.",
-        "Analyzed how our backend payment system and automation worked to identify leverage points.",
-        "Built Salesforce workflows and revisited our quote-to-cash workflow first on Sandbox, then Production.",
-        "Rolled out the automation in Developer Console, followed by full Production rollout."
+      situationDetails: "The Renewals team was handling 1,800+ accounts manually. Each renewal cycle meant countless back-and-forth emails, manual invoice generation, and payment chasing. Customers wanted to renew, but the friction in the process created delays that translated directly to revenue loss. The team had no visibility into at-risk accounts, no way to automate communications, and no systematic approach to procurement workflows.",
+      approachTitle: "My Approach",
+      approachDetails: [
+        {
+          subtitle: "Shadow & Listen (Week 1)",
+          description: "I shadowed the renewals team for about a month, understanding the key pain points—broken workflows, technical bugs, and inefficiencies in our Salesforce setup. I mapped every step: quote generation, approval, invoice delivery, payment, and renewal confirmation."
+        },
+        {
+          subtitle: "Analyze & Design (Week 2-3)",
+          description: "I analyzed how our backend payment system and Salesforce automation worked to identify leverage points. I identified three critical bottlenecks: quote approval delays, manual invoice processing, and reactive payment follow-ups."
+        },
+        {
+          subtitle: "Build & Test (Week 4-6)",
+          description: "I built Salesforce workflows from scratch and revisited our quote-to-cash workflow. First on Sandbox to test edge cases, then refined based on team feedback. I designed workflows that automatically triggered customer communications at each stage."
+        },
+        {
+          subtitle: "Implement & Rollout (Week 7-8)",
+          description: "Rolled out the automation in Developer Console, followed by full Production rollout. I trained the team on the new workflows and established weekly KPI reviews to track renewal velocity and identify at-risk accounts."
+        }
       ],
       impact: "$1.5M in upsell revenue | 67% reduction in delayed payments | 3-person team freed up for strategic work",
-      outcome: "The Renewal Machine transformed our revenue operations from reactive to proactive, empowering the team to focus on customer relationships instead of admin work."
+      outcome: "The Renewal Machine transformed our revenue operations from reactive to proactive. What took 3 people 40+ hours per week of manual work now runs on automation. The team shifted from administrative drudgery to strategic account management, proactively identifying at-risk accounts and having time for meaningful customer conversations. The automated workflows became repeatable, scalable, and—most importantly—revenue-generating."
     },
     {
       title: "Turning an Unstructured Backlog into a High-Impact Product Roadmap",
       subtitle: "How I built a system that accelerated delivery velocity by 25% using RICE prioritization",
       company: "The Media Ant",
-      situation: "When I joined as a Product Manager Intern, the company had 85+ features scattered across different tracking systems—some duplicated, some half-baked ideas. There was no consistent format, no shared prioritization framework, and no visibility across teams. The Head of Product said: \"Help me evaluate which features matter most.\"",
-      approach: [
-        "Shadowed stakeholders across Product, Engineering, Business Units, and Customer Success to understand pain points—no shared language, no shared criteria for prioritization.",
-        "Evaluated five product management platforms (Aha!, Productboard, Jira Product Discovery) against our needs: prioritization framework, hierarchy support, Jira integration, stakeholder visibility, and low learning curve.",
-        "Recommended Jira Product Discovery—60% cheaper, native Jira integration, and could be implemented in 2 weeks.",
-        "Facilitated cross-functional RICE scoring sessions with Product, Engineering, Sales, and Business Unit leads for each feature.",
-        "Implemented weekly roadmap review sessions with the CEO, CTO, and leadership team for transparency and alignment."
+      situation: "When I joined as a Product Manager Intern, the company had 85+ features scattered across different tracking systems. Some were months old, some were duplicates, and some were half-baked ideas from customer calls. There was no consistent format—one feature might be \"improve dashboard\", while another was a detailed 10-page spec. The Head of Product said: \"Help me evaluate which features matter most.\"",
+      situationDetails: "I opened the backlog and found chaos: features in Google Sheets, Slack messages, and people's heads. Product, Engineering, Sales, and Business Units all had different opinions on what to build next, but no shared framework for making decisions. Sprint planning was contentious—heated discussions with no data. Product team outputs were inconsistent: some projects had PRDs, some had FRDs, some had BRDs, and many had none at all.",
+      approachTitle: "My Approach",
+      approachDetails: [
+        {
+          subtitle: "Diagnose the Problem",
+          description: "I spent Week 1 shadowing 8 stakeholder meetings across Product, Engineering, Business Units, R&D, Marketing, and Customer Success. What I discovered: no shared language, no shared prioritization criteria, no visibility into what was in flight, and no tool to manage it all. Everyone had strong opinions based on their own department's needs."
+        },
+        {
+          subtitle: "Evaluate Solutions",
+          description: "I evaluated five product management platforms (Aha!, Productboard, Jira Product Discovery, Linear, and Coda) against our specific needs: built-in RICE scoring for objective decision-making, Jira integration since engineers already lived there, stakeholder visibility for Sales and Business Units, hierarchy support (Epics → Features → User Stories → Bugs), and low learning curve for a small team."
+        },
+        {
+          subtitle: "Recommend & Justify",
+          description: "I recommended Jira Product Discovery: 60% cheaper than Aha!, native Jira integration, built-in RICE framework, and could be implemented in 2 weeks vs. 6–8 weeks for alternatives. Presented a cost-benefit analysis to the Head of Product."
+        },
+        {
+          subtitle: "Build the System",
+          description: "I couldn't prioritize 85 features alone. I facilitated cross-functional scoring sessions with Product, Engineering, Sales, and Business Unit leads. For each feature, we discussed Reach (users impacted per quarter), Impact (business value), Confidence (certainty), and Effort (person-months). RICE Score = (Reach × Impact × Confidence) / Effort."
+        },
+        {
+          subtitle: "Drive Adoption",
+          description: "Once the roadmap was built, I established weekly roadmap review sessions with the CEO, CTO, COO, and leadership. Every week, they saw what was being built, which stage it was in, and why each initiative mattered. This transparency and alignment eliminated surprise feature requests and emergency pivots."
+        }
       ],
-      impact: "Sprint velocity increased by ~25% | Features representing $2.2M in ARR delivered faster | Cross-functional alignment reduced 'emergency' requests from Sales",
-      outcome: "The prioritization system unlocked speed through structure. By breaking the backlog into a clear hierarchy (Epics → Projects → Features → Bugs) and involving stakeholders in RICE scoring, we transformed how the company made decisions—with everyone aligned on why each initiative mattered.",
-      screenshot: jiraScreenshot
+      impact: "Sprint velocity increased by ~25% | Features representing $2.2M in ARR delivered faster due to focused, prioritized work | Cross-functional alignment reduced 'emergency' requests from Sales by ~40%",
+      outcome: "The prioritization system unlocked speed through structure. By breaking the backlog into a clear hierarchy (Epics → Projects → Features → Bugs) and involving stakeholders in RICE scoring, we transformed how the company made decisions. Even when their pet feature was deprioritized, stakeholders understood why. The result: faster delivery, less context switching, better team morale, and revenue that aligned with product strategy.",
+      screenshot: jiraScreenshot,
+      keyLearnings: [
+        "Prioritization is as much about people as data. RICE provided objectivity, but the real work was facilitating conversations where Product, Sales, and Engineering could see the same truth.",
+        "Structure unlocks speed. Breaking the mess into a clear hierarchy gave everyone a shared mental model.",
+        "A framework is worthless without buy-in. I could have scored features alone in a spreadsheet, but involving stakeholders meant they owned the roadmap.",
+        "Tools should fit your team—not the other way around. Adoption beats perfection."
+      ]
     }
   ];
 
@@ -281,10 +318,13 @@ export default function Home() {
                 subtitle={caseStudy.subtitle}
                 company={caseStudy.company}
                 situation={caseStudy.situation}
-                approach={caseStudy.approach}
+                situationDetails={(caseStudy as any).situationDetails}
+                approachTitle={(caseStudy as any).approachTitle}
+                approachDetails={(caseStudy as any).approachDetails}
                 impact={caseStudy.impact}
                 outcome={caseStudy.outcome}
-                screenshot={caseStudy.screenshot}
+                screenshot={(caseStudy as any).screenshot}
+                keyLearnings={(caseStudy as any).keyLearnings}
                 index={i}
               />
             ))}
