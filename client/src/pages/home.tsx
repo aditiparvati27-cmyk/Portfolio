@@ -17,6 +17,7 @@ export default function Home() {
       company: "Apsona Inc. (B2B SaaS)",
       location: "Bengaluru, India",
       period: "Sep 2024 - Aug 2025",
+      companyDescription: "Apsona is a B2B SaaS company that builds native Salesforce applications for nonprofit and education organizations, helping them manage donor, student, and constituent data. Its products streamline CRM workflows, reporting, and data management directly within the Salesforce ecosystem.",
       description: [
         "Improved Technical Sales and Revenue Operations efficiency by reducing invoice processing time by 80% through redesign of Salesforce-based workflows.",
         "Generated $1.5M in upsell revenue and reduced delayed payments by 67% by designing end-to-end renewal lifecycle workflows.",
@@ -32,6 +33,7 @@ export default function Home() {
       company: "Kinara Capital",
       location: "Bengaluru, India",
       period: "May 2024 - Jul 2024",
+      companyDescription: "Kinara Capital is a socially responsible fintech committed to driving last-mile financial inclusion for small business entrepreneurs in India. Kinara's AI/ML-driven risk assessment has empowered over 1 Lakh+ MSME customers across 300+ sub-sectors with seamless loan approvals and disbursements in just 24 hours. Recognized as one of 'India's Growth Champions' by the Economic Times.",
       description: [
         "Reduced CRM platform costs by 80% through vendor cost analysis and leading stakeholder interviews.",
         "Coordinated cross-functional workshops and prepared BRDs for a new Loan Management System."
@@ -44,6 +46,7 @@ export default function Home() {
       company: "The Media Ant",
       location: "Bengaluru, India",
       period: "Feb 2024 - May 2024",
+      companyDescription: "The Media Ant is a platform for media discovery, planning, and execution of marketing campaigns. Since 2012, it has served 3,500+ brands, offering 350,000+ advertising options across 12 media categories, powered by in-house AI tools that provide marketers with actionable insights for better decision-making.",
       description: [
         "Accelerated time-to-market by ~25% for features representing $2.2M in ARR using RICE prioritization.",
         "Reduced manual campaign setup effort by 70% by translating user research into UX wireframes."

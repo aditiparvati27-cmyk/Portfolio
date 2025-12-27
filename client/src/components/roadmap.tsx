@@ -10,6 +10,7 @@ interface RoadmapItem {
   location: string;
   period: string;
   description: string[];
+  companyDescription?: string;
   skills?: string[];
 }
 
@@ -47,6 +48,9 @@ export function Roadmap({ items }: RoadmapProps) {
               <span className="text-muted-foreground font-normal text-sm hidden sm:inline">• {item.location}</span>
             </div>
             <div className="text-sm text-muted-foreground sm:hidden mt-1">{item.location}</div>
+            {item.companyDescription && (
+              <p className="text-sm text-muted-foreground mt-3 leading-relaxed italic">{item.companyDescription}</p>
+            )}
           </div>
 
           <div className="text-muted-foreground leading-relaxed text-sm md:text-base space-y-2">
