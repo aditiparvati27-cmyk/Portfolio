@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Mail, Linkedin, FileText, Download, ArrowRight, BookOpen, ExternalLink, TrendingUp, Users } from "lucide-react";
 import heroBg from "@assets/generated_images/minimalist_abstract_architectural_shapes_in_soft_white_and_light_gray.png";
 import profilePhoto from "@assets/WhatsApp_Image_2025-12-26_at_7.27.54_PM_1766757495634.jpeg";
+import jiraScreenshot from "@assets/image_1766854017021.png";
 
 export default function Home() {
   const experiences = [
@@ -122,6 +123,22 @@ export default function Home() {
       ],
       impact: "$1.5M in upsell revenue | 67% reduction in delayed payments | 3-person team freed up for strategic work",
       outcome: "The Renewal Machine transformed our revenue operations from reactive to proactive, empowering the team to focus on customer relationships instead of admin work."
+    },
+    {
+      title: "The Mess I Walked Into",
+      subtitle: "How I built a system that accelerated delivery velocity by 25% using RICE prioritization",
+      company: "The Media Ant",
+      situation: "When I joined as a Product Manager Intern, the company had 85+ features scattered across different tracking systems—some duplicated, some half-baked ideas. There was no consistent format, no shared prioritization framework, and no visibility across teams. The Head of Product said: \"Help me evaluate which features matter most.\"",
+      approach: [
+        "Shadowed stakeholders across Product, Engineering, Business Units, and Customer Success to understand pain points—no shared language, no shared criteria for prioritization.",
+        "Evaluated five product management platforms (Aha!, Productboard, Jira Product Discovery) against our needs: prioritization framework, hierarchy support, Jira integration, stakeholder visibility, and low learning curve.",
+        "Recommended Jira Product Discovery—60% cheaper, native Jira integration, and could be implemented in 2 weeks.",
+        "Facilitated cross-functional RICE scoring sessions with Product, Engineering, Sales, and Business Unit leads for each feature.",
+        "Implemented weekly roadmap review sessions with the CEO, CTO, and leadership team for transparency and alignment."
+      ],
+      impact: "Sprint velocity increased by ~25% | Features representing $2.2M in ARR delivered faster | Cross-functional alignment reduced 'emergency' requests from Sales",
+      outcome: "The prioritization system unlocked speed through structure. By breaking the backlog into a clear hierarchy (Epics → Projects → Features → Bugs) and involving stakeholders in RICE scoring, we transformed how the company made decisions—with everyone aligned on why each initiative mattered.",
+      screenshot: jiraScreenshot
     }
   ];
 
@@ -311,6 +328,22 @@ export default function Home() {
                     <span className="text-muted-foreground">{caseStudy.outcome}</span>
                   </p>
                 </div>
+
+                {caseStudy.screenshot && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                    className="mt-8"
+                  >
+                    <img 
+                      src={caseStudy.screenshot} 
+                      alt={`${caseStudy.title} screenshot`}
+                      className="w-full rounded-lg border border-border/50 shadow-sm"
+                    />
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           ))}

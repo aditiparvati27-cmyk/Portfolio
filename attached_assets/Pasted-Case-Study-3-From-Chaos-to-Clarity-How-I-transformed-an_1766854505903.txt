@@ -1,0 +1,26 @@
+Case Study 3: From Chaos to Clarity
+How I transformed an 85-feature backlog into a strategic roadmap that accelerated delivery by 25%
+
+The Mess I Walked Into
+It was my second week at The Media Ant when I sat in on a sprint planning meeting. The product team was debating which feature to build next - a heated discussion between engineering, sales, and the business unit. Everyone had opinions, but no one had data.
+When I opened the backlog later that day, I understood why. 85+ features scattered across different tracking systems. Some were months old, some were duplicates, some were half-baked ideas from customer calls. There was no consistent format - one "feature" might be "improve dashboard" while another was a detailed 10-page spec.
+The head of product pulled me aside: "We need to get a handle on this. Engineering doesn't know what to build. Sales keeps promising features we haven't prioritized. Can you help us figure out what actually matters?"
+I'd seen prioritization frameworks in theory, but this was my first time applying one at scale. The challenge wasn't just evaluating features - it was creating a system that the entire company could rally behind.
+
+Diagnosing the Real Problem
+Before jumping to solutions, I spent time understanding why this chaos existed:
+Week 1: Shadow & Listen
+
+Joined 8 stakeholder meetings (product, eng, sales, marketing, customer success)
+Sat in on 3 customer calls to hear feature requests in real-time
+Asked engineers: "What frustrates you most about our current process?"
+Asked sales: "Why do you keep pushing for features that don't get built?"
+
+What I Discovered:
+
+No shared language: Engineering called things "tasks," sales called them "promises," product called them "initiatives"
+No shared criteria: Features were chosen based on who shouted loudest, not what drove business value
+No visibility: Nobody knew what was in flight, what was next, or when things would ship
+No tool: Everything lived in Google Sheets, Slack messages, and people's heads
+
+The head of product said: "Help me evaluate which features matter most. Then find us a tool that can make this visible to everyone."

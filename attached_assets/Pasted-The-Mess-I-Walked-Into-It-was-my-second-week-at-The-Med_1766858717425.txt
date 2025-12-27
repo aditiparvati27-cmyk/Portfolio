@@ -1,0 +1,137 @@
+The Mess I Walked Into
+
+It was my second week at The Media Ant when I sat in on a sprint planning meeting. The product team was debating which feature to build next—a heated discussion between engineering, sales, and the business unit. Everyone had opinions, but no one had data.
+
+When I opened the backlog later that day, I understood why.
+
+There were 85+ features scattered across different tracking systems. Some were months old, some were duplicates, and some were half-baked ideas from customer calls. There was no consistent format—one “feature” might be “improve dashboard”, while another was a detailed 10-page spec.
+
+The Head of Product pulled me aside and said:
+“We need to work on this.”
+
+I’d seen prioritization frameworks in theory, but this was my first time applying one at scale. The challenge wasn’t just evaluating features—it was creating a system the entire company could rally behind.
+
+Diagnosing the Real Problem
+
+Before jumping to solutions, I spent time understanding why this chaos existed.
+
+Week 1: Shadow & Listen
+
+I joined 8 stakeholder meetings across Product, Engineering, Business Units (Digital, Radio, Sports Teams), R&D Marketing, and Customer Success.
+
+What I Discovered
+
+No shared language: Engineering called them tasks, Sales called them promises, Product called them initiatives
+
+No shared criteria: Features were chosen based on who shouted the loudest, not business value
+
+No visibility: No one knew what was in flight, what was next, or when things would ship
+
+No tool: Everything lived in Google Sheets, Slack messages, and people’s heads
+
+Even the product team’s outputs were inconsistent. Some projects had PRDs, some had FRDs, some had BRDs—and many had none at all. There was no standard way to create or track them.
+
+The Head of Product said:
+“Help me evaluate which features matter most. Then find us a tool that can make this visible to everyone.”
+
+Finding the Right Tool
+
+I evaluated five product management platforms against our specific needs.
+
+Criteria
+What We Needed	Why It Mattered
+Prioritization framework	Built-in RICE scoring for objective decision-making
+Hierarchy support	Epics → Features → User Stories → Bugs to clean up the backlog
+Jira integration	Engineers already lived in Jira
+Stakeholder visibility	Sales and Business Units needed roadmap access
+Low learning curve	Small team, no time for heavy onboarding
+The Finalists
+
+Aha! – Powerful, but too expensive for a startup
+
+Productboard – Great UI, but weak Jira integration
+
+Jira Product Discovery – Native Jira integration, built-in RICE, affordable
+
+My Recommendation: Jira Product Discovery
+
+Cost: ~60% cheaper than Aha!
+
+Adoption: Engineers already knew Jira
+
+Speed: Could be implemented in ~2 weeks vs. 6–8 weeks for alternatives
+
+The Head of Product approved it, and I became the champion for rolling it out.
+
+The RICE Prioritization Process
+
+I couldn’t prioritize 85 features alone—I needed input from people who understood users, technical constraints, and business goals.
+
+What is RICE?
+
+Reach: How many users will this impact per quarter?
+
+Impact: How much will this improve the user experience or business outcome?
+
+Confidence: How confident are we in our reach and impact estimates?
+
+Effort: How many person-months of work will it take?
+
+RICE Score = (Reach × Impact × Confidence) / Effort
+
+How We Applied It
+
+For each feature, I facilitated cross-functional scoring sessions with Product, Engineering, Sales, and Business Unit leads.
+
+Once the scores were in, the roadmap finally came into perspective.
+
+We sat down with the Business Unit Heads and Sales leadership, walked them through the findings, and mutually agreed on the projects to prioritize.
+
+Bringing Stakeholders Along
+
+Changing how a company prioritizes work isn’t just about math—it’s about people.
+
+Weekly Roadmap Review Sessions
+
+After I built the roadmap, the company started weekly roadmap review sessions.
+The CEO, CTO, COO, and leadership team now had a clear view of:
+
+What was being built
+
+What stage each project was in
+
+Why certain initiatives were prioritized
+
+The Impact
+
+Within 6 months of implementing this system:
+
+Delivery Velocity
+
+Sprint velocity increased by ~25% (measured by story points per sprint)
+
+Features representing $2.2M in ARR were delivered faster by focusing on high-impact work
+
+Improved time-to-market due to fewer mid-sprint scope changes
+
+Cross-Functional Alignment
+
+Product, Engineering, Sales, and Business Units aligned on one roadmap
+
+Fewer “emergency” requests from Sales
+
+Improved morale—engineers understood why they were building something and felt their time was respected
+
+What I Learned
+
+Prioritization is as much about people as it is about data
+RICE provided objectivity, but the real work was facilitating conversations where Product, Sales, and Engineering could see the same truth. The tool made the data visible; I made it actionable.
+
+Structure unlocks speed
+Breaking a messy backlog into Epics → Projects → Features → Bugs gave everyone a shared mental model. Engineers thought in sprints, Sales in quarters, and leadership in business outcomes.
+
+A framework is worthless without buy-in
+I could have scored all 85 features myself in a spreadsheet. But involving stakeholders meant they owned the roadmap. Even when their pet feature was deprioritized, they understood why.
+
+Tools should fit your team—not the other way around
+I could have chosen the “best” product management tool. Instead, I chose the one that fit our existing workflow. Adoption beats perfection
