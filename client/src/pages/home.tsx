@@ -3,7 +3,7 @@ import { Roadmap } from "@/components/roadmap";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Mail, Linkedin, FileText, Download, ArrowRight, BookOpen, ExternalLink } from "lucide-react";
+import { Mail, Linkedin, FileText, Download, ArrowRight, BookOpen, ExternalLink, TrendingUp, Users } from "lucide-react";
 import heroBg from "@assets/generated_images/minimalist_abstract_architectural_shapes_in_soft_white_and_light_gray.png";
 import profilePhoto from "@assets/WhatsApp_Image_2025-12-26_at_7.27.54_PM_1766757495634.jpeg";
 
@@ -108,6 +108,23 @@ export default function Home() {
      }
   ];
 
+  const caseStudies = [
+    {
+      title: "The Renewal Machine",
+      subtitle: "How I generated $1.5M in upsell revenue and gave teams their time back",
+      company: "Apsona Inc.",
+      situation: "When I joined Apsona's Renewals team, I noticed something: we were losing revenue not because customers didn't want to renew, but because our procurement process was clunky. Payment delays meant late renewals. Manual outreach meant missed opportunities. A 3-person team was drowning in administrative work instead of strategic customer conversations.",
+      approach: [
+        "Shadowed the renewals team for about a month, understanding the key pain points—broken workflows and technical bugs.",
+        "Analyzed how our backend payment system and automation worked to identify leverage points.",
+        "Built Salesforce workflows and revisited our quote-to-cash workflow first on Sandbox, then Production.",
+        "Rolled out the automation in Developer Console, followed by full Production rollout."
+      ],
+      impact: "$1.5M in upsell revenue | 67% reduction in delayed payments | 3-person team freed up for strategic work",
+      outcome: "The Renewal Machine transformed our revenue operations from reactive to proactive, empowering the team to focus on customer relationships instead of admin work."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/10">
       
@@ -118,6 +135,7 @@ export default function Home() {
           <div className="flex gap-6 text-sm font-medium">
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#experience" className="hover:text-primary transition-colors">Experience</a>
+            <a href="#case-studies" className="hover:text-primary transition-colors">Case Studies</a>
             <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
             <a href="#blogs" className="hover:text-primary transition-colors">Blogs</a>
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
@@ -231,6 +249,71 @@ export default function Home() {
         <section className="mb-32">
           <h2 className="font-serif text-3xl mb-12">Education</h2>
           <Roadmap items={education} />
+        </section>
+
+        {/* Case Studies Section */}
+        <section id="case-studies" className="mb-32">
+          <h2 className="font-serif text-3xl mb-12">Case Studies</h2>
+          {caseStudies.map((caseStudy, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div className="space-y-3">
+                <h3 className="font-serif text-3xl font-semibold text-foreground">{caseStudy.title}</h3>
+                <p className="text-lg text-muted-foreground font-light">{caseStudy.subtitle}</p>
+                <Badge variant="secondary" className="text-sm py-1.5 px-3 font-normal">{caseStudy.company}</Badge>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                    <span className="inline-block w-1 h-1 rounded-full bg-primary" />
+                    The Situation
+                  </h4>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {caseStudy.situation}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                    <span className="inline-block w-1 h-1 rounded-full bg-primary" />
+                    My Approach
+                  </h4>
+                  <ul className="space-y-2">
+                    {caseStudy.approach.map((item, idx) => (
+                      <li key={idx} className="flex gap-3 text-muted-foreground leading-relaxed">
+                        <span className="block mt-1.5 h-1 w-1 rounded-full bg-muted-foreground shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="bg-secondary/30 border border-border/50 rounded-lg p-6">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <TrendingUp className="h-6 w-6 text-primary shrink-0" />
+                    <div>
+                      <p className="text-sm uppercase tracking-wider text-muted-foreground font-medium mb-1">Impact</p>
+                      <p className="text-foreground font-semibold">{caseStudy.impact}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-card border border-border/50 rounded-lg p-6">
+                  <p className="text-foreground leading-relaxed">
+                    <span className="font-semibold">Outcome: </span>
+                    <span className="text-muted-foreground">{caseStudy.outcome}</span>
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </section>
 
         {/* Projects Section */}
