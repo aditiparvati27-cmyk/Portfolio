@@ -125,7 +125,7 @@ export default function Home() {
       outcome: "The Renewal Machine transformed our revenue operations from reactive to proactive, empowering the team to focus on customer relationships instead of admin work."
     },
     {
-      title: "The Mess I Walked Into",
+      title: "Turning an Unstructured Backlog into a High-Impact Product Roadmap",
       subtitle: "How I built a system that accelerated delivery velocity by 25% using RICE prioritization",
       company: "The Media Ant",
       situation: "When I joined as a Product Manager Intern, the company had 85+ features scattered across different tracking systems—some duplicated, some half-baked ideas. There was no consistent format, no shared prioritization framework, and no visibility across teams. The Head of Product said: \"Help me evaluate which features matter most.\"",
