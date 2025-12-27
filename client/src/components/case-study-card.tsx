@@ -59,21 +59,39 @@ export function CaseStudyCard({
           
           <AccordionContent className="px-6 py-6 space-y-8 border-t border-border/30">
             {/* The Situation */}
-            <div className="space-y-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-4"
+            >
               <h4 className="font-serif text-lg font-semibold text-foreground flex items-center gap-2">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary" />
+                <motion.span 
+                  className="inline-block w-1.5 h-1.5 rounded-full bg-primary"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
                 The Situation
               </h4>
               <div className="space-y-3 text-muted-foreground leading-relaxed">
                 <p>{situation}</p>
                 {situationDetails && <p>{situationDetails}</p>}
               </div>
-            </div>
+            </motion.div>
 
             {/* My Approach */}
-            <div className="space-y-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="space-y-4"
+            >
               <h4 className="font-serif text-lg font-semibold text-foreground flex items-center gap-2">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary" />
+                <motion.span 
+                  className="inline-block w-1.5 h-1.5 rounded-full bg-primary"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
                 {approachTitle || "My Approach"}
               </h4>
               {approachDetails && approachDetails.length > 0 ? (
@@ -86,10 +104,15 @@ export function CaseStudyCard({
                   ))}
                 </div>
               ) : null}
-            </div>
+            </motion.div>
 
             {/* Impact */}
-            <div className="bg-secondary/30 border border-border/50 rounded-lg p-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="bg-secondary/30 border border-border/50 rounded-lg p-6 hover:bg-secondary/40 transition-colors"
+            >
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <TrendingUp className="h-6 w-6 text-primary shrink-0" />
                 <div>
@@ -97,17 +120,27 @@ export function CaseStudyCard({
                   <p className="text-foreground font-semibold">{impact}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Outcome */}
-            <div className="bg-secondary/10 border border-border/50 rounded-lg p-6 space-y-3">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="bg-secondary/10 border border-border/50 rounded-lg p-6 space-y-3 hover:bg-secondary/20 transition-colors"
+            >
               <p className="text-foreground font-semibold">Outcome</p>
               <p className="text-muted-foreground leading-relaxed">{outcome}</p>
-            </div>
+            </motion.div>
 
             {/* Key Learnings */}
             {keyLearnings && keyLearnings.length > 0 && (
-              <div className="space-y-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                className="space-y-4"
+              >
                 <h4 className="font-serif text-lg font-semibold text-foreground flex items-center gap-2">
                   <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary" />
                   Key Learnings
@@ -120,7 +153,7 @@ export function CaseStudyCard({
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             )}
 
             {/* Screenshot */}

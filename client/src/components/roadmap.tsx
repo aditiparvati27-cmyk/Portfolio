@@ -31,7 +31,11 @@ export function Roadmap({ items }: RoadmapProps) {
           className="relative pl-8 md:pl-12"
         >
           {/* Timeline Dot */}
-          <div className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-primary ring-4 ring-background" />
+          <motion.div 
+            className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-primary ring-4 ring-background"
+            whileHover={{ scale: 1.3 }}
+            transition={{ duration: 0.3 }}
+          />
           
           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
             <h3 className="text-xl font-serif font-semibold text-foreground">{item.title}</h3>

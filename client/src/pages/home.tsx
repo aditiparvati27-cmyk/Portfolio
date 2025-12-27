@@ -277,47 +277,106 @@ export default function Home() {
 
         {/* About Section */}
         <section id="about" className="mb-32">
-          <h2 className="font-serif text-3xl mb-8">About Me</h2>
-          <div className="prose prose-lg text-muted-foreground leading-relaxed">
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="font-serif text-3xl mb-8"
+          >
+            About Me
+          </motion.h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="prose prose-lg text-muted-foreground leading-relaxed"
+          >
             <p className="mb-4">
               I am currently pursuing a Master's in Engineering Management at Dartmouth College, building on a strong technical foundation in Electronics and Communication Engineering.
             </p>
             <p>
               My professional journey spans across B2B SaaS, FinTech, and Marketing Tech, where I've successfully led product initiatives that reduced costs, optimized revenue operations, and enhanced user experiences. I thrive at the intersection of technology, business strategy, and user-centric design.
             </p>
-          </div>
+          </motion.div>
           
-          <div className="mt-12">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
             <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-6">Key Skills</h3>
             <div className="flex flex-wrap gap-2">
               {skills.map((skill, i) => (
-                <Badge key={i} variant="secondary" className="bg-secondary/50 hover:bg-secondary text-sm py-1.5 px-3 font-normal">
-                  {skill}
-                </Badge>
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.05 + i * 0.05 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                >
+                  <Badge variant="secondary" className="bg-secondary/50 hover:bg-secondary text-sm py-1.5 px-3 font-normal cursor-pointer transition-all">
+                    {skill}
+                  </Badge>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Experience Section */}
         <section id="experience" className="mb-32">
-          <div className="flex items-center justify-between mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex items-center justify-between mb-12"
+          >
             <h2 className="font-serif text-3xl">Professional Roadmap</h2>
             <span className="text-sm text-muted-foreground hidden sm:block">2023 — Present</span>
-          </div>
+          </motion.div>
           <Roadmap items={experiences} />
         </section>
 
         {/* Education Section */}
         <section className="mb-32">
-          <h2 className="font-serif text-3xl mb-12">Education</h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="font-serif text-3xl mb-12"
+          >
+            Education
+          </motion.h2>
           <Roadmap items={education} />
         </section>
 
         {/* Case Studies Section */}
         <section id="case-studies" className="mb-32">
-          <h2 className="font-serif text-3xl mb-8">Case Studies</h2>
-          <p className="text-muted-foreground mb-8">Click on any case study to explore the details of my work</p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="font-serif text-3xl mb-8"
+          >
+            Case Studies
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-muted-foreground mb-8"
+          >
+            Click on any case study to explore the details of my work
+          </motion.p>
           <div className="space-y-4">
             {caseStudies.map((caseStudy, i) => (
               <CaseStudyCard
@@ -341,7 +400,15 @@ export default function Home() {
 
         {/* Projects Section */}
         <section id="projects" className="mb-32">
-          <h2 className="font-serif text-3xl mb-12">Featured Projects</h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="font-serif text-3xl mb-12"
+          >
+            Featured Projects
+          </motion.h2>
           <div className="grid gap-6 md:grid-cols-2">
             {projects.map((project, i) => (
               <motion.div
@@ -350,7 +417,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative p-6 bg-card border border-border/50 hover:border-border transition-colors rounded-lg hover:shadow-sm"
+                whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
+                className="group relative p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
@@ -369,7 +437,15 @@ export default function Home() {
 
         {/* Blogs Section */}
         <section id="blogs" className="mb-32">
-          <h2 className="font-serif text-3xl mb-12">Latest Articles</h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="font-serif text-3xl mb-12"
+          >
+            Latest Articles
+          </motion.h2>
           <div className="grid gap-6 md:grid-cols-2">
             <motion.a
               href="https://medium.com/@aditiparvati2/password-less-authentication-85cef1b67181"
@@ -379,7 +455,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="group relative p-6 bg-card border border-border/50 hover:border-border transition-colors rounded-lg hover:shadow-sm"
+              whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
+              className="group relative p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
@@ -404,7 +481,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
-              className="group relative p-6 bg-card border border-border/50 hover:border-border transition-colors rounded-lg hover:shadow-sm"
+              whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
+              className="group relative p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
