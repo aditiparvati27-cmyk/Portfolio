@@ -266,7 +266,7 @@ export default function Home() {
                 </Button>
                 <Button className="rounded-full px-4 sm:px-8 py-4 sm:py-6 text-xs sm:text-base" asChild>
                   <a href="mailto:aditiparvati27@gmail.com">
-                    <Mail className="mr-2 h-3 sm:h-4 w-3 sm:w-4" /> Touch
+                    <Mail className="mr-2 h-3 sm:h-4 w-3 sm:w-4" /> Get in Touch
                   </a>
                 </Button>
                 <Button variant="outline" className="rounded-full px-4 sm:px-8 py-4 sm:py-6 text-xs sm:text-base" asChild>
@@ -361,6 +361,20 @@ export default function Home() {
           </motion.div>
         </section>
 
+        {/* Education Section */}
+        <section id="education" className="mb-20 sm:mb-32">
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="font-serif text-2xl sm:text-3xl mb-8 sm:mb-12"
+          >
+            Education
+          </motion.h2>
+          <Roadmap items={education} />
+        </section>
+
         {/* Experience Section */}
         <section id="experience" className="mb-20 sm:mb-32">
           <motion.div 
@@ -374,20 +388,6 @@ export default function Home() {
             <span className="text-xs sm:text-sm text-muted-foreground hidden sm:block">2023 — Present</span>
           </motion.div>
           <Roadmap items={experiences} />
-        </section>
-
-        {/* Education Section */}
-        <section className="mb-20 sm:mb-32">
-          <motion.h2 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="font-serif text-2xl sm:text-3xl mb-8 sm:mb-12"
-          >
-            Education
-          </motion.h2>
-          <Roadmap items={education} />
         </section>
 
         {/* Case Studies Section */}
