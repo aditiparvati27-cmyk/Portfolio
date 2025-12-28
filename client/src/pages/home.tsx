@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Roadmap } from "@/components/roadmap";
 import { CaseStudyCard } from "@/components/case-study-card";
+import { Chatbot } from "@/components/chatbot";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -611,6 +612,7 @@ export default function Home() {
         </section>
 
       </main>
+      <Chatbot />
     </div>
   );
 }
