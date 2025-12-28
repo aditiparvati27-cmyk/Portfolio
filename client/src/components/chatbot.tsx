@@ -13,7 +13,7 @@ export function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hi! I'm Aditi's AI assistant. Feel free to ask me about her experience, skills, projects, or background!",
+      content: "Hey! How are you doing? I'm Aditi - feel free to ask me anything about my experience, projects, or what I'm passionate about!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -126,7 +126,7 @@ export function Chatbot() {
                   <span className="text-primary-foreground text-sm font-semibold">AP</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm">Aditi's Assistant</h3>
+                  <h3 className="font-semibold text-sm">Chat with Aditi</h3>
                   <p className="text-xs text-muted-foreground">Ask me anything!</p>
                 </div>
               </div>
