@@ -113,6 +113,39 @@ export default function Home() {
      }
   ];
 
+  const certifications = [
+    {
+      title: "Agile With Atlassian Jira",
+      issuer: "Coursera",
+      date: "May 2024",
+      url: "https://www.coursera.org/account/accomplishments/verify/MBRKMGFVJAD5"
+    },
+    {
+      title: "Data Analysis and Visualization Foundations Specialization",
+      issuer: "Coursera",
+      date: "Completed",
+      url: "https://www.coursera.org/account/accomplishments/specialization/certificate/EMPK9JE67YTK"
+    },
+    {
+      title: "Python for Data Science, AI & Development",
+      issuer: "Coursera",
+      date: "Completed",
+      url: "https://www.coursera.org/account/accomplishments/verify/2YB5FJ26KFY9"
+    },
+    {
+      title: "Salesforce Administrator Certification",
+      issuer: "Salesforce",
+      date: "Completed",
+      url: "https://smartinternz.com/internships/salesforce_certificates/77fbfe9c9116dbd570174ed214e77d9c"
+    },
+    {
+      title: "Salesforce AI Associate Certification",
+      issuer: "Salesforce",
+      date: "January 2, 2025",
+      url: "https://sforce.co/verifycerts"
+    }
+  ];
+
   const caseStudies = [
     {
       title: "The Renewal Machine",
@@ -188,20 +221,20 @@ export default function Home() {
       
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-serif font-bold text-xl tracking-tight">AP.</span>
-          <div className="flex gap-6 text-sm font-medium">
+        <div className="container mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+          <span className="font-serif font-bold text-lg sm:text-xl tracking-tight">AP.</span>
+          <div className="flex gap-3 sm:gap-6 text-xs sm:text-sm font-medium">
             <a href="#about" className="hover:text-primary transition-colors">About</a>
-            <a href="#experience" className="hover:text-primary transition-colors">Experience</a>
-            <a href="#case-studies" className="hover:text-primary transition-colors">Case Studies</a>
-            <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
-            <a href="#blogs" className="hover:text-primary transition-colors">Blogs</a>
+            <a href="#experience" className="hover:text-primary transition-colors hidden sm:inline">Experience</a>
+            <a href="#case-studies" className="hover:text-primary transition-colors hidden sm:inline">Case Studies</a>
+            <a href="#projects" className="hover:text-primary transition-colors hidden md:inline">Projects</a>
+            <a href="#blogs" className="hover:text-primary transition-colors hidden md:inline">Blogs</a>
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           </div>
         </div>
       </nav>
 
-      <main className="container mx-auto px-6 pt-32 pb-20 max-w-4xl">
+      <main className="container mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-12 sm:pb-20 max-w-4xl">
         
         {/* Hero Section */}
         <section className="mb-32 relative">
@@ -225,20 +258,20 @@ export default function Home() {
                 Designing scalable solutions and driving product growth through data-driven strategies and empathetic user experiences.
               </p>
               
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Button className="rounded-full px-8 py-6 text-base" asChild>
+              <div className="flex flex-wrap gap-2 sm:gap-4 pt-4">
+                <Button className="rounded-full px-4 sm:px-8 py-4 sm:py-6 text-xs sm:text-base" asChild>
                   <a href="https://www.linkedin.com/in/aditi-parvati/" target="_blank" rel="noreferrer">
-                    <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
+                    <Linkedin className="mr-2 h-3 sm:h-4 w-3 sm:w-4" /> LinkedIn
                   </a>
                 </Button>
-                <Button className="rounded-full px-8 py-6 text-base" asChild>
+                <Button className="rounded-full px-4 sm:px-8 py-4 sm:py-6 text-xs sm:text-base" asChild>
                   <a href="mailto:aditiparvati27@gmail.com">
-                    <Mail className="mr-2 h-4 w-4" /> Get in Touch
+                    <Mail className="mr-2 h-3 sm:h-4 w-3 sm:w-4" /> Touch
                   </a>
                 </Button>
-                <Button variant="outline" className="rounded-full px-8 py-6 text-base" asChild>
+                <Button variant="outline" className="rounded-full px-4 sm:px-8 py-4 sm:py-6 text-xs sm:text-base" asChild>
                   <a href="/attached_assets/Aditi-Parvati_Resume_(26)_1766756461117.pdf" target="_blank" download>
-                    <Download className="mr-2 h-4 w-4" /> Download Resume
+                    <Download className="mr-2 h-3 sm:h-4 w-3 sm:w-4" /> Resume
                   </a>
                 </Button>
               </div>
@@ -276,13 +309,13 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="mb-32">
+        <section id="about" className="mb-20 sm:mb-32">
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="font-serif text-3xl mb-8"
+            className="font-serif text-2xl sm:text-3xl mb-6 sm:mb-8"
           >
             About Me
           </motion.h2>
@@ -291,9 +324,9 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="prose prose-lg text-muted-foreground leading-relaxed"
+            className="text-muted-foreground leading-relaxed text-sm sm:text-base space-y-3"
           >
-            <p className="mb-4">
+            <p>
               I am currently pursuing a Master's in Engineering Management at Dartmouth College, building on a strong technical foundation in Electronics and Communication Engineering.
             </p>
             <p>
@@ -306,10 +339,10 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="mt-12"
+            className="mt-8 sm:mt-12"
           >
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-6">Key Skills</h3>
-            <div className="flex flex-wrap gap-2">
+            <h3 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4 sm:mb-6">Key Skills</h3>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {skills.map((skill, i) => (
                 <motion.div
                   key={i}
@@ -319,7 +352,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05, y: -2 }}
                 >
-                  <Badge variant="secondary" className="bg-secondary/50 hover:bg-secondary text-sm py-1.5 px-3 font-normal cursor-pointer transition-all">
+                  <Badge variant="secondary" className="bg-secondary/50 hover:bg-secondary text-xs sm:text-sm py-1 sm:py-1.5 px-2 sm:px-3 font-normal cursor-pointer transition-all">
                     {skill}
                   </Badge>
                 </motion.div>
@@ -329,28 +362,28 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="mb-32">
+        <section id="experience" className="mb-20 sm:mb-32">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex items-center justify-between mb-12"
+            className="flex items-center justify-between mb-8 sm:mb-12"
           >
-            <h2 className="font-serif text-3xl">Professional Roadmap</h2>
-            <span className="text-sm text-muted-foreground hidden sm:block">2023 — Present</span>
+            <h2 className="font-serif text-2xl sm:text-3xl">Professional Roadmap</h2>
+            <span className="text-xs sm:text-sm text-muted-foreground hidden sm:block">2023 — Present</span>
           </motion.div>
           <Roadmap items={experiences} />
         </section>
 
         {/* Education Section */}
-        <section className="mb-32">
+        <section className="mb-20 sm:mb-32">
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="font-serif text-3xl mb-12"
+            className="font-serif text-2xl sm:text-3xl mb-8 sm:mb-12"
           >
             Education
           </motion.h2>
@@ -358,13 +391,13 @@ export default function Home() {
         </section>
 
         {/* Case Studies Section */}
-        <section id="case-studies" className="mb-32">
+        <section id="case-studies" className="mb-20 sm:mb-32">
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="font-serif text-3xl mb-8"
+            className="font-serif text-2xl sm:text-3xl mb-4 sm:mb-8"
           >
             Case Studies
           </motion.h2>
@@ -373,7 +406,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-muted-foreground mb-8"
+            className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base"
           >
             Click on any case study to explore the details of my work
           </motion.p>
@@ -399,17 +432,17 @@ export default function Home() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="mb-32">
+        <section id="projects" className="mb-20 sm:mb-32">
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="font-serif text-3xl mb-12"
+            className="font-serif text-2xl sm:text-3xl mb-8 sm:mb-12"
           >
             Featured Projects
           </motion.h2>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
             {projects.map((project, i) => (
               <motion.div
                 key={i}
@@ -418,16 +451,16 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
-                className="group relative p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
+                className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
               >
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex justify-between items-start mb-3 sm:mb-4 gap-2">
                   <div>
-                     <h3 className="font-serif text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
-                     <p className="text-sm text-muted-foreground mt-1">{project.role} • {project.period}</p>
+                     <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
+                     <p className="text-xs sm:text-sm text-muted-foreground mt-1">{project.role} • {project.period}</p>
                   </div>
-                  <ArrowRight className="h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-muted-foreground" />
+                  <ArrowRight className="h-4 sm:h-5 w-4 sm:w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-muted-foreground shrink-0" />
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                   {project.desc}
                 </p>
               </motion.div>
@@ -435,18 +468,55 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Blogs Section */}
-        <section id="blogs" className="mb-32">
+        {/* Certifications Section */}
+        <section id="certifications" className="mb-20 sm:mb-32">
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="font-serif text-3xl mb-12"
+            className="font-serif text-2xl sm:text-3xl mb-8 sm:mb-12"
+          >
+            Certifications
+          </motion.h2>
+          <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
+            {certifications.map((cert, i) => (
+              <motion.a
+                key={i}
+                href={cert.url}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -2 }}
+                className="group relative p-4 sm:p-5 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
+              >
+                <div className="space-y-2">
+                  <h3 className="font-serif text-base sm:text-lg font-semibold group-hover:text-primary transition-colors line-clamp-2">{cert.title}</h3>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
+                    <p className="text-xs sm:text-sm text-muted-foreground">{cert.issuer}</p>
+                    <p className="text-xs text-muted-foreground">{cert.date}</p>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </section>
+
+        {/* Blogs Section */}
+        <section id="blogs" className="mb-20 sm:mb-32">
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="font-serif text-2xl sm:text-3xl mb-8 sm:mb-12"
           >
             Latest Articles
           </motion.h2>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
             <motion.a
               href="https://medium.com/@aditiparvati2/password-less-authentication-85cef1b67181"
               target="_blank"
@@ -456,19 +526,19 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
               whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
-              className="group relative p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
+              className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
             >
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <BookOpen className="h-4 w-4 text-muted-foreground" />
+                    <BookOpen className="h-3 sm:h-4 w-3 sm:w-4 text-muted-foreground shrink-0" />
                     <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">Medium</span>
                   </div>
-                  <h3 className="font-serif text-xl font-semibold group-hover:text-primary transition-colors">Passwordless Authentication</h3>
+                  <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">Passwordless Authentication</h3>
                 </div>
-                <ExternalLink className="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all text-muted-foreground shrink-0 ml-2" />
+                <ExternalLink className="h-4 sm:h-5 w-4 sm:w-5 opacity-0 group-hover:opacity-100 transition-all text-muted-foreground shrink-0 ml-2" />
               </div>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                 Exploring the future of authentication and how passwordless systems are transforming security.
               </p>
             </motion.a>
@@ -482,19 +552,19 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
-              className="group relative p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
+              className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
             >
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <BookOpen className="h-4 w-4 text-muted-foreground" />
+                    <BookOpen className="h-3 sm:h-4 w-3 sm:w-4 text-muted-foreground shrink-0" />
                     <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">Medium</span>
                   </div>
-                  <h3 className="font-serif text-xl font-semibold group-hover:text-primary transition-colors">Brand Discovery in AI Models</h3>
+                  <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">Brand Discovery in AI Models</h3>
                 </div>
-                <ExternalLink className="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all text-muted-foreground shrink-0 ml-2" />
+                <ExternalLink className="h-4 sm:h-5 w-4 sm:w-5 opacity-0 group-hover:opacity-100 transition-all text-muted-foreground shrink-0 ml-2" />
               </div>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                 The new era of brand discovery: Why enterprises need visibility inside AI models.
               </p>
             </motion.a>
@@ -502,39 +572,39 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 border-t border-border">
-          <div className="text-center space-y-8">
-            <h2 className="font-serif text-4xl mb-4">Let's Connect</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
+        <section id="contact" className="py-12 sm:py-20 border-t border-border">
+          <div className="text-center space-y-6 sm:space-y-8">
+            <h2 className="font-serif text-3xl sm:text-4xl mb-2 sm:mb-4">Let's Connect</h2>
+            <p className="text-muted-foreground max-w-md mx-auto text-sm sm:text-base px-2">
               I'm always open to discussing new opportunities, product strategies, or just chatting about the latest in tech.
             </p>
-            <div className="flex justify-center gap-6">
+            <div className="flex justify-center gap-4 sm:gap-6 flex-wrap">
               <a 
                 href="mailto:aditiparvati27@gmail.com"
-                className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors"
+                className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors text-sm sm:text-base"
               >
-                <Mail className="h-5 w-5" />
+                <Mail className="h-4 sm:h-5 w-4 sm:w-5" />
                 <span>Email</span>
               </a>
               <a 
                 href="https://www.linkedin.com/in/aditi-parvati/" 
                 target="_blank" 
                 rel="noreferrer"
-                className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors"
+                className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors text-sm sm:text-base"
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin className="h-4 sm:h-5 w-4 sm:w-5" />
                 <span>LinkedIn</span>
               </a>
               <a 
                 href="/attached_assets/Aditi-Parvati_Resume_(26)_1766756461117.pdf"
                 target="_blank"
-                className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors"
+                className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors text-sm sm:text-base"
               >
-                <FileText className="h-5 w-5" />
+                <FileText className="h-4 sm:h-5 w-4 sm:w-5" />
                 <span>Resume</span>
               </a>
             </div>
-            <p className="text-sm text-muted-foreground pt-12">
+            <p className="text-xs sm:text-sm text-muted-foreground pt-6 sm:pt-12">
               © 2025 Aditi Parvati. Built with modern web technologies.
             </p>
           </div>
