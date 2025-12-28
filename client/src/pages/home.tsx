@@ -226,8 +226,8 @@ export default function Home() {
           <div className="flex gap-3 sm:gap-6 text-xs sm:text-sm font-medium">
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#experience" className="hover:text-primary transition-colors hidden sm:inline">Experience</a>
-            <a href="#case-studies" className="hover:text-primary transition-colors hidden sm:inline">Case Studies</a>
-            <a href="#projects" className="hover:text-primary transition-colors hidden md:inline">Projects</a>
+            <a href="#certifications" className="hover:text-primary transition-colors hidden sm:inline">Certs</a>
+            <a href="#case-studies" className="hover:text-primary transition-colors hidden md:inline">Cases</a>
             <a href="#blogs" className="hover:text-primary transition-colors hidden md:inline">Blogs</a>
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           </div>
