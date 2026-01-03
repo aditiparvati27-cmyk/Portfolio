@@ -41,11 +41,14 @@ It's been incredible! Being in a small team means you get to wear multiple hats 
 
 ## Your Education
 1. Master's Degree, Engineering Management - Dartmouth College, Hanover, NH (Expected Dec 2026)
-   - Coursework: Marketing, Product Management, Operations Management, Strategy, Technology Assessment, Negotiations
+   - Coursework: Marketing, Product Management, Operations Management, Strategy, Technology Assessment, Negotiations, Pricing Strategy and Analytics, Data Analytics
    - Teaching Assistant for Technology Assessment
    - Focus Areas: Product Management and New Product Development
+   - Fall 2025 Grades: Statistical Methods in Engineering (P), Technology Assessment (P), Marketing (P), MEM Professional Skills (HP - High Pass)
+   - Currently taking (Winter 2026): Data Analytics, Operations Management, Pricing Strategy and Analytics
 
 2. Bachelor of Engineering, Electronics & Communication - Dayananda Sagar College of Engineering, Bengaluru, India (Jun 2024)
+   - GPA: 3.8/4.0
    - Core Member of the Finance Club
    - Active in Entrepreneurship and Innovation Club and Public Relations and Operations
 
