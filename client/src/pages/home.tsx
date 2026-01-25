@@ -104,7 +104,8 @@ export default function Home() {
       title: "Dartmouth College - LLM Marketing Strategy",
       role: "Project Manager",
       period: "Sept 2025 - Nov 2025",
-      desc: "Influenced $800K AI marketing technology investment for Fortune 500 client by leading strategic assessment of 10+ AI/LLM marketing platforms."
+      desc: "Influenced $800K AI marketing technology investment for Fortune 500 financial services client, by leading strategic assessment of 10+ AI/LLM marketing platforms to combat declining traditional search visibility.",
+      pdfUrl: "/llm-marketing-presentation.pdf"
      },
      {
       title: "AI Guided Echocardiography",
@@ -444,28 +445,36 @@ export default function Home() {
             Featured Projects
           </motion.h2>
           <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
-            {projects.map((project, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
-                className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
-              >
-                <div className="flex justify-between items-start mb-3 sm:mb-4 gap-2">
-                  <div>
-                     <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
-                     <p className="text-xs sm:text-sm text-muted-foreground mt-1">{project.role} • {project.period}</p>
+            {projects.map((project, i) => {
+              const CardWrapper = project.pdfUrl ? 'a' : 'div';
+              const cardProps = project.pdfUrl ? { href: project.pdfUrl, target: "_blank", rel: "noreferrer" } : {};
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
+                  className={`group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg ${project.pdfUrl ? 'cursor-pointer' : ''}`}
+                  onClick={() => project.pdfUrl && window.open(project.pdfUrl, '_blank')}
+                >
+                  <div className="flex justify-between items-start mb-3 sm:mb-4 gap-2">
+                    <div>
+                       <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
+                       <p className="text-xs sm:text-sm text-muted-foreground mt-1">{project.role} • {project.period}</p>
+                    </div>
+                    <ArrowRight className="h-4 sm:h-5 w-4 sm:w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-muted-foreground shrink-0" />
                   </div>
-                  <ArrowRight className="h-4 sm:h-5 w-4 sm:w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-muted-foreground shrink-0" />
-                </div>
-                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                  {project.desc}
-                </p>
-              </motion.div>
-            ))}
+                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                    {project.desc}
+                  </p>
+                  {project.pdfUrl && (
+                    <p className="text-primary text-xs mt-3 font-medium">Click to view presentation →</p>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
         </section>
 
