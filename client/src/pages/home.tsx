@@ -5,7 +5,7 @@ import { Chatbot } from "@/components/chatbot";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Mail, Linkedin, FileText, Download, ArrowRight, BookOpen, ExternalLink, TrendingUp, Users } from "lucide-react";
+import { Mail, Linkedin, FileText, Download, ArrowRight, BookOpen, ExternalLink, TrendingUp, Users, Github, Globe, FileCode2 } from "lucide-react";
 import heroBg from "@assets/generated_images/minimalist_abstract_architectural_shapes_in_soft_white_and_light_gray.png";
 import profilePhoto from "@assets/WhatsApp_Image_2025-12-26_at_7.27.54_PM_1766757495634.jpeg";
 import jiraScreenshot from "@assets/image_1766854017021.png";
@@ -94,25 +94,46 @@ export default function Home() {
   ];
 
   const skills = [
-    "Product Management", "Stakeholder Communication", "Agile & Scrum", "Data Analytics", 
+    "Product Management", "Stakeholder Communication", "Agile & Scrum", "Data Analytics",
     "Pricing Strategy", "Market Research", "Wireframing", "UI/UX Design", "Go-to-Market (GTM)",
     "Tableau", "SQL", "Salesforce", "Figma", "Jira", "Google Analytics 4"
   ];
 
   const projects = [
-     {
+    {
       title: "Dartmouth College - LLM Marketing Strategy",
       role: "Project Manager",
       period: "Sept 2025 - Nov 2025",
       desc: "Influenced $800K AI marketing technology investment for Fortune 500 financial services client, by leading strategic assessment of 10+ AI/LLM marketing platforms to combat declining traditional search visibility.",
-      pdfUrl: "/llm-marketing-presentation.pdf"
-     },
-     {
+      pdfUrl: "/llm-marketing-presentation.pdf",
+      tags: ["AI/LLM", "Strategy", "Market Research"]
+    },
+    {
       title: "AI Guided Echocardiography",
       role: "Team Lead",
       period: "Aug 2022 - Mar 2024",
-      desc: "Led a cross-functional team to design an AI-guided ultrasound solution; secured provisional patent and achieved 'Most Innovative Project' award."
-     }
+      desc: "Led a cross-functional team to design an AI-guided ultrasound solution; secured provisional patent and achieved 'Most Innovative Project' award.",
+      tags: ["AI", "Healthcare", "Patent"]
+    },
+    {
+      title: "Sentiment Stream",
+      role: "Builder · Product & Platform Engineer",
+      period: "2025",
+      desc: "Real-time social media sentiment analysis pipeline built entirely on Cloudflare's edge infrastructure — no servers, no cold starts, zero ops overhead. The system ingests data via Cloudflare Queues, runs NLP inference using Workers AI, and persists structured results in D1 (Cloudflare's serverless SQLite). A live dashboard visualizes sentiment trends across products in real time, demonstrating how modern edge-native architectures can replace traditional ML pipelines at a fraction of the cost and complexity.",
+      tags: ["Cloudflare Workers", "D1", "Queues", "Workers AI", "NLP", "Real-time", "Edge Computing"],
+      githubUrl: "https://github.com/aditiparvati27-cmyk/Sentiment_Stream",
+      liveUrl: "https://f461a94c.product-insights-dashboard.pages.dev/"
+    },
+    {
+      title: "Territory Slicer",
+      role: "Builder · Algorithm & Product Engineer",
+      period: "2025",
+      desc: "A browser-native sales territory optimizer that solves a classic NP-hard bin-packing problem in milliseconds — no backend, no server calls, runs entirely in your browser. Upload a CSV of accounts and reps, choose from 4 distribution strategies (Pure ARR Balance, ARR + Risk, ARR + Geography, Smart Multi-Factor), and get a balanced territory assignment instantly. Under the hood: a MinHeap-powered greedy algorithm (O(n log k)) with post-greedy swap refinement. Designed for sales leaders who need to fairly distribute revenue, churn risk, and geographic workload across their teams — with configurable weights for every factor.",
+      tags: ["TypeScript", "React", "MinHeap", "Greedy Algorithm", "Sales Ops", "Data Viz"],
+      githubUrl: "https://github.com/aditiparvati27-cmyk/Territory_Slicer",
+      liveUrl: "https://territory-slicer-two.vercel.app/",
+      docsUrl: "https://gist.github.com/aditiparvati27-cmyk/f88397a180b790d6c3753b55e6781dee"
+    }
   ];
 
   const certifications = [
@@ -220,7 +241,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/10">
-      
+
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
@@ -229,6 +250,7 @@ export default function Home() {
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#experience" className="hover:text-primary transition-colors hidden sm:inline">Experience</a>
             <a href="#case-studies" className="hover:text-primary transition-colors hidden sm:inline">Case Studies</a>
+            <a href="#projects" className="hover:text-primary transition-colors hidden sm:inline">Projects</a>
             <a href="#certifications" className="hover:text-primary transition-colors hidden sm:inline">Certs</a>
             <a href="#blogs" className="hover:text-primary transition-colors hidden md:inline">Blogs</a>
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
@@ -237,12 +259,12 @@ export default function Home() {
       </nav>
 
       <main className="container mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-12 sm:pb-20 max-w-4xl">
-        
+
         {/* Hero Section */}
         <section className="mb-32 relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
             {/* Text Content */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -259,7 +281,7 @@ export default function Home() {
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
                 Designing scalable solutions and driving product growth through data-driven strategies and empathetic user experiences.
               </p>
-              
+
               <div className="flex flex-wrap gap-2 sm:gap-4 pt-4">
                 <Button className="rounded-full px-4 sm:px-8 py-4 sm:py-6 text-xs sm:text-base" asChild>
                   <a href="https://www.linkedin.com/in/aditi-parvati/" target="_blank" rel="noreferrer">
@@ -286,25 +308,25 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="hidden md:flex justify-center md:justify-end items-start pt-4"
             >
-              <img 
-                src={profilePhoto} 
-                alt="Aditi Parvati" 
+              <img
+                src={profilePhoto}
+                alt="Aditi Parvati"
                 className="w-72 h-72 md:w-80 md:h-80 object-cover border border-border shadow-sm rounded-sm"
               />
             </motion.div>
           </div>
 
-           {/* Abstract Background Element */}
-           <motion.div 
+          {/* Abstract Background Element */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.6 }}
             transition={{ duration: 1.5 }}
             className="absolute top-0 right-0 -z-10 w-full md:w-1/2 h-full opacity-50 pointer-events-none"
           >
             <div className="w-full h-full bg-gradient-to-bl from-background via-transparent to-transparent absolute inset-0 z-10" />
-            <img 
-              src={heroBg} 
-              alt="Abstract Minimalist Background" 
+            <img
+              src={heroBg}
+              alt="Abstract Minimalist Background"
               className="w-full h-full object-cover mix-blend-multiply opacity-40 grayscale"
             />
           </motion.div>
@@ -312,7 +334,7 @@ export default function Home() {
 
         {/* About Section */}
         <section id="about" className="mb-20 sm:mb-32">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -321,7 +343,7 @@ export default function Home() {
           >
             About Me
           </motion.h2>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -335,8 +357,8 @@ export default function Home() {
               My professional journey spans across B2B SaaS, FinTech, and Marketing Tech, where I've successfully led product initiatives that reduced costs, optimized revenue operations, and enhanced user experiences. I thrive at the intersection of technology, business strategy, and user-centric design.
             </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -365,7 +387,7 @@ export default function Home() {
 
         {/* Education Section */}
         <section id="education" className="mb-20 sm:mb-32">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -379,7 +401,7 @@ export default function Home() {
 
         {/* Experience Section */}
         <section id="experience" className="mb-20 sm:mb-32">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -394,7 +416,7 @@ export default function Home() {
 
         {/* Case Studies Section */}
         <section id="case-studies" className="mb-20 sm:mb-32">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -403,7 +425,7 @@ export default function Home() {
           >
             Case Studies
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -435,7 +457,7 @@ export default function Home() {
 
         {/* Projects Section */}
         <section id="projects" className="mb-20 sm:mb-32">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -446,8 +468,6 @@ export default function Home() {
           </motion.h2>
           <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
             {projects.map((project, i) => {
-              const CardWrapper = project.pdfUrl ? 'a' : 'div';
-              const cardProps = project.pdfUrl ? { href: project.pdfUrl, target: "_blank", rel: "noreferrer" } : {};
               return (
                 <motion.div
                   key={i}
@@ -456,22 +476,70 @@ export default function Home() {
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
-                  className={`group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg ${project.pdfUrl ? 'cursor-pointer' : ''}`}
-                  onClick={() => project.pdfUrl && window.open(project.pdfUrl, '_blank')}
+                  className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg flex flex-col"
                 >
                   <div className="flex justify-between items-start mb-3 sm:mb-4 gap-2">
-                    <div>
-                       <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
-                       <p className="text-xs sm:text-sm text-muted-foreground mt-1">{project.role} • {project.period}</p>
+                    <div className="flex-1">
+                      <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground mt-1">{project.role} • {project.period}</p>
                     </div>
-                    <ArrowRight className="h-4 sm:h-5 w-4 sm:w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-muted-foreground shrink-0" />
                   </div>
-                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed flex-1">
                     {project.desc}
                   </p>
-                  {project.pdfUrl && (
-                    <p className="text-primary text-xs mt-3 font-medium">Click to view presentation →</p>
+                  {(project as any).tags && (
+                    <div className="flex flex-wrap gap-1.5 mt-4">
+                      {(project as any).tags.map((tag: string, ti: number) => (
+                        <Badge key={ti} variant="secondary" className="text-xs py-0.5 px-2 font-normal bg-secondary/40">{tag}</Badge>
+                      ))}
+                    </div>
                   )}
+                  <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/30">
+                    {(project as any).githubUrl && (
+                      <a
+                        href={(project as any).githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium"
+                      >
+                        <Github className="h-3.5 w-3.5" /> GitHub
+                      </a>
+                    )}
+                    {(project as any).liveUrl && (
+                      <a
+                        href={(project as any).liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium"
+                      >
+                        <Globe className="h-3.5 w-3.5" /> Live Demo
+                      </a>
+                    )}
+                    {(project as any).docsUrl && (
+                      <a
+                        href={(project as any).docsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium"
+                      >
+                        <FileCode2 className="h-3.5 w-3.5" /> Algorithm Deep Dive
+                      </a>
+                    )}
+                    {(project as any).pdfUrl && (
+                      <a
+                        href={(project as any).pdfUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium"
+                      >
+                        <FileText className="h-3.5 w-3.5" /> View Presentation
+                      </a>
+                    )}
+                  </div>
                 </motion.div>
               );
             })}
@@ -480,7 +548,7 @@ export default function Home() {
 
         {/* Certifications Section */}
         <section id="certifications" className="mb-20 sm:mb-32">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -517,7 +585,7 @@ export default function Home() {
 
         {/* Blogs Section */}
         <section id="blogs" className="mb-20 sm:mb-32">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -589,23 +657,23 @@ export default function Home() {
               I'm always open to discussing new opportunities, product strategies, or just chatting about the latest in tech.
             </p>
             <div className="flex justify-center gap-4 sm:gap-6 flex-wrap">
-              <a 
+              <a
                 href="mailto:aditiparvati27@gmail.com"
                 className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors text-sm sm:text-base"
               >
                 <Mail className="h-4 sm:h-5 w-4 sm:w-5" />
                 <span>Email</span>
               </a>
-              <a 
-                href="https://www.linkedin.com/in/aditi-parvati/" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/in/aditi-parvati/"
+                target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors text-sm sm:text-base"
               >
                 <Linkedin className="h-4 sm:h-5 w-4 sm:w-5" />
                 <span>LinkedIn</span>
               </a>
-              <a 
+              <a
                 href="/attached_assets/Aditi-Parvati_Resume_(26)_1766756461117.pdf"
                 target="_blank"
                 className="flex items-center gap-2 text-foreground hover:text-primary/70 transition-colors text-sm sm:text-base"

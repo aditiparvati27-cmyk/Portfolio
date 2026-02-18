@@ -5,7 +5,7 @@ const model = genAI.getGenerativeModel({
     model: "gemini-2.5-flash-lite"
 });
 
-import { SYSTEM_PROMPT } from "./chatContext";
+import { SYSTEM_PROMPT } from "./chatContext.js";
 
 interface ChatMessage {
     role: "user" | "assistant";
