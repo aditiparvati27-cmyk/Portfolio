@@ -245,7 +245,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
-          <span className="font-serif font-bold text-lg sm:text-xl tracking-tight">AP.</span>
+          <span className="font-serif font-bold text-lg sm:text-xl tracking-tight text-primary">AP.</span>
           <div className="flex gap-3 sm:gap-6 text-xs sm:text-sm font-medium">
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#experience" className="hover:text-primary transition-colors hidden sm:inline">Experience</a>
@@ -271,7 +271,7 @@ export default function Home() {
               className="space-y-6 relative z-10"
             >
               <div className="inline-block">
-                <Badge variant="outline" className="px-3 py-1 text-sm font-normal rounded-full border-primary/20 bg-primary/5 text-primary">
+                <Badge variant="outline" className="px-3 py-1 text-sm font-normal rounded-full border-gold/30 bg-gold/10 text-gold-foreground">
                   Product Manager
                 </Badge>
               </div>
@@ -376,7 +376,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05, y: -2 }}
                 >
-                  <Badge variant="secondary" className="bg-secondary/50 hover:bg-secondary text-xs sm:text-sm py-1 sm:py-1.5 px-2 sm:px-3 font-normal cursor-pointer transition-all">
+                  <Badge variant="secondary" className="bg-primary/5 hover:bg-primary/10 border border-primary/15 text-xs sm:text-sm py-1 sm:py-1.5 px-2 sm:px-3 font-normal cursor-pointer transition-all">
                     {skill}
                   </Badge>
                 </motion.div>
@@ -475,8 +475,8 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
-                  className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg flex flex-col"
+                  whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(45, 106, 79, 0.08)" }}
+                  className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/30 transition-all rounded-lg flex flex-col"
                 >
                   <div className="flex justify-between items-start mb-3 sm:mb-4 gap-2">
                     <div className="flex-1">
@@ -603,8 +603,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
-              className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
+              whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(45, 106, 79, 0.08)" }}
+              className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/30 transition-all rounded-lg"
             >
               <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
                 <div className="flex-1">
@@ -629,8 +629,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
-              className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/20 transition-all rounded-lg"
+              whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(45, 106, 79, 0.08)" }}
+              className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/30 transition-all rounded-lg"
             >
               <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
                 <div className="flex-1">

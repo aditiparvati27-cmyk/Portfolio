@@ -20,7 +20,7 @@ interface RoadmapProps {
 
 export function Roadmap({ items }: RoadmapProps) {
   return (
-    <div className="relative border-l border-border ml-3 md:ml-6 space-y-12 py-4">
+    <div className="relative border-l border-primary/20 ml-3 md:ml-6 space-y-12 py-4">
       {items.map((item, index) => (
         <motion.div
           key={index}
@@ -32,7 +32,7 @@ export function Roadmap({ items }: RoadmapProps) {
         >
           {/* Timeline Dot */}
           <motion.div 
-            className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-primary ring-4 ring-background"
+            className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-gold ring-4 ring-background"
             whileHover={{ scale: 1.3 }}
             transition={{ duration: 0.3 }}
           />

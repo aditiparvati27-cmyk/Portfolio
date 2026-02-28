@@ -67,7 +67,7 @@ export function CaseStudyCard({
             >
               <h4 className="font-serif text-lg font-semibold text-foreground flex items-center gap-2">
                 <motion.span 
-                  className="inline-block w-1.5 h-1.5 rounded-full bg-primary"
+                  className="inline-block w-1.5 h-1.5 rounded-full bg-gold"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
@@ -88,7 +88,7 @@ export function CaseStudyCard({
             >
               <h4 className="font-serif text-lg font-semibold text-foreground flex items-center gap-2">
                 <motion.span 
-                  className="inline-block w-1.5 h-1.5 rounded-full bg-primary"
+                  className="inline-block w-1.5 h-1.5 rounded-full bg-gold"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
@@ -97,7 +97,7 @@ export function CaseStudyCard({
               {approachDetails && approachDetails.length > 0 ? (
                 <div className="space-y-4">
                   {approachDetails.map((approach, idx) => (
-                    <div key={idx} className="pl-4 border-l-2 border-border">
+                    <div key={idx} className="pl-4 border-l-2 border-primary/30">
                       <h5 className="font-semibold text-foreground mb-2">{approach.subtitle}</h5>
                       <p className="text-muted-foreground leading-relaxed text-sm">{approach.description}</p>
                     </div>
@@ -142,13 +142,13 @@ export function CaseStudyCard({
                 className="space-y-4"
               >
                 <h4 className="font-serif text-lg font-semibold text-foreground flex items-center gap-2">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary" />
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-gold" />
                   Key Learnings
                 </h4>
                 <ul className="space-y-3">
                   {keyLearnings.map((learning, idx) => (
                     <li key={idx} className="flex gap-3 text-muted-foreground leading-relaxed text-sm">
-                      <span className="block mt-2 h-1 w-1 rounded-full bg-primary shrink-0" />
+                      <span className="block mt-2 h-1 w-1 rounded-full bg-gold shrink-0" />
                       <span>{learning}</span>
                     </li>
                   ))}

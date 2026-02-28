@@ -11,34 +11,39 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
 
-  /* Minimalist Monochrome Palette with Subtle Slate Accent */
-  --color-background: hsl(0 0% 98%);
-  --color-foreground: hsl(240 10% 3.9%);
-  
-  --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(240 10% 3.9%);
-  
-  --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(240 10% 3.9%);
-  
-  --color-primary: hsl(240 5.9% 10%);
-  --color-primary-foreground: hsl(0 0% 98%);
-  
-  --color-secondary: hsl(240 4.8% 95.9%);
-  --color-secondary-foreground: hsl(240 5.9% 10%);
-  
-  --color-muted: hsl(240 4.8% 95.9%);
-  --color-muted-foreground: hsl(240 3.8% 46.1%);
-  
-  --color-accent: hsl(240 4.8% 95.9%);
-  --color-accent-foreground: hsl(240 5.9% 10%);
-  
-  --color-destructive: hsl(0 84.2% 60.2%);
-  --color-destructive-foreground: hsl(0 0% 98%);
-  
-  --color-border: hsl(240 5.9% 90%);
-  --color-input: hsl(240 5.9% 90%);
-  --color-ring: hsl(240 10% 3.9%);
+  /* Option C: Dartmouth Forest & Gold */
+  --color-background: hsl(120 18% 97%);          /* #F5F8F5 Sage White */
+  --color-foreground: hsl(135 28% 14%);           /* #1A2E1F Deep Forest */
+
+  --color-card: hsl(120 15% 99%);                 /* Soft white with sage tint */
+  --color-card-foreground: hsl(135 28% 14%);      /* Deep Forest */
+
+  --color-popover: hsl(120 15% 99%);
+  --color-popover-foreground: hsl(135 28% 14%);
+
+  --color-primary: hsl(153 40% 30%);              /* #2D6A4F Dartmouth Green */
+  --color-primary-foreground: hsl(120 18% 97%);   /* Sage White */
+
+  --color-secondary: hsl(140 15% 93%);            /* Light sage tint */
+  --color-secondary-foreground: hsl(135 28% 14%); /* Deep Forest */
+
+  --color-muted: hsl(140 10% 93%);                /* Very light sage */
+  --color-muted-foreground: hsl(140 8% 45%);      /* Medium sage gray */
+
+  --color-accent: hsl(140 15% 93%);               /* Light sage for hover states */
+  --color-accent-foreground: hsl(135 28% 14%);    /* Deep Forest */
+
+  --color-destructive: hsl(13 66% 46%);           /* #C44B28 Burnt Orange */
+  --color-destructive-foreground: hsl(120 18% 97%);
+
+  --color-border: hsl(140 12% 88%);               /* Sage border */
+  --color-input: hsl(140 12% 88%);
+  --color-ring: hsl(153 40% 30%);                 /* Dartmouth Green focus ring */
+
+  /* Custom palette accents */
+  --color-gold: hsl(41 82% 52%);                  /* #E9A820 Rich Gold */
+  --color-gold-foreground: hsl(135 28% 14%);      /* Deep Forest */
+  --color-burnt-orange: hsl(13 66% 46%);          /* #C44B28 Burnt Orange */
 }
 
 @layer base {
