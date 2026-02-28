@@ -13,8 +13,14 @@ import {
   Mail, Linkedin, FileText, Download, ArrowRight, ArrowDown, BookOpen,
   ExternalLink, TrendingUp, Users, Github, Globe, FileCode2, Menu, X, Phone
 } from "lucide-react";
-import profilePhoto from "@assets/WhatsApp_Image_2025-12-26_at_7.27.54_PM_1766757495634.jpeg";
+import profilePhoto from "@assets/professional-headshot.jpeg";
 import jiraScreenshot from "@assets/image_1766854017021.png";
+import hikingPhoto from "@assets/hiking-nh-foliage.jpeg";
+import libraryClaudePhoto from "@assets/library-claude-session.jpeg";
+import bostonPhoto from "@assets/boston-charles-river.jpeg";
+import classroomPhoto from "@assets/dartmouth-classroom.jpeg";
+import bakerLibraryPhoto from "@assets/baker-library-day.jpeg";
+import tuckPhoto from "@assets/tuck-school.jpeg";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,7 +37,7 @@ export default function Home() {
         "$6M in ARR and 4x ACV growth by redesigning the quote-to-cash workflow for bundled pricing.",
         "$1.5M in upsell revenue + 67% reduction in delayed payments via renewal lifecycle automation.",
         "60% increase in AppExchange inbound leads through algorithm research + listing optimization.",
-        "75% of support cases resolved without escalation \u2014 built AI knowledge base using NotebookLM in 3 days.",
+        "75% of support cases resolved without escalation. Built AI knowledge base using NotebookLM in 3 days.",
         "30% reduction in manual case handling via ACH payments integration (Stripe).",
         "Built KPI dashboards from scratch for the 5-person renewals team."
       ],
@@ -89,7 +95,7 @@ export default function Home() {
       description: [
         "Coursework: Marketing, Product Management, Operations Management, Strategy, Technology Assessment, Negotiations",
         "Teaching Assistant for Technology Assessment",
-        "Dartmouth Consulting Club \u2014 Pro-bono consultant for Accruely (a startup)",
+        "Dartmouth Consulting Club: Pro-bono consultant for Accruely (a startup)",
         "Focus Areas: Product Management and New Product Development"
       ]
     },
@@ -126,17 +132,17 @@ export default function Home() {
 
   const projects = [
     {
-      title: "Enterprise AI Visibility Strategy \u2014 Capital One",
+      title: "Enterprise AI Visibility Strategy: Capital One",
       role: "Project Manager",
       period: "Sep\u2013Nov 2025",
-      desc: "Capital One watching traditional search die as AI tools (ChatGPT, Gemini, Claude) take over. Narrowed an impossibly broad question to one actionable one: What technology can Capital One invest in to reliably measure and improve LLM visibility for small business credit cards? Recommended Profound \u2014 an external LLM visibility platform.",
-      insight: "The best product thinking isn't about adding \u2014 it's about narrowing.",
+      desc: "Capital One watching traditional search die as AI tools (ChatGPT, Gemini, Claude) take over. Narrowed an impossibly broad question to one actionable one: What technology can Capital One invest in to reliably measure and improve LLM visibility for small business credit cards? Recommended Profound, an external LLM visibility platform.",
+      insight: "The best product thinking isn't about adding. It's about narrowing.",
       pdfUrl: "/llm-marketing-presentation.pdf",
       tags: ["AI/LLM", "Strategy", "Market Research"],
       metric: "$800K investment influenced"
     },
     {
-      title: "Kriyo AI \u2014 Salesforce Natural Language Query Tool",
+      title: "Kriyo AI: Salesforce Natural Language Query Tool",
       role: "Builder / PM",
       period: "2025",
       desc: "RevOps teams spend 90+ minutes/day manually retrieving Salesforce data. Designed an intent classification system and multi-step query pipeline that auto-generates SOQL from natural language inputs. Reduced manual retrieval from 90 min/day to near-zero.",
@@ -149,7 +155,7 @@ export default function Home() {
       role: "Team Lead \u2014 12-person cross-functional team",
       period: "Aug 2022 \u2013 Mar 2024",
       desc: "Rural India has a severe shortage of echocardiography operators. Led 12 engineers across electronics, medical electronics, and CS to design an AI-guided ultrasound solution. 2+ years of research.",
-      insight: "Engineering isn't just about circuits \u2014 it's about the person at the end of the wire.",
+      insight: "Engineering isn't just about circuits. It's about the person at the end of the wire.",
       tags: ["AI", "Healthcare", "Patent", "IEEE"],
       metric: "Patent + IEEE published"
     },
@@ -174,7 +180,7 @@ export default function Home() {
     },
     {
       title: "Wonga Finance",
-      role: "Co-founder (now alumni \u2014 the club runs on without me)",
+      role: "Co-founder",
       period: "2020\u20132024",
       desc: "My dad showed me an options trade. Only 16.7% of Indian college students knew basic finance. Started with 3 friends. Grew to 700+ members, 130+ sessions. Still running under the next generation after I graduated.",
       insight: "The fact that it outlived my involvement is, honestly, the metric I'm most proud of.",
@@ -241,42 +247,45 @@ export default function Home() {
       content: [
         "I grew up moving. By the time I graduated high school, I had attended more than 6 schools across India and the US.",
         "In 4th grade, we moved to California. In 7th grade, I was in Seattle, where I saw technology used as a learning tool for the first time. Back in India, it was considered a distraction. That perspective shift followed me everywhere.",
-        "All that moving gave me something: I can walk into any room \u2014 any culture, any team, any country \u2014 and find common ground fast. Diversity isn't a checkbox for me. It's how I was built.",
+        "All that moving gave me something: I can walk into any room, any culture, any team, any country, and find common ground fast. Diversity isn't a checkbox for me. It's how I was built.",
         "(Now I'm in Hanover, NH, where the primary wildlife is deer, the winters are genuinely alarming, and the people are extraordinary.)"
-      ]
+      ],
+      image: bostonPhoto,
+      imageAlt: "Charles River, Boston",
+      imageCaption: "Charles River, Boston"
     },
     {
       number: "02",
-      title: "Dad, the GPS Engineer, and the Options Trade",
+      title: "Dad and the Click That Changed Everything",
       content: [
-        "My dad was an electronics engineer who worked on GPS systems. He'd tell me stories about how GPS changed the world \u2014 navigation, smartphones, logistics \u2014 and I'd think: I want to build things like that.",
-        "But the moment that changed everything was smaller.",
-        "He sat me down one evening and showed me an options trade he had just made. He clicked the mouse. The number changed. I nearly fell off my chair.",
-        "\"This is how much you can do?\"",
-        "That one moment led to Wonga Finance. It led to Kinara Capital. It's leading me toward technology companies that change how people live and work.",
-        "He also taught me: earning money is important, but knowing how to manage it is more so. I've now passed that lesson to 700+ students."
+        "My father had his share of struggles, but he gave me something early that most people spend years figuring out: the idea that earning money matters, but knowing how to manage it matters more.",
+        "He taught me what financial literacy actually meant. And then he showed me, practically: sitting me down, walking me through his investments, explaining his thinking out loud. Finance wasn't a classroom subject in our house. It was a live demonstration.",
+        "The more I understood, the more I wanted to build things that gave other people that same leverage. That curiosity led to Wonga Finance, then to Kinara Capital, and eventually to product management, where I realized that the best products do exactly what my father did: take something complex and make it work for real people.",
+        "He's the reason I care about impact that's actually measurable."
       ]
     },
     {
       number: "03",
-      title: "The Flight to Boston",
+      title: "The Flight to Hanover",
       content: [
-        "I'd spent a year as a product manager \u2014 shipped real products, driven real revenue, learned hard lessons. But I knew I had gaps \u2014 in strategy, in frameworks, in how truly great products are built at scale.",
+        "I'd spent a year as a product manager. Shipped real products, driven real revenue, learned hard lessons. But I knew I had gaps: in strategy, in frameworks, in how truly great products are built at scale.",
         "So I packed up and moved from 30\u00B0C Bengaluru to -20\u00B0C Hanover, NH.",
         "Hanover has a population of about 11,000. There are more deer than chai shops. (There are zero chai shops.)",
         "But Dartmouth has something that makes up for all of it: people who are genuinely obsessed with building things that matter. And that is worth the cold."
-      ]
+      ],
+      image: hikingPhoto,
+      imageAlt: "Hiking in New Hampshire",
+      imageCaption: "Fall foliage in New Hampshire"
     },
     {
       number: "04",
       title: "What I'm Building Toward",
       content: [
-        "Short-term: I want to work at a technology company where I can move fast, take real ownership, and build products that change how people work or live. Fintech is one direction. AI products are another. Consumer tech, B2B SaaS, platforms that give people more leverage \u2014 all of it interests me.",
-        "What I care about: I want to build at the intersection of AI and people. Products that make humans more capable, not just more efficient.",
-        "Long-term: Build something of my own. Take the lesson my dad taught me \u2014 that the right information, at the right moment, can change everything \u2014 and build a company around it.",
-        "Wonga Finance was the proof of concept. The company is the full vision.",
-        "I believe engineering solutions empower communities. The best products don't just solve technical problems \u2014 they help people make better decisions about their lives.",
-        "That's what I'm building toward. One chai latte at a time."
+        "Short-term: I want to work at a technology company where I can move fast, take real ownership, and build products that change how people work or live. Fintech is one direction. AI products are another. Consumer tech, B2B SaaS, platforms that give people more leverage. All of it interests me.",
+        "What I care about: Products at the intersection of AI and people. Not just products that make things faster, but products that give humans more capability.",
+        "Long-term: Build something of my own. Take the lesson my dad taught me, that the right information, at the right moment, can change everything, and build a company around it.",
+        "Wonga Finance was the proof of concept. The company I'll build one day is the full vision.",
+        "Engineering solutions empower communities. The best products don't just solve technical problems. They help people make better decisions about their lives. That's what I'm building toward."
       ]
     }
   ];
@@ -287,6 +296,7 @@ export default function Home() {
     { href: "#case-studies", label: "Case Studies" },
     { href: "#projects", label: "Projects" },
     { href: "#story", label: "My Story" },
+    { href: "#ai-tools", label: "AI & Tools" },
     { href: "#certifications", label: "Certs" },
     { href: "#blogs", label: "Blogs" },
     { href: "#contact", label: "Contact" },
@@ -359,7 +369,7 @@ export default function Home() {
                 transition={{ delay: 0.2 }}
                 className="text-xs sm:text-sm font-mono text-muted-foreground tracking-wider uppercase"
               >
-                Bengaluru &rarr; Boston &rarr; Hanover, NH &#9992;&#65039;
+                Bengaluru &rarr; Hanover, NH &#9992;&#65039;
               </motion.p>
 
               <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-medium leading-[1.1] tracking-tight">
@@ -371,9 +381,11 @@ export default function Home() {
               </p>
 
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                I moved from Bangalore's beautiful chaos to a town with more deer than people.
-                I build products that drive real revenue &mdash; and I've been doing it with AI
-                before it was cool. Currently powered by chai lattes and Claude Code.
+                I moved from Bangalore's beautiful chaos to a town where the Appalachian Trail
+                starts on the main street, the average age is 23, and people describe -20&deg;C
+                winters as "brisk." I build products that drive real revenue and I've been doing
+                it with AI before it was cool. Currently powered by Mochas, Claude Code, and a
+                deeply questionable amount of optimism.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-3">
@@ -416,7 +428,7 @@ export default function Home() {
                 transition={{ delay: 1 }}
                 className="absolute -bottom-3 -left-3 bg-card border border-border rounded-full px-3 py-1.5 shadow-md"
               >
-                <span className="text-sm">&#9749; Powered by chai lattes</span>
+                <span className="text-sm">&#9749; Powered by Mochas</span>
               </motion.div>
             </motion.div>
           </div>
@@ -473,10 +485,10 @@ export default function Home() {
               className="md:col-span-3 text-muted-foreground leading-relaxed text-sm sm:text-base space-y-4"
             >
               <p>
-                Growing up, I attended 6+ schools across India and the US &mdash; California in 4th grade, Seattle in 7th, back to Bengaluru, and now Hanover, NH.
+                Growing up, I attended 6+ schools across India and the US. California in 4th grade, Seattle in 7th, back to Bengaluru, and now Hanover, NH.
               </p>
               <p>
-                Each move taught me something most PMs don't have: I can walk into any room, any culture, any team &mdash; and find common ground fast.
+                Each move taught me something most PMs don't have: I can walk into any room, any culture, any team, and find common ground fast.
               </p>
               <p>
                 My dad was an electronics engineer who once sat me down and showed me an options trade. He clicked the mouse. The number changed. I nearly fell off my chair. That one moment sparked everything.
@@ -557,6 +569,34 @@ export default function Home() {
             Education
           </motion.h2>
           <Roadmap items={education} />
+
+          {/* Campus Photos */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10"
+          >
+            <div className="relative group overflow-hidden rounded-lg">
+              <img src={bakerLibraryPhoto} alt="Baker Library, Dartmouth" className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
+                <p className="text-white text-xs font-medium">Baker Library, Dartmouth</p>
+              </div>
+            </div>
+            <div className="relative group overflow-hidden rounded-lg">
+              <img src={tuckPhoto} alt="Tuck School of Business" className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
+                <p className="text-white text-xs font-medium">Tuck School of Business</p>
+              </div>
+            </div>
+            <div className="relative group overflow-hidden rounded-lg">
+              <img src={classroomPhoto} alt="Thayer School of Engineering" className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
+                <p className="text-white text-xs font-medium">Thayer School of Engineering</p>
+              </div>
+            </div>
+          </motion.div>
         </section>
 
         {/* Experience Section */}
@@ -570,7 +610,7 @@ export default function Home() {
           >
             <h2 className="font-serif text-3xl sm:text-4xl mb-2">I Don't Just Ship Features. I Ship Revenue.</h2>
             <p className="text-muted-foreground text-sm sm:text-base max-w-2xl">
-              Here's what I've actually built &mdash; with the numbers that matter, the lessons that didn't come easy, and a couple things I'd do differently.
+              Here's what I've actually built, with the numbers that matter, the lessons that didn't come easy, and a couple things I'd do differently.
             </p>
           </motion.div>
           <Roadmap items={experiences} />
@@ -730,15 +770,123 @@ export default function Home() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-serif text-xl sm:text-2xl font-semibold mb-4">{chapter.title}</h3>
-                    <div className="space-y-3 text-muted-foreground leading-relaxed text-sm sm:text-base">
-                      {chapter.content.map((paragraph, pi) => (
-                        <p key={pi}>{paragraph}</p>
-                      ))}
-                    </div>
+                    {(chapter as any).image ? (
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="md:col-span-2 space-y-3 text-muted-foreground leading-relaxed text-sm sm:text-base">
+                          {chapter.content.map((paragraph, pi) => (
+                            <p key={pi}>{paragraph}</p>
+                          ))}
+                        </div>
+                        <div className="relative group overflow-hidden rounded-lg">
+                          <img
+                            src={(chapter as any).image}
+                            alt={(chapter as any).imageAlt}
+                            className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
+                            <p className="text-white text-xs font-medium">{(chapter as any).imageCaption}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-3 text-muted-foreground leading-relaxed text-sm sm:text-base">
+                        {chapter.content.map((paragraph, pi) => (
+                          <p key={pi}>{paragraph}</p>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
             ))}
+          </div>
+        </section>
+
+        {/* AI & Tools Section */}
+        <section id="ai-tools" className="mb-20 sm:mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-10 sm:mb-14"
+          >
+            <h2 className="font-serif text-3xl sm:text-4xl mb-2">
+              I Don't Just Use AI. I Build With It.
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl">
+              Claude Code, n8n, NotebookLM, Replit. These aren't just buzzwords on my resume. They're how I work every day. From building Kriyo AI to automating support resolution with NotebookLM, I treat AI as a serious product tool, not a gimmick.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            {/* AI Achievements */}
+            <div className="space-y-4">
+              {[
+                {
+                  icon: "\u{1F916}",
+                  title: "AI Knowledge Base",
+                  desc: "75% of support cases resolved without escalation using an AI knowledge base I built with NotebookLM in 3 days."
+                },
+                {
+                  icon: "\u{1F50D}",
+                  title: "Kriyo AI",
+                  desc: "Built a Salesforce natural language query tool that reduced manual retrieval from 90 min/day to near-zero."
+                },
+                {
+                  icon: "\u{1F4CA}",
+                  title: "LLM Visibility Strategy",
+                  desc: "Recommended Profound as an external visibility platform for Capital One. The team influenced $800K in investment."
+                },
+                {
+                  icon: "\u{2728}",
+                  title: "This Website",
+                  desc: "Built with Claude Code. Because the best way to prove you can build with AI is to actually build with AI."
+                }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex gap-4 p-4 sm:p-5 bg-card border border-border/50 hover:border-primary/20 rounded-lg transition-all"
+                >
+                  <span className="text-2xl shrink-0">{item.icon}</span>
+                  <div>
+                    <h4 className="font-serif font-semibold text-sm sm:text-base mb-1">{item.title}</h4>
+                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* AI Photo */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src={libraryClaudePhoto}
+                  alt="Working with Claude Code in the library"
+                  className="w-full h-64 sm:h-80 md:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-white text-sm font-medium">A typical afternoon: coffee + Claude Code</p>
+                </div>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["Claude Code", "NotebookLM", "n8n", "Replit", "Vercel"].map((tool, i) => (
+                  <Badge key={i} variant="secondary" className="bg-primary/5 border border-primary/15 text-xs py-1 px-2.5 font-normal">
+                    {tool}
+                  </Badge>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </section>
 
@@ -850,7 +998,7 @@ export default function Home() {
           <div className="text-center space-y-6 sm:space-y-8">
             <h2 className="font-serif text-3xl sm:text-4xl mb-2 sm:mb-4">Let's Build Something Together</h2>
             <p className="text-muted-foreground max-w-lg mx-auto text-sm sm:text-base px-2">
-              I'm always open to interesting conversations &mdash; about product, AI tools, or the best chai spots in Boston (I've done the field research).
+              I'm always open to interesting conversations about product, AI tools, or the best mocha spots in Hanover (I've done the field research).
             </p>
             <div className="flex justify-center gap-5 sm:gap-8 flex-wrap">
               <a
@@ -887,7 +1035,7 @@ export default function Home() {
             </div>
             <div className="pt-8 sm:pt-12 space-y-2">
               <p className="text-xs sm:text-sm text-muted-foreground">
-                Built with Claude Code (Opus 4.6). Deployed on Vercel. Powered by chai lattes.
+                Built with Claude Code (Opus 4.6). Deployed on Vercel. Powered by Mochas.
               </p>
               <p className="text-xs text-muted-foreground/60 italic">
                 Yes, I built this myself. No, I did not write every line manually. Yes, that is kind of the point.
