@@ -19,7 +19,6 @@ import libraryClaudePhoto from "@assets/library-claude-session.jpeg";
 import bakerLibraryPhoto from "@assets/baker-library-day.jpeg";
 import tuckPhoto from "@assets/tuck-school.jpeg";
 import bostonPhoto from "@assets/boston-charles-river.jpeg";
-import classroomPhoto from "@assets/dartmouth-classroom.jpeg";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,7 +27,7 @@ export default function Home() {
     {
       type: "work" as const,
       title: "Associate Product Manager",
-      company: "Apsona Inc. (B2B SaaS)",
+      company: "Apsona Inc. \u2013 Salesforce ISV Partner",
       location: "Bengaluru, India",
       period: "Sep 2024 - Aug 2025",
       companyDescription: "Apsona simplifies data management on Salesforce. ~25-person team across US + India.",
@@ -566,13 +565,12 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-10"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-10"
           >
             {[
               { src: bakerLibraryPhoto, alt: "Baker-Berry Library", caption: "Baker-Berry Library" },
               { src: tuckPhoto, alt: "Tuck School of Business", caption: "Tuck School of Business" },
               { src: bostonPhoto, alt: "Charles River, Boston", caption: "Charles River, Boston" },
-              { src: classroomPhoto, alt: "Thayer School of Engineering", caption: "Thayer School of Engineering" },
             ].map((photo, i) => (
               <motion.div
                 key={i}
