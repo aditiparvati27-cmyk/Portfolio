@@ -15,12 +15,7 @@ import {
 } from "lucide-react";
 import profilePhoto from "@assets/professional-headshot.jpeg";
 import jiraScreenshot from "@assets/image_1766854017021.png";
-import hikingPhoto from "@assets/hiking-nh-foliage.jpeg";
 import libraryClaudePhoto from "@assets/library-claude-session.jpeg";
-import bostonPhoto from "@assets/boston-charles-river.jpeg";
-import classroomPhoto from "@assets/dartmouth-classroom.jpeg";
-import bakerLibraryPhoto from "@assets/baker-library-day.jpeg";
-import tuckPhoto from "@assets/tuck-school.jpeg";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -156,8 +151,8 @@ export default function Home() {
       period: "Aug 2022 \u2013 Mar 2024",
       desc: "Rural India has a severe shortage of echocardiography operators. Led 12 engineers across electronics, medical electronics, and CS to design an AI-guided ultrasound solution. 2+ years of research.",
       insight: "Engineering isn't just about circuits. It's about the person at the end of the wire.",
-      tags: ["AI", "Healthcare", "Patent", "IEEE"],
-      metric: "Patent + IEEE published"
+      tags: ["AI", "Healthcare", "IEEE"],
+      metric: "IEEE published"
     },
     {
       title: "Sentiment Stream",
@@ -248,11 +243,8 @@ export default function Home() {
         "I grew up moving. By the time I graduated high school, I had attended more than 6 schools across India and the US.",
         "In 4th grade, we moved to California. In 7th grade, I was in Seattle, where I saw technology used as a learning tool for the first time. Back in India, it was considered a distraction. That perspective shift followed me everywhere.",
         "All that moving gave me something: I can walk into any room, any culture, any team, any country, and find common ground fast. Diversity isn't a checkbox for me. It's how I was built.",
-        "(Now I'm in Hanover, NH, where the primary wildlife is deer, the winters are genuinely alarming, and the people are extraordinary.)"
-      ],
-      image: bostonPhoto,
-      imageAlt: "Charles River, Boston",
-      imageCaption: "Charles River, Boston"
+        "(Now I'm in Hanover, NH, where the trees outnumber the people, the winters are genuinely alarming, and the community is extraordinary.)"
+      ]
     },
     {
       number: "02",
@@ -270,12 +262,9 @@ export default function Home() {
       content: [
         "I'd spent a year as a product manager. Shipped real products, driven real revenue, learned hard lessons. But I knew I had gaps: in strategy, in frameworks, in how truly great products are built at scale.",
         "So I packed up and moved from 30\u00B0C Bengaluru to -20\u00B0C Hanover, NH.",
-        "Hanover has a population of about 11,000. There are more deer than chai shops. (There are zero chai shops.)",
+        "Hanover has a population of about 11,000. There are more trees than people. (And zero chai shops.)",
         "But Dartmouth has something that makes up for all of it: people who are genuinely obsessed with building things that matter. And that is worth the cold."
-      ],
-      image: hikingPhoto,
-      imageAlt: "Hiking in New Hampshire",
-      imageCaption: "Fall foliage in New Hampshire"
+      ]
     },
     {
       number: "04",
@@ -444,7 +433,7 @@ export default function Home() {
             <StatCard icon="&#128176;" value={6} prefix="$" suffix="M" label="ARR Driven" />
             <StatCard icon="&#128200;" value={4} suffix="x" label="ACV Growth" />
             <StatCard icon="&#129302;" value="3+" suffix="" label="AI Tools Built" />
-            <StatCard icon="&#129420;" value="\u221E" label="Deer in Hanover" />
+            <StatCard icon="&#127795;" value="1M+" label="Trees in Hanover" />
           </motion.div>
         </div>
       </section>
@@ -489,9 +478,6 @@ export default function Home() {
               </p>
               <p>
                 Each move taught me something most PMs don't have: I can walk into any room, any culture, any team, and find common ground fast.
-              </p>
-              <p>
-                My dad was an electronics engineer who once sat me down and showed me an options trade. He clicked the mouse. The number changed. I nearly fell off my chair. That one moment sparked everything.
               </p>
               <p>
                 I'm at Dartmouth now, studying Engineering Management, building things with Claude Code, drinking bad chai, and working as a pro-bono consultant for a startup called Accruely. The learning never really stops.
@@ -546,7 +532,7 @@ export default function Home() {
               { icon: "&#9992;&#65039;", value: "6+", label: "Schools growing up" },
               { icon: "&#127758;", value: "3", label: "Countries lived in" },
               { icon: "&#129302;", value: "Daily", label: "Claude Code user" },
-              { icon: "&#129420;", value: "Too many", label: "Deer encounters in NH" },
+              { icon: "&#127795;", value: "1M+", label: "Trees in Hanover" },
             ].map((fact, i) => (
               <div key={i} className="text-center p-4 bg-card border border-border/30 rounded-lg">
                 <span className="text-xl sm:text-2xl" dangerouslySetInnerHTML={{ __html: fact.icon }} />
@@ -569,34 +555,6 @@ export default function Home() {
             Education
           </motion.h2>
           <Roadmap items={education} />
-
-          {/* Campus Photos */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10"
-          >
-            <div className="relative group overflow-hidden rounded-lg">
-              <img src={bakerLibraryPhoto} alt="Baker Library, Dartmouth" className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                <p className="text-white text-xs font-medium">Baker Library, Dartmouth</p>
-              </div>
-            </div>
-            <div className="relative group overflow-hidden rounded-lg">
-              <img src={tuckPhoto} alt="Tuck School of Business" className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                <p className="text-white text-xs font-medium">Tuck School of Business</p>
-              </div>
-            </div>
-            <div className="relative group overflow-hidden rounded-lg">
-              <img src={classroomPhoto} alt="Thayer School of Engineering" className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                <p className="text-white text-xs font-medium">Thayer School of Engineering</p>
-              </div>
-            </div>
-          </motion.div>
         </section>
 
         {/* Experience Section */}
@@ -770,31 +728,11 @@ export default function Home() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-serif text-xl sm:text-2xl font-semibold mb-4">{chapter.title}</h3>
-                    {(chapter as any).image ? (
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="md:col-span-2 space-y-3 text-muted-foreground leading-relaxed text-sm sm:text-base">
-                          {chapter.content.map((paragraph, pi) => (
-                            <p key={pi}>{paragraph}</p>
-                          ))}
-                        </div>
-                        <div className="relative group overflow-hidden rounded-lg">
-                          <img
-                            src={(chapter as any).image}
-                            alt={(chapter as any).imageAlt}
-                            className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                            <p className="text-white text-xs font-medium">{(chapter as any).imageCaption}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="space-y-3 text-muted-foreground leading-relaxed text-sm sm:text-base">
-                        {chapter.content.map((paragraph, pi) => (
-                          <p key={pi}>{paragraph}</p>
-                        ))}
-                      </div>
-                    )}
+                    <div className="space-y-3 text-muted-foreground leading-relaxed text-sm sm:text-base">
+                      {chapter.content.map((paragraph, pi) => (
+                        <p key={pi}>{paragraph}</p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>

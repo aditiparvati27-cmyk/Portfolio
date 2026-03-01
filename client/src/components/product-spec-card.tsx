@@ -7,7 +7,7 @@ const specLines = [
   { label: "Primary Fuel", value: "Masala Chai" },
   { label: "Backup Fuel", value: "Iced Coffee (sad)" },
   { label: "AI Stack", value: "Claude Code + Replit + n8n" },
-  { label: "Bad At", value: "Sports (NH is a sports town \u2014 ironic)" },
+  { label: "Bad At", value: "Sports (NH is a sports town, ironic)" },
   { label: "Superpower", value: "Turning ambiguity into revenue" },
   { label: "Languages", value: "English, Kannada, Hindi, Product, Prompt" },
 ];
