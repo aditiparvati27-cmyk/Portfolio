@@ -16,6 +16,10 @@ import {
 import profilePhoto from "@assets/professional-headshot.jpeg";
 import jiraScreenshot from "@assets/image_1766854017021.png";
 import libraryClaudePhoto from "@assets/library-claude-session.jpeg";
+import bakerLibraryPhoto from "@assets/baker-library-day.jpeg";
+import tuckPhoto from "@assets/tuck-school.jpeg";
+import bostonPhoto from "@assets/boston-charles-river.jpeg";
+import classroomPhoto from "@assets/dartmouth-classroom.jpeg";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -389,7 +393,7 @@ export default function Home() {
                   </a>
                 </Button>
                 <a
-                  href="/attached_assets/Aditi-Parvati_Resume_(26)_1766756461117.pdf"
+                  href="https://drive.google.com/file/d/18mv8p3-WhrCs02XOsn6nT5eHB37VCLMU/view"
                   target="_blank"
                   className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors self-center ml-1"
                 >
@@ -555,6 +559,36 @@ export default function Home() {
             Education
           </motion.h2>
           <Roadmap items={education} />
+
+          {/* Campus Photos */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-10"
+          >
+            {[
+              { src: bakerLibraryPhoto, alt: "Baker-Berry Library", caption: "Baker-Berry Library" },
+              { src: tuckPhoto, alt: "Tuck School of Business", caption: "Tuck School of Business" },
+              { src: bostonPhoto, alt: "Charles River, Boston", caption: "Charles River, Boston" },
+              { src: classroomPhoto, alt: "Thayer School of Engineering", caption: "Thayer School of Engineering" },
+            ].map((photo, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="relative group overflow-hidden rounded-lg"
+              >
+                <img src={photo.src} alt={photo.alt} className="w-full h-40 sm:h-52 object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-2 sm:p-3">
+                  <p className="text-white text-[10px] sm:text-xs font-medium">{photo.caption}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </section>
 
         {/* Experience Section */}
@@ -963,7 +997,7 @@ export default function Home() {
                 <span>LinkedIn</span>
               </a>
               <a
-                href="/attached_assets/Aditi-Parvati_Resume_(26)_1766756461117.pdf"
+                href="https://drive.google.com/file/d/18mv8p3-WhrCs02XOsn6nT5eHB37VCLMU/view"
                 target="_blank"
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-sm sm:text-base"
               >
