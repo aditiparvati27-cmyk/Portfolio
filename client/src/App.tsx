@@ -7,12 +7,14 @@ import { Analytics } from "@vercel/analytics/react";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Ooma from "@/pages/ooma";
+import Profound from "@/pages/profound";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/ooma/intro" component={Ooma} />
+      <Route path="/intro/profound" component={Profound} />
       <Route component={NotFound} />
     </Switch>
   );
