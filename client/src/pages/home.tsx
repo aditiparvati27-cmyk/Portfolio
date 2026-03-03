@@ -413,6 +413,8 @@ export default function Home() {
                 src={profilePhoto}
                 alt="Aditi Parvati"
                 className="w-72 h-80 md:w-80 md:h-[22rem] object-cover rounded-2xl shadow-xl border-2 border-border/30"
+                fetchPriority="high"
+                decoding="async"
               />
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -580,7 +582,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="relative group overflow-hidden rounded-lg"
               >
-                <img src={photo.src} alt={photo.alt} className="w-full h-40 sm:h-52 object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={photo.src} alt={photo.alt} className="w-full h-40 sm:h-52 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-2 sm:p-3">
                   <p className="text-white text-[10px] sm:text-xs font-medium">{photo.caption}</p>
                 </div>
@@ -844,6 +846,8 @@ export default function Home() {
                   src={libraryClaudePhoto}
                   alt="Working with Claude Code in the library"
                   className="w-full h-64 sm:h-80 md:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-white text-sm font-medium">A typical afternoon: coffee + Claude Code</p>

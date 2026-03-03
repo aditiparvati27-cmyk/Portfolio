@@ -39,6 +39,24 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React core — cached aggressively; changes almost never
+          "vendor-react": ["react", "react-dom"],
+          // Animation — large but static
+          "vendor-motion": ["framer-motion"],
+          // Radix UI primitives bundled together
+          "vendor-radix": [
+            "@radix-ui/react-tooltip",
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-slot",
+          ],
+          // Misc utils
+          "vendor-misc": ["wouter", "react-countup", "react-intersection-observer"],
+        },
+      },
+    },
   },
   server: {
     host: "0.0.0.0",

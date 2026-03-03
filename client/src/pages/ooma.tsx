@@ -146,11 +146,6 @@ const svgEcosystem = `<svg width="100%" viewBox="0 0 900 280" fill="none" xmlns=
 
 export default function Ooma() {
   useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap";
-    document.head.appendChild(link);
-
     const style = document.createElement("style");
     style.textContent = css;
     document.head.appendChild(style);
@@ -169,7 +164,6 @@ export default function Ooma() {
     }
 
     return () => {
-      document.head.removeChild(link);
       document.head.removeChild(style);
     };
   }, []);
