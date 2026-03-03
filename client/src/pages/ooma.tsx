@@ -64,10 +64,6 @@ body{background:var(--bg);color:var(--text)}
 #ooma-page .db{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:40px;margin:32px 0}
 #ooma-page .pb{border:1px solid var(--ba);border-radius:14px;padding:48px;margin:32px 0;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(240,192,96,.03),transparent 60%)}
 #ooma-page .pb::before{content:'"';position:absolute;top:-30px;left:30px;font-family:'Playfair Display',serif;font-size:160px;font-weight:900;color:rgba(240,192,96,.04);line-height:1}
-#ooma-page .gr{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
-#ooma-page .gp{display:flex;align-items:center;gap:7px;padding:6px 14px;border-radius:99px;font-size:13px;font-family:'DM Mono',monospace}
-#ooma-page .gp.mi{background:rgba(255,92,92,.08);border:1px solid rgba(255,92,92,.2);color:var(--red)}
-#ooma-page .gp.ha{background:rgba(80,216,144,.08);border:1px solid rgba(80,216,144,.2);color:var(--green)}
 #ooma-page .ir{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
 #ooma-page .ib{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--border);border-radius:99px;padding:7px 15px;font-size:13px;color:var(--muted)}
 #ooma-page .ib.ac{border-color:var(--ba);color:var(--gold);background:var(--gd)}
@@ -79,8 +75,15 @@ body{background:var(--bg);color:var(--text)}
 #ooma-page footer{text-align:center;padding:40px 24px;color:var(--dim);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px}
 #ooma-page footer a{color:var(--dim);text-decoration:none;margin:0 16px}
 #ooma-page footer a:hover{color:var(--muted)}
-#ooma-page .fade{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-#ooma-page .fade.v{opacity:1;transform:translateY(0)}
+#ooma-page .fade{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease}
+#ooma-page.js-loaded .fade{opacity:0;transform:translateY(16px)}
+#ooma-page.js-loaded .fade.v{opacity:1;transform:translateY(0)}
+#ooma-page .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:24px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+#ooma-page .gap-cell{padding:16px 20px;font-size:13.5px;display:flex;align-items:center;gap:10px}
+#ooma-page .gap-cell.have{background:rgba(80,216,144,.04)}
+#ooma-page .gap-cell.miss{background:rgba(255,92,92,.04)}
+#ooma-page .gap-icon{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+#ooma-page .gap-header{background:var(--s2);padding:10px 20px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);grid-column:span 1}
 #ooma-page .cta-section{text-align:center;padding:72px 56px;border-top:1px solid var(--border)}
 #ooma-page .cta-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px}
 #ooma-page .cta-eyebrow::before,#ooma-page .cta-eyebrow::after{content:'';display:block;width:32px;height:1px;background:var(--gold)}
@@ -89,15 +92,15 @@ body{background:var(--bg);color:var(--text)}
 #ooma-page .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 #ooma-page .btn-primary{padding:14px 36px;background:var(--gd);border:1px solid var(--gold);color:var(--gold);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:background .2s;border-radius:2px}
 #ooma-page .btn-primary:hover{background:rgba(240,192,96,.2)}
-#ooma-page .btn-secondary{padding:14px 36px;background:transparent;border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:border-color .2s,color .2s;border-radius:2px}
-#ooma-page .btn-secondary:hover{border-color:var(--muted);color:var(--text)}
-@media(max-width:768px){#ooma-page nav{padding:14px 20px}#ooma-page .na{display:none}#ooma-page .hero,#ooma-page .w{padding-left:24px;padding-right:24px}#ooma-page .hm{flex-wrap:wrap;gap:20px}#ooma-page .hcta{margin-left:0}#ooma-page .tc,#ooma-page .thr{grid-template-columns:1fr;gap:24px}#ooma-page .pb{padding:28px}#ooma-page .db{padding:20px}#ooma-page .cta-section{padding:48px 24px}}
+#ooma-page .btn-secondary{padding:14px 36px;background:transparent;border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:border-color .2s;border-radius:2px}
+#ooma-page .btn-secondary:hover{border-color:var(--muted)}
+@media(max-width:768px){#ooma-page nav{padding:14px 20px}#ooma-page .na{display:none}#ooma-page .hero,#ooma-page .w{padding-left:24px;padding-right:24px}#ooma-page .hm{flex-wrap:wrap;gap:20px}#ooma-page .hcta{margin-left:0}#ooma-page .tc,#ooma-page .thr{grid-template-columns:1fr;gap:24px}#ooma-page .pb{padding:28px}#ooma-page .db{padding:20px}#ooma-page .gap-grid{grid-template-columns:1fr}#ooma-page .cta-section{padding:48px 24px}}
 `;
 
 const svgEcosystem = `<svg width="100%" viewBox="0 0 900 280" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect x="350" y="100" width="200" height="80" rx="8" fill="rgba(240,192,96,.05)" stroke="rgba(240,192,96,.35)" stroke-width="1.5"/>
   <text x="450" y="133" text-anchor="middle" fill="#f0c060" font-family="DM Mono, monospace" font-size="13" letter-spacing="2">OOMA</text>
-  <text x="450" y="152" text-anchor="middle" fill="rgba(240,192,96,.5)" font-family="DM Sans, sans-serif" font-size="11">VoIP infrastructure · No native AI</text>
+  <text x="450" y="152" text-anchor="middle" fill="rgba(240,192,96,.5)" font-family="DM Sans, sans-serif" font-size="11">VoIP infrastructure. No generative AI.</text>
   <text x="450" y="170" text-anchor="middle" fill="rgba(240,192,96,.35)" font-family="DM Mono, monospace" font-size="10">1.2M+ users · $257M revenue</text>
   <rect x="20" y="10" width="155" height="62" rx="6" fill="rgba(92,168,255,.05)" stroke="rgba(92,168,255,.25)" stroke-width="1"/>
   <text x="97" y="35" text-anchor="middle" fill="#5ca8ff" font-family="DM Sans, sans-serif" font-size="13" font-weight="600">Goodcall</text>
@@ -120,7 +123,7 @@ const svgEcosystem = `<svg width="100%" viewBox="0 0 900 280" fill="none" xmlns=
   <text x="805" y="34" text-anchor="middle" fill="#b088ff" font-family="DM Sans, sans-serif" font-size="12" font-weight="600">2600Hz AI Team</text>
   <text x="805" y="51" text-anchor="middle" fill="rgba(122,122,138,.8)" font-family="DM Mono, monospace" font-size="9.5">Voice bots · Transcription</text>
   <text x="805" y="65" text-anchor="middle" fill="rgba(122,122,138,.8)" font-family="DM Mono, monospace" font-size="9.5">Sentiment · AI summaries</text>
-  <text x="805" y="79" text-anchor="middle" fill="rgba(176,136,255,.5)" font-family="DM Mono, monospace" font-size="9">Est. Feb 2023 · Internal only</text>
+  <text x="805" y="79" text-anchor="middle" fill="rgba(176,136,255,.5)" font-family="DM Mono, monospace" font-size="9">Est. Feb 2023 · In development</text>
   <line x1="725" y1="49" x2="550" y2="130" stroke="rgba(176,136,255,.2)" stroke-width="1" stroke-dasharray="5,4"/>
   <rect x="725" y="125" width="160" height="62" rx="6" fill="rgba(240,192,96,.03)" stroke="rgba(240,192,96,.2)" stroke-width="1" stroke-dasharray="4,2"/>
   <text x="805" y="149" text-anchor="middle" fill="rgba(240,192,96,.7)" font-family="DM Sans, sans-serif" font-size="12" font-weight="600">Ooma Labs</text>
@@ -137,36 +140,36 @@ const svgEcosystem = `<svg width="100%" viewBox="0 0 900 280" fill="none" xmlns=
 
 export default function Ooma() {
   useEffect(() => {
-    // Inject fonts
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap";
     document.head.appendChild(link);
 
-    // Inject styles
     const style = document.createElement("style");
     style.textContent = css;
     document.head.appendChild(style);
 
-    // Intersection observer for fade-in animations
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((i) => { if (i.isIntersecting) i.target.classList.add("v"); }),
-      { threshold: 0.1 }
-    );
-    setTimeout(() => {
-      document.querySelectorAll("#ooma-page .fade").forEach((el) => obs.observe(el));
-    }, 100);
+    const page = document.getElementById("ooma-page");
+    if (page) {
+      page.classList.add("js-loaded");
+      setTimeout(() => {
+        const obs = new IntersectionObserver(
+          (entries) => entries.forEach((i) => { if (i.isIntersecting) i.target.classList.add("v"); }),
+          { threshold: 0.1 }
+        );
+        document.querySelectorAll("#ooma-page .fade").forEach((el) => obs.observe(el));
+        return () => obs.disconnect();
+      }, 50);
+    }
 
     return () => {
       document.head.removeChild(link);
       document.head.removeChild(style);
-      obs.disconnect();
     };
   }, []);
 
   return (
     <div id="ooma-page">
-      {/* Top gradient line */}
       <div className="tl" />
 
       {/* Nav */}
@@ -184,49 +187,47 @@ export default function Ooma() {
       {/* Hero */}
       <div className="hero">
         <div className="hbg" /><div className="hgr" />
-        <div className="ey">Product Teardown · March 2026</div>
-        <h1 className="ht">Ooma Inc.<br /><em>Where AI Should Live</em></h1>
-        <p className="hs">A product teardown of Ooma's AI gap — and why I think I'm the right person to help close it.</p>
+        <div className="ey">Communications Teardown · March 2026</div>
+        <h1 className="ht">Ooma Inc.<br /><em>A Quiet AI Opportunity</em></h1>
+        <p className="hs">A look at where Ooma's AI story stands today, the gap in the market, and where I think I can help.</p>
         <div className="hm">
           <div className="ms"><div className="n">$257M</div><div className="l">Annual Revenue</div></div>
           <div className="ms"><div className="n">1.2M+</div><div className="l">Core Users</div></div>
-          <div className="ms"><div className="n r">1</div><div className="l">Native AI Feature*</div></div>
+          <div className="ms"><div className="n r">0</div><div className="l">Generative AI Features</div></div>
           <div className="ms"><div className="n">46.3%</div><div className="l">AI Agent CAGR to 2030</div></div>
           <a href="#gap" className="hcta">Read the Analysis</a>
         </div>
         <p style={{ color: "var(--dim)", fontSize: "11px", fontFamily: "'DM Mono', monospace", letterSpacing: "1px", marginTop: "14px" }}>
-          *Voicemail transcription on Pro tier only. No live transcription, summaries, sentiment, or AI receptionist on any public plan — verified across 4 independent 2025/2026 reviews.
+          Voicemail transcription uses basic ASR (automated speech recognition), not generative AI. No live transcription, call summaries, sentiment analysis, or AI receptionist on any public plan. Verified across 4 independent 2025/2026 reviews.
         </p>
       </div>
 
       <hr />
 
-      {/* The Core Finding */}
+      {/* AI Gap */}
       <div id="gap"><div className="w">
         <div className="eb">The Core Finding</div>
-        <h2>Ooma has the infrastructure.<br />The AI layer is missing.</h2>
+        <h2>The infrastructure is there.<br />The AI layer is not.</h2>
         <div className="tc">
           <div>
-            <p>Every major VoIP competitor ships AI as a core feature. Dialpad builds real-time transcription into its entry plan. RingCentral's RingSense AI spans tiers. Microsoft Teams gets Copilot. Zoom ships AI Companion. <strong>Ooma ships voicemail transcription on Pro — and nothing else.</strong></p>
-            <p>Verified independently via Quo, CloudTalk, Business.com, and Allo — all cite no AI transcription, no call summaries, no sentiment analysis as a key weakness. Management has flagged plans to boost ARPU 10–15% through AI. The gap widens quarterly while competitors ship.</p>
+            <p>Dialpad ships real-time transcription at the entry tier. RingCentral's RingSense AI spans plans. Microsoft Teams gets Copilot. Zoom ships AI Companion. Ooma has voicemail-to-email, powered by basic automated speech recognition, and nothing beyond that.</p>
+            <p>Management has flagged plans to grow ARPU 10 to 15% through AI. The 2600Hz AI team has been building voice bots, transcription, and sentiment analysis since early 2023. The pieces exist. What's interesting is the space between what's been built and what SMB users currently see.</p>
           </div>
           <div>
-            <p style={{ fontSize: "13px", marginBottom: "10px", color: "var(--text)" }}>What Ooma has natively:</p>
-            <div className="gr">
-              <div className="gp ha">✓ Voicemail transcription</div>
-              <div className="gp ha">✓ AI spam call blocking</div>
+            <div className="gap-grid">
+              <div className="gap-header">What Ooma has</div>
+              <div className="gap-header">Missing vs. competitors</div>
+              <div className="gap-cell have"><span className="gap-icon">✓</span><span style={{ color: "var(--green)" }}>Voicemail transcription (ASR)</span></div>
+              <div className="gap-cell miss"><span className="gap-icon">✕</span><span style={{ color: "var(--red)" }}>Live call transcription</span></div>
+              <div className="gap-cell have"><span className="gap-icon">✓</span><span style={{ color: "var(--green)" }}>AI spam call blocking</span></div>
+              <div className="gap-cell miss"><span className="gap-icon">✕</span><span style={{ color: "var(--red)" }}>AI call summaries</span></div>
+              <div className="gap-cell have" style={{ background: "rgba(240,192,96,.04)" }}><span className="gap-icon" style={{ color: "var(--gold)" }}>~</span><span style={{ color: "var(--gold)" }}>2600Hz AI (internal, dev)</span></div>
+              <div className="gap-cell miss"><span className="gap-icon">✕</span><span style={{ color: "var(--red)" }}>Sentiment analysis</span></div>
+              <div className="gap-cell have" style={{ background: "rgba(240,192,96,.04)" }}><span className="gap-icon" style={{ color: "var(--gold)" }}>~</span><span style={{ color: "var(--gold)" }}>Ooma Labs (R&D)</span></div>
+              <div className="gap-cell miss"><span className="gap-icon">✕</span><span style={{ color: "var(--red)" }}>AI virtual receptionist</span></div>
             </div>
-            <p style={{ fontSize: "13px", margin: "16px 0 10px", color: "var(--text)" }}>What every competitor has that Ooma doesn't:</p>
-            <div className="gr">
-              <div className="gp mi">✕ Live call transcription</div>
-              <div className="gp mi">✕ AI call summaries</div>
-              <div className="gp mi">✕ Sentiment analysis</div>
-              <div className="gp mi">✕ AI virtual receptionist</div>
-              <div className="gp mi">✕ Auto CRM note sync</div>
-              <div className="gp mi">✕ Coaching / whisper AI</div>
-            </div>
-            <div className="co" style={{ marginTop: "20px" }}>
-              <p><strong>Why this matters now:</strong> AI agent market growing 46.3% CAGR toward $52.6B by 2030. For Ooma's SMB customers, AI features are rapidly shifting from differentiator to table stakes.</p>
+            <div className="co" style={{ marginTop: "16px" }}>
+              <p>AI agent market growing 46.3% CAGR toward $52.6B by 2030. For Ooma's SMB customers, this category is shifting from differentiator to standard expectation.</p>
             </div>
           </div>
         </div>
@@ -237,8 +238,8 @@ export default function Ooma() {
       {/* Ecosystem */}
       <div className="fb" id="eco"><div className="w">
         <div className="eb">Market Intelligence</div>
-        <h2>The third-party AI tax on Ooma's users</h2>
-        <p>Companies are building <strong>profitable AI businesses by sitting on top of Ooma's infrastructure</strong> — charging Ooma customers an additional $59–$199/month for features Ooma doesn't offer natively. Their Ooma-specific landing pages and integrations are a clear signal: the demand is real, monetizable, and flowing to competitors.</p>
+        <h2>The third-party AI layer on Ooma's users</h2>
+        <p>Several companies have built businesses by layering AI on top of Ooma's infrastructure, charging Ooma customers an extra $59 to $199 per month for features Ooma doesn't offer natively. Their Ooma-specific landing pages make the demand visible.</p>
 
         <div className="db">
           <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "var(--gold)", marginBottom: "28px" }}>Who is capturing Ooma's AI opportunity</p>
@@ -249,17 +250,17 @@ export default function Ooma() {
           <div className="card fade">
             <span className="ct tb">Goodcall</span>
             <h4>AI Phone Agent for Ooma</h4>
-            <p>Integrates via call forwarding. 24/7 AI call handling and lead capture — features Ooma's virtual receptionist lacks. 10,000+ businesses. $59/mo on top of Ooma.</p>
+            <p>Integrates via call forwarding. 24/7 AI call handling and lead capture at $59/mo on top of Ooma. 10,000+ businesses using it across VoIP systems.</p>
           </div>
           <div className="card fade">
             <span className="ct tg">Smith.ai</span>
             <h4>Written for Ooma Users</h4>
-            <p>Their setup guide is written specifically for Ooma Office customers. Smith.ai identified Ooma's answer gap as a customer acquisition channel and built around it.</p>
+            <p>Their setup guide walks Ooma Office customers through call forwarding step by step. They've identified Ooma's gap and built onboarding directly around it.</p>
           </div>
           <div className="card fade">
             <span className="ct to">NextPhone</span>
             <h4>Built Around Ooma's Gap</h4>
-            <p>Dedicated Ooma integration page. Their research: 74.1% of Ooma SMB calls go unanswered. $199/mo flat — directly monetizing Ooma's product gap.</p>
+            <p>Dedicated Ooma page. Their research shows 74.1% of Ooma SMB calls go unanswered. $199/mo flat, built specifically for Ooma's customer base.</p>
           </div>
         </div>
       </div></div>
@@ -274,11 +275,11 @@ export default function Ooma() {
         <div style={{ marginBottom: "56px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
             <span className="ct tb" style={{ margin: 0 }}>Ooma Office</span>
-            <span style={{ fontSize: "13px", color: "var(--muted)" }}>SMB phone system · 513K business users · Primary growth product</span>
+            <span style={{ fontSize: "13px", color: "var(--muted)" }}>SMB phone system · 513K business users</span>
           </div>
-          <h3>The CRM gating problem</h3>
-          <p>Ooma Office's Salesforce and HubSpot integrations are locked behind the highest tier at $29.95/user/month. RingCentral includes CRM integrations at $20/user on Core. Dialpad includes them on every plan. For an SMB already using Salesforce, this pricing decision is often the switching factor.</p>
-          <p>There's a second gap: Ooma's Salesforce integration uses an XML call center adapter — not an AppExchange listing. That means it's <strong>invisible in Salesforce's marketplace</strong>, requires manual IT setup, and misses 150,000+ daily AppExchange visitors as a discovery channel entirely.</p>
+          <h3>CRM integrations and the tier structure</h3>
+          <p>Salesforce and HubSpot integrations sit behind the highest tier at $29.95/user/month. RingCentral includes CRM access starting at $20/user. Dialpad includes it across all plans. For teams already in Salesforce, this is often a deciding factor when comparing options.</p>
+          <p>Worth noting too: Ooma's Salesforce integration is set up via an XML call center adapter rather than a native AppExchange listing, which means it doesn't show up in Salesforce's marketplace. Competitors with AppExchange listings benefit from that discovery channel.</p>
           <table>
             <thead>
               <tr>
@@ -305,11 +306,11 @@ export default function Ooma() {
             <span className="ct tp" style={{ margin: 0 }}>2600Hz Platform</span>
             <span style={{ fontSize: "13px", color: "var(--muted)" }}>White-label UCaaS/CCaaS/CPaaS · 300+ APIs · Acquired Oct 2023</span>
           </div>
-          <h3>The AI engine Ooma hasn't surfaced yet</h3>
-          <p>2600Hz's AI team was established February 2023. Post-acquisition, they announced an AI meeting recap, voice bots, chatbots, call transcription, and sentiment analysis — all in development. ServiceTitan has already used 2600Hz to ship Contact Center Pro, a commercial AI-driven contact center. The engineering capability is proven.</p>
-          <p>The gap isn't technical — it's a product strategy problem. <strong>No one has defined how to surface these 2600Hz AI capabilities as features for Ooma Office's 500K+ SMB users.</strong> That translation work is exactly what a PM on the Ooma Labs or 2600Hz AI team would own.</p>
+          <h3>AI in development, not yet in market</h3>
+          <p>In early 2023, 2600Hz formally established an AI team. At Kazoocon that October, alongside the Ooma acquisition announcement, they previewed voice bots, call transcription, and sentiment analysis. ServiceTitan has also used the 2600Hz platform to build Contact Center Pro, their AI-driven contact center product for the trades.</p>
+          <p>What hasn't been confirmed publicly is how much of this has made it into Ooma Office's SMB product. That's the interesting part. There's clearly active work on the platform side, and the question of how it gets shaped into something Ooma's 500K+ business users actually see is exactly the kind of problem I'd want to work on.</p>
           <div className="co gr fade">
-            <p>My interest in contributing to <strong>Ooma Labs and/or the 2600Hz AI team</strong> is genuine — this is where the company's next chapter will be written. The R&amp;D stage requires exactly the kind of thinking I've developed: customer discovery, build-vs-buy analysis, RICE prioritization, and the ability to translate engineering capabilities into features SMB users actually pay for.</p>
+            <p>My interest in contributing to <strong>Ooma Labs and/or the 2600Hz AI team</strong> is genuine. This is where the company's next chapter is being written, and the R&D stage is exactly where I'd like to be. Customer discovery, build vs. buy thinking, working through what features actually matter to SMBs, figuring out how platform capabilities become things users pay for. That's the kind of work I've done and want to keep doing.</p>
           </div>
         </div>
       </div></div>
@@ -322,23 +323,23 @@ export default function Ooma() {
         <h2>Why I want to be here</h2>
 
         <div className="pb fade">
-          <p style={{ color: "var(--text)", fontSize: "16.5px", lineHeight: "1.75", marginBottom: "20px" }}>I'm a Master's student in Engineering Management at Dartmouth and a former APM at Apsona (a Salesforce ISV). I found Ooma by looking for companies where my exact experience could move a needle — and the AI opportunity mapped almost perfectly to what I've already done.</p>
-          <p>At <strong>Apsona</strong>, I was sitting in the Salesforce ecosystem solving exactly the kind of problems Ooma needs to solve: CRM integrations, SMB pricing strategy, AppExchange positioning, and building AI tools that cut support overhead by 75%. I know what makes SMBs upgrade tiers. I know what makes them churn. And I know what it takes to move 1,800+ accounts to a new pricing model without losing them.</p>
-          <p>At <strong>Capital One</strong> (as Dartmouth PM consultant), I led the AI marketing technology assessment that influenced an $800K investment decision — by doing exactly what this teardown does: mapping a market gap, evaluating the third-party landscape, and recommending a build-vs-buy path.</p>
+          <p style={{ color: "var(--text)", fontSize: "16.5px", lineHeight: "1.75", marginBottom: "20px" }}>I'm a Master's student in Engineering Management at Dartmouth and a former APM at Apsona, a Salesforce ISV. I found Ooma by looking for companies where my background could genuinely be useful, and the AI opportunity here mapped closely to problems I've already worked on.</p>
+          <p>At <strong>Apsona</strong>, I was sitting in the Salesforce ecosystem working on CRM integrations, SMB pricing strategy, AppExchange positioning, and building AI tools that cut support overhead by 75%. I know what makes SMBs upgrade tiers, what makes them churn, and what it takes to move 1,800+ accounts to a new pricing model without losing them.</p>
+          <p>At <strong>Capital One</strong>, as a Dartmouth PM consultant, I led the AI marketing technology assessment that influenced an $800K investment decision. That project looked a lot like this: mapping a market gap, evaluating the third-party landscape, and working through a build vs. buy recommendation.</p>
         </div>
 
         <div className="thr" style={{ marginTop: "8px" }}>
           <div className="card fade">
-            <h4>Where I want to contribute</h4>
-            <p>Product Management — ideally on Ooma Office AI features, 2600Hz AI roadmap, or Ooma Labs. I'm excited about the discovery and 0 to 1 work of defining what "Ooma AI" looks like for SMBs.</p>
+            <h4>Where I'd love to contribute</h4>
+            <p>Ideally somewhere close to the AI product work, whether that's Ooma Office, the 2600Hz roadmap, or Ooma Labs. That said, I'm genuinely open to wherever the product team needs an extra hand.</p>
           </div>
           <div className="card fade">
             <h4>What I bring</h4>
-            <p>Salesforce ISV experience · SMB pricing playbook · AppExchange GTM · RICE prioritization · Customer discovery · AI build-vs-buy analysis · Quote-to-cash redesign · Dartmouth MEM, Dec 2026.</p>
+            <p>Customer interviews and discovery, feature backlog management, writing functional specs for engineering, A/B testing, tracking and analyzing user engagement metrics, RICE prioritization, AI build vs. buy thinking. Dartmouth MEM graduating Dec 2026.</p>
           </div>
           <div className="card fade">
-            <h4>Happy to also help with</h4>
-            <p>Integration strategy, GTM for new AI tiers, AirDial product analytics, or anywhere a PM with SMB SaaS and Salesforce ecosystem depth creates value.</p>
+            <h4>Day to day, I'm comfortable with</h4>
+            <p>Translating user research into requirements, working closely with engineers to spec features, pulling apart engagement data to find what's actually driving growth, and running structured experiments to validate assumptions before building.</p>
           </div>
         </div>
 
@@ -346,9 +347,13 @@ export default function Ooma() {
           <div className="ib ac"><span className="id idg" />Ooma Office AI</div>
           <div className="ib ac"><span className="id idp" />2600Hz AI Roadmap</div>
           <div className="ib ac"><span className="id idg" />Ooma Labs R&amp;D</div>
-          <div className="ib"><span className="id idb" />CRM Integration</div>
-          <div className="ib"><span className="id idb" />AirDial Product</div>
+          <div className="ib"><span className="id idb" />Feature Backlog</div>
+          <div className="ib"><span className="id idb" />Customer Interviews</div>
+          <div className="ib"><span className="id idg" />Growth Metrics</div>
+          <div className="ib"><span className="id idp" />A/B Testing</div>
+          <div className="ib"><span className="id idb" />GTM</div>
           <div className="ib"><span className="id idg" />SMB Pricing</div>
+          <div className="ib"><span className="id idp" />User Research</div>
         </div>
       </div></div>
 
@@ -358,14 +363,14 @@ export default function Ooma() {
       <div className="w" style={{ paddingTop: "48px", paddingBottom: "48px" }}>
         <div className="eb">Research Sources</div>
         <div className="tc">
-          <div><p><strong>AI feature verification:</strong> Confirmed via Ooma's G2 listing, official pricing pages, and four independent 2025/2026 reviews (Quo/OpenPhone, CloudTalk, Business.com, Allo). "No AI transcription, summaries, or sentiment" is consistent across all sources. Enterprise-tier AI virtual agents mentioned in one review but not publicly listed or priced.</p></div>
-          <div><p><strong>Competitive intelligence:</strong> Goodcall, Smith.ai, NextPhone, TalkforceAI sourced from their own Ooma-specific pages. 2600Hz AI features from official Kazoocon blog post (2023). Ooma Labs details from ooma.com/company-team. Financial data from FY2025 10-K and Q3 FY2026 earnings call.</p></div>
+          <div><p><strong>AI feature verification:</strong> Confirmed via Ooma's own support docs (voicemail transcription uses ASR, not generative AI), G2 listing, official pricing pages, and four independent 2025/2026 reviews from Quo, CloudTalk, Business.com, and Allo. All consistent on the absence of live transcription, summaries, and sentiment analysis.</p></div>
+          <div><p><strong>Other sources:</strong> Goodcall, Smith.ai, NextPhone, and TalkforceAI from their own Ooma-specific pages. 2600Hz AI development from the official Kazoocon blog. Ooma Labs from ooma.com/company-team. Financial data from FY2025 10-K and Q3 FY2026 earnings.</p></div>
         </div>
       </div>
 
       <hr />
 
-      {/* CTA Section */}
+      {/* CTA */}
       <div className="cta-section fade">
         <div className="cta-eyebrow">Let's talk</div>
         <h2 className="cta-title">Interested in working together?</h2>
@@ -378,7 +383,7 @@ export default function Ooma() {
 
       {/* Footer */}
       <footer>
-        <p style={{ color: "var(--muted)", fontSize: "13px", marginBottom: "14px" }}>Aditi Parvati · Ooma Product Teardown · March 2026</p>
+        <p style={{ color: "var(--muted)", fontSize: "13px", marginBottom: "14px" }}>Aditi Parvati · Ooma Teardown · March 2026</p>
         <div>
           <a href="mailto:aditiparvati27@gmail.com">aditiparvati27@gmail.com</a>
           <a href="https://linkedin.com/in/aditi-parvati" target="_blank" rel="noreferrer">LinkedIn</a>
