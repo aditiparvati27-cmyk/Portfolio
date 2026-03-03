@@ -20,7 +20,7 @@ body{background:var(--bg);color:var(--text)}
 #ooma-page .ey{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
 #ooma-page .ey::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
 #ooma-page .ht{font-family:'Playfair Display',serif;font-size:clamp(48px,7vw,88px);font-weight:900;line-height:1;letter-spacing:-2px;margin-bottom:28px}
-#ooma-page .ht em{color:var(--gold);font-style:italic}
+#ooma-page .ht em{color:var(--gold);font-family:'DM Sans',sans-serif;font-style:italic;font-weight:300;letter-spacing:1px}
 #ooma-page .hs{color:var(--muted);font-size:17px;max-width:560px;line-height:1.65;margin-bottom:48px}
 #ooma-page .hm{display:flex;gap:40px;align-items:flex-end;border-top:1px solid var(--border);padding-top:28px}
 #ooma-page .ms .n{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1}
@@ -210,6 +210,7 @@ export default function Ooma() {
         <h2>The infrastructure is there.<br />The AI layer is not.</h2>
         <div className="tc">
           <div>
+            <p style={{ color: "var(--text)", fontSize: "16.5px", fontWeight: "700", lineHeight: "1.65", marginBottom: "20px" }}>Ooma has 1.2M users, a white-label communications platform with 300+ APIs, and an AI team that has been building since 2023. What it doesn't have is an AI layer</p>
             <p>Dialpad ships real-time transcription at the entry tier. RingCentral's RingSense AI spans plans. Microsoft Teams gets Copilot. Zoom ships AI Companion. Ooma has voicemail-to-email, powered by basic automated speech recognition, and nothing beyond that.</p>
             <p>Management has flagged plans to grow ARPU 10 to 15% through AI. The 2600Hz AI team has been building voice bots, transcription, and sentiment analysis since early 2023. The pieces exist. What's interesting is the space between what's been built and what SMB users currently see.</p>
           </div>
