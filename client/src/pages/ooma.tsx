@@ -94,6 +94,12 @@ body{background:var(--bg);color:var(--text)}
 #ooma-page .btn-primary:hover{background:rgba(240,192,96,.2)}
 #ooma-page .btn-secondary{padding:14px 36px;background:transparent;border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:border-color .2s;border-radius:2px}
 #ooma-page .btn-secondary:hover{border-color:var(--muted)}
+#ooma-page .scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;animation:si-bounce 2.2s ease-in-out infinite}
+#ooma-page .scroll-ind span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);transition:color .2s}
+#ooma-page .scroll-ind:hover span{color:var(--gold)}
+#ooma-page .scroll-ind svg{color:var(--gold);opacity:.55;transition:opacity .2s}
+#ooma-page .scroll-ind:hover svg{opacity:.9}
+@keyframes si-bounce{0%,100%{transform:translateX(-50%) translateY(0)}55%{transform:translateX(-50%) translateY(7px)}}
 @media(max-width:768px){#ooma-page nav{padding:14px 20px}#ooma-page .na{display:none}#ooma-page .hero,#ooma-page .w{padding-left:24px;padding-right:24px}#ooma-page .hm{flex-wrap:wrap;gap:20px}#ooma-page .hcta{margin-left:0}#ooma-page .tc,#ooma-page .thr{grid-template-columns:1fr;gap:24px}#ooma-page .pb{padding:28px}#ooma-page .db{padding:20px}#ooma-page .gap-grid{grid-template-columns:1fr}#ooma-page .cta-section{padding:48px 24px}}
 `;
 
@@ -200,6 +206,13 @@ export default function Ooma() {
         <p style={{ color: "var(--dim)", fontSize: "11px", fontFamily: "'DM Mono', monospace", letterSpacing: "1px", marginTop: "14px" }}>
           Voicemail transcription uses basic ASR (automated speech recognition), not generative AI. No live transcription, call summaries, sentiment analysis, or AI receptionist on any public plan. Verified across 4 independent 2025/2026 reviews.
         </p>
+        <a href="#gap" className="scroll-ind" aria-label="Scroll to analysis">
+          <span>scroll</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <polyline points="19 12 12 19 5 12" />
+          </svg>
+        </a>
       </div>
 
       <hr />
