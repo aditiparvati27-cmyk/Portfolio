@@ -15,6 +15,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/ooma/intro" component={Ooma} />
       <Route path="/intro/profound" component={Profound} />
+      <Route path="/profound/intro" component={Profound} />
       <Route component={NotFound} />
     </Switch>
   );
