@@ -1447,81 +1447,261 @@
   font-weight: 500;
 }
 
-/* ═══ RESPONSIVE ═══ */
+/* ═══ RESPONSIVE — MOBILE ═══ */
 @media (max-width: 768px) {
+
+  /* ── Slides allow internal vertical scroll on mobile ── */
   #profound-scroll .pd-slide {
-    padding: 40px 20px 36px;
+    padding: 38px 18px 52px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
+  /* ── Chrome: compact ── */
   #profound-scroll .pd-chrome-t {
-    padding: 10px 20px;
+    padding: 8px 16px;
   }
 
   #profound-scroll .pd-chrome-b {
-    padding: 8px 20px;
+    padding: 6px 16px;
   }
 
+  #profound-scroll .pd-logo {
+    font-size: 8px;
+  }
+
+  #profound-scroll .pd-counter {
+    font-size: 9px;
+  }
+
+  /* ── Nav arrows: smaller, pushed to bottom corners ── */
   #profound-scroll .pd-nav-arrow {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    top: auto;
+    bottom: 48px;
+    transform: none;
+  }
+
+  #profound-scroll .pd-nav-arrow:hover {
+    transform: scale(1.06);
   }
 
   #profound-scroll .pd-nav-left {
-    left: 6px;
+    left: 16px;
   }
 
   #profound-scroll .pd-nav-right {
-    right: 6px;
+    right: 16px;
   }
 
   #profound-scroll .pd-nav-arrow svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
 
-  #profound-scroll .s1-title {
-    font-size: min(12vw, 56px) !important;
+  /* ── Hide keyboard hint on mobile, compact dots ── */
+  #profound-scroll .pd-hint {
+    display: none;
   }
 
-  #profound-scroll .s1-stats {
-    position: relative !important;
-    right: auto !important;
-    bottom: auto !important;
-    flex-wrap: wrap;
-    margin-top: 20px;
+  #profound-scroll .pd-dots {
+    width: 100%;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  #profound-scroll .pd-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* ── Common: smaller type ── */
+  #profound-scroll .eyebrow {
+    font-size: 8px;
+    margin-bottom: 6px;
+    letter-spacing: .2em;
+  }
+
+  #profound-scroll h2.pd-h2 {
+    font-size: 22px !important;
+    margin-bottom: 8px;
+  }
+
+  #profound-scroll .callout {
+    padding: 10px 12px;
+    margin-top: 8px;
+  }
+
+  #profound-scroll .callout p {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  /* ═══ S1 COVER — mobile ═══ */
+  #profound-scroll #ps1 {
+    padding-bottom: 52px;
+    justify-content: center;
   }
 
   #profound-scroll .s1-ghost {
     display: none;
   }
 
-  #profound-scroll h2.pd-h2 {
-    font-size: 24px !important;
+  #profound-scroll .s1-pill {
+    font-size: 8px;
+    padding: 4px 10px;
+    margin-bottom: 16px;
+  }
+
+  #profound-scroll .s1-title {
+    font-size: 42px !important;
+    margin-bottom: 16px;
+  }
+
+  #profound-scroll .s1-rule {
+    margin-bottom: 10px;
+  }
+
+  #profound-scroll .s1-sub {
+    font-size: 13px;
+    line-height: 1.55;
+    max-width: 100%;
+  }
+
+  #profound-scroll .s1-stats {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    border: none;
+  }
+
+  #profound-scroll .ss {
+    padding: 10px 14px;
+    width: 50%;
+    border: 1px solid var(--line);
+  }
+
+  #profound-scroll .ss-n {
+    font-size: 20px;
+  }
+
+  #profound-scroll .ss-l {
+    font-size: 9px;
+    max-width: none;
+  }
+
+  /* ═══ S2 GAP TABLE — mobile: horizontal scroll ═══ */
+  #profound-scroll .gap-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 11px;
+    min-width: 0;
+  }
+
+  #profound-scroll .gap-table th {
+    font-size: 8px;
+    padding: 6px 8px;
+    white-space: nowrap;
   }
 
   #profound-scroll .gap-table td {
     font-size: 11px;
-    padding: 6px 8px;
+    padding: 8px 10px;
+    min-width: 100px;
   }
 
-  #profound-scroll .gap-table th {
-    font-size: 9px;
-    padding: 6px 8px;
+  #profound-scroll .gap-table td:first-child {
+    font-size: 8px;
+    min-width: 70px;
+    width: auto;
   }
 
+  /* ═══ S3 WEBMCP — mobile: stack ═══ */
   #profound-scroll .ba-wrap {
     grid-template-columns: 1fr !important;
-    gap: 8px;
+    gap: 10px;
   }
 
   #profound-scroll .ba-arrow {
     display: none;
   }
 
-  #profound-scroll .moat-grid {
-    grid-template-columns: 1fr !important;
+  #profound-scroll .ba-header {
+    padding: 6px 10px;
   }
 
+  #profound-scroll .ba-header-t {
+    font-size: 8px;
+  }
+
+  #profound-scroll .ba-row {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  #profound-scroll .ba-ico {
+    font-size: 14px;
+    width: 18px;
+  }
+
+  #profound-scroll .ba-text {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  #profound-scroll .bstat {
+    padding: 6px 8px;
+  }
+
+  #profound-scroll .bstat-v {
+    font-size: 18px;
+  }
+
+  #profound-scroll .bstat-l {
+    font-size: 8px;
+  }
+
+  #profound-scroll .ba-code {
+    padding: 8px 10px;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  #profound-scroll .chip {
+    font-size: 7px;
+    padding: 2px 6px;
+  }
+
+  /* ═══ S4 MOAT — mobile: 1 col ═══ */
+  #profound-scroll .moat-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1px;
+  }
+
+  #profound-scroll .mc {
+    padding: 14px 16px;
+  }
+
+  #profound-scroll .mc-num {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  #profound-scroll .mc-title {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  #profound-scroll .mc-body {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  /* ═══ S5 ATTRIBUTION — mobile: 1 col ═══ */
   #profound-scroll .loop-wrap {
     grid-template-columns: 1fr !important;
   }
@@ -1531,29 +1711,327 @@
     border-top: 1px solid var(--line);
   }
 
+  #profound-scroll .lp {
+    padding: 16px 16px;
+  }
+
+  #profound-scroll .lp-label {
+    font-size: 8px;
+    margin-bottom: 6px;
+  }
+
+  #profound-scroll .lp-big {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  #profound-scroll .lp-title {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  #profound-scroll .lp-body {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  #profound-scroll .lp-chip {
+    margin-top: 6px;
+    font-size: 8px;
+  }
+
+  /* ═══ S6 TIMELINE — mobile ═══ */
+  #profound-scroll .tl-head {
+    padding: 6px 10px;
+    font-size: 7px;
+  }
+
   #profound-scroll .tl-row {
-    grid-template-columns: 70px 1fr;
+    grid-template-columns: 65px 1fr;
+  }
+
+  #profound-scroll .tl-date {
+    padding: 8px 6px;
+    font-size: 9px;
+    padding-top: 10px;
+  }
+
+  #profound-scroll .tl-body {
+    padding: 8px 12px;
+  }
+
+  #profound-scroll .tl-title {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  #profound-scroll .tl-desc {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  #profound-scroll .tl-chip {
+    font-size: 7px;
+    padding: 2px 6px;
+    margin-top: 3px;
+  }
+
+  /* ═══ S7 DASHBOARD — mobile ═══ */
+  #profound-scroll .db {
+    margin-top: 6px;
+  }
+
+  #profound-scroll .db-topbar {
+    padding: 5px 10px;
+    gap: 5px;
+  }
+
+  #profound-scroll .db-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  #profound-scroll .db-url {
+    font-size: 8px;
+  }
+
+  #profound-scroll .db-tabs {
+    flex-wrap: nowrap;
+  }
+
+  #profound-scroll .db-tab {
+    font-size: 8px;
+    padding: 5px 8px;
   }
 
   #profound-scroll .db-content {
     grid-template-columns: 1fr !important;
   }
 
+  #profound-scroll .db-left {
+    padding: 10px 12px;
+  }
+
   #profound-scroll .db-right {
+    padding: 10px 12px;
     border-top: 1px solid rgba(255, 255, 255, .06);
   }
 
+  #profound-scroll .db-brand {
+    font-size: 12px;
+  }
+
+  #profound-scroll .db-sub {
+    font-size: 8px;
+    margin-bottom: 8px;
+  }
+
+  #profound-scroll .db-score-n {
+    font-size: 36px;
+  }
+
+  #profound-scroll .db-score-label {
+    font-size: 8px;
+  }
+
+  #profound-scroll .db-score-delta {
+    font-size: 9px;
+  }
+
+  #profound-scroll .db-score-row {
+    margin-bottom: 10px;
+  }
+
+  #profound-scroll .dbm {
+    margin-bottom: 6px;
+  }
+
+  #profound-scroll .dbm-label,
+  #profound-scroll .dbm-val {
+    font-size: 10px;
+  }
+
+  #profound-scroll .db-alert {
+    margin-top: 8px;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  #profound-scroll .db-cta {
+    font-size: 8px;
+    padding: 3px 10px;
+    margin-top: 6px;
+  }
+
+  #profound-scroll .db-ins-label {
+    font-size: 8px;
+    margin-bottom: 6px;
+  }
+
+  #profound-scroll .insight-item {
+    padding: 6px 0;
+  }
+
+  #profound-scroll .insight-title {
+    font-size: 11px;
+  }
+
+  #profound-scroll .insight-body {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  /* ═══ S8 ASK — mobile ═══ */
   #profound-scroll .ask-grid {
     grid-template-columns: 1fr !important;
     gap: 16px;
   }
 
-  #profound-scroll .mkt-grid,
-  #profound-scroll .wm-grid2 {
+  #profound-scroll .ask-items {
+    gap: 10px;
+  }
+
+  #profound-scroll .ask-item {
+    gap: 10px;
+  }
+
+  #profound-scroll .ask-n {
+    font-size: 16px;
+  }
+
+  #profound-scroll .ask-text {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  #profound-scroll .ask-note {
+    font-size: 11px;
+    margin-top: 12px;
+    line-height: 1.55;
+  }
+
+  #profound-scroll .ask-card {
+    padding: 10px 12px;
+  }
+
+  #profound-scroll .card-l {
+    font-size: 8px;
+    margin-bottom: 2px;
+  }
+
+  #profound-scroll .card-v {
+    font-size: 11px;
+  }
+
+  #profound-scroll .ask-proof {
+    margin-top: 10px;
+    padding: 10px 12px;
+    font-size: 10px;
+    line-height: 1.55;
+  }
+
+  /* ═══ APPENDIX — mobile ═══ */
+  #profound-scroll .apx-big {
+    font-size: 32px;
+  }
+
+  #profound-scroll .apx-sub {
+    font-size: 12px;
+  }
+
+  #profound-scroll .mkt-grid {
     grid-template-columns: 1fr 1fr !important;
+  }
+
+  #profound-scroll .mkt-cell {
+    padding: 12px 12px;
+  }
+
+  #profound-scroll .mkt-n {
+    font-size: 24px;
+    margin-bottom: 2px;
+  }
+
+  #profound-scroll .mkt-l {
+    font-size: 10px;
+  }
+
+  #profound-scroll .mkt-src {
+    font-size: 8px;
+  }
+
+  #profound-scroll .infra-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   #profound-scroll .infra-table td {
     font-size: 11px;
+    padding: 8px 0;
+  }
+
+  #profound-scroll .infra-table td:first-child {
+    width: 120px;
+    font-size: 12px;
+  }
+
+  #profound-scroll .ibadge {
+    font-size: 8px;
+    padding: 2px 6px;
+  }
+
+  #profound-scroll .wm-grid2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  #profound-scroll .wm-cell {
+    padding: 14px 16px;
+  }
+
+  #profound-scroll .wm-n {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  #profound-scroll .wm-t {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  #profound-scroll .wm-b {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
+
+/* ═══ VERY SMALL SCREENS (< 400px) ═══ */
+@media (max-width: 400px) {
+  #profound-scroll .s1-title {
+    font-size: 36px !important;
+  }
+
+  #profound-scroll .s1-sub {
+    font-size: 12px;
+  }
+
+  #profound-scroll h2.pd-h2 {
+    font-size: 20px !important;
+  }
+
+  #profound-scroll .ss {
+    padding: 8px 10px;
+  }
+
+  #profound-scroll .ss-n {
+    font-size: 18px;
+  }
+
+  #profound-scroll .ss-l {
+    font-size: 8px;
+  }
+
+  #profound-scroll .mkt-grid {
+    grid-template-columns: 1fr !important;
   }
 }
