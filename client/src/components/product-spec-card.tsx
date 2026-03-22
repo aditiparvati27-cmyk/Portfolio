@@ -3,13 +3,12 @@ import { motion } from "framer-motion";
 const specLines = [
   { label: "Current Build", value: "Dartmouth MEM '26" },
   { label: "Previous Build", value: "DSCE Bengaluru '24" },
-  { label: "Base Location", value: "Hanover, NH (formerly Bengaluru)" },
+  { label: "Base Location", value: "Hanover, NH" },
+  { label: "Target Roles", value: "Product Mgmt + Product Marketing" },
   { label: "Primary Fuel", value: "Masala Chai" },
-  { label: "Backup Fuel", value: "Iced Coffee (sad)" },
   { label: "AI Stack", value: "Claude Code + Replit + n8n" },
-  { label: "Bad At", value: "Sports (NH is a sports town, ironic)" },
   { label: "Superpower", value: "Turning ambiguity into revenue" },
-  { label: "Languages", value: "English, Kannada, Hindi, Product, Prompt" },
+  { label: "Languages", value: "English, Kannada, Hindi" },
 ];
 
 export function ProductSpecCard() {
@@ -19,7 +18,7 @@ export function ProductSpecCard() {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="bg-foreground text-primary-foreground rounded-lg p-5 sm:p-6 font-mono text-xs sm:text-sm leading-relaxed shadow-lg"
+      className="bg-foreground text-primary-foreground rounded-lg p-4 sm:p-5 font-mono text-[11px] sm:text-xs leading-relaxed shadow-lg"
     >
       <div className="flex items-center gap-2 mb-1">
         <span className="w-3 h-3 rounded-full bg-destructive inline-block" />
@@ -36,13 +35,13 @@ export function ProductSpecCard() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row sm:gap-2 mb-1.5"
+            className="flex flex-col sm:flex-row sm:gap-2 mb-1"
           >
-            <span className="text-primary-foreground/60 shrink-0 sm:w-36">{line.label}:</span>
+            <span className="text-primary-foreground/60 shrink-0 sm:w-32">{line.label}:</span>
             <span className="text-primary-foreground">{line.value}</span>
           </motion.div>
         ))}
-        <div className="mt-3 pt-3 border-t border-primary-foreground/10">
+        <div className="mt-2 pt-2 border-t border-primary-foreground/10">
           <span className="text-primary-foreground/60">Status: </span>
           <span className="text-gold font-bold animate-pulse">OPEN TO OPPORTUNITIES</span>
           <span className="text-primary-foreground/40"> [active]</span>

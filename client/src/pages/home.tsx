@@ -24,7 +24,7 @@ import bostonPhoto from "@assets/boston-charles-river.jpeg";
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [journeyMode, setJourneyMode] = useState<"quick" | "deep">("quick");
-  const [roleView, setRoleView] = useState<"recruiter" | "product_marketing_team">("recruiter");
+  const [roleView, setRoleView] = useState<"impact" | "thinking">("impact");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showStickyCta, setShowStickyCta] = useState(false);
 
@@ -32,7 +32,7 @@ export default function Home() {
     track("Portfolio Funnel", {
       step,
       action,
-      role_view: roleView,
+      viewer_lens: roleView,
     });
   }, [roleView]);
 
@@ -296,7 +296,7 @@ export default function Home() {
     },
     {
       number: "02",
-      title: "Dad and the Click That Changed Everything",
+      title: "Where This Started",
       content: [
         "My father had his share of struggles, but he gave me something early that most people spend years figuring out: the idea that earning money matters, but knowing how to manage it matters more.",
         "He taught me what financial literacy actually meant. And then he showed me, practically: sitting me down, walking me through his investments, explaining his thinking out loud. Finance wasn't a classroom subject in our house. It was a live demonstration.",
@@ -535,32 +535,32 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => {
-                    setRoleView("recruiter");
-                    trackFunnel("hero", "role_toggle_recruiter");
+                    setRoleView("impact");
+                    trackFunnel("hero", "lens_toggle_impact");
                   }}
-                  className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "recruiter"
+                  className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "impact"
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"}`}
                 >
-                  Recruiter
+                  Impact First
                 </button>
                 <button
                   type="button"
                   onClick={() => {
-                    setRoleView("product_marketing_team");
-                    trackFunnel("hero", "role_toggle_product_marketing_team");
+                    setRoleView("thinking");
+                    trackFunnel("hero", "lens_toggle_thinking");
                   }}
-                  className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "product_marketing_team"
+                  className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "thinking"
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"}`}
                 >
-                  Product & Marketing Team
+                  How I Think
                 </button>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-              {(roleView === "recruiter" ? [
+              {(roleView === "impact" ? [
                 {
                   title: "Business outcomes",
                   body: "$6M ARR influenced, $1.5M upsell unlocked, $800K strategic investment influenced."
@@ -685,7 +685,7 @@ export default function Home() {
                 <div className="p-4 sm:p-5 bg-card border border-border/50 rounded-lg">
                   <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Top Proof Points</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {roleView === "recruiter"
+                    {roleView === "impact"
                       ? "$6M ARR influenced, $1.5M upsell revenue unlocked, $800K investment decision influenced."
                       : "$6M ARR impact in SaaS monetization, $1.5M upsell systems execution, and $800K AI strategy decision support."}
                   </p>
@@ -701,7 +701,7 @@ export default function Home() {
                 <div className="p-4 sm:p-5 bg-primary/5 border border-primary/20 rounded-lg">
                   <p className="text-xs uppercase tracking-wider text-primary/90 mb-2">Best For</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Recruiters, hiring managers, and busy visitors who want signal fast without scrolling the full site.
+                    Anyone who wants a fast summary before deciding what to explore next.
                   </p>
                 </div>
               </motion.div>
@@ -726,7 +726,7 @@ export default function Home() {
                   <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Step 2</p>
                   <h3 className="font-serif text-lg mb-2">Execution Evidence</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                    {roleView === "recruiter"
+                    {roleView === "impact"
                       ? "Review revenue-linked outcomes and clear role impact."
                       : "Review revenue-linked outcomes, case-study logic, and product-to-positioning decisions."}
                   </p>
@@ -743,7 +743,7 @@ export default function Home() {
                 <div className="p-4 sm:p-5 bg-primary/5 border border-primary/20 rounded-lg">
                   <p className="text-xs uppercase tracking-wider text-primary/90 mb-2">Best For</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Product and marketing interview panels who want depth, thought process, and decision quality.
+                    Anyone who wants depth on process, decision quality, and execution thinking.
                   </p>
                 </div>
               </motion.div>
@@ -760,12 +760,12 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="font-serif text-3xl sm:text-4xl mb-2">The Person Behind the PRDs</h2>
-            <p className="text-muted-foreground text-sm sm:text-base mb-8 sm:mb-12 max-w-2xl">
+            <p className="text-muted-foreground text-sm sm:text-base mb-6 sm:mb-8 max-w-2xl">
               (And Behind the Claude Code Prompts)
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 items-start">
             {/* Product Spec Card */}
             <div className="md:col-span-2">
               <ProductSpecCard />
