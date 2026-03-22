@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Roadmap } from "@/components/roadmap";
 import { CaseStudyCard } from "@/components/case-study-card";
@@ -9,6 +9,7 @@ import { ProductSpecCard } from "@/components/product-spec-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { track } from "@vercel/analytics";
 import {
   Mail, Linkedin, FileText, Download, ArrowRight, ArrowDown, BookOpen,
   ExternalLink, TrendingUp, Users, Github, Globe, FileCode2, Menu, X, Phone
@@ -22,6 +23,50 @@ import bostonPhoto from "@assets/boston-charles-river.jpeg";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [journeyMode, setJourneyMode] = useState<"quick" | "deep">("quick");
+  const [roleView, setRoleView] = useState<"recruiter" | "product_marketing_team">("recruiter");
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showStickyCta, setShowStickyCta] = useState(false);
+
+  const trackFunnel = useCallback((step: string, action: string) => {
+    track("Portfolio Funnel", {
+      step,
+      action,
+      role_view: roleView,
+    });
+  }, [roleView]);
+
+  const prefetchProjectRoute = useCallback((href?: string) => {
+    if (!href || !href.startsWith("/projects/")) return;
+
+    if (href === "/projects/typeface") {
+      import("@/pages/typeface-portfolio");
+      return;
+    }
+
+    if (href === "/projects/profound") {
+      import("@/pages/profound-portfolio");
+      return;
+    }
+
+    if (href === "/projects/ooma") {
+      import("@/pages/ooma-portfolio");
+    }
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const total = doc.scrollHeight - window.innerHeight;
+      const progress = total > 0 ? Math.min(100, (window.scrollY / total) * 100) : 0;
+      setScrollProgress(progress);
+      setShowStickyCta(progress >= 25);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const experiences = [
     {
@@ -283,6 +328,7 @@ export default function Home() {
   ];
 
   const navLinks = [
+    { href: "#journey", label: "Start Here" },
     { href: "#about", label: "About" },
     { href: "#experience", label: "Experience" },
     { href: "#case-studies", label: "Case Studies" },
@@ -292,6 +338,36 @@ export default function Home() {
     { href: "#certifications", label: "Certs" },
     { href: "#blogs", label: "Blogs" },
     { href: "#contact", label: "Contact" },
+  ];
+
+  const featuredStrategyProjects = [
+    {
+      title: "Typeface: Brand Voice Intelligence Loop",
+      role: "Portfolio Case Study",
+      period: "February 2026",
+      desc: "Interactive strategy + prototype deck on performance-informed brand voice systems. Reframed as portfolio work for public viewing.",
+      tags: ["Product Marketing", "AI Content Systems", "Experiment Design"],
+      liveUrl: "/projects/typeface",
+      metric: "Interactive prototype + strategy deck"
+    },
+    {
+      title: "Profound: WebMCP Product Strategy",
+      role: "Portfolio Case Study",
+      period: "March 2026",
+      desc: "Public-facing version of my Profound strategic teardown. Internship ask removed and reframed as a product roadmap case study.",
+      tags: ["AI Strategy", "Agent Analytics", "Competitive Intel"],
+      liveUrl: "/projects/profound",
+      metric: "Copied from original private endpoint"
+    },
+    {
+      title: "Ooma: AI Opportunity Teardown",
+      role: "Portfolio Case Study",
+      period: "March 2026",
+      desc: "Public-facing version of my Ooma analysis focused on market gap, product packaging, and execution opportunities.",
+      tags: ["Product Strategy", "Market Mapping", "Build vs Buy"],
+      liveUrl: "/projects/ooma",
+      metric: "Copied from original private endpoint"
+    }
   ];
 
   return (
@@ -382,18 +458,20 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-3 pt-3">
                 <Button className="rounded-full px-6 py-5 text-sm" asChild>
-                  <a href="#contact">
+                  <a href="#contact" onClick={() => trackFunnel("hero", "cta_contact")}>
                     Let's Talk <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
                 <Button variant="outline" className="rounded-full px-6 py-5 text-sm" asChild>
-                  <a href="#experience">
+                  <a href="#experience" onClick={() => trackFunnel("hero", "cta_experience")}>
                     See My Work <ArrowDown className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
                 <a
                   href="https://drive.google.com/file/d/18mv8p3-WhrCs02XOsn6nT5eHB37VCLMU/view"
                   target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackFunnel("hero", "cta_resume")}
                   className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors self-center ml-1"
                 >
                   <Download className="h-3.5 w-3.5" /> Resume
@@ -440,6 +518,101 @@ export default function Home() {
             <StatCard icon="&#129302;" value="3+" suffix="" label="AI Tools Built" />
             <StatCard icon="&#127795;" value="1M+" label="Trees in Hanover" />
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-5 sm:mt-7 border border-border/50 rounded-xl bg-card/60 backdrop-blur-sm p-4 sm:p-5"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">45-Second Portfolio Snapshot</p>
+                <h3 className="font-serif text-lg sm:text-xl">Quick signal, then choose your depth</h3>
+              </div>
+              <div className="inline-flex rounded-full border border-border/60 bg-background p-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setRoleView("recruiter");
+                    trackFunnel("hero", "role_toggle_recruiter");
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "recruiter"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  Recruiter
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setRoleView("product_marketing_team");
+                    trackFunnel("hero", "role_toggle_product_marketing_team");
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "product_marketing_team"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  Product & Marketing Team
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+              {(roleView === "recruiter" ? [
+                {
+                  title: "Business outcomes",
+                  body: "$6M ARR influenced, $1.5M upsell unlocked, $800K strategic investment influenced."
+                },
+                {
+                  title: "Core fit",
+                  body: "Product management + product marketing blend: market analysis, positioning, and execution."
+                },
+                {
+                  title: "Speed",
+                  body: "From ambiguous problem to recommendation prototype in tight timelines."
+                }
+              ] : [
+                {
+                  title: "Outcome quality",
+                  body: "Repeated record of tying product decisions to revenue, retention, and adoption signals."
+                },
+                {
+                  title: "PM + PMM operating model",
+                  body: "Discovery, segmentation, positioning, build-vs-buy, roadmap prioritization, and launch narrative."
+                },
+                {
+                  title: "Execution depth",
+                  body: "Comfortable moving between strategy docs, wireframes, experiment plans, and metric reviews."
+                }
+              ]).map((item, i) => (
+                <div key={i} className="p-3 sm:p-4 rounded-lg border border-border/50 bg-background/70">
+                  <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1">{item.title}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{item.body}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#projects"
+                onClick={() => trackFunnel("hero", "snapshot_view_projects")}
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+              >
+                <Globe className="h-3.5 w-3.5" /> View Strategy Projects
+              </a>
+              <a
+                href="https://drive.google.com/file/d/18mv8p3-WhrCs02XOsn6nT5eHB37VCLMU/view"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackFunnel("hero", "snapshot_view_resume")}
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+              >
+                <FileText className="h-3.5 w-3.5" /> View Resume
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -449,6 +622,134 @@ export default function Home() {
       </div>
 
       <main className="container mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-20 max-w-5xl">
+
+        {/* Journey Section */}
+        <section id="journey" className="mb-20 sm:mb-28">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-6"
+          >
+            <h2 className="font-serif text-2xl sm:text-3xl mb-2">Pick Your Path</h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl">
+              If you only have 2 minutes, use the quick path. If you want depth, use the deep-dive path.
+            </p>
+          </motion.div>
+
+          <div className="inline-flex rounded-full border border-border/60 bg-card p-1 mb-6 sm:mb-8">
+            <button
+              type="button"
+              onClick={() => {
+                setJourneyMode("quick");
+                trackFunnel("journey", "mode_quick");
+              }}
+              className={`px-4 py-2 text-xs sm:text-sm rounded-full transition-all ${journeyMode === "quick"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"}`}
+            >
+              2-Minute Overview
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setJourneyMode("deep");
+                trackFunnel("journey", "mode_deep");
+              }}
+              className={`px-4 py-2 text-xs sm:text-sm rounded-full transition-all ${journeyMode === "deep"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"}`}
+            >
+              Deep Dive
+            </button>
+          </div>
+
+          <AnimatePresence mode="wait">
+            {journeyMode === "quick" ? (
+              <motion.div
+                key="quick"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              >
+                <div className="p-4 sm:p-5 bg-card border border-border/50 rounded-lg">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Start Here</p>
+                  <h3 className="font-serif text-lg mb-2">Who I Am in One Line</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Product manager who has shipped revenue-driving systems across SaaS, fintech, and AI.
+                  </p>
+                </div>
+                <div className="p-4 sm:p-5 bg-card border border-border/50 rounded-lg">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Top Proof Points</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {roleView === "recruiter"
+                      ? "$6M ARR influenced, $1.5M upsell revenue unlocked, $800K investment decision influenced."
+                      : "$6M ARR impact in SaaS monetization, $1.5M upsell systems execution, and $800K AI strategy decision support."}
+                  </p>
+                </div>
+                <div className="p-4 sm:p-5 bg-card border border-border/50 rounded-lg">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Read Next</p>
+                  <div className="space-y-2 text-sm">
+                    <a href="#experience" onClick={() => trackFunnel("journey", "quick_experience")} className="flex items-center gap-2 hover:text-primary transition-colors">Experience Highlights <ArrowRight className="h-3.5 w-3.5" /></a>
+                    <a href="#projects" onClick={() => trackFunnel("journey", "quick_projects")} className="flex items-center gap-2 hover:text-primary transition-colors">Featured Projects <ArrowRight className="h-3.5 w-3.5" /></a>
+                    <a href="#contact" onClick={() => trackFunnel("journey", "quick_contact")} className="flex items-center gap-2 hover:text-primary transition-colors">Get in Touch <ArrowRight className="h-3.5 w-3.5" /></a>
+                  </div>
+                </div>
+                <div className="p-4 sm:p-5 bg-primary/5 border border-primary/20 rounded-lg">
+                  <p className="text-xs uppercase tracking-wider text-primary/90 mb-2">Best For</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Recruiters, hiring managers, and busy visitors who want signal fast without scrolling the full site.
+                  </p>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="deep"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              >
+                <div className="p-4 sm:p-5 bg-card border border-border/50 rounded-lg">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Step 1</p>
+                  <h3 className="font-serif text-lg mb-2">Context + Operating Style</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    Start with background, skills, and how I approach ambiguous product work.
+                  </p>
+                  <a href="#about" onClick={() => trackFunnel("journey", "deep_about")} className="text-sm hover:text-primary transition-colors">Go to About →</a>
+                </div>
+                <div className="p-4 sm:p-5 bg-card border border-border/50 rounded-lg">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Step 2</p>
+                  <h3 className="font-serif text-lg mb-2">Execution Evidence</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    {roleView === "recruiter"
+                      ? "Review revenue-linked outcomes and clear role impact."
+                      : "Review revenue-linked outcomes, case-study logic, and product-to-positioning decisions."}
+                  </p>
+                  <a href="#case-studies" onClick={() => trackFunnel("journey", "deep_case_studies")} className="text-sm hover:text-primary transition-colors">Go to Case Studies →</a>
+                </div>
+                <div className="p-4 sm:p-5 bg-card border border-border/50 rounded-lg">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Step 3</p>
+                  <h3 className="font-serif text-lg mb-2">Strategy Breakdowns</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    Explore company teardowns and product recommendations in public portfolio format.
+                  </p>
+                  <a href="#projects" onClick={() => trackFunnel("journey", "deep_projects")} className="text-sm hover:text-primary transition-colors">Go to Projects →</a>
+                </div>
+                <div className="p-4 sm:p-5 bg-primary/5 border border-primary/20 rounded-lg">
+                  <p className="text-xs uppercase tracking-wider text-primary/90 mb-2">Best For</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Product and marketing interview panels who want depth, thought process, and decision quality.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </section>
 
         {/* About Section */}
         <section id="about" className="mb-20 sm:mb-32">
@@ -663,6 +964,56 @@ export default function Home() {
               Not homework assignments. Real problems, real stakeholders, real impact.
             </p>
           </motion.div>
+
+          <div className="mb-8 sm:mb-10">
+            <div className="flex items-center justify-between gap-3 mb-3">
+              <h3 className="font-serif text-xl sm:text-2xl">Company Product Breakdowns</h3>
+              <Badge className="bg-primary/10 text-primary border-primary/20 text-[10px] sm:text-xs">Public Portfolio Copies</Badge>
+            </div>
+            <p className="text-muted-foreground text-xs sm:text-sm mb-4">
+              These are copied portfolio-safe versions of my company-specific analyses. The original private endpoints remain unchanged.
+            </p>
+            <div className="grid gap-4 md:grid-cols-2">
+              {featuredStrategyProjects.map((project, i) => (
+                <motion.div
+                  key={`featured-${i}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: i * 0.08 }}
+                  viewport={{ once: true }}
+                  className="p-4 sm:p-5 bg-card border border-primary/20 rounded-lg"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <div>
+                      <h4 className="font-serif text-base sm:text-lg">{project.title}</h4>
+                      <p className="text-xs text-muted-foreground mt-1">{project.role} &bull; {project.period}</p>
+                    </div>
+                  </div>
+                  <Badge className="bg-gold/10 text-gold-foreground border-gold/20 text-xs font-mono mb-3">
+                    {project.metric}
+                  </Badge>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{project.desc}</p>
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {project.tags.map((tag: string, ti: number) => (
+                      <Badge key={ti} variant="secondary" className="text-xs py-0.5 px-2 font-normal bg-secondary/40">{tag}</Badge>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-border/40">
+                    <a
+                      href={project.liveUrl}
+                      onMouseEnter={() => prefetchProjectRoute(project.liveUrl)}
+                      onFocus={() => prefetchProjectRoute(project.liveUrl)}
+                      onClick={() => trackFunnel("project", `featured_${project.title.toLowerCase().replace(/\s+/g, "_")}`)}
+                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+                    >
+                      <Globe className="h-3.5 w-3.5" /> Open Case Study
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
           <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
             {projects.map((project, i) => (
               <motion.div
@@ -704,22 +1055,22 @@ export default function Home() {
                 )}
                 <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/30">
                   {(project as any).githubUrl && (
-                    <a href={(project as any).githubUrl} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                    <a href={(project as any).githubUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_github`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
                       <Github className="h-3.5 w-3.5" /> GitHub
                     </a>
                   )}
                   {(project as any).liveUrl && (
-                    <a href={(project as any).liveUrl} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                    <a href={(project as any).liveUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_live`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
                       <Globe className="h-3.5 w-3.5" /> Live Demo
                     </a>
                   )}
                   {(project as any).docsUrl && (
-                    <a href={(project as any).docsUrl} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                    <a href={(project as any).docsUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_docs`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
                       <FileCode2 className="h-3.5 w-3.5" /> Algorithm Deep Dive
                     </a>
                   )}
                   {(project as any).pdfUrl && (
-                    <a href={(project as any).pdfUrl} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                    <a href={(project as any).pdfUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_pdf`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
                       <FileText className="h-3.5 w-3.5" /> View Presentation
                     </a>
                   )}
@@ -977,6 +1328,7 @@ export default function Home() {
             <div className="flex justify-center gap-5 sm:gap-8 flex-wrap">
               <a
                 href="mailto:aditiparvati27@gmail.com"
+                onClick={() => trackFunnel("contact", "email")}
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-sm sm:text-base"
               >
                 <Mail className="h-4 sm:h-5 w-4 sm:w-5" />
@@ -984,6 +1336,7 @@ export default function Home() {
               </a>
               <a
                 href="tel:+16033221700"
+                onClick={() => trackFunnel("contact", "phone")}
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-sm sm:text-base"
               >
                 <Phone className="h-4 sm:h-5 w-4 sm:w-5" />
@@ -993,6 +1346,7 @@ export default function Home() {
                 href="https://www.linkedin.com/in/aditi-parvati/"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackFunnel("contact", "linkedin")}
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-sm sm:text-base"
               >
                 <Linkedin className="h-4 sm:h-5 w-4 sm:w-5" />
@@ -1001,6 +1355,8 @@ export default function Home() {
               <a
                 href="https://drive.google.com/file/d/18mv8p3-WhrCs02XOsn6nT5eHB37VCLMU/view"
                 target="_blank"
+                rel="noreferrer"
+                onClick={() => trackFunnel("contact", "resume")}
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors text-sm sm:text-base"
               >
                 <FileText className="h-4 sm:h-5 w-4 sm:w-5" />
@@ -1019,6 +1375,43 @@ export default function Home() {
         </section>
 
       </main>
+      <AnimatePresence>
+        {showStickyCta && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-auto"
+          >
+            <div className="bg-card/95 backdrop-blur-md border border-border/70 rounded-xl shadow-lg px-3 sm:px-4 py-2.5">
+              <div className="w-full sm:w-[360px] h-1 bg-secondary rounded-full overflow-hidden mb-2">
+                <div
+                  className="h-full bg-primary transition-all duration-150"
+                  style={{ width: `${Math.max(0, Math.min(100, scrollProgress))}%` }}
+                />
+              </div>
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-[11px] sm:text-xs text-muted-foreground">
+                  {Math.round(scrollProgress)}% explored
+                </p>
+                <div className="flex items-center gap-3 text-[11px] sm:text-xs">
+                  <a href="#projects" onClick={() => trackFunnel("sticky_cta", "projects")} className="text-muted-foreground hover:text-primary transition-colors">Projects</a>
+                  <a href="#contact" onClick={() => trackFunnel("sticky_cta", "contact")} className="text-muted-foreground hover:text-primary transition-colors">Contact</a>
+                  <a
+                    href="https://drive.google.com/file/d/18mv8p3-WhrCs02XOsn6nT5eHB37VCLMU/view"
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackFunnel("sticky_cta", "resume")}
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Resume
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Chatbot />
     </div>
   );
