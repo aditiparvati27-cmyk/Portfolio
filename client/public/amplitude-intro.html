@@ -12,428 +12,675 @@
   })(window, document, "clarity", "script", "vp6im8t7qs");
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Libre+Franklin:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Libre+Franklin:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#F4F1EA;--warm:#ECE9E1;--card:#FDFCF9;
+  --bg:#F4F1EA;--card:#FDFCF9;
   --ink:#151517;--ink2:#27272E;--mid:#55545E;--mu:#908E98;
   --ln:rgba(21,21,23,.07);--ln2:rgba(21,21,23,.13);
   --blue:#3450D1;--teal:#0C7F90;--green:#1B7D38;--amber:#B86E08;--red:#C03030;
 }
 
-html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:'Libre Franklin',sans-serif;-webkit-font-smoothing:antialiased}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:'Libre Franklin',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 
-/* Grain */
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.22;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
+/* Grain overlay */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
 
-/* Engine */
+/* ═══════════════════════════
+   GLOBAL DECK
+═══════════════════════════ */
 .deck{position:fixed;inset:0}
-.slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:52px 76px 44px;opacity:0;pointer-events:none;transition:opacity .55s ease;overflow-y:auto}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .6s ease;overflow-y:auto}
 .slide.active{opacity:1;pointer-events:all}
-.slide .r{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
-.slide.active .r{opacity:1;transform:translateY(0)}
-.slide.active .r:nth-child(1){transition-delay:.04s}
-.slide.active .r:nth-child(2){transition-delay:.14s}
-.slide.active .r:nth-child(3){transition-delay:.25s}
-.slide.active .r:nth-child(4){transition-delay:.36s}
-.slide.active .r:nth-child(5){transition-delay:.46s}
-.slide.active .r:nth-child(6){transition-delay:.55s}
 
-/* Chrome */
-.ct{position:fixed;top:0;left:0;right:0;z-index:90;padding:15px 76px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
-.ct-l{font-size:9px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--mu)}
-.ct-r{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--mu)}
-.cb{position:fixed;bottom:0;left:0;right:0;z-index:90;padding:13px 76px;display:flex;align-items:center;justify-content:space-between}
-.cb-h{font-size:8px;color:var(--mu);letter-spacing:.25em;text-transform:uppercase}
-.cb-d{display:flex;gap:11px}
-.dot{width:6px;height:6px;border-radius:50%;background:rgba(21,21,23,.1);cursor:pointer;border:none;padding:0;transition:all .35s}
-.dot.on{background:var(--ink);transform:scale(1.5)}
-.pbar{position:fixed;top:0;left:0;height:1.5px;z-index:100;background:var(--ink);transition:width .55s cubic-bezier(.4,0,.2,1)}
+/* Reveal animation */
+.slide .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.slide.active .rv{opacity:1;transform:translateY(0)}
+.slide.active .rv:nth-child(1){transition-delay:.08s}
+.slide.active .rv:nth-child(2){transition-delay:.18s}
+.slide.active .rv:nth-child(3){transition-delay:.3s}
+.slide.active .rv:nth-child(4){transition-delay:.42s}
+.slide.active .rv:nth-child(5){transition-delay:.52s}
+.slide.active .rv:nth-child(6){transition-delay:.62s}
+.slide.active .rv:nth-child(7){transition-delay:.72s}
 
-/* Type */
-.ey{font-size:9px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:var(--mu);margin-bottom:22px}
-h2{font-family:'Instrument Serif',serif;font-size:clamp(30px,4.2vw,52px);font-weight:400;line-height:1.12;letter-spacing:-.015em;color:var(--ink)}
-h2 em{font-style:italic;color:var(--blue)}
-.sub{font-size:14px;font-weight:300;color:var(--mu);line-height:1.7;max-width:520px}
-.sub strong{color:var(--mid);font-weight:500}
+/* Top bar */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:90;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.topbar-name{font-size:10px;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--mu)}
+.topbar-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu)}
 
+/* Bottom bar */
+.botbar{position:fixed;bottom:0;left:0;right:0;z-index:90;padding:16px 60px;display:flex;align-items:center;justify-content:space-between}
+.botbar-hint{font-size:9px;color:var(--mu);letter-spacing:.3em;text-transform:uppercase}
+.botbar-dots{display:flex;gap:10px}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(21,21,23,.12);cursor:pointer;border:none;padding:0;transition:all .35s}
+.dot.on{background:var(--ink);transform:scale(1.6)}
 
-/* ═══ S1 — HOOK ═══ */
-#s1{justify-content:center;position:relative}
-#s1::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 45% at 65% 40%,rgba(52,80,209,.025)0%,transparent 55%)}
+/* Progress bar */
+.pbar{position:fixed;top:0;left:0;height:2px;z-index:100;background:var(--blue);transition:width .55s cubic-bezier(.4,0,.2,1)}
 
-.hook-top{font-size:14px;font-weight:300;color:var(--mu);line-height:1.8;max-width:540px;margin-bottom:36px}
-.hook-top strong{color:var(--ink);font-weight:500}
-
-.hook-title{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(28px,3.8vw,48px);font-weight:400;
-  line-height:1.2;color:var(--ink);max-width:640px;
+/* Citation bubbles */
+.cite{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;
+  width:15px;height:15px;border-radius:50%;
+  background:rgba(52,80,209,.1);color:var(--blue);
+  text-decoration:none;vertical-align:super;
+  margin-left:2px;transition:all .2s;line-height:1;position:relative;top:-3px;
 }
-.hook-title em{font-style:italic;color:var(--blue)}
+.cite:hover{background:var(--blue);color:#fff;transform:scale(1.2)}
 
-.hook-bottom{margin-top:32px;font-size:14px;font-weight:300;color:var(--mu);max-width:480px;line-height:1.75}
-.hook-bottom strong{color:var(--mid);font-weight:500}
+/* Source footer */
+.src-bar{
+  padding:12px 60px;
+  display:flex;flex-wrap:wrap;gap:4px 20px;
+  font-size:9px;color:var(--mu);line-height:1.5;
+  border-top:1px solid var(--ln);margin-top:auto;
+}
+.src-bar a{color:var(--mu);text-decoration:none;transition:color .2s}
+.src-bar a:hover{color:var(--blue)}
+.sn{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:700;
+  width:13px;height:13px;border-radius:50%;
+  background:rgba(52,80,209,.07);color:var(--blue);margin-right:3px;
+}
 
-.credit{position:absolute;bottom:44px;right:76px;text-align:right}
-.cr-n{font-family:'Instrument Serif',serif;font-size:15px;color:var(--ink)}
-.cr-r{font-size:10px;color:var(--mu);line-height:1.5;margin-top:1px}
-
-
-/* ═══ S2 — THE AI LAYER ═══ */
-#s2{justify-content:center}
-
-.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:28px;max-width:880px}
-.pillar{padding:22px 20px 20px;border:1px solid var(--ln);border-left:3px solid var(--ln2);position:relative}
-.pillar+.pillar{border-top-width:1px}
-.pillar.has{border-left-color:var(--green);background:rgba(27,125,56,.015)}
-.pillar.new{border-left-color:var(--blue);background:rgba(52,80,209,.015)}
-
-.p-icon{font-size:18px;margin-bottom:12px}
-.p-tag{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
-.p-tag.g{color:var(--green)}
-.p-tag.b{color:var(--blue)}
-.p-title{font-family:'Instrument Serif',serif;font-size:19px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:8px}
-.p-body{font-size:12.5px;font-weight:300;color:var(--mu);line-height:1.6}
-.p-body strong{color:var(--ink2);font-weight:500}
-
-.s2-note{margin-top:20px;font-size:12.5px;color:var(--mu);line-height:1.7;max-width:820px}
-.s2-note strong{color:var(--ink2);font-weight:500}
-
-.s2-future{margin-top:12px;padding:10px 16px;border:1px dashed rgba(184,110,8,.16);background:rgba(184,110,8,.01);font-size:11.5px;color:var(--amber);line-height:1.6;max-width:820px}
-.s2-future strong{font-weight:600}
-.s2-future code{font-family:'JetBrains Mono',monospace;font-size:9.5px;background:rgba(184,110,8,.06);padding:1px 4px;border-radius:2px}
+/* Shared typography */
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.5em;text-transform:uppercase;color:var(--mu)}
+.heading{font-family:'Instrument Serif',serif;font-weight:400;line-height:1.08;letter-spacing:-.02em;color:var(--ink)}
+.heading em{font-style:italic;color:var(--blue)}
 
 
-/* ═══ S3 — MOCKUP ═══ */
-#s3{padding-bottom:36px}
-.s3-sub{font-size:13px;font-weight:300;color:var(--mu);max-width:540px;line-height:1.65;margin-bottom:12px}
-.s3-sub strong{color:var(--ink2);font-weight:500}
+/* ═══════════════════════════
+   S1 — HOOK
+═══════════════════════════ */
+#s1{padding:60px 60px 0;justify-content:center;position:relative}
+#s1::before{content:'';position:absolute;top:0;right:0;width:55%;height:100%;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 75% 40%,rgba(52,80,209,.03)0%,transparent 60%)}
 
-.dash{border:1px solid var(--ln2);background:var(--card);display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(0,0,0,.02),0 4px 12px rgba(0,0,0,.025),0 14px 36px rgba(0,0,0,.03);flex:1;min-height:0;overflow:hidden;border-radius:6px}
-.dtop{padding:8px 16px;background:#1D1D26;display:flex;align-items:center;gap:6px;border-radius:6px 6px 0 0}
-.ddo{width:8px;height:8px;border-radius:50%}
-.ddo:nth-child(1){background:#FF5F57}.ddo:nth-child(2){background:#FEBC2E}.ddo:nth-child(3){background:#28C840}
-.durl{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.25);margin-left:10px}
+.s1-wrap{display:flex;align-items:flex-end;gap:60px;flex:1}
+.s1-left{flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:60px}
+.s1-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;padding-bottom:60px}
 
-.dnav{display:flex;border-bottom:1px solid var(--ln);background:#fff;padding:0 14px}
-.dtab{padding:9px 13px;font-size:10.5px;font-weight:500;color:var(--mu);position:relative}
-.dtab.on{color:var(--ink)}
-.dtab.on::after{content:'';position:absolute;bottom:-1px;left:10px;right:10px;height:2px;background:var(--blue)}
-.nbad{font-size:6.5px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--blue);padding:1.5px 4.5px;border-radius:2px;margin-left:4px;vertical-align:top}
+.hero-num{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(120px,18vw,240px);font-weight:400;
+  line-height:.78;letter-spacing:-.06em;color:var(--ink);
+}
+.hero-num span{color:var(--blue)}
 
-.dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);flex:1;min-height:0}
-.dp{background:#fff;padding:14px 16px;display:flex;flex-direction:column}
-.dp.x2{grid-column:span 2}
-.dp.x3{grid-column:span 3}
-.dp.x4{grid-column:span 4}
+.hero-rule{width:52px;height:2px;background:var(--ln2);margin:36px 0}
 
-.dl{font-size:8.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);margin-bottom:6px}
-.dn{font-family:'Instrument Serif',serif;font-size:30px;font-weight:400;color:var(--ink);line-height:1}
-.ddl{font-size:10px;font-weight:500;margin-top:2px}
-.ddl.up{color:var(--green)}.ddl.dn{color:var(--red)}
-.dsm{font-size:10px;color:var(--mu);margin-top:2px}
+.hero-q{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(24px,3vw,36px);font-weight:400;
+  line-height:1.3;color:var(--ink);max-width:560px;
+}
+.hero-q em{font-style:italic;color:var(--blue)}
 
-/* Mini bars */
-.mbars{display:flex;flex-direction:column;gap:6px;margin-top:2px}
-.mbr{display:flex;align-items:center;gap:7px}
-.mbn{width:70px;font-size:10px;color:var(--mid);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mbt{flex:1;height:12px;background:rgba(21,21,23,.02);border-radius:2px;overflow:hidden}
-.mbf{height:100%;border-radius:2px;transition:width 1.6s cubic-bezier(.16,1,.3,1)}
-.mbv{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--mu);width:30px}
+.hero-sub{
+  margin-top:28px;font-size:16px;font-weight:300;
+  color:var(--mid);max-width:480px;line-height:1.75;
+}
+.hero-sub strong{color:var(--ink2);font-weight:500}
 
-/* Agent list compact */
-.alist{display:flex;flex-direction:column;gap:0}
-.ar{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--ln)}
-.ar:last-child{border-bottom:none}
-.adot{width:5px;height:5px;border-radius:50%;margin-right:6px;display:inline-block}
-.an{font-size:11px;color:var(--ink2)}
-.av{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu)}
-
-/* Attribution chain */
-.chain{display:flex;align-items:stretch;gap:0;margin-top:4px}
-.cstep{flex:1;padding:7px 8px;text-align:center;font-size:9px;line-height:1.35;border:1px solid}
-.cstep strong{display:block;font-weight:600;font-size:9.5px;margin-bottom:1px}
-.cs1{background:rgba(27,125,56,.02);border-color:rgba(27,125,56,.12);color:var(--green)}
-.cs2{background:rgba(52,80,209,.02);border-color:rgba(52,80,209,.12);color:var(--blue);border-left:none}
-.cs3{background:rgba(12,127,144,.02);border-color:rgba(12,127,144,.12);color:var(--teal);border-left:none}
-
-.dins{padding:7px 10px;border-left:2.5px solid var(--blue);background:rgba(52,80,209,.015);font-size:10px;color:var(--mid);line-height:1.5}
-.dins strong{color:var(--ink);font-weight:600}
-
-/* Content perf mini */
-.cprow{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--ln)}
-.cprow:last-child{border-bottom:none}
-.cppage{font-size:10.5px;color:var(--ink2);flex:1}
-.cpn{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--mu)}
-.cptag{font-size:8px;font-weight:600;letter-spacing:.06em;padding:2px 5px;border-radius:2px;color:#fff}
-.cptag.high{background:var(--green)}
-.cptag.med{background:var(--amber)}
-
-/* Future hint row */
-.dfut{padding:8px 12px;border:1px dashed rgba(184,110,8,.15);background:rgba(184,110,8,.012);font-size:9.5px;color:var(--amber);line-height:1.5}
-.dfut strong{font-weight:600}
-.dfut code{font-family:'JetBrains Mono',monospace;font-size:8.5px;background:rgba(184,110,8,.06);padding:1px 4px;border-radius:2px}
+.credit-block{text-align:right}
+.cr-name{font-family:'Instrument Serif',serif;font-size:18px;color:var(--ink)}
+.cr-role{font-size:11px;color:var(--mu);line-height:1.6;margin-top:4px}
 
 
-/* ═══ S4 — ASK ═══ */
-#s4{justify-content:center}
-.ask-text{font-size:15px;font-weight:300;color:var(--mid);line-height:1.8;max-width:540px}
-.ask-text strong{color:var(--ink);font-weight:500}
-.ask-rule{width:32px;height:1.5px;background:var(--ln2);margin:20px 0}
-.acards{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:540px}
-.ac{padding:12px 14px;border:1px solid var(--ln)}
-.ac.top{grid-column:span 2;background:var(--ink);border-color:var(--ink)}
-.ac.top .acl{color:rgba(244,241,234,.35)}.ac.top .acv{color:rgba(244,241,234,.88)}
-.acl{font-size:8px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--mu);margin-bottom:2px}
-.acv{font-size:12px;color:var(--ink2);line-height:1.45}
-.proof{margin-top:14px;font-size:10.5px;color:var(--mu);line-height:1.7;max-width:540px;font-style:italic}
-.proof strong{font-style:normal;color:var(--ink2);font-weight:500}
+/* ═══════════════════════════
+   S2 — THREE PHASES
+═══════════════════════════ */
+#s2{padding:60px}
+#s2 .slide-inner{flex:1;display:flex;flex-direction:column;justify-content:center}
+
+.phase-row{display:flex;gap:2px;margin-top:40px;max-width:100%}
+.phase-card{flex:1;position:relative;padding:32px 28px 28px;border:1px solid var(--ln);transition:box-shadow .3s}
+.phase-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.04)}
+.phase-card+.phase-card{border-left:none}
+.phase-card.done{background:rgba(27,125,56,.015);border-color:rgba(27,125,56,.15)}
+.phase-card.now{background:rgba(52,80,209,.015);border-color:rgba(52,80,209,.15)}
+.phase-card.next{background:rgba(184,110,8,.01);border-color:rgba(184,110,8,.12)}
+
+.phase-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px}
+.phase-num.g{color:var(--green)}.phase-num.b{color:var(--blue)}.phase-num.a{color:var(--amber)}
+.phase-title{font-family:'Instrument Serif',serif;font-size:26px;font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:14px}
+.phase-body{font-size:15px;font-weight:300;color:var(--mid);line-height:1.65}
+.phase-body strong{color:var(--ink2);font-weight:500}
+.phase-arrow{position:absolute;top:50%;right:-15px;width:28px;height:28px;border-radius:50%;background:var(--bg);border:1px solid var(--ln2);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--mu);z-index:3;transform:translateY(-50%)}
+
+.s2-bottom{margin-top:32px;font-size:15px;color:var(--mid);line-height:1.7;max-width:780px}
+.s2-bottom strong{color:var(--ink2);font-weight:500}
 
 
-@media(max-width:920px){
-  .slide{padding:36px 22px 32px}.ct,.cb{padding-left:22px;padding-right:22px}
-  .pillars{grid-template-columns:1fr 1fr}
-  .dgrid{grid-template-columns:1fr 1fr}
-  .dp.x2,.dp.x3,.dp.x4{grid-column:span 1}
-  .acards{grid-template-columns:1fr}.ac.top{grid-column:span 1}
-  .credit{position:static;text-align:left;margin-top:20px}
+/* ═══════════════════════════
+   S3 — FOUR PILLARS
+═══════════════════════════ */
+#s3{padding:60px}
+#s3 .slide-inner{flex:1;display:flex;flex-direction:column;justify-content:center}
+
+.pillar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:36px}
+.pillar-card{padding:32px 26px 28px;border:1px solid var(--ln);border-left:4px solid var(--ln2);transition:box-shadow .3s}
+.pillar-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.04)}
+.pillar-card+.pillar-card{border-top-left-radius:0;border-bottom-left-radius:0}
+.pillar-card.shipped{border-left-color:var(--green);background:rgba(27,125,56,.015)}
+.pillar-card.build{border-left-color:var(--blue);background:rgba(52,80,209,.015)}
+
+.pc-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
+.pc-badge.g{color:var(--green)}.pc-badge.b{color:var(--blue)}
+.pc-title{font-family:'Instrument Serif',serif;font-size:22px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:10px}
+.pc-body{font-size:14px;font-weight:300;color:var(--mid);line-height:1.65}
+.pc-body strong{color:var(--ink2);font-weight:500}
+
+.s3-footer{margin-top:28px;font-size:14px;color:var(--mid);line-height:1.7;max-width:780px}
+.s3-footer strong{color:var(--ink2);font-weight:500}
+.s3-horizon{margin-top:10px;font-size:13px;color:var(--amber);line-height:1.6;max-width:780px}
+.s3-horizon strong{font-weight:600}
+
+
+/* ═══════════════════════════
+   S4 — MOCKUP
+═══════════════════════════ */
+#s4{padding:50px 60px 40px}
+
+.mock-sub{font-size:15px;font-weight:300;color:var(--mid);max-width:480px;line-height:1.6;margin-bottom:16px}
+.mock-sub strong{color:var(--ink2);font-weight:500}
+
+.browser{border:1px solid var(--ln2);background:var(--card);display:flex;flex-direction:column;box-shadow:0 2px 4px rgba(0,0,0,.02),0 8px 24px rgba(0,0,0,.03),0 20px 48px rgba(0,0,0,.035);flex:1;min-height:0;overflow:hidden;border-radius:8px}
+.browser-top{padding:10px 18px;background:#1B1B24;display:flex;align-items:center;gap:7px;border-radius:8px 8px 0 0}
+.browser-dot{width:9px;height:9px;border-radius:50%}
+.browser-dot:nth-child(1){background:#FF5F57}.browser-dot:nth-child(2){background:#FEBC2E}.browser-dot:nth-child(3){background:#28C840}
+.browser-url{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.22);margin-left:12px}
+.browser-nav{display:flex;border-bottom:1px solid var(--ln);background:#fff;padding:0 18px}
+.browser-tab{padding:11px 16px;font-size:12px;font-weight:500;color:var(--mu);position:relative}
+.browser-tab.on{color:var(--ink)}
+.browser-tab.on::after{content:'';position:absolute;bottom:-1px;left:12px;right:12px;height:2px;background:var(--blue)}
+.tab-badge{font-size:8px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--blue);padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:top}
+
+.dash-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto 1fr;gap:1px;background:var(--ln);flex:1;min-height:0}
+.dash-cell{background:#fff;padding:18px 20px;display:flex;flex-direction:column;justify-content:center}
+.dc-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin-bottom:8px}
+.dc-num{font-family:'Instrument Serif',serif;font-size:36px;font-weight:400;color:var(--ink);line-height:1}
+.dc-delta{font-size:12px;font-weight:600;margin-top:4px}
+.dc-delta.up{color:var(--green)}.dc-delta.dn{color:var(--red)}.dc-delta.warn{color:var(--amber)}
+.dc-hint{font-size:11px;color:var(--mu);margin-top:3px}
+
+/* Crawler list */
+.clist{display:flex;flex-direction:column}
+.clist-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--ln)}
+.clist-row:last-child{border-bottom:none}
+.clist-dot{width:7px;height:7px;border-radius:50%;margin-right:8px;display:inline-block}
+.clist-name{font-size:13px;color:var(--ink2)}
+.clist-val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mu)}
+
+/* Bar chart */
+.bars{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+.bar-row{display:flex;align-items:center;gap:8px}
+.bar-label{width:78px;font-size:12px;color:var(--mid);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:15px;background:rgba(21,21,23,.02);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;transition:width 1.6s cubic-bezier(.16,1,.3,1)}
+.bar-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mu);width:34px}
+
+/* Funnel chain */
+.funnel{display:flex;align-items:stretch;gap:0;margin-top:8px}
+.funnel-step{flex:1;padding:10px 12px;text-align:center;font-size:11px;line-height:1.35;border:1px solid}
+.funnel-step strong{display:block;font-weight:700;font-size:12px;margin-bottom:2px}
+.fs-1{background:rgba(27,125,56,.02);border-color:rgba(27,125,56,.13);color:var(--green)}
+.fs-2{background:rgba(52,80,209,.02);border-color:rgba(52,80,209,.13);color:var(--blue);border-left:none}
+.fs-3{background:rgba(12,127,144,.02);border-color:rgba(12,127,144,.13);color:var(--teal);border-left:none}
+.insight-bar{padding:10px 14px;border-left:3px solid var(--blue);background:rgba(52,80,209,.02);font-size:12px;color:var(--mid);line-height:1.5;margin-top:6px}
+.insight-bar strong{color:var(--ink);font-weight:700}
+
+/* Content table */
+.ct-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--ln)}
+.ct-row:last-child{border-bottom:none}
+.ct-page{font-size:12px;color:var(--ink2);flex:1}
+.ct-count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mu)}
+.ct-badge{font-size:9px;font-weight:700;letter-spacing:.04em;padding:2px 7px;border-radius:3px;color:#fff}
+.ct-badge.hi{background:var(--green)}.ct-badge.md{background:var(--amber)}
+
+
+/* ═══════════════════════════
+   S5 — THE ASK
+═══════════════════════════ */
+#s5{padding:0}
+
+.s5-top{
+  flex:1;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:60px 60px 40px;
+}
+
+.s5-intro{
+  font-size:17px;font-weight:300;color:var(--mid);
+  line-height:1.7;max-width:500px;text-align:center;margin-bottom:32px;
+}
+.s5-intro strong{color:var(--ink);font-weight:500}
+
+/* Visual proof strip */
+.proof-strip{
+  display:flex;gap:0;width:100%;max-width:680px;margin-bottom:36px;
+  border:1px solid var(--ln2);overflow:hidden;
+}
+.proof-item{
+  flex:1;padding:28px 24px;text-align:center;
+  border-right:1px solid var(--ln2);
+  position:relative;
+}
+.proof-item:last-child{border-right:none}
+.proof-num{
+  font-family:'Instrument Serif',serif;
+  font-size:44px;font-weight:400;color:var(--ink);line-height:1;
+}
+.proof-label{font-size:12px;color:var(--mu);margin-top:6px;line-height:1.4}
+.proof-context{font-size:11px;color:var(--mu);margin-top:4px;font-style:italic;opacity:.7}
+
+/* CTA grid */
+.cta-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:0;width:100%;max-width:680px;
+}
+.cta-card{padding:20px 22px;border:1px solid var(--ln);text-align:left}
+.cta-card+.cta-card{border-left:none}
+.cta-card.hero-cta{
+  grid-column:span 3;background:var(--ink);border-color:var(--ink);
+  text-align:center;padding:22px;
+}
+.cta-card.hero-cta .cta-label{color:rgba(244,241,234,.3)}
+.cta-card.hero-cta .cta-val{color:rgba(244,241,234,.9);font-size:16px}
+.cta-label{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--mu);margin-bottom:5px}
+.cta-val{font-size:14px;color:var(--ink2);line-height:1.5}
+
+/* Closing line */
+.closer{
+  margin-top:28px;
+  font-family:'Instrument Serif',serif;
+  font-size:20px;font-style:italic;color:var(--mid);
+}
+
+.s5-note{
+  font-size:10px;color:var(--mu);margin-top:16px;max-width:500px;text-align:center;line-height:1.6;
+}
+.s5-note a{color:var(--blue);text-decoration:none}
+.s5-note a:hover{text-decoration:underline}
+
+
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+@media(max-width:960px){
+  .slide{padding:32px 24px 28px}
+  .topbar,.botbar{padding-left:24px;padding-right:24px}
+  #s1{padding:32px 24px 0}
+  #s2,#s3{padding:32px 24px}
+  #s4{padding:32px 24px 28px}
+  .s1-wrap{flex-direction:column;gap:20px}
+  .s1-right{align-items:flex-start}
+  .phase-row{flex-direction:column}.phase-card+.phase-card{border-left:1px solid var(--ln);border-top:none}.phase-arrow{display:none}
+  .pillar-grid{grid-template-columns:1fr 1fr}
+  .dash-grid{grid-template-columns:1fr 1fr}
+  .cta-grid{grid-template-columns:1fr}.cta-card.hero-cta{grid-column:span 1}.cta-card+.cta-card{border-left:1px solid var(--ln);border-top:none}
+  .proof-strip{flex-direction:column}.proof-item{border-right:none;border-bottom:1px solid var(--ln2)}.proof-item:last-child{border-bottom:none}
+  .credit-block{position:static;text-align:left;margin-top:20px}
+  .src-bar{padding:12px 24px;flex-direction:column}
 }
 </style>
 </head>
 <body>
 
 <div class="pbar" id="pbar"></div>
-<div class="ct">
-  <span class="ct-l">Aditi Parvati</span>
-  <span class="ct-r" id="counter">01 / 04</span>
+<div class="topbar">
+  <span class="topbar-name">Aditi Parvati</span>
+  <span class="topbar-count" id="counter">01 / 05</span>
 </div>
 
 <div class="deck">
 
-<!-- ═══ S1 — THE HOOK ═══ -->
+<!-- ═══════════════════════════════════════
+     S1 — HOOK
+     Takeaway: AI crawling exploded 21×. Amplitude tracks mentions. Who tracks the rest?
+═══════════════════════════════════════ -->
 <div class="slide active" id="s1">
-  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
-    <div class="ey r">A note for the Amplitude team</div>
-    <div class="hook-top r">
-      Amplitude was built on an insight: <strong>you can't improve what you can't measure.</strong><br>
-      Spenser couldn't answer a simple retention question — so he built the tool to answer it.
+  <div class="s1-wrap">
+    <div class="s1-left">
+      <div class="eyebrow rv">A note for the Amplitude team</div>
+      <div class="hero-num rv" style="margin-top:20px">21<span>×</span></div>
+      <div class="hero-rule rv"></div>
+      <div class="hero-q rv">
+        That's how fast AI crawling grew in 2025.<a class="cite" href="https://blog.cloudflare.com/radar-2025-year-in-review/" target="_blank" title="Cloudflare Radar 2025 Year in Review">1</a><br>
+        Amplitude sees what AI <em>says</em> about a brand.<br>
+        Can it see what agents <em>do</em> on their site?
+      </div>
+      <div class="hero-sub rv">
+        AI Visibility was the right first move — <strong>27,000 brands in months.</strong><a class="cite" href="https://amplitude.com/blog/amplitude-expands-ai-visibility" target="_blank" title="Amplitude Expands AI Visibility">2</a>
+        But crawlers index content. LLMs choose what to surface. AI-driven visitors convert differently. <strong>That full layer is invisible today.</strong>
+      </div>
     </div>
-    <div class="hook-title r">
-      Today, AI sits between your product<br>
-      and your users. It crawls your site.<br>
-      It decides what to surface. It sends<br>
-      visitors on <em>its terms.</em>
-    </div>
-    <div class="hook-bottom r">
-      AI Visibility was the right first move — <strong>27,000 brands</strong> now see what AI says about them. But the AI layer is deeper than mentions. It's crawlers indexing your content, LLMs choosing which pages to reference, and AI-driven visitors who convert differently than anyone before them. <strong>That full layer is invisible today.</strong>
+    <div class="s1-right rv">
+      <div class="credit-block">
+        <div class="cr-name">Aditi Parvati</div>
+        <div class="cr-role">PMM Intern Candidate — AI Labs<br>Dartmouth MEM '26</div>
+      </div>
     </div>
   </div>
-  <div class="credit r">
-    <div class="cr-n">Aditi Parvati</div>
-    <div class="cr-r">PMM Intern Candidate — AI Labs<br>Dartmouth MEM '26</div>
+  <div class="src-bar rv">
+    <a href="https://blog.cloudflare.com/radar-2025-year-in-review/" target="_blank"><span class="sn">1</span>Cloudflare Radar 2025 — user-action AI crawling grew 21× in 12 months</a>
+    <a href="https://amplitude.com/blog/amplitude-expands-ai-visibility" target="_blank"><span class="sn">2</span>Amplitude AI Visibility Expands (27K brands, 70K+ reports)</a>
   </div>
 </div>
 
 
-<!-- ═══ S2 — THE FOUR PILLARS ═══ -->
+<!-- ═══════════════════════════════════════
+     S2 — THREE PHASES
+     Takeaway: Amplitude owns layer 1. Two bigger layers are forming.
+═══════════════════════════════════════ -->
 <div class="slide" id="s2">
-  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
-    <div class="ey r">From AI mentions to full AI intelligence</div>
-    <h2 class="r" style="max-width:640px">AI Visibility is the foundation.<br>Here's the <em>full picture.</em></h2>
-    <div class="sub r" style="margin-bottom:4px">Four capabilities that together give Amplitude customers complete visibility into how AI interacts with their product — from crawl to conversion.</div>
+  <div class="slide-inner">
+    <div class="eyebrow rv">AI interactions are getting deeper</div>
+    <div class="heading rv" style="font-size:clamp(34px,4.8vw,56px);max-width:680px;margin-top:16px">
+      Amplitude owns the first layer.<br>Two more are <em>forming.</em>
+    </div>
 
-    <div class="pillars r">
-      <div class="pillar has">
-        <div class="p-icon">📈</div>
-        <div class="p-tag g">✓ Exists in AI Visibility</div>
-        <div class="p-title">Content Performance Tracking</div>
-        <div class="p-body">Which pages are referenced in AI-generated responses? Which content is AI choosing to surface to users? <strong>AI Visibility already tracks this across 10+ AI platforms.</strong></div>
+    <div class="phase-row rv">
+      <div class="phase-card done">
+        <div class="phase-num g">✓ Amplitude ships this</div>
+        <div class="phase-title">AI mentions<br>your brand</div>
+        <div class="phase-body">Tracks brand presence across ChatGPT and Google AI Overviews.<a class="cite" href="https://amplitude.com/blog/amplitude-expands-ai-visibility" target="_blank" title="Amplitude AI Visibility">1</a> <strong>27K brands. 70K+ reports.</strong></div>
+        <div class="phase-arrow">→</div>
       </div>
-      <div class="pillar new">
-        <div class="p-icon">🔍</div>
-        <div class="p-tag b">● Build next</div>
-        <div class="p-title">AI Crawler Visibility</div>
-        <div class="p-body">Track when, how often, and <strong>which AI systems</strong> crawl your site. GPTBot, ClaudeBot, PerplexityBot — understand what content they're indexing and how frequently.</div>
+      <div class="phase-card now">
+        <div class="phase-num b">● The open window</div>
+        <div class="phase-title">AI crawls and<br>drives traffic</div>
+        <div class="phase-body">GPTBot, ClaudeBot, PerplexityBot, Google-Extended index your content.<a class="cite" href="https://www.searchenginejournal.com/ai-crawler-user-agents-list/558130/" target="_blank" title="SEJ AI Crawlers">2</a> AI-referred visitors <strong>convert differently.</strong></div>
+        <div class="phase-arrow">→</div>
       </div>
-      <div class="pillar new">
-        <div class="p-icon">⚙️</div>
-        <div class="p-tag b">● Build next</div>
-        <div class="p-title">Technical Analysis</div>
-        <div class="p-body">Is your site structured for AI-based indexing and retrieval? <strong>Schema markup, crawlability, structured data</strong> — an AI-readiness score that helps teams optimize.</div>
-      </div>
-      <div class="pillar new">
-        <div class="p-icon">📊</div>
-        <div class="p-tag b">● Build next</div>
-        <div class="p-title">Attribution & Traffic Insights</div>
-        <div class="p-body">How many human visitors convert from AI-driven search? <strong>Compare AI-referred traffic vs organic vs paid</strong> — and connect it back to which AI mentions drove the visit.</div>
+      <div class="phase-card next">
+        <div class="phase-num a">◌ Where it's heading</div>
+        <div class="phase-title">AI agents act<br>on your site</div>
+        <div class="phase-body">Chrome 146 includes <strong>WebMCP</strong> as a developer preview.<a class="cite" href="https://developer.chrome.com/blog/webmcp-epp" target="_blank" title="Chrome WebMCP">3</a> Sites declare tools agents call directly.</div>
       </div>
     </div>
 
-    <div class="s2-note r">
-      <strong>Why Amplitude wins here:</strong> No other platform has both AI brand monitoring (AI Visibility) AND behavioral analytics in one product. The attribution chain — AI mentioned your brand → AI crawled your site → AI-referred visitor converted — is only possible when both sides live in the same platform.
+    <div class="s2-bottom rv">
+      <strong>Only Amplitude can connect all three</strong> — AI brand monitoring plus behavioral analytics in one platform, now with Agentic AI Analytics and MCP integrations.<a class="cite" href="https://amplitude.com/press/amplitude-introduces-agentic-ai-analytics-for-the-next-era-of-product-experiences" target="_blank" title="Agentic AI Analytics">4</a>
     </div>
-
-    <div class="s2-future r">
-      <strong>On the horizon — WebMCP (Chrome 146, March 2026):</strong> Websites can now declare structured tools like <code>search_products()</code> that AI agents call directly — no screen-scraping needed. When this standard matures, agent <em>actions</em> become trackable events too. Researching this now means being ready when adoption hits.
-    </div>
+  </div>
+  <div class="src-bar rv">
+    <a href="https://amplitude.com/blog/amplitude-expands-ai-visibility" target="_blank"><span class="sn">1</span>Amplitude AI Visibility</a>
+    <a href="https://www.searchenginejournal.com/ai-crawler-user-agents-list/558130/" target="_blank"><span class="sn">2</span>SEJ — AI Crawler User Agents</a>
+    <a href="https://developer.chrome.com/blog/webmcp-epp" target="_blank"><span class="sn">3</span>Chrome WebMCP Early Preview</a>
+    <a href="https://amplitude.com/press/amplitude-introduces-agentic-ai-analytics-for-the-next-era-of-product-experiences" target="_blank"><span class="sn">4</span>Amplitude Agentic AI Analytics (Feb 2026)</a>
   </div>
 </div>
 
 
-<!-- ═══ S3 — MOCKUP ═══ -->
+<!-- ═══════════════════════════════════════
+     S3 — FOUR PILLARS
+     Takeaway: Four capabilities to expand AI Visibility.
+═══════════════════════════════════════ -->
 <div class="slide" id="s3">
-  <div class="ey r">Imagine this in Amplitude</div>
-  <h2 class="r" style="margin-bottom:4px">AI Visibility, <em>expanded.</em></h2>
-  <div class="s3-sub r">Same platform. Deeper intelligence. The natural evolution of what's already shipping.</div>
-
-  <div class="dash r">
-    <div class="dtop">
-      <div class="ddo"></div><div class="ddo"></div><div class="ddo"></div>
-      <span class="durl">app.amplitude.com</span>
-    </div>
-    <div class="dnav">
-      <div class="dtab">Analytics</div>
-      <div class="dtab">Session Replay</div>
-      <div class="dtab on">AI Visibility<span class="nbad">EXPANDED</span></div>
-      <div class="dtab">Experiments</div>
-      <div class="dtab">Guides</div>
+  <div class="slide-inner">
+    <div class="eyebrow rv">What the full AI layer looks like</div>
+    <div class="heading rv" style="font-size:clamp(34px,4.8vw,56px);max-width:680px;margin-top:16px">
+      Four capabilities.<br>One <em>expanded</em> AI Visibility.
     </div>
 
-    <div class="dgrid">
-      <!-- Row 1: Top-level KPIs -->
-      <div class="dp">
-        <div class="dl">AI Crawler Visits · 7d</div>
-        <div class="dn">48.3K</div>
-        <div class="ddl up">↑ 22% vs prior week</div>
-        <div class="dsm">Across 6 AI crawlers</div>
+    <div class="pillar-grid rv">
+      <div class="pillar-card shipped">
+        <div class="pc-badge g">✓ Ships today</div>
+        <div class="pc-title">Content Performance</div>
+        <div class="pc-body">Which pages does AI reference? Tracked across <strong>ChatGPT and Google AI Overviews</strong> today.<a class="cite" href="https://amplitude.com/blog/amplitude-expands-ai-visibility" target="_blank" title="AI Visibility">1</a></div>
       </div>
-      <div class="dp">
-        <div class="dl">AI-Referred Traffic · 7d</div>
-        <div class="dn">6,841</div>
-        <div class="ddl up">↑ 18% — fastest growing channel</div>
-        <div class="dsm">8.4% of total site visitors</div>
+      <div class="pillar-card build">
+        <div class="pc-badge b">● Build next</div>
+        <div class="pc-title">AI Crawler Visibility</div>
+        <div class="pc-body">When and how often <strong>AI bots crawl</strong> your site — GPTBot, ClaudeBot, PerplexityBot, Google-Extended.<a class="cite" href="https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers" target="_blank" title="Google Crawlers">2</a></div>
       </div>
-      <div class="dp">
-        <div class="dl">AI-Referred Conversion</div>
-        <div class="dn">4.2%</div>
-        <div class="ddl dn">↓ vs 5.8% organic</div>
-        <div class="dsm">Checkout friction for AI-driven visits</div>
+      <div class="pillar-card build">
+        <div class="pc-badge b">● Build next</div>
+        <div class="pc-title">Technical Analysis</div>
+        <div class="pc-body">Is your site optimized for AI? <strong>Schema, structured data, crawlability</strong> — an AI-readiness score.</div>
       </div>
-      <div class="dp">
-        <div class="dl">AI Readiness Score</div>
-        <div class="dn">72</div>
-        <div class="ddl" style="color:var(--amber)">3 issues found</div>
-        <div class="dsm">Schema, crawlability, structured data</div>
-      </div>
-
-      <!-- Row 2: Crawlers + Pages + Attribution -->
-      <div class="dp">
-        <div class="dl">AI Crawlers Accessing Your Site</div>
-        <div class="alist">
-          <div class="ar"><span class="an"><span class="adot" style="background:#10B981"></span>GPTBot</span><span class="av">18,420</span></div>
-          <div class="ar"><span class="an"><span class="adot" style="background:#8B5CF6"></span>ClaudeBot</span><span class="av">12,105</span></div>
-          <div class="ar"><span class="an"><span class="adot" style="background:#3B82F6"></span>PerplexityBot</span><span class="av">9,841</span></div>
-          <div class="ar"><span class="an"><span class="adot" style="background:#EC4899"></span>Gemini</span><span class="av">4,233</span></div>
-          <div class="ar"><span class="an"><span class="adot" style="background:#F59E0B"></span>Cohere</span><span class="av">2,714</span></div>
-        </div>
-      </div>
-
-      <div class="dp">
-        <div class="dl">Most Crawled Pages</div>
-        <div class="mbars">
-          <div class="mbr"><div class="mbn">/docs/api</div><div class="mbt"><div class="mbf" style="width:92%;background:var(--blue)"></div></div><div class="mbv">8.4K</div></div>
-          <div class="mbr"><div class="mbn">/pricing</div><div class="mbt"><div class="mbf" style="width:68%;background:var(--blue);opacity:.75"></div></div><div class="mbv">6.2K</div></div>
-          <div class="mbr"><div class="mbn">/blog/ai-guide</div><div class="mbt"><div class="mbf" style="width:51%;background:var(--blue);opacity:.55"></div></div><div class="mbv">4.7K</div></div>
-          <div class="mbr"><div class="mbn">/features</div><div class="mbt"><div class="mbf" style="width:33%;background:var(--blue);opacity:.4"></div></div><div class="mbv">3.0K</div></div>
-        </div>
-      </div>
-
-      <div class="dp">
-        <div class="dl">AI Mention → Site Visit Attribution</div>
-        <div class="chain">
-          <div class="cstep cs1"><strong>Mentioned</strong>ChatGPT cited brand</div>
-          <div class="cstep cs2"><strong>Crawled</strong>GPTBot indexed /docs</div>
-          <div class="cstep cs3"><strong>Converted</strong>AI-referred signup</div>
-        </div>
-        <div class="dins" style="margin-top:6px">
-          <strong>New insight:</strong> Pages crawled by 3+ AI systems convert AI-referred visitors at 2.1× the rate. Optimizing /pricing for AI retrieval could unlock 340+ monthly signups.
-        </div>
-      </div>
-
-      <div class="dp">
-        <div class="dl">Content Referenced in AI Answers</div>
-        <div class="cprow"><span class="cppage">/docs/api-reference</span><span class="cptag high">HIGH</span><span class="cpn">847×</span></div>
-        <div class="cprow"><span class="cppage">/blog/getting-started</span><span class="cptag high">HIGH</span><span class="cpn">623×</span></div>
-        <div class="cprow"><span class="cppage">/pricing</span><span class="cptag med">MED</span><span class="cpn">291×</span></div>
-        <div class="cprow"><span class="cppage">/case-studies/acme</span><span class="cptag med">MED</span><span class="cpn">184×</span></div>
-        <div style="margin-top:6px;font-size:9px;color:var(--mu);line-height:1.4">/features page is crawled heavily but rarely referenced. Content may need restructuring for AI retrieval.</div>
+      <div class="pillar-card build">
+        <div class="pc-badge b">● Build next</div>
+        <div class="pc-title">Attribution & Traffic</div>
+        <div class="pc-body">How many visitors convert from AI search? <strong>AI-referred vs organic vs paid.</strong></div>
       </div>
     </div>
+
+    <div class="s3-footer rv">
+      <strong>Pendo launched Agent Analytics in June 2025, GA December 2025.</strong><a class="cite" href="https://www.prnewswire.com/news-releases/pendos-agent-analytics-is-now-ga-helping-companies-see-and-optimize-how-users-interact-with-agents-302644222.html" target="_blank" title="Pendo GA">3</a> Adobe shipped LLM Optimizer.<a class="cite" href="https://news.adobe.com/news/2025/06/adobe-llm-optimizer-empowers-businesses-drive-brand-visibility" target="_blank" title="Adobe LLM Optimizer">4</a> Competitors are moving — Amplitude's depth makes it the natural owner.
+    </div>
+    <div class="s3-horizon rv">
+      <strong>On the horizon:</strong> WebMCP means agent actions become trackable events.<a class="cite" href="https://developer.chrome.com/blog/webmcp-epp" target="_blank" title="WebMCP">5</a> Researching this now = being ready when adoption hits.
+    </div>
+  </div>
+  <div class="src-bar rv">
+    <a href="https://amplitude.com/blog/amplitude-expands-ai-visibility" target="_blank"><span class="sn">1</span>Amplitude AI Visibility</a>
+    <a href="https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers" target="_blank"><span class="sn">2</span>Google Common Crawlers</a>
+    <a href="https://www.prnewswire.com/news-releases/pendos-agent-analytics-is-now-ga-helping-companies-see-and-optimize-how-users-interact-with-agents-302644222.html" target="_blank"><span class="sn">3</span>Pendo Agent Analytics GA</a>
+    <a href="https://news.adobe.com/news/2025/06/adobe-llm-optimizer-empowers-businesses-drive-brand-visibility" target="_blank"><span class="sn">4</span>Adobe LLM Optimizer</a>
+    <a href="https://developer.chrome.com/blog/webmcp-epp" target="_blank"><span class="sn">5</span>Chrome WebMCP</a>
   </div>
 </div>
 
 
-<!-- ═══ S4 — ASK ═══ -->
+<!-- ═══════════════════════════════════════
+     S4 — MOCKUP
+     Takeaway: This is what it could look like inside Amplitude.
+═══════════════════════════════════════ -->
 <div class="slide" id="s4">
-  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
-    <div class="ey r">Why me · Why now</div>
-    <h2 class="r" style="max-width:460px;margin-bottom:16px">I'd love to explore this<br>at <em>AI Labs.</em></h2>
+  <div class="eyebrow rv">Imagine this in Amplitude</div>
+  <div class="heading rv" style="font-size:clamp(34px,4.8vw,56px);margin-top:12px;margin-bottom:6px">AI Visibility, <em>expanded.</em></div>
+  <div class="mock-sub rv">Same platform. Deeper intelligence. Built on Agentic AI Analytics.<a class="cite" href="https://amplitude.com/press/amplitude-introduces-agentic-ai-analytics-for-the-next-era-of-product-experiences" target="_blank" title="Agentic AI Analytics">1</a></div>
 
-    <div class="ask-text r">
-      I applied for the Product Marketing Intern role and spoke with the recruiting team. This brief is a preview of the kind of thinking I'd bring — <strong>mapping emerging landscapes and translating them into product ideas.</strong><br><br>
-      I've been a user of analytics tools for years — I ran Microsoft Clarity on my portfolio to understand how visitors navigated it. When I installed Amplitude, it was transformational — the depth of behavioral insight, the way funnels and cohorts connect. <strong>Going from a user of this platform to helping build what comes next would be genuinely rewarding.</strong><br><br>
-      At Apsona, I rebuilt an AppExchange listing from zero — <strong>60% more inbound leads.</strong> At Capital One, I led an AI visibility research project that influenced an <strong>$800K investment.</strong> The JD says "builder's mentality." <strong>I've spent the past year building things that didn't exist yet.</strong>
+  <div class="browser rv">
+    <div class="browser-top">
+      <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+      <span class="browser-url">app.amplitude.com</span>
+    </div>
+    <div class="browser-nav">
+      <div class="browser-tab">Analytics</div>
+      <div class="browser-tab">Session Replay</div>
+      <div class="browser-tab on">AI Visibility<span class="tab-badge">EXPANDED</span></div>
+      <div class="browser-tab">Experiments</div>
+    </div>
+    <div class="dash-grid">
+      <!-- Row 1: KPI cards -->
+      <div class="dash-cell">
+        <div class="dc-label">AI Crawler Visits · 7d</div>
+        <div class="dc-num">48.3K</div>
+        <div class="dc-delta up">↑ 22% vs prior week</div>
+        <div class="dc-hint">Across 4 AI crawlers</div>
+      </div>
+      <div class="dash-cell">
+        <div class="dc-label">AI-Referred Traffic</div>
+        <div class="dc-num">6,841</div>
+        <div class="dc-delta up">↑ 18% — fastest channel</div>
+        <div class="dc-hint">8.4% of total visitors</div>
+      </div>
+      <div class="dash-cell">
+        <div class="dc-label">AI-Referred Conversion</div>
+        <div class="dc-num">4.2%</div>
+        <div class="dc-delta dn">↓ vs 5.8% organic</div>
+        <div class="dc-hint">Checkout friction on AI visits</div>
+      </div>
+      <div class="dash-cell">
+        <div class="dc-label">AI Readiness Score</div>
+        <div class="dc-num">72</div>
+        <div class="dc-delta warn">3 issues found</div>
+        <div class="dc-hint">Schema + crawlability</div>
+      </div>
+      <!-- Row 2: Detail panels -->
+      <div class="dash-cell">
+        <div class="dc-label">AI Crawlers</div>
+        <div class="clist">
+          <div class="clist-row"><span class="clist-name"><span class="clist-dot" style="background:#10B981"></span>GPTBot</span><span class="clist-val">18,420</span></div>
+          <div class="clist-row"><span class="clist-name"><span class="clist-dot" style="background:#8B5CF6"></span>ClaudeBot</span><span class="clist-val">12,105</span></div>
+          <div class="clist-row"><span class="clist-name"><span class="clist-dot" style="background:#3B82F6"></span>PerplexityBot</span><span class="clist-val">9,841</span></div>
+          <div class="clist-row"><span class="clist-name"><span class="clist-dot" style="background:#F59E0B"></span>Google-Extended</span><span class="clist-val">7,934</span></div>
+        </div>
+      </div>
+      <div class="dash-cell">
+        <div class="dc-label">Most Crawled Pages</div>
+        <div class="bars">
+          <div class="bar-row"><div class="bar-label">/docs/api</div><div class="bar-track"><div class="bar-fill" style="width:92%;background:var(--blue)"></div></div><div class="bar-val">8.4K</div></div>
+          <div class="bar-row"><div class="bar-label">/pricing</div><div class="bar-track"><div class="bar-fill" style="width:68%;background:var(--blue);opacity:.7"></div></div><div class="bar-val">6.2K</div></div>
+          <div class="bar-row"><div class="bar-label">/blog/guide</div><div class="bar-track"><div class="bar-fill" style="width:51%;background:var(--blue);opacity:.5"></div></div><div class="bar-val">4.7K</div></div>
+          <div class="bar-row"><div class="bar-label">/features</div><div class="bar-track"><div class="bar-fill" style="width:33%;background:var(--blue);opacity:.35"></div></div><div class="bar-val">3.0K</div></div>
+        </div>
+      </div>
+      <div class="dash-cell">
+        <div class="dc-label">Mention → Visit → Conversion</div>
+        <div class="funnel">
+          <div class="funnel-step fs-1"><strong>Mentioned</strong>ChatGPT cited brand</div>
+          <div class="funnel-step fs-2"><strong>Crawled</strong>GPTBot indexed /docs</div>
+          <div class="funnel-step fs-3"><strong>Converted</strong>AI-referred signup</div>
+        </div>
+        <div class="insight-bar">
+          <strong>Insight:</strong> Pages crawled by 3+ AI systems convert at 2.1× the rate.
+        </div>
+      </div>
+      <div class="dash-cell">
+        <div class="dc-label">Content in AI Answers</div>
+        <div class="ct-row"><span class="ct-page">/docs/api-reference</span><span class="ct-badge hi">HIGH</span><span class="ct-count">847×</span></div>
+        <div class="ct-row"><span class="ct-page">/blog/getting-started</span><span class="ct-badge hi">HIGH</span><span class="ct-count">623×</span></div>
+        <div class="ct-row"><span class="ct-page">/pricing</span><span class="ct-badge md">MED</span><span class="ct-count">291×</span></div>
+        <div class="ct-row"><span class="ct-page">/case-studies/acme</span><span class="ct-badge md">MED</span><span class="ct-count">184×</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="src-bar rv" style="padding-top:6px;margin-top:6px;border-top:none">
+    <a href="https://amplitude.com/press/amplitude-introduces-agentic-ai-analytics-for-the-next-era-of-product-experiences" target="_blank"><span class="sn">1</span>Agentic AI Analytics (Feb 2026)</a>
+    <span style="color:var(--mu);font-size:8px;font-style:italic">Dashboard data is illustrative</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     S5 — THE ASK
+     Takeaway: Hire me. Visual proof. Clear ask.
+═══════════════════════════════════════ -->
+<div class="slide" id="s5">
+  <div class="s5-top">
+    <div class="eyebrow rv" style="margin-bottom:16px">Why me · Why AI Labs</div>
+    <div class="heading rv" style="font-size:clamp(36px,5vw,60px);text-align:center;max-width:500px;margin-bottom:20px">
+      I'd love to build this<br>at <em>AI Labs.</em>
     </div>
 
-    <div class="ask-rule r"></div>
+    <div class="s5-intro rv">
+      I find whitespace and turn it into product stories.<br>This deck is my proof of concept.
+    </div>
 
-    <div class="acards r">
-      <div class="ac top">
-        <div class="acl">What I'm asking for</div>
-        <div class="acv">A conversation with the AI Labs hiring manager about this idea — and the internship.</div>
+    <!-- Visual proof strip -->
+    <div class="proof-strip rv">
+      <div class="proof-item">
+        <div class="proof-num" style="color:var(--green)">60%</div>
+        <div class="proof-label">more inbound</div>
+        <div class="proof-context">Rebuilt Apsona's AppExchange listing</div>
       </div>
-      <div class="ac">
-        <div class="acl">Role</div>
-        <div class="acv">PMM Intern · AI Labs · Summer 2026</div>
+      <div class="proof-item">
+        <div class="proof-num" style="color:var(--blue)">$800K</div>
+        <div class="proof-label">investment influenced</div>
+        <div class="proof-context">AI visibility research at Capital One</div>
       </div>
-      <div class="ac">
-        <div class="acl">Education</div>
-        <div class="acv">MEM, Dartmouth · Dec 2026</div>
-      </div>
-      <div class="ac">
-        <div class="acl">Relevant Work</div>
-        <div class="acv">Assoc. PM, Apsona · AI Visibility Strategy, Capital One</div>
-      </div>
-      <div class="ac">
-        <div class="acl">AI Labs Contribution</div>
-        <div class="acv">Product ideas · Competitive intel · AI capabilities catalog · Release narratives</div>
+      <div class="proof-item">
+        <div class="proof-num" style="color:var(--amber)">9</div>
+        <div class="proof-label">sources researched</div>
+        <div class="proof-context">Earnings, Forrester, Cloudflare, Pendo, CNBC...</div>
       </div>
     </div>
 
-    <div class="proof r">
-      <strong>Sources:</strong> Amplitude Q4 '25 earnings, Chrome 146 WebMCP spec, Pendo Agent Analytics, Spenser's CNBC interview, Forrester Wave, Cloudflare Year in Review, and every AI feature shipped since Jul 2025. <strong>I found this gap because I was looking.</strong>
+    <!-- CTA grid -->
+    <div class="cta-grid rv">
+      <div class="cta-card hero-cta">
+        <div class="cta-label">What I'm asking for</div>
+        <div class="cta-val">A conversation with the hiring team — about this idea, and the internship.</div>
+      </div>
+      <div class="cta-card">
+        <div class="cta-label">Role</div>
+        <div class="cta-val">PMM Intern · AI Labs<br>Summer 2026</div>
+      </div>
+      <div class="cta-card">
+        <div class="cta-label">Education</div>
+        <div class="cta-val">MEM, Dartmouth<br>Dec 2026</div>
+      </div>
+      <div class="cta-card">
+        <div class="cta-label">What I'd build</div>
+        <div class="cta-val">AI Capabilities Catalog<br>Competitive intel</div>
+      </div>
+    </div>
+
+    <div class="closer rv">I found this gap because I was looking.</div>
+
+    <div class="s5-note rv">
+      Based on <a href="https://investors.amplitude.com/news-releases/news-release-details/amplitude-announces-fourth-quarter-and-fiscal-year-2025" target="_blank">Q4 '25 earnings</a>,
+      <a href="https://amplitude.com/resources/forrester-wave-digital-analytics-solutions" target="_blank">Forrester Wave</a>,
+      <a href="https://developer.chrome.com/blog/webmcp-epp" target="_blank">Chrome WebMCP</a>,
+      <a href="https://www.prnewswire.com/news-releases/pendos-agent-analytics-is-now-ga-helping-companies-see-and-optimize-how-users-interact-with-agents-302644222.html" target="_blank">Pendo</a>,
+      <a href="https://blog.cloudflare.com/radar-2025-year-in-review/" target="_blank">Cloudflare</a>,
+      <a href="https://www.cnbc.com/video/2026/02/23/spenser-skates-amplitude-ceo-a-fortt-knox-update.html" target="_blank">CNBC</a>, and
+      <a href="https://investors.amplitude.com/news-releases/news-release-details/amplitude-acquires-kraftful-accelerate-ai-strategy" target="_blank">Kraftful acquisition</a>.
     </div>
   </div>
 </div>
 
-</div><!-- /deck -->
+</div>
 
-<div class="cb">
-  <span class="cb-h">← → to navigate</span>
-  <div class="cb-d" id="dots"></div>
+<div class="botbar">
+  <span class="botbar-hint">← → to navigate</span>
+  <div class="botbar-dots" id="dots"></div>
 </div>
 
 <script>
-const slides=[...document.querySelectorAll('.slide')],N=slides.length;let cur=0;
+const slides=[...document.querySelectorAll('.slide')],N=slides.length;
+let cur=0;
 const dotsEl=document.getElementById('dots');
-slides.forEach((_,i)=>{const d=document.createElement('button');d.className='dot'+(i===0?' on':'');d.onclick=()=>go(i);dotsEl.appendChild(d)});
-function go(n){if(n<0||n>=N||n===cur)return;slides[cur].classList.remove('active');cur=n;slides[cur].classList.add('active');if(cur===2){slides[cur].querySelectorAll('.mbf').forEach(f=>{const w=f.style.width;f.style.width='0';setTimeout(()=>f.style.width=w,400)})}refresh()}
-function refresh(){document.getElementById('counter').textContent=`0${cur+1} / 0${N}`;document.getElementById('pbar').style.width=((cur+1)/N*100)+'%';document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur))}
-document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();go(cur-1)}});
-let tx=0;document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>44)go(dx<0?cur+1:cur-1)},{passive:true});
+slides.forEach((_,i)=>{
+  const d=document.createElement('button');
+  d.className='dot'+(i===0?' on':'');
+  d.onclick=()=>go(i);
+  dotsEl.appendChild(d);
+});
+
+function go(n){
+  if(n<0||n>=N||n===cur)return;
+  slides[cur].classList.remove('active');
+  cur=n;
+  slides[cur].classList.add('active');
+  // Animate bar charts on slide 4
+  if(cur===3){
+    slides[cur].querySelectorAll('.bar-fill').forEach(f=>{
+      const w=f.style.width;f.style.width='0';
+      setTimeout(()=>f.style.width=w,400);
+    });
+  }
+  refresh();
+}
+
+function refresh(){
+  document.getElementById('counter').textContent=
+    String(cur+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
+  document.getElementById('pbar').style.width=((cur+1)/N*100)+'%';
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+}
+
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();go(cur-1)}
+});
+
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>44)go(dx<0?cur+1:cur-1);
+},{passive:true});
+
 refresh();
 </script>
 </body>
