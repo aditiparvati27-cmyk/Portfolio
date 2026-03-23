@@ -342,15 +342,6 @@ export default function Home() {
 
   const featuredStrategyProjects = [
     {
-      title: "Typeface: Brand Voice Intelligence Loop",
-      role: "Portfolio Case Study",
-      period: "February 2026",
-      desc: "Interactive strategy + prototype deck on performance-informed brand voice systems. Reframed as portfolio work for public viewing.",
-      tags: ["Product Marketing", "AI Content Systems", "Experiment Design"],
-      liveUrl: "/projects/typeface",
-      metric: "Interactive prototype + strategy deck"
-    },
-    {
       title: "Profound: WebMCP Product Strategy",
       role: "Portfolio Case Study",
       period: "March 2026",
