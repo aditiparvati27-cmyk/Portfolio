@@ -58,6 +58,23 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(21,21,23,.12);cursor:pointer;border:none;padding:0;transition:all .35s}
 .dot.on{background:var(--ink);transform:scale(1.6)}
 
+/* Side navigation arrows */
+.nav-arrow{
+  position:fixed;top:50%;z-index:95;
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--ln2);
+  background:rgba(253,252,249,.9);
+  color:var(--ink2);font-size:24px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .22s ease;
+  transform:translateY(-50%);
+}
+.nav-arrow.left{left:14px}
+.nav-arrow.right{right:14px}
+.nav-arrow:hover{background:#fff;border-color:rgba(52,80,209,.35);color:var(--blue)}
+.nav-arrow:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.nav-arrow:disabled{opacity:.3;cursor:default}
+
 /* Progress bar */
 .pbar{position:fixed;top:0;left:0;height:2px;z-index:100;background:var(--blue);transition:width .55s cubic-bezier(.4,0,.2,1)}
 
@@ -327,6 +344,16 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   .proof-strip{flex-direction:column}.proof-item{border-right:none;border-bottom:1px solid var(--ln2)}.proof-item:last-child{border-bottom:none}
   .credit-block{position:static;text-align:left;margin-top:20px}
   .src-bar{padding:12px 24px;flex-direction:column}
+  .nav-arrow{
+    top:auto;
+    bottom:62px;
+    transform:none;
+    width:40px;
+    height:40px;
+    font-size:21px;
+  }
+  .nav-arrow.left{left:12px}
+  .nav-arrow.right{right:12px}
 }
 </style>
 </head>
@@ -635,17 +662,23 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   <span class="botbar-hint">← → to navigate</span>
   <div class="botbar-dots" id="dots"></div>
 </div>
+<button class="nav-arrow left" id="navPrev" type="button" aria-label="Previous slide">←</button>
+<button class="nav-arrow right" id="navNext" type="button" aria-label="Next slide">→</button>
 
 <script>
 const slides=[...document.querySelectorAll('.slide')],N=slides.length;
 let cur=0;
 const dotsEl=document.getElementById('dots');
+const prevBtn=document.getElementById('navPrev');
+const nextBtn=document.getElementById('navNext');
 slides.forEach((_,i)=>{
   const d=document.createElement('button');
   d.className='dot'+(i===0?' on':'');
   d.onclick=()=>go(i);
   dotsEl.appendChild(d);
 });
+prevBtn.onclick=()=>go(cur-1);
+nextBtn.onclick=()=>go(cur+1);
 
 function go(n){
   if(n<0||n>=N||n===cur)return;
@@ -667,6 +700,8 @@ function refresh(){
     String(cur+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
   document.getElementById('pbar').style.width=((cur+1)/N*100)+'%';
   document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+  prevBtn.disabled=cur===0;
+  nextBtn.disabled=cur===N-1;
 }
 
 document.addEventListener('keydown',e=>{
