@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>The Next Bottleneck — Aditi Parvati</title>
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "vp6im8t7qs");
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Libre+Franklin:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F4F1EA;--ink:#151517;--ink2:#27272E;--mid:#55545E;--mu:#908E98;
+  --ln:rgba(21,21,23,.07);--ln2:rgba(21,21,23,.13);
+  --blue:#3450D1;--green:#1B7D38;--amber:#B86E08;--red:#C03030;--teal:#0C7F90;
+}
+
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:'Libre Franklin',sans-serif;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
+
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:52px 80px 44px;opacity:0;pointer-events:none;transition:opacity .55s ease;overflow-y:auto}
+.slide.active{opacity:1;pointer-events:all}
+.slide .r{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.slide.active .r{opacity:1;transform:translateY(0)}
+.slide.active .r:nth-child(1){transition-delay:.05s}
+.slide.active .r:nth-child(2){transition-delay:.16s}
+.slide.active .r:nth-child(3){transition-delay:.28s}
+.slide.active .r:nth-child(4){transition-delay:.40s}
+.slide.active .r:nth-child(5){transition-delay:.50s}
+
+.ct{position:fixed;top:0;left:0;right:0;z-index:90;padding:15px 80px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.ct-l{font-size:9px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--mu)}
+.ct-r{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--mu)}
+.cb{position:fixed;bottom:0;left:0;right:0;z-index:90;padding:13px 80px;display:flex;align-items:center;justify-content:space-between}
+.cb-h{font-size:8px;color:var(--mu);letter-spacing:.25em;text-transform:uppercase}
+.cb-d{display:flex;gap:11px}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(21,21,23,.1);cursor:pointer;border:none;padding:0;transition:all .35s}
+.dot.on{background:var(--ink);transform:scale(1.5)}
+.pbar{position:fixed;top:0;left:0;height:1.5px;z-index:100;background:var(--ink);transition:width .55s cubic-bezier(.4,0,.2,1)}
+
+.ey{font-size:9px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:var(--mu);margin-bottom:22px}
+
+
+/* ═══ S1 — THE OPENING ═══ */
+#s1{justify-content:center;position:relative}
+#s1::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 45% 40% at 65% 40%,rgba(52,80,209,.02)0%,transparent 50%)}
+
+.s1-quote{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(20px,2.4vw,28px);font-weight:400;
+  line-height:1.5;color:var(--mid);max-width:600px;
+  font-style:italic;margin-bottom:8px;
+}
+.s1-quote em{font-style:normal;color:var(--ink)}
+.s1-attr{font-size:12px;color:var(--mu);margin-bottom:40px;letter-spacing:.02em}
+
+.s1-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(36px,5.5vw,72px);font-weight:400;
+  line-height:1.05;letter-spacing:-.03em;color:var(--ink);
+  max-width:700px;
+}
+.s1-title span{color:var(--blue)}
+
+.s1-body{
+  margin-top:32px;font-size:16px;font-weight:300;
+  color:var(--mu);max-width:520px;line-height:1.8;
+}
+.s1-body strong{color:var(--mid);font-weight:500}
+
+.credit{position:absolute;bottom:44px;right:80px;text-align:right}
+.cr-n{font-family:'Instrument Serif',serif;font-size:15px;color:var(--ink)}
+.cr-r{font-size:10px;color:var(--mu);line-height:1.5;margin-top:1px}
+
+
+/* ═══ S2 — THE SHIFT ═══ */
+#s2{justify-content:center}
+
+.timeline{
+  display:flex;flex-direction:column;gap:0;
+  margin-top:28px;max-width:720px;
+  border-left:2px solid var(--ln2);
+  padding-left:32px;
+}
+.tl-item{padding:16px 0;position:relative}
+.tl-item+.tl-item{border-top:1px solid var(--ln)}
+.tl-item::before{
+  content:'';position:absolute;left:-39px;top:22px;
+  width:12px;height:12px;border-radius:50%;
+  border:2px solid var(--ln2);background:var(--bg);
+}
+.tl-item.past::before{background:var(--mu);border-color:var(--mu)}
+.tl-item.now::before{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 4px rgba(52,80,209,.12)}
+.tl-item.next::before{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 4px rgba(184,110,8,.1)}
+
+.tl-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
+.tl-label.solved{color:var(--mu)}
+.tl-label.live{color:var(--blue)}
+.tl-label.emerging{color:var(--amber)}
+.tl-title{font-family:'Instrument Serif',serif;font-size:22px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:4px}
+.tl-body{font-size:13px;font-weight:300;color:var(--mu);line-height:1.6;max-width:560px}
+.tl-body strong{color:var(--ink2);font-weight:500}
+
+.s2-note{margin-top:24px;font-size:14px;color:var(--mid);line-height:1.7;max-width:640px}
+.s2-note strong{color:var(--ink);font-weight:500}
+
+
+/* ═══ S3 — THE OPPORTUNITY ═══ */
+#s3{justify-content:center}
+
+.s3-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(28px,3.8vw,44px);font-weight:400;
+  line-height:1.15;color:var(--ink);max-width:600px;margin-bottom:24px;
+}
+.s3-title em{font-style:italic;color:var(--blue)}
+
+.opp-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:20px;max-width:760px;
+}
+.opp-card{padding:24px;border:1px solid var(--ln);position:relative}
+.opp-card.featured{border-left:3px solid var(--blue);background:rgba(52,80,209,.01)}
+
+.opp-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--mu);letter-spacing:.16em;margin-bottom:10px}
+.opp-title{font-family:'Instrument Serif',serif;font-size:20px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:8px}
+.opp-body{font-size:12.5px;font-weight:300;color:var(--mu);line-height:1.65}
+.opp-body strong{color:var(--ink2);font-weight:500}
+
+.opp-stat{
+  margin-top:12px;padding:8px 12px;background:var(--bg);
+  border:1px solid var(--ln);
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mid);
+}
+.opp-stat strong{color:var(--ink);font-weight:600}
+
+.s3-bottom{margin-top:22px;font-size:13px;color:var(--mu);line-height:1.7;max-width:680px;font-style:italic}
+.s3-bottom strong{font-style:normal;color:var(--ink2);font-weight:500}
+
+
+/* ═══ S4 — THE CLOSE ═══ */
+#s4{justify-content:center;align-items:center;text-align:center}
+
+.s4-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(28px,4vw,48px);font-weight:400;
+  line-height:1.15;color:var(--ink);max-width:500px;margin-bottom:24px;
+}
+.s4-title em{font-style:italic;color:var(--blue)}
+
+.s4-body{
+  font-size:15.5px;font-weight:300;color:var(--mid);
+  line-height:1.85;max-width:480px;text-align:center;
+}
+.s4-body strong{color:var(--ink);font-weight:500}
+
+.s4-rule{width:32px;height:1.5px;background:var(--ln2);margin:28px auto}
+
+.s4-info{
+  display:flex;gap:32px;justify-content:center;align-items:baseline;
+  font-size:12px;color:var(--mu);
+}
+.s4-info strong{color:var(--ink2);font-weight:500}
+.s4-info-sep{color:var(--ln2)}
+
+.s4-sources{
+  margin-top:24px;font-size:10px;color:var(--mu);
+  line-height:1.7;max-width:480px;text-align:center;font-style:italic;
+}
+.s4-sources strong{font-style:normal;font-weight:500;color:var(--ink2)}
+
+
+@media(max-width:920px){
+  .slide{padding:36px 24px 32px}.ct,.cb{padding-left:24px;padding-right:24px}
+  .opp-grid{grid-template-columns:1fr}
+  .credit{position:static;text-align:left;margin-top:20px}
+  .s4-info{flex-direction:column;gap:8px;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<div class="pbar" id="pbar"></div>
+<div class="ct">
+  <span class="ct-l">Aditi Parvati · A Note for Spenser</span>
+  <span class="ct-r" id="counter">01 / 04</span>
+</div>
+
+<div class="deck">
+
+<!-- ═══ S1 — THE OPENING ═══ -->
+<div class="slide active" id="s1">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="s1-quote r">
+      "Every major shift in product development has removed a bottleneck.<br>
+      The internet removed distribution. Cloud removed iteration.<br>
+      AI tools removed coding. But none solved: <em>are you building the right thing?</em>"
+    </div>
+    <div class="s1-attr r">— Spenser Skates, "The Last Bottleneck," February 2026</div>
+
+    <div class="s1-title r">
+      You named the feedback loop.<br>
+      There's another one <span>forming.</span>
+    </div>
+
+    <div class="s1-body r">
+      AI isn't just helping teams build faster. It's becoming <strong>the layer between products and the people who use them.</strong> It crawls content, decides what to surface, drives traffic on its own terms — and increasingly, acts on behalf of users. That layer is growing faster than any analytics platform can see.
+    </div>
+  </div>
+  <div class="credit r">
+    <div class="cr-n">Aditi Parvati</div>
+    <div class="cr-r">Dartmouth MEM '26<br>aditiparvati27@gmail.com</div>
+  </div>
+</div>
+
+
+<!-- ═══ S2 — THE SHIFT ═══ -->
+<div class="slide" id="s2">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="ey r">How we got here</div>
+
+    <div class="timeline r">
+      <div class="tl-item past">
+        <div class="tl-label solved">Solved · 2012–2024</div>
+        <div class="tl-title">Humans discover products through search and ads</div>
+        <div class="tl-body">Google, social, paid media. Analytics platforms track the full journey. <strong>Amplitude built the gold standard for understanding this behavior.</strong></div>
+      </div>
+      <div class="tl-item now">
+        <div class="tl-label live">Happening now · 2025–2026</div>
+        <div class="tl-title">AI mediates discovery — and starts acting on behalf of users</div>
+        <div class="tl-body">ChatGPT, Perplexity, Gemini answer questions that used to drive website visits. AI crawlers index content to decide what gets surfaced. <strong>38% of web traffic is now bots. AI-referred traffic doubled in Q4 2025.</strong> Amplitude's AI Visibility tracks brand mentions — but the crawl, the referral, and the conversion are still invisible.</div>
+      </div>
+      <div class="tl-item next">
+        <div class="tl-label emerging">Emerging · 2026+</div>
+        <div class="tl-title">AI agents browse, transact, and make decisions on websites</div>
+        <div class="tl-body">OpenAI's Operator, Google's agent mode, Chrome's WebMCP standard (live March 10). Agents are beginning to search products, compare prices, and complete tasks. <strong>$262B in AI-influenced retail in holiday 2025 alone.</strong> Agent commerce isn't coming — it's here.</div>
+      </div>
+    </div>
+
+    <div class="s2-note r">
+      <strong>You wrote that the feedback loop is the last bottleneck.</strong> But if the loop only captures human behavior — and a growing share of product interaction is AI-mediated — the loop itself has a blind spot. The question isn't just "what did the user do?" It's becoming "what did the AI do before the user got there?"
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ S3 — THE OPPORTUNITY ═══ -->
+<div class="slide" id="s3">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="ey r">Why this is Amplitude's opportunity</div>
+    <div class="s3-title r">
+      Self-improving products need to<br>understand the <em>full</em> user journey.<br>
+      AI is now part of that journey.
+    </div>
+
+    <div class="opp-grid r">
+      <div class="opp-card featured">
+        <div class="opp-num">01 — EXTEND AI VISIBILITY</div>
+        <div class="opp-title">From mentions to the full AI layer</div>
+        <div class="opp-body">AI Visibility tracks what AI says about brands. Extend it to track <strong>AI crawlers visiting sites, AI-referred traffic converting, and which content AI chooses to surface.</strong> The chain from mention → crawl → conversion only works if both ends live in one platform.</div>
+        <div class="opp-stat"><strong>27K brands</strong> already on AI Visibility → natural expansion path</div>
+      </div>
+      <div class="opp-card featured">
+        <div class="opp-num">02 — AGENT ANALYTICS</div>
+        <div class="opp-title">Treat AI agents as a new user type</div>
+        <div class="opp-body">GPTBot, ClaudeBot, Operator — these aren't just crawlers. They're attempting tasks on behalf of real users. <strong>Track agent sessions the way you track human sessions</strong> — funnels, drop-offs, success rates. Same event model. New property: <code style="font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(52,80,209,.05);padding:1px 4px">source = ai_agent</code>.</div>
+        <div class="opp-stat"><strong>25% of Amplitude's own queries</strong> come from AI agents — the pattern is already inside the building</div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-num">03 — AI-DRIVEN COMMERCE</div>
+        <div class="opp-title">The transaction layer is shifting</div>
+        <div class="opp-body">AI-influenced retail hit $262B last holiday. Agent commerce is emerging — Operator, Gemini, Perplexity are browsing and buying. <strong>Amplitude's customers (Burger King, Under Armour, Square) need to understand this traffic.</strong> It converts differently. It behaves differently.</div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-num">04 — THE MOAT IS DATA</div>
+        <div class="opp-title">Behavioral data is the defensible layer</div>
+        <div class="opp-body">You've said it: <strong>"It won't be about the best ML models — it'll be about proprietary datasets."</strong> Amplitude has the deepest behavioral dataset in the industry. Adding the AI interaction layer to that dataset compounds the moat.</div>
+      </div>
+    </div>
+
+    <div class="s3-bottom r">
+      Pendo shipped Agent Analytics in December 2025. Cloudflare launched AI Crawl Control. The "agentic search" category your team mentioned at the TMT conference — <strong>this is the space. And Amplitude's depth makes it the natural owner.</strong>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ S4 — THE CLOSE ═══ -->
+<div class="slide" id="s4">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center">
+    <div class="ey r" style="text-align:center">A personal note</div>
+
+    <div class="s4-title r">
+      I'd love to talk<br>about <em>this vision.</em>
+    </div>
+
+    <div class="s4-body r">
+      I've been thinking about the AI analytics space since leading an AI visibility research project at Capital One that influenced an $800K investment. I've used analytics tools for years — Microsoft Clarity on my own projects, then Amplitude, which changed how I thought about user behavior entirely.<br><br>
+      I applied for the AI Labs PMM intern role and spoke with your recruiting team. But this brief isn't a job pitch. It's the kind of thinking I can't stop doing. <strong>I'd genuinely love the chance to talk with you about where this space is heading</strong> — and to learn from how you're seeing it.
+    </div>
+
+    <div class="s4-rule r"></div>
+
+    <div class="s4-info r">
+      <span><strong>Aditi Parvati</strong></span>
+      <span class="s4-info-sep">·</span>
+      <span>Dartmouth MEM '26</span>
+      <span class="s4-info-sep">·</span>
+      <span>aditiparvati27@gmail.com</span>
+    </div>
+
+    <div class="s4-sources r">
+      <strong>What I read to think about this:</strong> Your "Last Bottleneck" essay, the Q4 earnings call, CNBC Fortt Knox, the TMT conference notes, Library of Minds episode, Y Combinator Lightcone, Chrome 146 WebMCP spec, Pendo Agent Analytics GA, Cloudflare Year in Review, and Salesforce's $262B holiday AI commerce report.
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="cb">
+  <span class="cb-h">← → to navigate</span>
+  <div class="cb-d" id="dots"></div>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')],N=slides.length;let cur=0;
+const dotsEl=document.getElementById('dots');
+slides.forEach((_,i)=>{const d=document.createElement('button');d.className='dot'+(i===0?' on':'');d.onclick=()=>go(i);dotsEl.appendChild(d)});
+function go(n){if(n<0||n>=N||n===cur)return;slides[cur].classList.remove('active');cur=n;slides[cur].classList.add('active');refresh()}
+function refresh(){document.getElementById('counter').textContent=`0${cur+1} / 0${N}`;document.getElementById('pbar').style.width=((cur+1)/N*100)+'%';document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur))}
+document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();go(cur-1)}});
+let tx=0;document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>44)go(dx<0?cur+1:cur-1)},{passive:true});
+refresh();
+</script>
+</body>
+</html>
