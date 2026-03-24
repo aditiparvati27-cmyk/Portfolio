@@ -37,7 +37,15 @@ export default function Home() {
   }, [roleView]);
 
   const prefetchProjectRoute = useCallback((href?: string) => {
-    if (!href || !href.startsWith("/projects/")) return;
+    if (!href) return;
+
+    if (href === "/galaxy/intro" || href === "/galaxy/opportunity") {
+      import("@/pages/galaxy-intro");
+      import("@/pages/galaxy-opportunity");
+      return;
+    }
+
+    if (!href.startsWith("/projects/")) return;
 
     if (href === "/projects/typeface") {
       import("@/pages/typeface-portfolio");
@@ -341,6 +349,15 @@ export default function Home() {
   ];
 
   const featuredStrategyProjects = [
+    {
+      title: "Galaxy: Institutional API Onboarding Prototype",
+      role: "Portfolio Case Study",
+      period: "March 2026",
+      desc: "Public-facing product prototype focused on reducing onboarding friction from account setup to first API-driven institutional workflow.",
+      tags: ["API Product", "User Journeys", "PRD + Launch Plan"],
+      liveUrl: "/galaxy/intro",
+      metric: "Copied from original private endpoint"
+    },
     {
       title: "Profound: WebMCP Product Strategy",
       role: "Portfolio Case Study",

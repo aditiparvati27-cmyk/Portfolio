@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Galaxy PM Showcase Intro</title>
+<style>
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #071423;
+  --bg-soft: #0e2238;
+  --ink: #f8fbff;
+  --ink-soft: #c4d7eb;
+  --line: rgba(200, 220, 245, 0.24);
+  --accent: #16d1c4;
+  --accent-2: #ff8f3f;
+  --accent-3: #b8ff4d;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+  background: radial-gradient(130% 90% at 18% 2%, #154873 0%, transparent 45%),
+              radial-gradient(120% 100% at 90% 85%, #4f2b1a 0%, transparent 45%),
+              linear-gradient(150deg, var(--bg) 0%, #0b1a2a 52%, #091421 100%);
+  color: var(--ink);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, black 20%, transparent 88%);
+}
+
+main {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(18px, 4vw, 44px);
+}
+
+.panel {
+  width: min(980px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  padding: clamp(20px, 4.5vw, 52px);
+  background: linear-gradient(160deg, rgba(16, 37, 60, 0.9), rgba(7, 20, 35, 0.88));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(4px);
+}
+
+.kicker {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+  font-weight: 700;
+}
+
+.headline {
+  margin: 18px 0 12px;
+  font-size: clamp(2rem, 6.8vw, 4.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  max-width: 11ch;
+}
+
+.headline .hot { color: var(--accent-2); }
+
+.subhead {
+  margin: 0;
+  max-width: 58ch;
+  color: var(--ink-soft);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  line-height: 1.58;
+}
+
+.framing-bar {
+  margin-top: 26px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.framing-progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.6s ease;
+}
+
+.framing-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 0.89rem;
+}
+
+.grid {
+  margin-top: clamp(22px, 4vw, 34px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 14px 13px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 0.84rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.card p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  font-size: 0.93rem;
+}
+
+.actions {
+  margin-top: clamp(24px, 4vw, 36px);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #061322;
+  background: linear-gradient(95deg, var(--accent), var(--accent-2));
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding: 13px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.32);
+}
+
+.cta:hover { transform: translateY(-1px); }
+
+.note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  max-width: 62ch;
+}
+
+.note strong { color: var(--ink); }
+
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .panel { border-radius: 18px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="panel" aria-labelledby="intro-title">
+    <p class="kicker">Galaxy PM Internship Showcase</p>
+    <h1 id="intro-title" class="headline">The <span class="hot">next leap</span> in institutional API activation.</h1>
+    <p class="subhead">
+      This is a fast 45-second framing of a real product challenge: institutions can access advanced crypto infrastructure, but onboarding to first API-driven value is still slower than it should be.
+    </p>
+
+    <div class="framing-bar" aria-hidden="true">
+      <div class="framing-progress" id="progress"></div>
+    </div>
+    <div class="framing-meta">
+      <span id="timer">~45 second framing</span>
+      <span>Designed for mobile and desktop review</span>
+      <span>Signal: problem-to-PRD in one flow</span>
+    </div>
+
+    <div class="grid" role="list">
+      <article class="card" role="listitem">
+        <h2>Why now</h2>
+        <p>Galaxy is scaling across trading, lending, staking, and platform offerings while institutional expectations for secure, fast API activation keep rising.</p>
+      </article>
+      <article class="card" role="listitem">
+        <h2>What changes</h2>
+        <p>This prototype maps a guided onboarding flow from account setup to launch-readiness, with explicit tradeoffs and a PM-ready PRD snapshot.</p>
+      </article>
+      <article class="card" role="listitem">
+        <h2>What to review</h2>
+        <p>The next page covers problem, user journey, design tradeoffs, endpoint catalog, launch plan, and AI workflow evidence.</p>
+      </article>
+    </div>
+
+    <div class="actions">
+      <a class="cta" href="/galaxy/opportunity" aria-label="Open Galaxy opportunity deck">Open Opportunity Deck <span aria-hidden="true">-&gt;</span></a>
+      <p class="note"><strong>Inference note:</strong> conclusions in this prototype are informed inferences from public sources and public product artifacts, not internal Galaxy data.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const totalSeconds = 45;
+  const progress = document.getElementById("progress");
+  const timer = document.getElementById("timer");
+  const start = Date.now();
+
+  function tick() {
+    const elapsed = (Date.now() - start) / 1000;
+    const ratio = Math.min(elapsed / totalSeconds, 1);
+    const remaining = Math.max(Math.ceil(totalSeconds - elapsed), 0);
+
+    progress.style.width = (ratio * 100).toFixed(1) + "%";
+    timer.textContent = remaining > 0 ? `~${remaining}s left in framing` : "Framing complete";
+
+    if (ratio < 1) {
+      requestAnimationFrame(tick);
+    }
+  }
+
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

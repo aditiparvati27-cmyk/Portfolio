@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Galaxy Opportunity Prototype</title>
+<style>
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #f2f6fa;
+  --ink: #102236;
+  --ink-soft: #40566d;
+  --line: rgba(16, 34, 54, 0.2);
+  --panel: rgba(255, 255, 255, 0.86);
+  --navy: #0d2d4c;
+  --teal: #0f9f91;
+  --amber: #ef8d38;
+  --lime: #a1de32;
+  --rose: #e5584b;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(100% 60% at 95% 2%, rgba(239, 141, 56, 0.2), transparent 60%),
+    radial-gradient(80% 90% at 2% 24%, rgba(15, 159, 145, 0.16), transparent 62%),
+    linear-gradient(165deg, #f4f8fb 0%, #ecf2f8 48%, #f3f8fb 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.4;
+  background-image: linear-gradient(rgba(16, 34, 54, 0.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(16, 34, 54, 0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+.page {
+  width: min(1160px, 100% - 26px);
+  margin: 20px auto 56px;
+}
+
+.hero {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(22px, 4.7vw, 54px);
+  background: linear-gradient(145deg, rgba(11, 39, 63, 0.95), rgba(7, 26, 44, 0.92));
+  color: #edf7ff;
+  box-shadow: 0 24px 60px rgba(7, 24, 39, 0.28);
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: min(620px, 84%);
+  aspect-ratio: 1.5;
+  right: -12%;
+  top: -20%;
+  background: radial-gradient(circle, rgba(161, 222, 50, 0.34), rgba(15, 159, 145, 0));
+  pointer-events: none;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #a7f7dd;
+}
+
+.hero h1 {
+  margin: 16px 0 10px;
+  font-size: clamp(2.1rem, 6vw, 4.3rem);
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  max-width: 12ch;
+}
+
+.hero h1 .hot { color: #ffd08d; }
+
+.hero p {
+  margin: 0;
+  max-width: 64ch;
+  color: #c6d9eb;
+  line-height: 1.6;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+}
+
+.hero-meta {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  padding: 8px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 999px;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.inference-note {
+  margin-top: 18px;
+  border-left: 3px solid #ffd08d;
+  background: rgba(255, 208, 141, 0.12);
+  color: #f4f8ff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.87rem;
+  line-height: 1.5;
+}
+
+.quick-nav {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick-nav a {
+  text-decoration: none;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.quick-nav a.active {
+  color: #fff;
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+main {
+  margin-top: 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.section {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: clamp(16px, 3.1vw, 28px);
+  background: var(--panel);
+  backdrop-filter: blur(3px);
+}
+
+.section h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  letter-spacing: -0.02em;
+}
+
+.section-sub {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.problem-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 12px;
+}
+
+.box {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.box h3 {
+  margin: 0 0 8px;
+  font-size: 0.86rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.box ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.metric-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.metric {
+  border-radius: 11px;
+  padding: 11px;
+  color: #fff;
+}
+
+.metric strong {
+  display: block;
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.metric small { font-size: 0.8rem; opacity: 0.95; }
+.metric.navy { background: linear-gradient(130deg, #10395f, #0c2a46); }
+.metric.teal { background: linear-gradient(130deg, #0f9f91, #11796f); }
+.metric.amber { background: linear-gradient(130deg, #ef8d38, #cd6d1b); }
+
+.journey-toggle {
+  margin-top: 14px;
+  display: none;
+  gap: 8px;
+}
+
+.journey-toggle button {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 11px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.journey-toggle button.on {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.journey-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.journey-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 14px;
+}
+
+.journey-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.tag {
+  display: inline-block;
+  margin: 8px 0 10px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.tag.current { background: rgba(229, 88, 75, 0.14); color: #9a2f26; }
+.tag.proposed { background: rgba(15, 159, 145, 0.14); color: #0a6c63; }
+
+.journey-card ol {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.matrix-wrap { margin-top: 12px; overflow-x: auto; }
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.matrix th,
+.matrix td {
+  border: 1px solid var(--line);
+  padding: 11px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.matrix th {
+  background: #102b46;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.matrix tr:nth-child(even) td { background: rgba(16, 45, 76, 0.05); }
+.matrix .pick td:first-child { font-weight: 700; color: #0a6c63; }
+
+.prd-grid {
+  margin-top: 12px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.prd-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.prd-card h3 {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prd-card ul {
+  margin: 0;
+  padding-left: 17px;
+  color: var(--ink-soft);
+  line-height: 1.52;
+}
+
+.endpoints {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.endpoint-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.endpoint-card h3 {
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.route-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.route-list li {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.route-list code {
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+  color: #0a2d4a;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.endpoint-card pre {
+  margin: 10px 0 0;
+  overflow: auto;
+  background: #0d2d4c;
+  color: #dbf2ff;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.launch-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 12px;
+}
+
+.timeline {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.timeline li + li { margin-top: 6px; }
+
+.post-box {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.post-box h3 {
+  margin: 0 0 8px;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-box ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.evidence-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.evidence {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.84), rgba(246, 250, 255, 0.9));
+}
+
+.evidence h3 {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.evidence p {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  font-size: 0.87rem;
+}
+
+.evidence .stamp {
+  margin-top: 10px;
+  display: inline-block;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 4px 7px;
+  background: rgba(16, 45, 76, 0.1);
+}
+
+.footer-note {
+  margin-top: 12px;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 1000px) {
+  .problem-grid,
+  .launch-grid,
+  .endpoints,
+  .journey-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prd-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .evidence-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .page { width: min(1160px, 100% - 14px); margin-top: 8px; }
+  .hero { border-radius: 16px; }
+  .section { border-radius: 14px; }
+  .quick-nav { position: sticky; top: 8px; z-index: 4; padding-bottom: 2px; }
+  .journey-toggle { display: flex; }
+  .journey-card[hidden] { display: none; }
+  .prd-grid { grid-template-columns: 1fr; }
+  .evidence-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero" id="top">
+      <p class="kicker">Galaxy Internship PM Showcase</p>
+      <h1>Turn onboarding friction into <span class="hot">API-first activation</span>.</h1>
+      <p>
+        This prototype frames a PM plan for Galaxy to reduce time-to-first-value for institutional API users by redesigning onboarding, readiness checks, and launch guidance.
+      </p>
+      <div class="hero-meta">
+        <span class="pill">Problem -> Journey -> PRD</span>
+        <span class="pill">Single-file prototype</span>
+        <span class="pill">Institutional API focus</span>
+      </div>
+      <p class="inference-note">
+        Inference note: conclusions below are informed inferences from public sources and public product artifacts, not internal Galaxy or partner data.
+      </p>
+    </header>
+
+    <nav class="quick-nav" aria-label="Opportunity sections">
+      <a href="#problem">Problem</a>
+      <a href="#journey">Journey</a>
+      <a href="#tradeoffs">Tradeoffs</a>
+      <a href="#prd">PRD</a>
+      <a href="#endpoints">Endpoints</a>
+      <a href="#launch">Launch</a>
+      <a href="#ai-evidence">AI Workflow</a>
+    </nav>
+
+    <main>
+      <section class="section" id="problem">
+        <h2>Problem Statement</h2>
+        <p class="section-sub">Institutional clients can access deep trading and blockchain infrastructure, but onboarding to first successful API workflow still has avoidable friction.</p>
+        <div class="problem-grid">
+          <article class="box">
+            <h3>Core Gap</h3>
+            <ul>
+              <li>Security setup is non-trivial: API key + JWT token signing + short-lived token windows can block early testing.</li>
+              <li>Developers often lack one guided path from registration to first successful strategy simulation.</li>
+              <li>PM and GTM teams have limited visibility into where onboarding breaks before institutional users reach production usage.</li>
+            </ul>
+          </article>
+          <div class="metric-stack" aria-label="Opportunity metrics">
+            <article class="metric navy"><strong>v1 goal</strong><small>Cut onboarding-to-first-successful-call time for pilot institutional accounts.</small></article>
+            <article class="metric teal"><strong>2 weeks</strong><small>Prototype timeline for journey redesign, PRD draft, and endpoint spec.</small></article>
+            <article class="metric amber"><strong>3 KPIs</strong><small>Activation time, auth error rate, and first-week endpoint completion.</small></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="journey">
+        <h2>User Journey: Current vs Proposed</h2>
+        <p class="section-sub">Design intent: keep compliance and security intact while removing ambiguity from the activation path.</p>
+        <div class="journey-toggle" role="tablist" aria-label="Journey mode toggle">
+          <button type="button" class="on" data-mode="current">Current</button>
+          <button type="button" data-mode="proposed">Proposed</button>
+        </div>
+        <div class="journey-grid">
+          <article class="journey-card" data-mode="current">
+            <h3>Current Journey</h3>
+            <span class="tag current">Blind spot heavy</span>
+            <ol>
+              <li>Institution signs up and receives credentials plus technical documentation.</li>
+              <li>Developer configures JWT signing and request headers with limited interactive guidance.</li>
+              <li>Initial API calls fail due token, URI, or payload-hash mismatches.</li>
+              <li>Support and product teams diagnose issues manually and activation is delayed.</li>
+            </ol>
+          </article>
+          <article class="journey-card" data-mode="proposed">
+            <h3>Proposed Journey</h3>
+            <span class="tag proposed">Context attached</span>
+            <ol>
+              <li>Institution completes a guided onboarding checklist mapped to auth and environment setup.</li>
+              <li>Developer runs a readiness assessment before first production-intent call.</li>
+              <li>System returns actionable error classes and next steps instead of generic failures.</li>
+              <li>PM dashboard tracks activation cohorts and bottlenecks for weekly iteration decisions.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="tradeoffs">
+        <h2>Design Tradeoff Matrix</h2>
+        <p class="section-sub">Recommendation: ship guided onboarding plus readiness scoring first, then expand into deeper workspace-level automation.</p>
+        <div class="matrix-wrap">
+          <table class="matrix" aria-label="Design tradeoff matrix">
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Speed to MVP</th>
+                <th>Data Confidence</th>
+                <th>Engineering Effort</th>
+                <th>Risk Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Docs-only onboarding</td>
+                <td>High</td>
+                <td>Low</td>
+                <td>Low</td>
+                <td>High drop-off and repeated support loops</td>
+              </tr>
+              <tr class="pick">
+                <td>Guided flow + readiness APIs (recommended)</td>
+                <td>Medium-high</td>
+                <td>Medium</td>
+                <td>Medium</td>
+                <td>Manageable complexity with visible checkpoints</td>
+              </tr>
+              <tr>
+                <td>Fully managed integration from day one</td>
+                <td>Low</td>
+                <td>High</td>
+                <td>High</td>
+                <td>Longer build cycle and heavy dependency load</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="prd">
+        <h2>PRD Snapshot</h2>
+        <p class="section-sub">Condensed PM spec for internship-scope prototype and stakeholder review.</p>
+        <div class="prd-grid">
+          <article class="prd-card">
+            <h3>Goals</h3>
+            <ul>
+              <li>Reduce institutional time-to-first-successful API workflow.</li>
+              <li>Improve onboarding quality without weakening security posture.</li>
+            </ul>
+          </article>
+          <article class="prd-card">
+            <h3>Users</h3>
+            <ul>
+              <li>Institutional developers</li>
+              <li>Product managers</li>
+              <li>Solutions and support teams</li>
+            </ul>
+          </article>
+          <article class="prd-card">
+            <h3>Scope</h3>
+            <ul>
+              <li>Guided onboarding journey map</li>
+              <li>Auth and integration readiness checks</li>
+              <li>Launch-readiness scoring surface</li>
+            </ul>
+          </article>
+          <article class="prd-card">
+            <h3>KPIs</h3>
+            <ul>
+              <li>Median time to first successful API call</li>
+              <li>Auth-related onboarding failure rate</li>
+              <li>Week-1 API completion rate</li>
+            </ul>
+          </article>
+          <article class="prd-card">
+            <h3>Risks</h3>
+            <ul>
+              <li>Over-simplifying complex institutional setup cases</li>
+              <li>False confidence from incomplete readiness checks</li>
+              <li>Adoption risk if workflow feels duplicative</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="endpoints">
+        <h2>Endpoint Catalog</h2>
+        <p class="section-sub">Real routes are implemented in this prototype; proposed routes are non-functional API concepts for product definition.</p>
+        <div class="endpoints">
+          <article class="endpoint-card">
+            <h3>Real Routes in Repo</h3>
+            <ul class="route-list">
+              <li><code>GET /galaxy/intro</code> - Intro route wired in <code>client/src/App.tsx</code></li>
+              <li><code>GET /galaxy/opportunity</code> - Opportunity route wired in <code>client/src/App.tsx</code></li>
+              <li><code>GET /galaxy-intro.html</code> - Static asset used by intro iframe wrapper</li>
+              <li><code>GET /galaxy-opportunity.html</code> - Static asset used by opportunity wrapper</li>
+              <li><code>POST /api/chat</code> - Existing active API route in <code>server/routes.ts</code></li>
+            </ul>
+          </article>
+          <article class="endpoint-card">
+            <h3>Proposed APIs (Conceptual)</h3>
+            <ul class="route-list">
+              <li><code>POST /api/galaxy/onboarding-assessment</code> - evaluate setup and auth readiness before first launch</li>
+              <li><code>POST /api/galaxy/strategy-readiness</code> - validate integration across trading and infrastructure requirements</li>
+              <li><code>GET /api/galaxy/launch-readiness/{clientId}</code> - return rollout status, blockers, and recommended next actions</li>
+            </ul>
+<pre>{
+  "route": "POST /api/galaxy/onboarding-assessment",
+  "input": { "clientId": "inst_102", "authConfigured": true, "env": "sandbox" },
+  "output": { "status": "ready_with_warnings", "blockers": ["jwt_exp_window"], "nextStep": "run_strategy_readiness" }
+}</pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="launch">
+        <h2>Launch + Post-Launch Plan</h2>
+        <p class="section-sub">Ship narrow, validate activation gains, and iterate with clear risk controls before broader expansion.</p>
+        <div class="launch-grid">
+          <article class="box">
+            <h3>Launch Plan</h3>
+            <ol class="timeline">
+              <li><strong>Week 1:</strong> lock onboarding journey and PRD scope with product, solutions, and engineering.</li>
+              <li><strong>Week 2:</strong> launch pilot guided flow for sandbox-only institutional accounts.</li>
+              <li><strong>Week 3:</strong> track auth and readiness failure themes; ship top UX and docs fixes.</li>
+              <li><strong>Week 4:</strong> expand pilot with launch-readiness dashboard and weekly PM review cadence.</li>
+            </ol>
+          </article>
+          <article class="post-box">
+            <h3>Post-Launch Loop</h3>
+            <ul>
+              <li><strong>Day 7:</strong> audit top onboarding failures by root-cause category.</li>
+              <li><strong>Day 30:</strong> compare pilot activation times against baseline cohorts.</li>
+              <li><strong>Day 45:</strong> evaluate support ticket volume and escalation reductions.</li>
+              <li><strong>Day 60:</strong> decide scale-up criteria by readiness score and conversion reliability.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="ai-evidence">
+        <h2>AI Workflow Evidence</h2>
+        <p class="section-sub">Audit trail showing how AI assistance accelerated product workflows while preserving PM judgment and explicit assumptions.</p>
+        <div class="evidence-grid">
+          <article class="evidence">
+            <h3>Evidence 01</h3>
+            <p>Public-source research was synthesized into painpoint clusters for onboarding, auth, and activation risk.</p>
+            <span class="stamp">artifact: inference-map.md</span>
+          </article>
+          <article class="evidence">
+            <h3>Evidence 02</h3>
+            <p>User journey alternatives were drafted and narrowed to current vs proposed flow for internship-scope execution.</p>
+            <span class="stamp">artifact: journey-diff-v3</span>
+          </article>
+          <article class="evidence">
+            <h3>Evidence 03</h3>
+            <p>Tradeoff matrix options were AI-drafted and then manually adjusted for compliance, speed, and engineering feasibility.</p>
+            <span class="stamp">artifact: tradeoff-grid-v2</span>
+          </article>
+          <article class="evidence">
+            <h3>Evidence 04</h3>
+            <p>PRD snapshot and launch plan were drafted from templates, then edited for realistic scope and measurable KPIs.</p>
+            <span class="stamp">artifact: prd-snapshot-v1</span>
+          </article>
+        </div>
+        <p class="footer-note">All evidence items reflect AI-assisted drafting with human review, and all strategic conclusions remain inference-based from public information.</p>
+      </section>
+    </main>
+  </div>
+
+<script>
+(() => {
+  const navLinks = [...document.querySelectorAll(".quick-nav a")];
+  const sections = navLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+
+  const markActive = () => {
+    let activeId = "";
+    const scrollY = window.scrollY + 120;
+
+    sections.forEach((section) => {
+      if (section.offsetTop <= scrollY) {
+        activeId = section.id;
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle("active", link.getAttribute("href") === `#${activeId}`);
+    });
+  };
+
+  const toggleButtons = [...document.querySelectorAll(".journey-toggle button")];
+  const journeyCards = [...document.querySelectorAll(".journey-card")];
+  let currentMode = "current";
+
+  function applyJourneyMode(mode) {
+    currentMode = mode;
+    const mobile = window.matchMedia("(max-width: 760px)").matches;
+
+    toggleButtons.forEach((button) => {
+      button.classList.toggle("on", button.dataset.mode === mode);
+      button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
+    });
+
+    journeyCards.forEach((card) => {
+      if (!mobile) {
+        card.hidden = false;
+        return;
+      }
+      card.hidden = card.dataset.mode !== mode;
+    });
+  }
+
+  toggleButtons.forEach((button) => {
+    button.addEventListener("click", () => applyJourneyMode(button.dataset.mode));
+  });
+
+  window.addEventListener("resize", () => applyJourneyMode(currentMode));
+  window.addEventListener("scroll", markActive, { passive: true });
+
+  applyJourneyMode("current");
+  markActive();
+})();
+</script>
+</body>
+</html>

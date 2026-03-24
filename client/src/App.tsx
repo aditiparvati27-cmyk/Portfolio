@@ -15,6 +15,8 @@ const ProfoundPortfolio = lazy(() => import("@/pages/profound-portfolio"));
 const TypefacePortfolio = lazy(() => import("@/pages/typeface-portfolio"));
 const AmplitudeIntro = lazy(() => import("@/pages/amplitude-intro"));
 const AmplitudeOpportunity = lazy(() => import("@/pages/amplitude-opportunity"));
+const GalaxyIntro = lazy(() => import("@/pages/galaxy-intro"));
+const GalaxyOpportunity = lazy(() => import("@/pages/galaxy-opportunity"));
 const ProfoundDeck = lazy(() => import("@/pages/profound-deck"));
 
 function RouteLoading() {
@@ -35,6 +37,8 @@ function Router() {
         <Route path="/profound/intro" component={Profound} />
         <Route path="/intro/amplitude" component={AmplitudeIntro} />
         <Route path="/amplitude/opportunity" component={AmplitudeOpportunity} />
+        <Route path="/galaxy/intro" component={GalaxyIntro} />
+        <Route path="/galaxy/opportunity" component={GalaxyOpportunity} />
         <Route path="/profound" component={ProfoundDeck} />
         <Route path="/projects/ooma" component={OomaPortfolio} />
         <Route path="/projects/profound" component={ProfoundPortfolio} />
