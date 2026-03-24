@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Profound — AXO & the Agentic Web</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0908;--white:#F2EFE9;--dim:#8A877F;--faint:#2E2C28;--faint2:#1A1917;
+  --border:rgba(242,239,233,.08);--border2:rgba(242,239,233,.16);--border3:rgba(242,239,233,.3);
+  --gold:#C9A84C;--red:#C0483A;--blue:#4A7EC0;--green:#5A9E6F;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased}
+.deck{position:fixed;inset:0;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:48px 64px 40px;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);transform:translateY(24px);overflow-y:auto;justify-content:flex-start}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.slide.exit-up{opacity:0;transform:translateY(-24px);transition:opacity .3s ease,transform .3s ease}
+
+/* CHROME */
+.chrome-top{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 64px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.c-logo{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.c-counter{font-size:11px;font-weight:500;letter-spacing:.1em;color:var(--dim);font-family:'Fira Code',monospace}
+.chrome-bottom{position:fixed;bottom:0;left:0;right:0;z-index:50;padding:12px 64px;display:flex;align-items:center;justify-content:space-between}
+.nav-hint{font-size:10px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
+.nav-dots{display:flex;gap:6px;align-items:center}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--faint);cursor:pointer;transition:background .25s,transform .25s}
+.dot.on{background:var(--white);transform:scale(1.3)}
+.dot.apx{background:transparent;border:1px solid var(--faint)}
+.dot.apx.on{background:var(--dim);border-color:var(--dim)}
+.progress-line{position:fixed;top:0;left:0;height:2px;background:var(--white);z-index:100;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.apx-badge{position:fixed;top:14px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);padding:4px 12px;border:1px solid var(--border2);z-index:50;display:none}
+.apx-badge.show{display:block}
+
+/* ── TYPE (bigger across the board) ── */
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+h2{font-family:'Cormorant',serif;font-size:clamp(32px,3.6vw,48px);font-weight:300;line-height:1.08;letter-spacing:-.02em;color:var(--white);margin-bottom:6px}
+h2 em{font-style:italic}
+.lead{font-size:17px;font-weight:300;color:rgba(242,239,233,.55);line-height:1.6;max-width:680px}
+.lead strong{color:var(--white);font-weight:500}
+.body-sm{font-size:16px;font-weight:300;color:var(--dim);line-height:1.6}
+.body-sm strong{color:var(--white);font-weight:500}
+.mono{font-family:'Fira Code',monospace}
+
+/* COVER */
+#s1{background:var(--black);justify-content:flex-end;padding-bottom:72px}
+#s1::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 75% 40%,rgba(201,168,76,.06) 0%,transparent 60%)}
+.s1-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 100% 100% at 50% 100%,black 30%,transparent 80%)}
+.cover-content{position:relative;z-index:2}
+.cover-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border2);padding:5px 14px;margin-bottom:28px}
+.cover-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.cover-title{font-family:'Cormorant',serif;font-size:clamp(48px,6.5vw,86px);font-weight:300;line-height:.93;letter-spacing:-.04em;color:var(--white);margin-bottom:32px}
+.cover-title em{font-style:italic}
+.cover-rule{width:48px;height:1px;background:var(--border3);margin-bottom:18px}
+.cover-sub{font-size:16px;font-weight:300;color:rgba(242,239,233,.45);max-width:540px;line-height:1.65}
+.cover-sub strong{color:rgba(242,239,233,.75);font-weight:500}
+
+/* LAYERS */
+.loop{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--border2);overflow:hidden;flex:1}
+.lp{padding:24px 22px;position:relative;display:flex;flex-direction:column}
+.lp+.lp{border-left:1px solid var(--border)}
+.lp.built{background:var(--faint2)}
+.lp.new{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.2)}
+.lp-layer{font-family:'Fira Code',monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;margin-bottom:12px}
+.lp-n{font-family:'Cormorant',serif;font-size:36px;font-weight:300;color:var(--white);line-height:1;margin-bottom:10px}
+.lp.new .lp-n{color:var(--gold)}
+.lp-title{font-size:16px;font-weight:500;color:var(--white);margin-bottom:8px}
+.lp.new .lp-title{color:var(--gold)}
+.lp-desc{font-size:15px;font-weight:300;color:var(--dim);line-height:1.5}
+.lp-desc strong{color:var(--white);font-weight:500}
+.lp.new .lp-desc{color:rgba(242,239,233,.5)}
+.lp.new .lp-desc strong{color:var(--gold)}
+.lp-status{margin-top:auto;padding-top:14px;display:inline-block;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border:1px solid;align-self:flex-start}
+.lp-status.has{border-color:var(--border2);color:var(--dim)}
+.lp-status.build{background:var(--gold);border-color:var(--gold);color:var(--black)}
+
+/* CALLOUT */
+.callout{padding:16px 20px;border-left:3px solid var(--gold);background:rgba(201,168,76,.04);font-size:15px;font-weight:300;color:rgba(242,239,233,.6);line-height:1.55}
+.callout strong{color:var(--white);font-weight:500}
+.callout.red{border-left-color:var(--red);background:rgba(192,72,58,.04)}
+
+/* CARDS */
+.card-grid{display:grid;gap:2px}
+.card-grid.c2{grid-template-columns:1fr 1fr}
+.card-grid.c3{grid-template-columns:1fr 1fr 1fr}
+.card{padding:20px;border:1px solid var(--border)}
+.card.gold{border-color:rgba(201,168,76,.2);background:rgba(201,168,76,.04)}
+.card-t{font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px}
+.card.gold .card-t{color:var(--gold)}
+.card-b{font-size:15px;font-weight:300;color:var(--dim);line-height:1.5}
+.card-b strong{color:var(--white);font-weight:500}
+.card.gold .card-b{color:rgba(242,239,233,.5)}
+.card.gold .card-b strong{color:var(--gold)}
+
+/* ── LANDSCAPE (redesigned) ── */
+.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;flex:1;border:1px solid var(--border2);overflow:hidden}
+.ls-item{padding:20px 22px;position:relative}
+.ls-item:nth-child(1){border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.ls-item:nth-child(2){border-bottom:1px solid var(--border)}
+.ls-item:nth-child(3){border-right:1px solid var(--border)}
+.ls-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.ls-ico{font-size:20px}
+.ls-t{font-size:16px;font-weight:600;color:var(--white)}
+.ls-b{font-size:15px;font-weight:300;color:rgba(242,239,233,.45);line-height:1.5}
+.ls-b strong{color:var(--white);font-weight:500}
+.ls-examples{margin-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.ls-ex{font-size:12px;font-weight:500;letter-spacing:.04em;color:rgba(242,239,233,.4);padding:4px 10px;border:1px solid var(--border);background:var(--faint2);border-radius:2px}
+.ls-ex.live{color:var(--green);border-color:rgba(90,158,111,.3);background:rgba(90,158,111,.04)}
+
+/* BEFORE/AFTER */
+.ba{display:grid;grid-template-columns:1fr 40px 1fr;gap:0;align-items:start;flex:1}
+.ba-col{border:1px solid var(--border)}
+.ba-col.after{border-color:var(--border3)}
+.ba-head{padding:10px 16px;background:var(--faint2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ba-ht{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.tag{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1px solid}
+.tag.old{border-color:var(--border2);color:var(--dim)}
+.tag.new{background:var(--white);border-color:var(--white);color:var(--black)}
+.ba-body{padding:0}
+.ba-row{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.ba-row:last-of-type{border-bottom:none}
+.ba-ico{font-size:15px;flex-shrink:0;width:20px;text-align:center;margin-top:2px}
+.ba-t{font-size:15px;font-weight:300;color:rgba(242,239,233,.55);line-height:1.5}
+.ba-t strong{color:var(--white);font-weight:500}
+.ba-nums{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border);gap:1px;background:var(--border)}
+.bn{background:var(--black);padding:12px 14px;text-align:center}
+.bn-v{font-family:'Cormorant',serif;font-size:24px;font-weight:300;color:var(--white)}
+.bn-l{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.ba-code{padding:12px 16px;background:var(--faint2);border-top:1px solid var(--border);font-family:'Fira Code',monospace;font-size:10.5px;color:var(--dim);line-height:1.9}
+.ba-code .fn{color:var(--white)} .ba-code .str{color:rgba(242,239,233,.5)}
+.ba-mid{display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--border2);padding-top:80px}
+
+/* GAP LAYOUT */
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1}
+.gap-col{display:flex;flex-direction:column}
+.gap-col h3{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.gap-item{font-size:15px;font-weight:300;color:rgba(242,239,233,.5);line-height:1.5;padding:8px 0;border-bottom:1px solid var(--border)}
+.gap-item strong{color:var(--white);font-weight:500}
+.gap-item .tick{color:rgba(242,239,233,.3);margin-right:6px}
+.gap-item .x{color:var(--red);margin-right:6px}
+
+/* CODE */
+.code-block{background:var(--faint2);border:1px solid var(--border);padding:14px 18px;font-family:'Fira Code',monospace;font-size:11px;color:var(--dim);line-height:1.85;overflow-x:auto;white-space:pre}
+.code-block .kw{color:var(--gold)} .code-block .fn{color:var(--white)} .code-block .str{color:rgba(242,239,233,.5)}
+
+/* SPEC TABLE */
+.spec-row{display:grid;grid-template-columns:120px 1fr;border-bottom:1px solid var(--border);padding:10px 0}
+.spec-row:last-child{border-bottom:none}
+.spec-label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.spec-val{font-size:15px;font-weight:300;color:rgba(242,239,233,.6);line-height:1.5}
+.spec-val strong{color:var(--white);font-weight:500}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:40px;flex:1;align-items:start}
+
+/* AXO DIMENSIONS */
+.dim-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:2px;margin-top:14px}
+.dim{border:1px solid var(--border);padding:18px 14px;text-align:center}
+.dim-num{font-family:'Cormorant',serif;font-size:32px;font-weight:400;color:rgba(242,239,233,.35);line-height:1;margin-bottom:8px}
+.dim-t{font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px}
+.dim-q{font-size:14px;font-weight:300;color:var(--dim);line-height:1.45;font-style:italic}
+
+/* ── MEASUREMENT (redesigned with visual weight) ── */
+.meas-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1}
+.meas-col{border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column}
+.meas-col.primary{border-color:rgba(201,168,76,.25)}
+.meas-head{padding:14px 20px;background:var(--faint2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.meas-col.primary .meas-head{background:rgba(201,168,76,.04)}
+.meas-ht{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.meas-col.primary .meas-ht{color:var(--gold)}
+.meas-badge{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border2);color:var(--dim)}
+.meas-col.primary .meas-badge{background:var(--gold);border-color:var(--gold);color:var(--black)}
+.meas-body{padding:16px 20px;flex:1}
+.meas-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border)}
+.meas-item:last-child{border-bottom:none}
+.meas-ico{font-size:16px;flex-shrink:0;margin-top:2px}
+.meas-text{font-size:15px;font-weight:300;color:var(--dim);line-height:1.5}
+.meas-text strong{color:var(--white);font-weight:500}
+
+/* DASHBOARD */
+.db-shell{border:1px solid var(--border2);overflow:hidden;background:#0D0C0B;display:flex;flex-direction:column;flex:1}
+.db-bar{background:#161513;padding:8px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.db-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.1)}
+.db-url{font-family:'Fira Code',monospace;font-size:10px;color:rgba(255,255,255,.25)}
+.db-tabs{display:flex;background:#111009;border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0}
+.db-tab{padding:8px 14px;font-size:10px;font-weight:500;color:rgba(255,255,255,.28);letter-spacing:.1em;text-transform:uppercase}
+.db-tab.on{color:#F2EFE9;border-bottom:1.5px solid #F2EFE9}
+.db-body{display:grid;grid-template-columns:1.1fr .9fr;flex:1;overflow:hidden}
+.db-l{padding:18px 20px;border-right:1px solid rgba(255,255,255,.05);overflow-y:auto}
+.db-r{padding:18px 20px;overflow-y:auto}
+.db-brand{font-size:15px;font-weight:600;color:#F2EFE9;margin-bottom:2px}
+.db-sub{font-size:11px;color:rgba(255,255,255,.28);margin-bottom:14px;font-family:'Fira Code',monospace}
+.db-score-row{display:flex;align-items:flex-end;gap:12px;margin-bottom:16px}
+.db-sn{font-family:'Cormorant',serif;font-size:52px;font-weight:300;color:#F2EFE9;line-height:1}
+.db-sl{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:4px}
+.db-sc{font-size:11px;color:#C0483A}
+.dbm{margin-bottom:10px}
+.dbm-r{display:flex;justify-content:space-between;margin-bottom:4px}
+.dbm-l{font-size:13px;color:rgba(255,255,255,.38)}
+.dbm-v{font-size:13px;font-weight:600;color:#F2EFE9;font-family:'Fira Code',monospace}
+.dbm-track{height:3px;background:rgba(255,255,255,.07);border-radius:1px}
+.dbm-fill{height:100%;background:#F2EFE9;transition:width 1.2s ease;border-radius:1px}
+.db-alert{margin-top:12px;padding:12px 14px;border:1px solid rgba(192,72,58,.3);background:rgba(192,72,58,.07);font-size:13px;font-weight:300;color:rgba(242,239,233,.5);line-height:1.55}
+.db-alert strong{color:#F2EFE9;font-weight:500}
+.db-cta{display:inline-block;margin-top:10px;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#F2EFE9;border:1px solid rgba(255,255,255,.2);padding:5px 14px}
+.db-ins-label{font-family:'Fira Code',monospace;font-size:10px;color:rgba(255,255,255,.28);margin-bottom:12px}
+.dbi{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.dbi:last-child{border-bottom:none}
+.dbi.hi{border-left:2px solid #F2EFE9;padding-left:12px}
+.dbi.wn{border-left:2px solid #C0483A;padding-left:12px}
+.dbi-t{font-size:14px;font-weight:500;color:#F2EFE9;margin-bottom:3px}
+.dbi-b{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.5}
+
+/* NEXT STEPS */
+.ns-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;flex:1;align-content:start}
+.ns-item{border:1px solid var(--border);padding:22px 24px}
+.ns-item.primary{border-color:rgba(201,168,76,.2);background:rgba(201,168,76,.04)}
+.ns-num{font-family:'Cormorant',serif;font-size:28px;font-weight:400;color:rgba(242,239,233,.3);margin-bottom:8px;line-height:1}
+.ns-item.primary .ns-num{color:rgba(201,168,76,.4)}
+.ns-t{font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px}
+.ns-item.primary .ns-t{color:var(--gold)}
+.ns-b{font-size:15px;font-weight:300;color:var(--dim);line-height:1.5}
+.ns-b strong{color:var(--white);font-weight:500}
+.ns-item.primary .ns-b{color:rgba(242,239,233,.5)}
+.ns-item.primary .ns-b strong{color:var(--gold)}
+
+/* DEMO */
+.demo-center{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center}
+.demo-icon{font-size:72px;margin-bottom:24px;opacity:.5}
+.demo-label{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-top:18px}
+
+/* APPENDIX */
+.apx-divider{justify-content:center;align-items:center}
+.apx-divider-content{text-align:center}
+.apx-d-label{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:16px}
+.apx-d-line{width:40px;height:1px;background:var(--border2);margin:0 auto 16px}
+.apx-d-title{font-family:'Cormorant',serif;font-size:44px;font-weight:300;color:var(--white);margin-bottom:8px}
+.apx-d-title em{font-style:italic}
+.apx-d-sub{font-size:15px;color:var(--dim)}
+.a-table{width:100%;border-collapse:collapse;border:1px solid var(--border2)}
+.a-table th{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border2);background:var(--faint2);border-right:1px solid var(--border)}
+.a-table th:last-child{border-right:none}
+.a-table td{padding:10px 14px;font-size:15px;font-weight:300;color:rgba(242,239,233,.55);line-height:1.45;border-bottom:1px solid var(--border);border-right:1px solid var(--border);vertical-align:top}
+.a-table td:last-child{border-right:none}
+.a-table td:first-child{font-weight:500;color:var(--white)}
+.a-table tr:last-child td{border-bottom:none}
+</style>
+</head>
+<body>
+
+<div class="progress-line" id="pline"></div>
+<div class="apx-badge" id="apxbadge">Appendix</div>
+<div class="chrome-top">
+  <span class="c-logo">Profound</span>
+  <span class="c-counter" id="counter">01 / 12</span>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- S1 COVER -->
+<div class="slide active" id="s1">
+  <div class="s1-grid"></div>
+  <div class="cover-content">
+    <div class="cover-tag"><span class="cover-tag-dot"></span>March 2026</div>
+    <h1 class="cover-title" style="font-family:'Cormorant',serif;font-size:clamp(48px,6.5vw,86px);font-weight:300;line-height:.93;letter-spacing:-.04em">From AEO<br>to <em>Agent<br>Experience.</em></h1>
+    <div class="cover-rule"></div>
+    <p class="cover-sub">AI agents are shifting from <strong>reading about brands to acting on their behalf.</strong> Profound already tracks what AI says about you and when it visits your site. The next layer, <strong>what agents do on your site,</strong> is where revenue flows.</p>
+  </div>
+</div>
+
+<!-- S2 PROBLEM -->
+<div class="slide" id="s2">
+  <div class="eyebrow">01 · The Problem</div>
+  <h2>Profound owns two layers.<br><em>The third is where revenue flows.</em></h2>
+  <p class="lead" style="margin-bottom:16px">The AI-to-brand relationship has three layers. Profound tracks discovery and crawling. The interaction layer, where agents try to transact, <strong>is invisible to every platform today.</strong></p>
+  <div class="loop">
+    <div class="lp built">
+      <div class="lp-layer">LAYER 01 · DISCOVERY</div>
+      <div class="lp-n">AI<br>sees<br>you</div>
+      <div class="lp-title">AI mentions your brand</div>
+      <div class="lp-desc">ChatGPT cites Target in "best retailers for athletic gear." Profound tracks this across <strong>10+ engines:</strong> citation frequency, visibility, sentiment.</div>
+      <span class="lp-status has">Profound owns this</span>
+    </div>
+    <div class="lp built" style="border-left:1px solid var(--border)">
+      <div class="lp-layer">LAYER 02 · CRAWLING</div>
+      <div class="lp-n">AI<br>visits<br>you</div>
+      <div class="lp-title">AI agent visits your site</div>
+      <div class="lp-desc">Agent navigates to Target.com. <strong>Agent Analytics tracks 30B+ daily crawler visits:</strong> which pages, which bot, how often. CDN-level identification via 8+ edge platforms.</div>
+      <span class="lp-status has">Profound owns this</span>
+    </div>
+    <div class="lp new">
+      <div class="lp-layer">LAYER 03 · INTERACTION</div>
+      <div class="lp-n">AI<br>acts<br>for you</div>
+      <div class="lp-title">AI agent transacts on your site</div>
+      <div class="lp-desc">Agent tries to search products, add to cart, complete checkout. <strong>Did it succeed? Fail? Go to a competitor?</strong> No platform can answer this today.</div>
+      <span class="lp-status build">Nobody owns this yet</span>
+    </div>
+  </div>
+</div>
+
+<!-- S3 PROFOUND'S POSITION -->
+<div class="slide" id="s4">
+  <div class="eyebrow">02 · Where Profound Sits</div>
+  <h2>The question Profound<br>can't answer <em>yet.</em></h2>
+
+  <table class="gap-table" style="margin-top:16px;width:100%;border-collapse:collapse;border:1px solid var(--border2)">
+    <thead>
+      <tr>
+        <th style="width:140px;padding:10px 16px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;border-bottom:1px solid var(--border2);border-right:1px solid var(--border);background:var(--faint2)">Capability</th>
+        <th style="padding:10px 16px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;border-bottom:1px solid var(--border2);border-right:1px solid var(--border);background:var(--faint2)">Agent Analytics — Can See Today</th>
+        <th style="padding:10px 16px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;border-bottom:1px solid var(--border2);background:var(--faint2)">The Gap — Cannot See Yet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--faint2);vertical-align:middle">Bot ID</td>
+        <td style="padding:14px 16px;font-size:15px;font-weight:300;color:rgba(242,239,233,.55);border-bottom:1px solid var(--border);border-right:1px solid var(--border);line-height:1.5">✓ <strong style="color:var(--white)">GPTBot, ClaudeBot, PerplexityBot</strong> — agent vs. human at CDN level</td>
+        <td style="padding:14px 16px;font-size:14px;font-weight:300;color:rgba(242,239,233,.2);border-bottom:1px solid var(--border);vertical-align:middle;font-style:italic">N/A</td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--faint2);vertical-align:middle">Page Access</td>
+        <td style="padding:14px 16px;font-size:15px;font-weight:300;color:rgba(242,239,233,.55);border-bottom:1px solid var(--border);border-right:1px solid var(--border);line-height:1.5">✓ <strong style="color:var(--white)">Which pages, crawl depth,</strong> frequency, time-on-page</td>
+        <td style="padding:14px 16px;font-size:14px;font-weight:300;color:rgba(242,239,233,.2);border-bottom:1px solid var(--border);vertical-align:middle;font-style:italic">N/A</td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--faint2);vertical-align:middle">Citation Link</td>
+        <td style="padding:14px 16px;font-size:15px;font-weight:300;color:rgba(242,239,233,.55);border-bottom:1px solid var(--border);border-right:1px solid var(--border);line-height:1.5">✓ "ChatGPT crawled this → <strong style="color:var(--white)">cited you 3 days later</strong>"</td>
+        <td style="padding:14px 16px;font-size:14px;font-weight:300;color:rgba(242,239,233,.2);border-bottom:1px solid var(--border);vertical-align:middle;font-style:italic">N/A</td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--faint2);vertical-align:middle;font-style:italic">Transactions</td>
+        <td style="padding:14px 16px;font-size:14px;font-weight:300;color:rgba(242,239,233,.2);border-bottom:1px solid var(--border);border-right:1px solid var(--border);font-style:italic;vertical-align:middle">Not visible</td>
+        <td style="padding:14px 16px;font-size:15px;font-weight:300;color:rgba(192,72,58,.85);border-bottom:1px solid var(--border);line-height:1.5"><span style="color:var(--red);margin-right:6px">✗</span> Which agents are <strong style="color:var(--white)">trying to transact</strong> on your site?</td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--faint2);vertical-align:middle;font-style:italic">Task Outcome</td>
+        <td style="padding:14px 16px;font-size:14px;font-weight:300;color:rgba(242,239,233,.2);border-bottom:1px solid var(--border);border-right:1px solid var(--border);font-style:italic;vertical-align:middle">Not visible</td>
+        <td style="padding:14px 16px;font-size:15px;font-weight:300;color:rgba(192,72,58,.85);border-bottom:1px solid var(--border);line-height:1.5"><span style="color:var(--red);margin-right:6px">✗</span> What tasks did they <strong style="color:var(--white)">attempt and fail?</strong></td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--faint2);vertical-align:middle;font-style:italic">Agent Routing</td>
+        <td style="padding:14px 16px;font-size:14px;font-weight:300;color:rgba(242,239,233,.2);border-bottom:1px solid var(--border);border-right:1px solid var(--border);font-style:italic;vertical-align:middle">Not visible</td>
+        <td style="padding:14px 16px;font-size:15px;font-weight:300;color:rgba(192,72,58,.85);border-bottom:1px solid var(--border);line-height:1.5"><span style="color:var(--red);margin-right:6px">✗</span> When an agent fails, <strong style="color:var(--white)">where does it redirect?</strong></td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border);border-right:1px solid var(--border);background:var(--faint2);vertical-align:middle;font-style:italic">Benchmarks</td>
+        <td style="padding:14px 16px;font-size:14px;font-weight:300;color:rgba(242,239,233,.2);border-bottom:1px solid var(--border);border-right:1px solid var(--border);font-style:italic;vertical-align:middle">Not visible</td>
+        <td style="padding:14px 16px;font-size:15px;font-weight:300;color:rgba(192,72,58,.85);border-bottom:1px solid var(--border);line-height:1.5"><span style="color:var(--red);margin-right:6px">✗</span> How do your <strong style="color:var(--white)">agent tools compare</strong> to competitors?</td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border-right:1px solid var(--border);background:var(--faint2);vertical-align:middle;font-style:italic">Revenue</td>
+        <td style="padding:14px 16px;font-size:14px;font-weight:300;color:rgba(242,239,233,.2);border-right:1px solid var(--border);font-style:italic;vertical-align:middle">Not visible</td>
+        <td style="padding:14px 16px;font-size:15px;font-weight:300;color:rgba(192,72,58,.85);line-height:1.5"><span style="color:var(--red);margin-right:6px">✗</span> What <strong style="color:var(--white)">revenue is being lost</strong> to failed interactions?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:14px">A Fortune 500 CMO will ask: <strong>"How many agent transactions attempted on our site — and how many went to a competitor?"</strong> When that hits a renewal meeting, it's a churn risk on a $250K–$800K contract.</div>
+</div>
+
+<!-- S5 AXO CATEGORY -->
+<div class="slide" id="s5">
+  <div class="eyebrow">03 · The Opportunity</div>
+  <h2>Build for agent-led demand.<br><em>Three clear opportunities.</em></h2>
+  <p class="lead" style="margin-bottom:8px"><strong>Each area</strong> drives growth from intent to completion.</p>
+  <div class="dim-grid" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="dim"><div class="dim-num">01</div><div class="dim-t">Intent Alignment</div><div class="dim-q">Turn ambiguous agent inputs into structured, revenue-generating actions</div></div>
+    <div class="dim"><div class="dim-num">02</div><div class="dim-t">Task Success</div><div class="dim-q">Increase conversion by making agent-executed tasks consistently succeed</div></div>
+    <div class="dim"><div class="dim-num">03</div><div class="dim-t">Journey Completion</div><div class="dim-q">Maximize revenue capture through fully completed, agent-led journeys</div></div>
+  </div>
+  <div style="margin:18px 0 14px;display:flex;justify-content:center">
+    <svg viewBox="0 0 820 55" width="820" height="55" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+      <line x1="60" y1="28" x2="580" y2="28" stroke="rgba(242,239,233,.1)" stroke-width="1"/>
+      <line x1="580" y1="28" x2="620" y2="28" stroke="rgba(201,168,76,.3)" stroke-width="1" stroke-dasharray="3,3"/>
+      <polygon points="620,24 620,32 628,28" fill="rgba(201,168,76,.3)"/>
+      <rect x="638" y="6" width="170" height="44" rx="3" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.25)" stroke-width="1"/>
+      <text x="723" y="26" text-anchor="middle" font-family="Fira Code,monospace" font-size="9" fill="#C9A84C" letter-spacing=".06em">AXO SCORE</text>
+      <text x="723" y="40" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" fill="rgba(201,168,76,.7)" font-weight="300">Single number. Benchmarked.</text>
+      <circle cx="180" cy="28" r="4" fill="var(--faint2)" stroke="rgba(242,239,233,.2)"/>
+      <circle cx="350" cy="28" r="4" fill="var(--faint2)" stroke="rgba(242,239,233,.2)"/>
+      <circle cx="520" cy="28" r="4" fill="var(--faint2)" stroke="rgba(242,239,233,.2)"/>
+    </svg>
+  </div>
+  <div class="callout">AEO asks "does the agent mention your brand?" AXO asks <strong>"when an agent tries to interact with your brand — across any surface — what is the end-to-end experience?"</strong></div>
+</div>
+
+<!-- S6 PROTOCOL STACK -->
+<div class="slide" id="s6">
+  <div class="eyebrow">04 · The Protocol Stack</div>
+  <h2>Five protocols. Different layers.<br><em>One is brand new.</em></h2>
+  <p class="lead" style="margin-bottom:8px">The infrastructure for agents to interact with brands is being built right now.</p>
+  <div style="margin:8px 0;display:flex;justify-content:center">
+    <svg viewBox="0 0 820 200" width="820" height="200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+      <text x="0" y="32" font-family="Fira Code,monospace" font-size="10" fill="#8A877F" letter-spacing=".05em">AGENT ↔ TOOLS</text>
+      <text x="0" y="82" font-family="Fira Code,monospace" font-size="10" fill="#8A877F" letter-spacing=".05em">AGENT ↔ COMMERCE</text>
+      <text x="0" y="132" font-family="Fira Code,monospace" font-size="10" fill="#8A877F" letter-spacing=".05em">AGENT ↔ AGENT</text>
+      <text x="0" y="182" font-family="Fira Code,monospace" font-size="10" fill="#C9A84C" letter-spacing=".05em">AGENT ↔ BROWSER</text>
+      <rect x="155" y="14" width="645" height="34" rx="3" fill="#1A1917" stroke="rgba(242,239,233,.16)"/>
+      <text x="185" y="36" font-family="Outfit,sans-serif" font-size="14" fill="#F2EFE9" font-weight="500">MCP</text>
+      <text x="228" y="36" font-family="Outfit,sans-serif" font-size="12" fill="#8A877F">Anthropic → Linux Foundation. 97M downloads.</text>
+      <rect x="155" y="64" width="310" height="34" rx="3" fill="#1A1917" stroke="rgba(242,239,233,.16)"/>
+      <text x="185" y="86" font-family="Outfit,sans-serif" font-size="14" fill="#F2EFE9" font-weight="500">ACP</text>
+      <text x="224" y="86" font-family="Outfit,sans-serif" font-size="12" fill="#8A877F">OpenAI + Stripe. Checkout.</text>
+      <rect x="483" y="64" width="317" height="34" rx="3" fill="#1A1917" stroke="rgba(242,239,233,.16)"/>
+      <text x="513" y="86" font-family="Outfit,sans-serif" font-size="14" fill="#F2EFE9" font-weight="500">UCP</text>
+      <text x="552" y="86" font-family="Outfit,sans-serif" font-size="12" fill="#8A877F">Google + Shopify. Full lifecycle.</text>
+      <rect x="155" y="114" width="645" height="34" rx="3" fill="#1A1917" stroke="rgba(242,239,233,.16)"/>
+      <text x="185" y="136" font-family="Outfit,sans-serif" font-size="14" fill="#F2EFE9" font-weight="500">A2A</text>
+      <text x="222" y="136" font-family="Outfit,sans-serif" font-size="12" fill="#8A877F">Google → Linux Foundation. 150+ orgs.</text>
+      <rect x="155" y="164" width="645" height="34" rx="3" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.3)" stroke-width="1.5"/>
+      <text x="185" y="186" font-family="Outfit,sans-serif" font-size="14" fill="#C9A84C" font-weight="600">WebMCP</text>
+      <text x="264" y="186" font-family="Outfit,sans-serif" font-size="12" fill="rgba(201,168,76,.7)">W3C Draft. Google + Microsoft. Chrome 146, March 10.</text>
+    </svg>
+  </div>
+  <div class="callout">Every protocol reinforces why agent experience optimization matters. <strong>WebMCP is the browser-native piece,</strong> and the one I want to dive deeper into because it directly impacts how agents interact with our clients' websites.</div>
+</div>
+
+<!-- S7 WEBMCP SOLUTION -->
+<div class="slide" id="s7">
+  <div class="eyebrow">05 · WebMCP</div>
+  <h2>Websites stop being pages.<br>They become <em>APIs agents call.</em></h2>
+  <div class="ba" style="margin-top:12px">
+    <div class="ba-col">
+      <div class="ba-head"><span class="ba-ht">How agents browse today</span><span class="tag old">Current</span></div>
+      <div class="ba-body">
+        <div class="ba-row"><div class="ba-ico">📸</div><div class="ba-t">Screenshots page, then a vision model burns <strong>2,000+ tokens</strong> guessing layout. $0.08 per action.</div></div>
+        <div class="ba-row"><div class="ba-ico">🖱️</div><div class="ba-t">Parses DOM, synthesizes clicks. <strong>Breaks every time the site updates,</strong> typically weekly.</div></div>
+        <div class="ba-row"><div class="ba-ico">🔐</div><div class="ba-t">Login doesn't transfer. OAuth wall. <strong>Agent goes to a competitor instead.</strong></div></div>
+      </div>
+      <div class="ba-nums">
+        <div class="bn"><div class="bn-v">~45%</div><div class="bn-l">Accuracy</div></div>
+        <div class="bn"><div class="bn-v">30–60s</div><div class="bn-l">Latency</div></div>
+        <div class="bn"><div class="bn-v">$0.08</div><div class="bn-l">Per action</div></div>
+      </div>
+    </div>
+    <div class="ba-mid">→</div>
+    <div class="ba-col after">
+      <div class="ba-head"><span class="ba-ht">After WebMCP, Chrome 146</span><span class="tag new">Live Now</span></div>
+      <div class="ba-body">
+        <div class="ba-row"><div class="ba-ico">📋</div><div class="ba-t">Website declares <strong>search_products()</strong> with plain-English description. Agent discovers it without scraping.</div></div>
+        <div class="ba-row"><div class="ba-ico">⚡</div><div class="ba-t">Agent discovers tools via <strong>navigator.modelContext</strong>. Structured function calls, no pixels, no fragility.</div></div>
+        <div class="ba-row"><div class="ba-ico">🔑</div><div class="ba-t">Inherits user's browser session. <strong>Zero extra authentication.</strong></div></div>
+      </div>
+      <div class="ba-code"><span class="fn">navigator.modelContext</span>.registerTool({<br>&nbsp;&nbsp;name: <span class="str">"search_products"</span>,<br>&nbsp;&nbsp;description: <span class="str">"Find items by query and filters"</span>,<br>&nbsp;&nbsp;inputSchema: { query, maxPrice, category }<br>})</div>
+      <div class="ba-nums">
+        <div class="bn"><div class="bn-v">~98%</div><div class="bn-l">Accuracy</div></div>
+        <div class="bn"><div class="bn-v">~5s</div><div class="bn-l">Latency</div></div>
+        <div class="bn"><div class="bn-v">−89%</div><div class="bn-l">Token cost</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S8 DEMO (now before deep dive) -->
+<div class="slide" id="s8">
+  <div class="demo-center">
+    <div class="demo-icon">▶</div>
+    <h2>Live Demo</h2>
+    <p class="lead" style="text-align:center;max-width:480px;margin-top:12px">WebMCP in action: how a website registers tools and an agent discovers and calls them in a live Chrome 146 session.</p>
+    <div class="demo-label">Chrome 146 · WebMCP DevTrial Flag Enabled</div>
+  </div>
+</div>
+
+<!-- S7 MEASUREMENT (redesigned) -->
+<div class="slide" id="s10">
+  <div class="eyebrow">06 · How Profound Measures This</div>
+  <h2>Two approaches.<br><em>Four dimensions.</em></h2>
+  <p class="lead" style="margin-bottom:8px">WebMCP is client-side — invisible to CDN logs. Profound needs <strong>two measurement layers.</strong></p>
+  <div class="meas-grid">
+    <div class="meas-col">
+      <div class="meas-head"><span class="meas-ht">Headless Scan</span><span class="meas-badge">Free · No setup</span></div>
+      <div class="meas-body">
+        <div class="meas-item"><div class="meas-ico">🔍</div><div class="meas-text"><strong>Tools Registered vs. Industry Standard</strong> — scan for registered tools across competitors. How many tools has your category average registered, and how many have you? Where are the gaps?</div></div>
+        <div class="meas-item"><div class="meas-ico">📝</div><div class="meas-text"><strong>Intent Alignment</strong> — match tool and content descriptions against 400M+ prompts. Does brand language match user language?</div></div>
+        <div class="meas-item"><div class="meas-ico">📊</div><div class="meas-text"><strong>Competitive Benchmark</strong> — same scan on any website. Category ranking, gap analysis, trend tracking.</div></div>
+      </div>
+    </div>
+    <div class="meas-col primary">
+      <div class="meas-head"><span class="meas-ht">Client SDK</span><span class="meas-badge">Paid · Real data</span></div>
+      <div class="meas-body">
+        <div class="meas-item"><div class="meas-ico">⚡</div><div class="meas-text"><strong>Task Success</strong> — real success/failure rates per action. Latency. Error types. Not simulated.</div></div>
+        <div class="meas-item"><div class="meas-ico">🔄</div><div class="meas-text"><strong>Journey Completion</strong> — full funnel tracking. Where do agents drop off? Which workflows complete end-to-end?</div></div>
+        <div class="meas-item"><div class="meas-ico">💰</div><div class="meas-text"><strong>Revenue Attribution</strong> — "1,247 checkout attempts. 38% failed. Estimated loss: $340K–$1.2M."</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:10px">Headless scan = the <strong>free hook.</strong> Show any brand their AXO Score cold. SDK = the <strong>paid product.</strong> Real data no competitor can replicate.</div>
+</div>
+
+<!-- S11 DASHBOARD -->
+<div class="slide" id="s11">
+  <div class="eyebrow">07 · The Product</div>
+  <h2>AXO Score: the metric<br><em>nobody owns yet.</em></h2>
+  <div class="db-shell" style="margin-top:8px">
+    <div class="db-bar"><div class="db-dot"></div><div class="db-dot"></div><div class="db-dot"></div><span class="db-url">profound.ai · agent experience · target.com</span></div>
+    <div class="db-tabs"><div class="db-tab">Answer Engine</div><div class="db-tab on">Agent Readiness</div><div class="db-tab">Competitors</div></div>
+    <div class="db-body">
+      <div class="db-l">
+        <div class="db-brand">Target, Retail Category</div>
+        <div class="db-sub">vs. 7 competitors · refreshed 2h ago · 3 alerts</div>
+        <div class="db-score-row"><div class="db-sn">68</div><div><div class="db-sl">AXO Score</div><div class="db-sc">↓4 pts this week. Walmart added 2 new tools</div></div></div>
+
+        <!-- 5 AXO Dimensions as clear rows -->
+        <div style="margin-bottom:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.06);border-left:3px solid #C9A84C">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+            <span style="font-size:12px;color:rgba(255,255,255,.6);font-weight:500">01 · Tools Registered vs. Industry Standard</span>
+            <span style="font-size:13px;font-weight:600;color:#F2EFE9;font-family:'Fira Code',monospace">72<span style="font-weight:300;color:rgba(255,255,255,.25);font-size:11px"> / 100</span></span>
+          </div>
+          <div class="dbm-track"><div class="dbm-fill" style="width:72%;background:#C9A84C"></div></div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">Target: 5 tools registered. Category average: 7. Walmart: 8. Missing: checkout_cart() — the highest-impact tool in retail.</div>
+        </div>
+
+        <div style="margin-bottom:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.06);border-left:3px solid #C0483A">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+            <span style="font-size:12px;color:rgba(255,255,255,.6);font-weight:500">02 · Intent Resolution</span>
+            <span style="font-size:13px;font-weight:600;color:#F2EFE9;font-family:'Fira Code',monospace">64<span style="font-weight:300;color:rgba(255,255,255,.25);font-size:11px"> / 100</span></span>
+          </div>
+          <div class="dbm-track"><div class="dbm-fill" style="width:64%;background:#C0483A"></div></div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">Descriptions match 64% of user prompts. "Search catalog" vs. "find shoes under $150."</div>
+        </div>
+
+        <div style="margin-bottom:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.06);border-left:3px solid #C0483A">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+            <span style="font-size:12px;color:rgba(255,255,255,.6);font-weight:500">03 · Task Execution</span>
+            <span style="font-size:13px;font-weight:600;color:#F2EFE9;font-family:'Fira Code',monospace">61<span style="font-weight:300;color:rgba(255,255,255,.25);font-size:11px"> / 100</span></span>
+          </div>
+          <div class="dbm-track"><div class="dbm-fill" style="width:61%;background:#C0483A"></div></div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">Search works. Cart works. Checkout fails 38% of the time. Walmart: 89%.</div>
+        </div>
+
+        <div style="margin-bottom:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.06);border-left:3px solid #C0483A">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+            <span style="font-size:12px;color:rgba(255,255,255,.6);font-weight:500">04 · Journey Completion</span>
+            <span style="font-size:13px;font-weight:600;color:#F2EFE9;font-family:'Fira Code',monospace">52<span style="font-weight:300;color:rgba(255,255,255,.25);font-size:11px"> / 100</span></span>
+          </div>
+          <div class="dbm-track"><div class="dbm-fill" style="width:52%;background:#C0483A"></div></div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">3 of 8 key workflows complete end-to-end. Browse→cart→checkout: 23% drop-off.</div>
+        </div>
+
+        <div style="margin-bottom:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.06);border-left:3px solid #C9A84C">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+            <span style="font-size:12px;color:rgba(255,255,255,.6);font-weight:500">05 · Competitive Parity</span>
+            <span style="font-size:13px;font-weight:600;color:#F2EFE9;font-family:'Fira Code',monospace">#4<span style="font-weight:300;color:rgba(255,255,255,.25);font-size:11px"> of 8</span></span>
+          </div>
+          <div class="dbm-track"><div class="dbm-fill" style="width:50%;background:#C9A84C"></div></div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">Walmart #1 (84), Best Buy #2 (79), Amazon #3 (76). Target dropped from #3.</div>
+        </div>
+
+        <div class="db-alert">⚠ <strong>Estimated lost revenue:</strong> Agents attempted checkout_cart() 1,247× this week. 38% failed. Walmart: 89%. Loss: $340K–$1.2M.</div>
+      </div>
+      <div class="db-r">
+        <div class="db-ins-label">// top actions by revenue impact</div>
+        <div class="dbi hi"><div class="dbi-t">Register checkout_cart() → +12 pts</div><div class="dbi-b">Checkout is the highest-impact unregistered tool in the retail category. Registering with an optimized schema moves Target #4 → #2.</div></div>
+        <div class="dbi wn"><div class="dbi-t">Fix search_products() schema</div><div class="dbi-b">Description: "search catalog." Users say: "find X under $Y." One change closes 22% of missed calls.</div></div>
+        <div class="dbi"><div class="dbi-t">Best Buy jumped to #2 — how</div><div class="dbi-b">Registered filter_by_specs(), check_availability(), schedule_pickup(). AXO 79, up from 61.</div></div>
+        <div class="dbi"><div class="dbi-t">EU compliance: 11% gap</div><div class="dbi-b">89% of interactions logged. 11% gap in checkout = risk before Aug 2 deadline.</div></div>
+        <div style="margin-top:10px;padding:8px 10px;border:1px solid rgba(201,168,76,.12);background:rgba(201,168,76,.03)">
+          <div style="font-size:10px;color:rgba(201,168,76,.5);font-weight:500;margin-bottom:4px">↳ Each dimension drills into per-tool breakdowns, agent behavior, trends, and fix recommendations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S12 WHAT PROFOUND BUILDS -->
+<div class="slide" id="s12">
+  <div class="eyebrow">08 · Connecting Back</div>
+  <h2>What this means<br>for <em>Profound.</em></h2>
+  <p class="lead" style="margin-bottom:14px">These are <strong>new products — but Profound has unfair advantages</strong> in data, headless browser expertise, and an enterprise customer base already paying for AI visibility.</p>
+  <div class="ns-grid">
+    <div class="ns-item primary"><div class="ns-num">01</div><div class="ns-t">AXO Headless Scanner</div><div class="ns-b"><strong>New build.</strong> A headless fleet that visits websites with Chrome 146 + WebMCP flag — scanning for agent-facing capabilities, schema quality, competitive gaps. <strong>Zero brand setup. The free hook.</strong></div></div>
+    <div class="ns-item primary"><div class="ns-num">02</div><div class="ns-t">AXO Client SDK</div><div class="ns-b"><strong>New build.</strong> First-party instrumentation capturing <strong>real agent interactions:</strong> task success, failure points, revenue attribution. <strong>The paid product — behavioral data no competitor has.</strong></div></div>
+    <div class="ns-item"><div class="ns-num">03</div><div class="ns-t">Intent Optimizer</div><div class="ns-b"><strong>Leverages existing 400M+ prompt corpus</strong> to generate optimized descriptions per vertical. Brands write "search product catalog." Users say "find running shoes under $150." <strong>Only Profound has this data.</strong></div></div>
+    <div class="ns-item"><div class="ns-num">04</div><div class="ns-t">AXO Score Engine</div><div class="ns-b"><strong>New build.</strong> Four-dimension weighted scoring, <strong>competitor indexing, historical tracking, and automated alerts.</strong> The number a CMO brings to a board meeting.</div></div>
+  </div>
+  <div class="callout" style="margin-top:12px">The 400M+ prompt corpus is the unfair advantage — no competitor can replicate it. Profound's headless browser expertise and <strong>700+ enterprise clients give these products a built-in distribution channel from day one.</strong></div>
+</div>
+
+<!-- APPENDIX DIVIDER -->
+<div class="slide apx-divider" id="sa0">
+  <div class="apx-divider-content">
+    <div class="apx-d-label">Appendix</div>
+    <div class="apx-d-line"></div>
+    <div class="apx-d-title">Supporting <em>Detail</em></div>
+    <div class="apx-d-sub">Scoring methodology · Implementation plan · Security · Competitive landscape · Market data</div>
+  </div>
+</div>
+
+<!-- A1 SCORING -->
+<div class="slide" id="sa1">
+  <div class="eyebrow">Appendix A · AXO Scoring Methodology</div>
+  <h2>How the four dimensions<br>become <em>one number.</em></h2>
+  <table class="a-table" style="margin-top:14px;flex:1">
+    <thead><tr><th style="width:160px">Dimension</th><th>What it measures</th><th style="width:240px">How Profound measures it</th><th style="width:90px">Source</th></tr></thead>
+    <tbody>
+      <tr><td>01 · Tools Registered vs. Industry Standard</td><td>How many WebMCP tools has the brand registered compared to the category average and direct competitors? Which high-impact tools are missing?</td><td>Headless fleet scans every page for registered tools. Benchmarks count and type against competitors in the same category.</td><td>Headless</td></tr>
+      <tr><td>02 · Intent Alignment</td><td>Do capability descriptions match real user language? Can agents map user requests to the right brand action?</td><td>Cross-reference descriptions against 400M+ prompt corpus. Flag brand-language vs. user-intent mismatches per vertical.</td><td>Headless + Corpus</td></tr>
+      <tr><td>03 · Task Success</td><td>When an agent executes an action, does it return valid results? What's the latency, error rate, failure mode?</td><td><strong>Simulated:</strong> fleet executes with prompt-derived params. <strong>Real:</strong> SDK captures live agent interactions.</td><td>Headless + SDK</td></tr>
+      <tr><td>04 · Journey Completion</td><td>Can agents finish end-to-end workflows? Where in the funnel do they abandon? How does this compare to category?</td><td>SDK tracks full funnels. Headless benchmarks competitors with identical scans. AXO indexed against category average.</td><td>Headless + SDK</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- A2 SDK DETAIL -->
+<div class="slide" id="sa2">
+  <div class="eyebrow">Appendix B · Client SDK: Technical Detail</div>
+  <h2>What the SDK captures<br>and <em>how it works.</em></h2>
+  <div class="split" style="flex:1;margin-top:14px">
+    <div>
+      <p class="body-sm" style="margin-bottom:12px">A lightweight JS snippet. Three hooks into the WebMCP spec:</p>
+      <div class="card" style="margin-bottom:2px"><div class="card-t">1. Wraps navigator.modelContext</div><div class="card-b">Intercepts registerTool() and unregisterTool() to log which tools are live on each page, when registered, schemas. <strong>No changes to brand's existing code.</strong></div></div>
+      <div class="card" style="margin-bottom:2px"><div class="card-t">2. Hooks into SubmitEvent.agentInvoked</div><div class="card-b">Boolean on form submissions distinguishing human from agent. SDK logs every agent-triggered submission with timestamp, tool name, inputs.</div></div>
+      <div class="card"><div class="card-t">3. Monitors execute() callbacks</div><div class="card-b">Wraps execute to measure latency, success/failure, response shape. Captures agent errors. <strong>All telemetry beaconed to Profound.</strong></div></div>
+    </div>
+    <div>
+      <p class="body-sm" style="margin-bottom:12px">What the data unlocks beyond headless scan:</p>
+      <div class="card gold" style="margin-bottom:2px"><div class="card-t">Real agent traffic patterns</div><div class="card-b">Which AI agents visit (GPTBot, ClaudeBot, Gemini). Tasks attempted. Time-of-day. Frequency by platform. <strong>Ground truth.</strong></div></div>
+      <div class="card gold" style="margin-bottom:2px"><div class="card-t">Failure point analysis</div><div class="card-b">search_products() succeeded but checkout_cart() failed. Session handoff broke. <strong>Pinpoints exactly where the funnel breaks.</strong></div></div>
+      <div class="card gold"><div class="card-t">Revenue attribution</div><div class="card-b">"Agents attempted checkout 1,247 times. 38% failed. <strong>Estimated loss: $340K–$1.2M."</strong> The renewal conversation.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- A2b DECLARATIVE VS IMPERATIVE -->
+<div class="slide" id="sa2b">
+  <div class="eyebrow">Appendix B2 · WebMCP: Two Ways to Register Tools</div>
+  <h2>Two APIs.<br><em>Same result, different approach.</em></h2>
+  <p class="lead" style="margin-bottom:16px">WebMCP gives brands two ways to expose tools to AI agents. Both tell agents what actions are available — but they suit different situations.</p>
+  <div class="card-grid c2" style="flex:1;align-content:start;gap:16px">
+    <div class="card" style="border-color:var(--border2)">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:12px">Imperative API — write it in JavaScript</div>
+      <div class="card-t" style="margin-bottom:10px">You define the tool entirely in code</div>
+      <div class="card-b" style="margin-bottom:14px">The brand's developer writes a JavaScript function that runs when an agent calls the tool. Full control — you decide what data to fetch, how to handle errors, and what to return. The agent gets a structured result back.</div>
+      <div class="code-block" style="font-size:10px;line-height:1.7"><span class="fn">navigator.modelContext</span>.registerTool({
+  name: <span class="str">"search_products"</span>,
+  description: <span class="str">"Find items by keyword and price"</span>,
+  inputSchema: { query, maxPrice },
+  execute: async (input) =&gt; {
+    <span class="kw">const</span> results = <span class="kw">await</span> fetch(<span class="str">`/api/search`</span>)
+    <span class="kw">return</span> { content: [{ text: results }] }
+  }
+})</div>
+      <div style="margin-top:14px;font-size:13px;color:var(--dim)"><strong style="color:var(--white)">Best for:</strong> product search, cart actions, dynamic lookups — anything requiring a real API call or custom logic.</div>
+    </div>
+    <div class="card" style="border-color:var(--border2)">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:12px">Declarative API — annotate your HTML</div>
+      <div class="card-t" style="margin-bottom:10px">You add attributes to an existing form</div>
+      <div class="card-b" style="margin-bottom:14px">No JavaScript needed. The brand adds a few attributes to an HTML form that already exists on their site. The browser reads the form fields and tells agents what parameters are available. The agent fills the form; the user still clicks Submit to confirm — keeping the human in control.</div>
+      <div class="code-block" style="font-size:10px;line-height:1.7"><span class="kw">&lt;form</span>
+  <span class="fn">toolname</span>=<span class="str">"checkout"</span>
+  <span class="fn">tooldescription</span>=<span class="str">"Place an order for the user"</span>&gt;
+
+  &lt;input name=<span class="str">"address"</span>
+    <span class="fn">toolparamdescription</span>=<span class="str">"Shipping address"</span>/&gt;
+
+  &lt;button type=<span class="str">"submit"</span>&gt;Place Order&lt;/button&gt;
+<span class="kw">&lt;/form&gt;</span></div>
+      <div style="margin-top:14px;font-size:13px;color:var(--dim)"><strong style="color:var(--white)">Best for:</strong> checkout forms, search bars, sign-up flows — any existing HTML form with minimal engineering effort.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px"><strong>The key difference:</strong> Imperative gives full programmatic control. Declarative requires zero JavaScript — just HTML attributes on existing forms. Most brands will use both: declarative for forms, imperative for dynamic actions like product search or cart management.</div>
+</div>
+
+<!-- A3 IMPLEMENTATION -->
+<div class="slide" id="sa3">
+  <div class="eyebrow">Appendix C · Implementation Timeline</div>
+  <h2>What exists, what to build,<br>and <em>estimated effort.</em></h2>
+  <table class="a-table" style="margin-top:14px;flex:1">
+    <thead><tr><th style="width:200px">Component</th><th>Description</th><th style="width:90px">Status</th><th style="width:90px">Effort</th></tr></thead>
+    <tbody>
+      <tr><td>Headless browser fleet</td><td>Millions of daily prompts across 10 AI engines via front-end browser sessions.</td><td style="color:var(--dim)">Exists</td><td style="color:var(--dim)">n/a</td></tr>
+      <tr><td>Agent Analytics CDN</td><td>8+ edge platforms: Cloudflare, Vercel, AWS, Fastly, Google CDN, Netlify, Akamai, Shopify.</td><td style="color:var(--dim)">Exists</td><td style="color:var(--dim)">n/a</td></tr>
+      <tr><td>400M+ prompt corpus</td><td>Double-opt-in panels, Aho-Corasick extraction, semantic search, GPU classification.</td><td style="color:var(--dim)">Exists</td><td style="color:var(--dim)">n/a</td></tr>
+      <tr><td>MCP Server (v0.6.0)</td><td>npm install profound-mcp. Claude Desktop, Cursor, Cline integration.</td><td style="color:var(--dim)">Exists</td><td style="color:var(--dim)">n/a</td></tr>
+      <tr><td>AXO Headless Scanner</td><td>Chrome 146 WebMCP flag on fleet. Tool inventory pipeline: intercept registerTool() → parse → score.</td><td style="color:var(--gold)">Build</td><td style="color:var(--gold)">Weeks</td></tr>
+      <tr><td>Intent Optimizer</td><td>Prompt corpus → capability description matching → optimized descriptions per vertical.</td><td style="color:var(--gold)">Build</td><td style="color:var(--gold)">Weeks</td></tr>
+      <tr><td>AXO Client SDK</td><td>First-party instrumentation: task success monitoring, journey tracking, agent telemetry, beacon.</td><td style="color:var(--gold)">Build</td><td style="color:var(--gold)">Weeks</td></tr>
+      <tr><td>AXO Score Engine</td><td>Four-dimension weighted scoring, competitor indexing, historical tracking, alerts.</td><td style="color:var(--gold)">Build</td><td style="color:var(--gold)">1–2 months</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- A4 SECURITY -->
+<div class="slide" id="sa4">
+  <div class="eyebrow">Appendix D · WebMCP Security Landscape</div>
+  <h2>The spec's security section<br>is <em>empty.</em></h2>
+  <p class="lead" style="margin-bottom:12px">Sections 5 and 6 of the W3C Draft contain zero content. The threats are real and documented.</p>
+  <div class="card-grid c2" style="flex:1;align-content:start">
+    <div class="card" style="border-left:3px solid var(--red)"><div class="card-t" style="color:var(--red)">Cross-tab tool chaining ("Deadly Triad")</div><div class="card-b">Agent with access to banking, email, social tabs. Each call is legitimate; <strong>chaining creates exfiltration.</strong> Flagged by W3C member Tom Jones.</div></div>
+    <div class="card" style="border-left:3px solid var(--red)"><div class="card-t" style="color:var(--red)">Tool Poisoning (Invariant Labs)</div><div class="card-b">Malicious instructions in tool descriptions. <strong>Invisible to users, visible to AI.</strong> Demonstrated: SSH key exfiltration from Cursor IDE.</div></div>
+    <div class="card" style="border-left:3px solid var(--gold)"><div class="card-t">Tool Shadowing and Rug Pulls</div><div class="card-b">Registering tools with trusted names to intercept calls. Descriptions can <strong>change after user approval.</strong> Simon Willison documented both.</div></div>
+    <div class="card" style="border-left:3px solid var(--gold)"><div class="card-t">destructiveHint is advisory only</div><div class="card-b">Not enforced by the browser. A tool marked destructiveHint: false can still delete data. <strong>No enforcement mechanism.</strong></div></div>
+  </div>
+  <div class="callout red" style="margin-top:10px">Risk and opportunity. <strong>Profound can define security best practices before the W3C does.</strong> EU AI Act (Aug 2) creates a hard deadline for auditable agent interaction logs.</div>
+</div>
+
+<!-- A5 COMPETITIVE -->
+<div class="slide" id="sa5">
+  <div class="eyebrow">Appendix E · Competitive Landscape</div>
+  <h2>Who else could build this.</h2>
+  <table class="a-table" style="margin-top:14px;flex:1">
+    <thead><tr><th style="width:160px">Company</th><th>What they have</th><th>WebMCP / AXO gap</th></tr></thead>
+    <tbody>
+      <tr><td>Adobe LLM Optimizer</td><td>Enterprise GEO. MCP + A2A support. AEM edge delivery. 18B page views/yr. 20 years of Fortune 500.</td><td>Could connect AEM-MCP to LLM Optimizer in ~1 sprint. <strong>Threat window: Q3 2026.</strong></td></tr>
+      <tr><td>Scrunch AI (AXP)</td><td>CDN-level AI bot optimization. "Shadow site" reducing size 98% for bots. $26M raised.</td><td>CDN optimization, not interaction analytics. No prompt corpus. No tool-level measurement.</td></tr>
+      <tr><td>web-mcp.net</td><td>Commercial SaaS: CLI, 37+ templates, Agent Score scanner. $49/mo founding program.</td><td>Implementation tooling, not analytics. Helps you build WebMCP; doesn't measure outcomes.</td></tr>
+      <tr><td>BrightEdge</td><td>Enterprise SEO. CEO says "commerce will hinge on influencing AI agents."</td><td>No WebMCP tooling. Conceptual only.</td></tr>
+      <tr><td>Semrush</td><td>SEO + AI add-on. Public (NYSE: SEMR).</td><td>No agent interaction measurement. No prompt corpus at Profound's scale.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout" style="margin-top:10px"><strong>No company has built WebMCP measurement tools.</strong> The standard shipped weeks ago. Adobe is the most credible threat, but their products are not yet connected. Window to own the category: Q2 2026.</div>
+</div>
+
+<!-- A6 MARKET DATA -->
+<div class="slide" id="sa6">
+  <div class="eyebrow">Appendix F · Market Data</div>
+  <h2>The numbers behind<br><em>every claim.</em></h2>
+  <div class="card-grid c3" style="margin-top:14px;flex:1;align-content:start">
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">$385B</div><div class="card-b">US agentic commerce by 2030 (Morgan Stanley)</div></div>
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">805%</div><div class="card-b">YoY AI retail traffic growth, Black Friday 2025</div></div>
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">75%</div><div class="card-b">Of agentic AI tasks fail in real-world scenarios (Superface.ai)</div></div>
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">97M</div><div class="card-b">Monthly MCP SDK downloads (Python + TypeScript)</div></div>
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">$15T</div><div class="card-b">B2B via AI agents by 2028, 90% of all B2B (Gartner)</div></div>
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">4.4×</div><div class="card-b">AI search visitors convert vs. organic (Semrush)</div></div>
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">71%</div><div class="card-b">Consumers abandon brand after one bad AI interaction</div></div>
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">$9B</div><div class="card-b">AEO market by 2031, 42% CAGR (QY Research)</div></div>
+    <div class="card"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:4px">Aug 2</div><div class="card-b">EU AI Act full enforcement. Agent audit trails required.</div></div>
+  </div>
+</div>
+
+</div>
+
+<div class="chrome-bottom">
+  <span class="nav-hint">← → to navigate</span>
+  <div class="nav-dots" id="dots"></div>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const MAIN=10;
+let cur=0;
+const dotsEl=document.getElementById('dots');
+slides.forEach((s,i)=>{const d=document.createElement('div');d.className=i>=MAIN?'dot apx':'dot';if(i===0)d.classList.add('on');d.onclick=()=>go(i);dotsEl.appendChild(d)});
+function go(n){
+  if(n<0||n>=slides.length||n===cur)return;
+  slides[cur].classList.remove('active');slides[cur].classList.add('exit-up');
+  setTimeout(()=>slides[cur].classList.remove('exit-up'),350);
+  cur=n;slides[cur].classList.add('active');
+  slides[cur].querySelectorAll('.dbm-fill').forEach(f=>{const w=f.style.width;f.style.width='0';setTimeout(()=>f.style.width=w,300)});
+  updateChrome();
+}
+function updateChrome(){
+  const inApx=cur>=MAIN;
+  document.getElementById('counter').textContent=inApx
+    ?`A${cur-MAIN} / A${slides.length-MAIN}`
+    :`${String(cur+1).padStart(2,'0')} / ${String(MAIN).padStart(2,'0')}`;
+  document.getElementById('pline').style.width=((cur+1)/slides.length)*100+'%';
+  document.getElementById('apxbadge').classList.toggle('show',inApx);
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();go(cur+1)}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(cur-1)}
+  if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);
+});
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)go(dx<0?cur+1:cur-1)},{passive:true});
+updateChrome();
+</script>
+</body>
+</html>

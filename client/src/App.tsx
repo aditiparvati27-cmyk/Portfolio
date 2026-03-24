@@ -14,6 +14,7 @@ const OomaPortfolio = lazy(() => import("@/pages/ooma-portfolio"));
 const ProfoundPortfolio = lazy(() => import("@/pages/profound-portfolio"));
 const TypefacePortfolio = lazy(() => import("@/pages/typeface-portfolio"));
 const AmplitudeIntro = lazy(() => import("@/pages/amplitude-intro"));
+const ProfoundDeck = lazy(() => import("@/pages/profound-deck"));
 
 function RouteLoading() {
   return (
@@ -32,6 +33,7 @@ function Router() {
         <Route path="/intro/profound" component={Profound} />
         <Route path="/profound/intro" component={Profound} />
         <Route path="/intro/amplitude" component={AmplitudeIntro} />
+        <Route path="/profound" component={ProfoundDeck} />
         <Route path="/projects/ooma" component={OomaPortfolio} />
         <Route path="/projects/profound" component={ProfoundPortfolio} />
         <Route path="/projects/typeface" component={TypefacePortfolio} />
