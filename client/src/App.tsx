@@ -18,6 +18,10 @@ const AmplitudeOpportunity = lazy(() => import("@/pages/amplitude-opportunity"))
 const GalaxyIntro = lazy(() => import("@/pages/galaxy-intro"));
 const GalaxyOpportunity = lazy(() => import("@/pages/galaxy-opportunity"));
 const ProfoundDeck = lazy(() => import("@/pages/profound-deck"));
+const BluefishDeck = lazy(() => import("@/pages/bluefish"));
+const AthenaHQDeck = lazy(() => import("@/pages/athenahq"));
+const ScrunchDeck = lazy(() => import("@/pages/scrunch"));
+const GaugeDeck = lazy(() => import("@/pages/gauge"));
 
 function RouteLoading() {
   return (
@@ -40,6 +44,10 @@ function Router() {
         <Route path="/galaxy/intro" component={GalaxyIntro} />
         <Route path="/galaxy/opportunity" component={GalaxyOpportunity} />
         <Route path="/profound" component={ProfoundDeck} />
+        <Route path="/bluefish" component={BluefishDeck} />
+        <Route path="/athenahq" component={AthenaHQDeck} />
+        <Route path="/scrunch" component={ScrunchDeck} />
+        <Route path="/gauge" component={GaugeDeck} />
         <Route path="/projects/ooma" component={OomaPortfolio} />
         <Route path="/projects/profound" component={ProfoundPortfolio} />
         <Route path="/projects/typeface" component={TypefacePortfolio} />

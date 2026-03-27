@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AI Visibility Landscape — A Brief for Bluefish</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0908;--white:#F2EFE9;--dim:#8A877F;--faint:#2E2C28;--faint2:#1A1917;
+  --border:rgba(242,239,233,.08);--border2:rgba(242,239,233,.16);--border3:rgba(242,239,233,.3);
+  --accent:#4A9EE0;--gold:#C9A84C;--red:#C0483A;--green:#5A9E6F;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased}
+.deck{position:fixed;inset:0;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:56px 72px 44px;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);transform:translateY(24px);overflow-y:auto}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.slide.exit-up{opacity:0;transform:translateY(-24px);transition:opacity .3s ease,transform .3s ease}
+
+.chrome-top{position:fixed;top:0;left:0;right:0;z-index:50;padding:20px 72px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.c-logo{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.c-counter{font-size:11px;font-weight:500;letter-spacing:.1em;color:var(--dim);font-family:'Fira Code',monospace}
+.chrome-bottom{position:fixed;bottom:0;left:0;right:0;z-index:50;padding:20px 72px;display:flex;align-items:center;justify-content:space-between}
+.nav-hint{font-size:10px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
+.nav-dots{display:flex;gap:6px;align-items:center}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--faint);cursor:pointer;transition:background .25s,transform .25s}
+.dot.on{background:var(--white);transform:scale(1.3)}
+.progress-line{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:100;transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+.eyebrow{font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-bottom:20px}
+h2{font-family:'Cormorant',serif;font-size:clamp(32px,4vw,54px);font-weight:300;line-height:1.06;letter-spacing:-.025em;color:var(--white);margin-bottom:10px}
+h2 em{font-style:italic}
+.lead{font-size:15px;font-weight:300;color:rgba(242,239,233,.55);line-height:1.75;max-width:620px}
+.lead strong{color:var(--white);font-weight:500}
+.body-sm{font-size:13px;font-weight:300;color:var(--dim);line-height:1.7}
+.body-sm strong{color:var(--white);font-weight:500}
+.mono{font-family:'Fira Code',monospace}
+
+/* COVER */
+#s1{background:var(--black);justify-content:flex-end;padding-bottom:80px}
+#s1::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 75% 40%,rgba(74,158,224,.06) 0%,transparent 60%)}
+.s1-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 100% 100% at 50% 100%,black 30%,transparent 80%)}
+.cover-content{position:relative;z-index:2}
+.cover-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border2);padding:5px 14px;margin-bottom:32px}
+.cover-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.cover-title{font-family:'Cormorant',serif;font-size:clamp(48px,7vw,100px);font-weight:300;line-height:.93;letter-spacing:-.04em;color:var(--white);margin-bottom:40px}
+.cover-title em{font-style:italic}
+.cover-rule{width:48px;height:1px;background:var(--border3);margin-bottom:22px}
+.cover-sub{font-size:14px;font-weight:300;color:rgba(242,239,233,.45);max-width:520px;line-height:1.75}
+.cover-sub strong{color:rgba(242,239,233,.75);font-weight:500}
+
+/* CARDS */
+.card-grid{display:grid;gap:2px}
+.card-grid.c2{grid-template-columns:1fr 1fr}
+.card-grid.c3{grid-template-columns:1fr 1fr 1fr}
+.card-grid.c4{grid-template-columns:1fr 1fr 1fr 1fr}
+.card{padding:20px;border:1px solid var(--border)}
+.card.accent{border-color:rgba(74,158,224,.2);background:rgba(74,158,224,.04)}
+.card.gold{border-color:rgba(201,168,76,.2);background:rgba(201,168,76,.04)}
+.card-num{font-family:'Fira Code',monospace;font-size:9px;color:var(--dim);letter-spacing:.1em;margin-bottom:8px}
+.card-t{font-size:12px;font-weight:600;color:var(--white);margin-bottom:6px}
+.card.accent .card-t{color:var(--accent)}
+.card.gold .card-t{color:var(--gold)}
+.card-b{font-size:11.5px;font-weight:300;color:var(--dim);line-height:1.65}
+.card-b strong{color:var(--white);font-weight:500}
+.card.accent .card-b strong{color:var(--accent)}
+.card.gold .card-b strong{color:var(--gold)}
+
+/* CALLOUT */
+.callout{padding:14px 18px;border-left:3px solid var(--accent);background:rgba(74,158,224,.04);font-size:13px;font-weight:300;color:rgba(242,239,233,.6);line-height:1.65}
+.callout strong{color:var(--white);font-weight:500}
+.callout.gold{border-left-color:var(--gold);background:rgba(201,168,76,.04)}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;flex:1;align-items:start}
+
+/* LANDSCAPE */
+.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;flex:1;align-content:start}
+.ls-item{border:1px solid var(--border);padding:18px 20px}
+.ls-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ls-ico{font-size:20px}
+.ls-t{font-size:13px;font-weight:500;color:var(--white)}
+.ls-b{font-size:11.5px;font-weight:300;color:var(--dim);line-height:1.65}
+.ls-b strong{color:var(--white);font-weight:500}
+.ls-examples{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+.ls-ex{font-size:9px;font-weight:500;letter-spacing:.06em;color:var(--dim);padding:3px 8px;border:1px solid var(--border);background:var(--faint2)}
+.ls-ex.live{color:var(--green);border-color:rgba(90,158,111,.25)}
+
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:16px 0}
+.stat{border:1px solid var(--border);padding:18px 16px;text-align:center}
+.stat-n{font-family:'Cormorant',serif;font-size:36px;font-weight:300;color:var(--white);line-height:1}
+.stat-n.accent{color:var(--accent)}
+.stat-l{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:6px}
+
+/* GAP LAYOUT */
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.gap-col h3{font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.gap-item{font-size:12px;font-weight:300;color:rgba(242,239,233,.5);line-height:1.6;padding:6px 0;border-bottom:1px solid var(--border)}
+.gap-item strong{color:var(--white);font-weight:500}
+.gap-item .tick{color:rgba(242,239,233,.3);margin-right:6px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;flex:1;align-items:start;margin-top:16px}
+.about-item{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;font-weight:300;color:var(--dim);line-height:1.6}
+.about-item strong{color:var(--white);font-weight:500}
+.about-label{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+
+/* CONTACT SLIDE */
+.contact-center{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center}
+
+/* SPEC TABLE */
+.spec-row{display:grid;grid-template-columns:140px 1fr;border-bottom:1px solid var(--border);padding:10px 0}
+.spec-row:last-child{border-bottom:none}
+.spec-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.spec-val{font-size:12px;font-weight:300;color:rgba(242,239,233,.6);line-height:1.55}
+.spec-val strong{color:var(--white);font-weight:500}
+</style>
+</head>
+<body>
+
+<div class="progress-line" id="pline" style="width:10%"></div>
+<div class="chrome-top">
+  <span class="c-logo">Landscape Brief — Bluefish</span>
+  <span class="c-counter" id="counter">01 / 10</span>
+</div>
+
+<div class="deck">
+
+<!-- ═══════════ S1 — COVER ═══════════ -->
+<div class="slide active" id="s1">
+  <div class="s1-grid"></div>
+  <div class="cover-content">
+    <div class="cover-tag"><span class="cover-tag-dot"></span>March 2026</div>
+    <h1 class="cover-title">The AI<br>Visibility<br><em>Landscape.</em></h1>
+    <div class="cover-rule"></div>
+    <p class="cover-sub">
+      A research brief on where the AEO/GEO market stands, where <strong>agentic commerce</strong> is headed, and why <strong>Bluefish</strong> is building in the right place at the right time.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════ S2 — HOW I GOT HERE ═══════════ -->
+<div class="slide" id="s2">
+  <div class="eyebrow">01 — Context</div>
+  <h2>How I ended up<br><em>in this space.</em></h2>
+  <div class="split" style="margin-top:16px">
+    <div>
+      <p class="body-sm" style="margin-bottom:16px">Six months ago, I was working on a project for <strong>Capital One</strong>. The question was straightforward: if someone asks ChatGPT or Perplexity "what's the best credit card for travel rewards," does Capital One show up?</p>
+      <p class="body-sm" style="margin-bottom:16px">It often didn't. We started evaluating AI brand visibility platforms to understand why. That's how I found this category.</p>
+      <p class="body-sm" style="margin-bottom:16px">I spent the next several months going deep. Not surface-level. I mapped the competitive landscape, studied the protocol stack being built underneath it, and started tracking how the category was shifting from <strong>monitoring</strong> toward something more structural: <strong>how AI agents actually interact with brands.</strong></p>
+      <p class="body-sm">This brief is a slice of that research. It's what I'd want to know if I were building in this space.</p>
+    </div>
+    <div>
+      <div style="border:1px solid var(--border);padding:20px;margin-bottom:12px">
+        <div class="about-label">The original question</div>
+        <p class="body-sm" style="margin-top:8px">"When a consumer asks an AI engine for product recommendations in our category, are we appearing? If not, why? And what would we need to change?"</p>
+      </div>
+      <div style="border:1px solid var(--border);padding:20px">
+        <div class="about-label">What it turned into</div>
+        <p class="body-sm" style="margin-top:8px">A six-month research sprint across the full AEO/GEO landscape: platform evaluation, protocol analysis (MCP, ACP, UCP, WebMCP, A2A), competitive mapping, and a <strong>product strategy brief</strong> for one of the companies in the space.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ S3 — THE MARKET ═══════════ -->
+<div class="slide" id="s3">
+  <div class="eyebrow">02 — The Market</div>
+  <h2>AEO went from experimental<br>to <em>essential in 18 months.</em></h2>
+  <p class="lead" style="margin-top:6px;margin-bottom:12px">24+ dedicated platforms. Over $200M raised. And AI search visitors convert at <strong>4.4x the rate</strong> of traditional organic.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-n accent">$4.97B</div><div class="stat-l">AEO Market by 2033</div></div>
+    <div class="stat"><div class="stat-n accent">12%</div><div class="stat-l">Overlap: Google vs ChatGPT results</div></div>
+    <div class="stat"><div class="stat-n accent">4.4×</div><div class="stat-l">AI visitor conversion rate</div></div>
+    <div class="stat"><div class="stat-n accent">40-60%</div><div class="stat-l">Monthly citation volatility</div></div>
+  </div>
+  <div class="card-grid c3" style="margin-top:2px">
+    <div class="card">
+      <div class="card-num">TIER 1 — ENTERPRISE AEO</div>
+      <div class="card-t">Full-Stack Platforms</div>
+      <div class="card-b">Monitor + optimize + create. Enterprise pricing ($250K+/yr). Fortune 500 clients. Racing to own the full workflow. <strong>Profound ($155M raised), Bluefish ($24M), Scrunch ($19M).</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-num">TIER 2 — POINT SOLUTIONS</div>
+      <div class="card-t">Monitor or Optimize</div>
+      <div class="card-b">Focused tools doing one thing well. Lower price points, broader adoption. <strong>AthenaHQ (YC), Otterly ($29/mo, Gartner Cool Vendor), Peec AI ($21M, €650K ARR in 4 months).</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-num">TIER 3 — INCUMBENTS ADDING AI</div>
+      <div class="card-t">SEO Platforms + AI Features</div>
+      <div class="card-b">Bolt-on AI visibility to existing SEO products. Distribution advantage, weaker depth. <strong>Semrush (NYSE), BrightEdge, Conductor, HubSpot (acquired xFunnel).</strong></div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px">
+    One observation keeps surfacing: most platforms in Tier 1 and 2 look remarkably similar in feature sets. The differentiation gap is shifting from <strong>who monitors best to who helps brands act.</strong>
+  </div>
+</div>
+
+<!-- ═══════════ S4 — PROTOCOL STACK ═══════════ -->
+<div class="slide" id="s4">
+  <div class="eyebrow">03 — The Protocol Stack</div>
+  <h2>Five protocols are defining<br>how <em>agents reach brands.</em></h2>
+  <p class="lead" style="margin-top:6px;margin-bottom:14px">This is the infrastructure layer most marketing teams haven't caught up to yet. It's moving fast.</p>
+  <div style="margin:8px 0;display:flex;justify-content:center">
+    <svg viewBox="0 0 820 200" width="820" height="200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+      <text x="0" y="32" font-family="Fira Code,monospace" font-size="8" fill="#8A877F" letter-spacing=".08em">AGENT ↔ TOOLS</text>
+      <text x="0" y="82" font-family="Fira Code,monospace" font-size="8" fill="#8A877F" letter-spacing=".08em">AGENT ↔ COMMERCE</text>
+      <text x="0" y="132" font-family="Fira Code,monospace" font-size="8" fill="#8A877F" letter-spacing=".08em">AGENT ↔ AGENT</text>
+      <text x="0" y="182" font-family="Fira Code,monospace" font-size="8" fill="#4A9EE0" letter-spacing=".08em">AGENT ↔ BROWSER</text>
+      <rect x="140" y="14" width="660" height="34" rx="3" fill="#1A1917" stroke="rgba(242,239,233,.16)" stroke-width="1"/>
+      <text x="170" y="36" font-family="Outfit,sans-serif" font-size="12" fill="#F2EFE9" font-weight="500">MCP</text>
+      <text x="215" y="36" font-family="Outfit,sans-serif" font-size="10" fill="#8A877F" font-weight="300">Anthropic. Agent-to-tool communication. 97M monthly SDK downloads. Industry standard.</text>
+      <rect x="140" y="64" width="320" height="34" rx="3" fill="#1A1917" stroke="rgba(242,239,233,.16)" stroke-width="1"/>
+      <text x="170" y="86" font-family="Outfit,sans-serif" font-size="12" fill="#F2EFE9" font-weight="500">ACP</text>
+      <text x="210" y="86" font-family="Outfit,sans-serif" font-size="10" fill="#8A877F" font-weight="300">OpenAI + Stripe. Chat-to-buy checkout. Powers ChatGPT shopping.</text>
+      <rect x="478" y="64" width="322" height="34" rx="3" fill="#1A1917" stroke="rgba(242,239,233,.16)" stroke-width="1"/>
+      <text x="508" y="86" font-family="Outfit,sans-serif" font-size="12" fill="#F2EFE9" font-weight="500">UCP</text>
+      <text x="544" y="86" font-family="Outfit,sans-serif" font-size="10" fill="#8A877F" font-weight="300">Google + Shopify. Full lifecycle. Walmart, Target, Visa on board.</text>
+      <rect x="140" y="114" width="660" height="34" rx="3" fill="#1A1917" stroke="rgba(242,239,233,.16)" stroke-width="1"/>
+      <text x="170" y="136" font-family="Outfit,sans-serif" font-size="12" fill="#F2EFE9" font-weight="500">A2A</text>
+      <text x="210" y="136" font-family="Outfit,sans-serif" font-size="10" fill="#8A877F" font-weight="300">Google → Linux Foundation. Agent-to-agent delegation. 150+ orgs. Production at Tyson, Twilio.</text>
+      <rect x="140" y="164" width="660" height="34" rx="3" fill="rgba(74,158,224,.06)" stroke="rgba(74,158,224,.3)" stroke-width="1.5"/>
+      <text x="170" y="186" font-family="Outfit,sans-serif" font-size="12" fill="#4A9EE0" font-weight="600">WebMCP</text>
+      <text x="240" y="186" font-family="Outfit,sans-serif" font-size="10" fill="rgba(74,158,224,.7)" font-weight="300">W3C Draft. Google + Microsoft. Browser-native. Chrome 146 shipped March 10. The client-side piece.</text>
+    </svg>
+  </div>
+  <div class="callout" style="margin-top:6px">
+    The key insight: the monitoring side of AEO is getting commoditized. The companies that win will be the ones that help brands <strong>become machine-readable and agent-transactable</strong> across this protocol stack. That's a different product than a monitoring dashboard.
+  </div>
+</div>
+
+<!-- ═══════════ S5 — AGENTIC COMMERCE ═══════════ -->
+<div class="slide" id="s5">
+  <div class="eyebrow">04 — Agentic Commerce</div>
+  <h2>AI agents are starting<br>to <em>buy things.</em></h2>
+  <p class="lead" style="margin-top:6px;margin-bottom:14px">The shift from "AI recommends your brand" to "AI completes a purchase on your brand's site" is happening right now. Gartner predicts <strong>90% of B2B purchases ($15T+) will be AI agent-intermediated by 2028.</strong></p>
+  <div class="ls-grid" style="margin-top:4px">
+    <div class="ls-item">
+      <div class="ls-head"><span class="ls-ico">💬</span><span class="ls-t">Chat-to-Buy</span></div>
+      <div class="ls-b">Users buy directly inside AI conversations. Instacart in ChatGPT covers <strong>1,800+ retailers.</strong> Google AI Mode surfaces shoppable products from Etsy and Wayfair to <strong>75M+ daily users.</strong></div>
+      <div class="ls-examples">
+        <span class="ls-ex live">Instacart × ChatGPT</span><span class="ls-ex live">Google AI Mode</span><span class="ls-ex live">Perplexity Buy</span>
+      </div>
+    </div>
+    <div class="ls-item">
+      <div class="ls-head"><span class="ls-ico">🛒</span><span class="ls-t">Agent-to-Merchant APIs</span></div>
+      <div class="ls-b">Amazon's "Buy for Me" lets agents purchase from third-party retailers. <strong>500K+ products.</strong> Shopify's Agentic Storefronts surface products inside AI interfaces with full MCP compliance.</div>
+      <div class="ls-examples">
+        <span class="ls-ex live">Amazon Buy for Me</span><span class="ls-ex">Shopify Storefronts</span><span class="ls-ex live">Walmart AI Search</span>
+      </div>
+    </div>
+    <div class="ls-item">
+      <div class="ls-head"><span class="ls-ico">💳</span><span class="ls-t">Agent Payment Rails</span></div>
+      <div class="ls-b">Mastercard Agent Pay is live for <strong>all U.S. cardholders</strong> since November 2025. Visa's Trusted Agent Protocol handles identity. Google's AP2 handles payment authorization.</div>
+      <div class="ls-examples">
+        <span class="ls-ex live">Mastercard Agent Pay</span><span class="ls-ex">Visa TAP</span><span class="ls-ex">Google AP2</span><span class="ls-ex">Stripe SPTs</span>
+      </div>
+    </div>
+    <div class="ls-item">
+      <div class="ls-head"><span class="ls-ico">🔗</span><span class="ls-t">Protocol Middleware</span></div>
+      <div class="ls-b">A new layer is emerging: companies that abstract multi-protocol complexity into a single merchant integration. <strong>Firmly ($5.2M, powers native checkout inside Perplexity), Nekuda, Basis Theory's Agentic Commerce Consortium (20+ members).</strong></div>
+      <div class="ls-examples">
+        <span class="ls-ex live">Firmly</span><span class="ls-ex">Nekuda</span><span class="ls-ex">Basis Theory</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ S6 — THE THREE LAYERS ═══════════ -->
+<div class="slide" id="s6">
+  <div class="eyebrow">05 — The Full Funnel</div>
+  <h2>AEO only covers<br><em>the first layer.</em></h2>
+  <p class="lead" style="margin-top:6px;margin-bottom:16px">The AI-to-brand relationship has three layers. Most platforms stop at layer one.</p>
+  <div class="card-grid c3" style="flex:1;margin-top:4px">
+    <div class="card">
+      <div class="card-num">LAYER 01 — DISCOVERY</div>
+      <div class="card-t" style="font-size:22px;font-family:'Cormorant',serif;font-weight:300;margin-bottom:10px">AI sees you</div>
+      <div class="card-b">AI mentions your brand in a response. This is where AEO platforms live today. Citation tracking, visibility scores, share of voice. <strong>Bluefish's AI Monitoring module does this well</strong> — custom prompts, Custom AI Audiences, AI Brand Vault.</div>
+      <div style="margin-top:12px"><span style="font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--border2);color:var(--dim)">COMMODITIZING</span></div>
+    </div>
+    <div class="card">
+      <div class="card-num">LAYER 02 — INTERACTION</div>
+      <div class="card-t" style="font-size:22px;font-family:'Cormorant',serif;font-weight:300;margin-bottom:10px">AI visits you</div>
+      <div class="card-b">An agent navigates to your site, tries to understand your product catalog, reads your content. CDN-level crawler tracking, bot identification, page depth analysis. <strong>Bluefish's Agentic Commerce module is entering this space.</strong></div>
+      <div style="margin-top:12px"><span style="font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(74,158,224,.3);color:var(--accent)">EMERGING</span></div>
+    </div>
+    <div class="card accent">
+      <div class="card-num">LAYER 03 — TRANSACTION</div>
+      <div class="card-t" style="font-size:22px;font-family:'Cormorant',serif;font-weight:300;margin-bottom:10px;color:var(--accent)">AI buys for you</div>
+      <div class="card-b">An agent completes a purchase on behalf of a user. Search products, add to cart, checkout. Did it succeed? Fail? Redirect to a competitor? <strong>This is where revenue actually flows. No platform fully owns it yet.</strong></div>
+      <div style="margin-top:12px"><span style="font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;background:var(--accent);border:1px solid var(--accent);color:var(--black)">WIDE OPEN</span></div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px">
+    The brand that helps enterprises go from "we know AI mentions us" to "we know AI can transact with us, and here's how to fix it when it can't" — that brand defines the next category.
+  </div>
+</div>
+
+<!-- ═══════════ S7 — WHY BLUEFISH ═══════════ -->
+<div class="slide" id="s7">
+  <div class="eyebrow">06 — Why Bluefish</div>
+  <h2>Three exits, Fortune 500 clients,<br>and a <em>clear thesis.</em></h2>
+  <p class="lead" style="margin-top:6px;margin-bottom:16px">I've been following this space for six months. Bluefish stands out for specific reasons.</p>
+  <div class="gap-grid" style="flex:1">
+    <div class="gap-col">
+      <h3>What I see in Bluefish</h3>
+      <div class="gap-item"><span class="tick">→</span> <strong>The founding team has done this before.</strong> PromoteIQ→Microsoft, LiveRail→Facebook. Sherman, Dunca, and Feng built and sold enterprise martech companies at the right platform shift moment. This is their third.</div>
+      <div class="gap-item"><span class="tick">→</span> <strong>Custom prompt methodology is the right approach.</strong> Generic prompts produce generic data. Industry-specific, persona-specific measurement is how enterprise clients think.</div>
+      <div class="gap-item"><span class="tick">→</span> <strong>Custom AI Audiences is unique.</strong> No competitor offers brand-defined audience segmentation for AI visibility measurement. That's a real differentiator.</div>
+      <div class="gap-item"><span class="tick">→</span> <strong>The AI Brand Vault matters.</strong> Controlling how AI models interpret brand metadata (97% cross-engine consistency) is a governance problem enterprise buyers care about.</div>
+      <div class="gap-item"><span class="tick">→</span> <strong>The research output is credible.</strong> The YouTube vs Reddit sourcing study, the holiday commerce reports — these put Bluefish in the conversation with much better-funded competitors.</div>
+    </div>
+    <div class="gap-col">
+      <h3>Where the next wave is</h3>
+      <div class="gap-item"><span class="tick">→</span> <strong>Agentic Commerce as a module is the right bet</strong> — Sherman has said it: brands need "enterprise marketing infrastructure to reach consumers in this new AI funnel." The product needs to catch up to that vision.</div>
+      <div class="gap-item"><span class="tick">→</span> <strong>ACP + UCP integration</strong> is the connective tissue. Bluefish clients (Adidas, DocuSign, Wayfair) are the exact companies adopting these protocols. The relationship already exists.</div>
+      <div class="gap-item"><span class="tick">→</span> <strong>The $500B "Agent Attention Economy"</strong> framing from the Series A is strong. The product roadmap to serve that market — beyond monitoring — is the challenge and the opportunity.</div>
+      <div class="gap-item"><span class="tick">→</span> <strong>45 open roles against ~50 people.</strong> That's nearly doubling the team. The window for someone who already understands this space to contribute is now.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ S8 — BLUEFISH COMPETITIVE POSITION ═══════════ -->
+<div class="slide" id="s8">
+  <div class="eyebrow">07 — Competitive Context</div>
+  <h2>How Bluefish compares<br>to the <em>field.</em></h2>
+  <p class="lead" style="margin-top:6px;margin-bottom:14px">Four companies are competing for the enterprise AEO/GEO category. Each has a different angle.</p>
+  <div class="card-grid c4" style="margin-top:4px">
+    <div class="card accent">
+      <div class="card-num">BLUEFISH — $24M</div>
+      <div class="card-t" style="color:var(--accent)">Enterprise GEO + Agentic Commerce</div>
+      <div class="card-b">Fortune 500 focus (80%+ clients). Custom AI Audiences, AI Brand Vault, source influence mapping. <strong>Strength:</strong> founding team + enterprise relationships. <strong>Gap:</strong> no content creation tools, no protocol integrations yet.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">PROFOUND — $155M</div>
+      <div class="card-t">Full-Stack AEO Platform</div>
+      <div class="card-b">Category leader by funding. 10+ AI engines, 400M+ prompt dataset, content creation via Workflows. <strong>Strength:</strong> data moats, execution. <strong>Gap:</strong> agentic transaction layer still conceptual.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">SCRUNCH — $19M</div>
+      <div class="card-t">CDN-Layer Agent Optimization</div>
+      <div class="card-b">Agent Experience Platform (AXP) serves AI-optimized content at CDN level. 98% file size reduction. <strong>Strength:</strong> infrastructure approach. <strong>Gap:</strong> insights and action layer underdeveloped.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">ATHENAHQ — $2.7M (YC)</div>
+      <div class="card-t">GEO + Revenue Attribution</div>
+      <div class="card-b">Ex-Google Search / DeepMind founders. Direct Shopify revenue attribution. <strong>Strength:</strong> can tie AI visibility to dollars. <strong>Gap:</strong> small team (17), no agentic commerce layer.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px">
+    Bluefish's competitive position: <strong>the strongest founding team in enterprise adtech</strong>, the clearest articulation of the agentic commerce opportunity, and the client relationships to execute on it. The race is to build the product that matches the vision before Profound's funding advantage closes the gap.
+  </div>
+</div>
+
+<!-- ═══════════ S9 — ABOUT ME ═══════════ -->
+<div class="slide" id="s9">
+  <div class="eyebrow">08 — About Me</div>
+  <h2>Why I'm reaching out,<br>and <em>what I bring.</em></h2>
+  <div class="about-grid">
+    <div>
+      <p class="body-sm" style="margin-bottom:20px">I'm finishing my <strong>Master's in Engineering Management</strong> at Dartmouth's Thayer School of Engineering, affiliated with the Tuck School of Business. I graduate in spring 2026 and I'm looking for a <strong>summer 2026 internship.</strong></p>
+      <p class="body-sm" style="margin-bottom:20px">I've spent my career so far at small companies. I know what it's like when your job description changes week to week, when you're doing customer research in the morning and building a pitch deck in the afternoon. I'm comfortable with ambiguity. I prefer it.</p>
+      <p class="body-sm" style="margin-bottom:20px">The reason I'm reaching out to Bluefish specifically — and not applying broadly to "AI companies" — is that I've been thinking about this exact space for six months. I understand the landscape, the protocols, and the competitive dynamics at a level that most applicants won't. This brief is evidence of that.</p>
+      <p class="body-sm">I want to contribute in whatever capacity is useful — operations, customer success, sales support, research, GTM. I'm not attached to a title. I want to be helpful.</p>
+    </div>
+    <div>
+      <div style="border:1px solid var(--border);padding:20px;margin-bottom:12px">
+        <div class="about-label">Education</div>
+        <div class="about-item"><strong>M.S. Engineering Management</strong> — Dartmouth (Thayer / Tuck), Spring 2026</div>
+      </div>
+      <div style="border:1px solid var(--border);padding:20px;margin-bottom:12px">
+        <div class="about-label">What I've done in this space</div>
+        <div class="about-item">6-month research sprint on AEO/GEO landscape</div>
+        <div class="about-item">Capital One AI visibility platform evaluation</div>
+        <div class="about-item">Competitive analysis across 15+ platforms</div>
+        <div class="about-item">Protocol stack research: MCP, ACP, UCP, WebMCP, A2A</div>
+        <div class="about-item">Product strategy brief for a company in the space</div>
+      </div>
+      <div style="border:1px solid var(--border);padding:20px">
+        <div class="about-label">Work style</div>
+        <div class="about-item">All prior experience at <strong>startups and small teams</strong></div>
+        <div class="about-item">Comfortable with ambiguous, fast-changing scope</div>
+        <div class="about-item">Generalist orientation — ops, research, GTM, CS</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ S10 — CONTACT ═══════════ -->
+<div class="slide" id="s10">
+  <div class="contact-center">
+    <div style="font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-bottom:32px">09 — Next Step</div>
+    <h2 style="text-align:center;max-width:600px;font-size:clamp(36px,5vw,64px)">I'd love to get<br>on a <em>call.</em></h2>
+    <p class="lead" style="text-align:center;max-width:460px;margin-top:16px">
+      20 minutes. I can walk you through this research in more detail, share what I've learned about the competitive landscape, and talk about where I might be useful on the team.
+    </p>
+    <div style="margin-top:32px;display:flex;gap:12px;align-items:center">
+      <div style="padding:10px 24px;border:1px solid var(--accent);color:var(--accent);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase">Summer 2026 Internship</div>
+    </div>
+    <div style="margin-top:24px;font-size:12px;color:var(--dim)">
+      Dartmouth — Thayer School of Engineering / Tuck School of Business
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<div class="chrome-bottom">
+  <span class="nav-hint">← → to navigate</span>
+  <div class="nav-dots" id="dots"></div>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const TOTAL=slides.length;
+let cur=0;
+const dotsEl=document.getElementById('dots');
+slides.forEach((s,i)=>{const d=document.createElement('div');d.className='dot';if(i===0)d.classList.add('on');d.onclick=()=>go(i);dotsEl.appendChild(d)});
+function go(n){
+  if(n<0||n>=TOTAL||n===cur)return;
+  slides[cur].classList.remove('active');slides[cur].classList.add('exit-up');
+  setTimeout(()=>slides[cur].classList.remove('exit-up'),350);
+  cur=n;slides[cur].classList.add('active');
+  updateChrome();
+}
+function updateChrome(){
+  document.getElementById('counter').textContent=`${String(cur+1).padStart(2,'0')} / ${String(TOTAL).padStart(2,'0')}`;
+  document.getElementById('pline').style.width=((cur+1)/TOTAL)*100+'%';
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();go(cur+1)}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(cur-1)}
+  if(e.key==='Home')go(0);if(e.key==='End')go(TOTAL-1);
+});
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)go(dx<0?cur+1:cur-1)},{passive:true});
+updateChrome();
+</script>
+</body>
+</html>
