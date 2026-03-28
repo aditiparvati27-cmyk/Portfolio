@@ -22,6 +22,7 @@ const BluefishDeck = lazy(() => import("@/pages/bluefish"));
 const AthenaHQDeck = lazy(() => import("@/pages/athenahq"));
 const ScrunchDeck = lazy(() => import("@/pages/scrunch"));
 const GaugeDeck = lazy(() => import("@/pages/gauge"));
+const CreatifyAI = lazy(() => import("@/pages/creatify-ai"));
 
 function RouteLoading() {
   return (
@@ -48,6 +49,7 @@ function Router() {
         <Route path="/athenahq" component={AthenaHQDeck} />
         <Route path="/scrunch" component={ScrunchDeck} />
         <Route path="/gauge" component={GaugeDeck} />
+        <Route path="/creatifyAI" component={CreatifyAI} />
         <Route path="/projects/ooma" component={OomaPortfolio} />
         <Route path="/projects/profound" component={ProfoundPortfolio} />
         <Route path="/projects/typeface" component={TypefacePortfolio} />
