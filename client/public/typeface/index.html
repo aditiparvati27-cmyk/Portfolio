@@ -1593,27 +1593,68 @@ body::-webkit-scrollbar-thumb {
 }
 
 .deck-vertical-hint {
-    position: fixed;
-    left: 50%;
-    bottom: 14px;
-    transform: translateX(-50%) translateY(8px);
-    z-index: 1200;
-    border: 1px solid rgba(0, 0, 0, 0.14);
-    background: rgba(255, 255, 255, 0.96);
-    color: var(--text-dark);
-    border-radius: 999px;
-    padding: 8px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: none; /* replaced by #slide-scroll-gradient */
 }
 
-.deck-vertical-hint.show {
+/* ── Scroll-fade gradient overlay ── */
+#slide-scroll-gradient {
+    position: fixed;
+    top: min(calc(100vh - 126px), 692px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1280px, calc(100vw - 24px));
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.97) 100%);
+    pointer-events: none;
+    z-index: 1150;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    gap: 4px;
+    flex-direction: column;
+}
+
+#slide-scroll-gradient.visible {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+}
+
+.ssg-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.ssg-chevrons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.ssg-chevron {
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid rgba(74, 74, 74, 0.65);
+    border-bottom: 2px solid rgba(74, 74, 74, 0.65);
+    transform: rotate(45deg);
+    animation: ssg-bounce 1.6s ease-in-out infinite;
+}
+
+.ssg-chevron:nth-child(2) {
+    animation-delay: 0.18s;
+    opacity: 0.45;
+}
+
+@keyframes ssg-bounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50%       { transform: rotate(45deg) translateY(4px); }
 }
 
 .s2-entry-text a {
@@ -1630,17 +1671,32 @@ body::-webkit-scrollbar-thumb {
         height: calc(100vh - 96px);
         max-height: none;
     }
+    #slide-scroll-gradient {
+        top: calc(100vh - 126px);
+        width: 100vw;
+        left: 0;
+        transform: none;
+    }
 }
     </style>
 </head>
 <body>
-    <div class="deck-hint">Scroll right and left to move through slides</div>
+    <div class="deck-hint">← → navigate &nbsp;·&nbsp; ↓ scroll within slides</div>
     <div class="deck-progress" id="deck-progress-text">Slide 1 of 10</div>
     <div class="deck-controls">
         <button class="deck-btn" id="deck-prev" type="button" aria-label="Previous slide">&larr; Prev</button>
         <button class="deck-btn" id="deck-next" type="button" aria-label="Next slide">Next &rarr;</button>
     </div>
     <div class="deck-vertical-hint" id="deck-vertical-hint">↓ Scroll down for more</div>
+
+    <!-- Scroll fade gradient — appears when active slide has content below the fold -->
+    <div id="slide-scroll-gradient">
+        <div class="ssg-label">scroll for more</div>
+        <div class="ssg-chevrons">
+            <div class="ssg-chevron"></div>
+            <div class="ssg-chevron"></div>
+        </div>
+    </div>
 
     <!-- SLIDE 1: Title Slide -->
     <div class="slide" id="slide-1">
@@ -2468,6 +2524,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var prevBtn = document.getElementById('deck-prev');
     var nextBtn = document.getElementById('deck-next');
     var verticalHint = document.getElementById('deck-vertical-hint');
+    var scrollGradient = document.getElementById('slide-scroll-gradient');
     var currentIndex = 0;
     var wheelLocked = false;
     var touchStartX = 0;
@@ -2487,17 +2544,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateVerticalHint() {
-        if (!verticalHint) return;
         var activeSlide = slides[currentIndex];
-        if (!activeSlide) {
-            verticalHint.classList.remove('show');
-            return;
+        var show = false;
+
+        if (activeSlide) {
+            var hasOverflow = (activeSlide.scrollHeight - activeSlide.clientHeight) > 16;
+            var nearBottom = (activeSlide.scrollTop + activeSlide.clientHeight) >= (activeSlide.scrollHeight - 16);
+            show = hasOverflow && !nearBottom;
         }
 
-        var hasOverflow = (activeSlide.scrollHeight - activeSlide.clientHeight) > 16;
-        var nearBottom = (activeSlide.scrollTop + activeSlide.clientHeight) >= (activeSlide.scrollHeight - 16);
-
-        verticalHint.classList.toggle('show', hasOverflow && !nearBottom);
+        if (verticalHint) verticalHint.classList.toggle('show', show);
+        if (scrollGradient) scrollGradient.classList.toggle('visible', show);
     }
 
     function renderSlide(index) {
