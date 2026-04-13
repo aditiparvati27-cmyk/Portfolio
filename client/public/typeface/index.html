@@ -1050,6 +1050,64 @@
             letter-spacing: 1px;
             min-width: 70px;
         }
+        .s4-sizing-tag small {
+            display: block;
+            font-weight: 400;
+            font-size: 9px;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .s4-orientation {
+            font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+            font-size: 12px;
+            color: var(--text-mid);
+            text-align: center;
+            margin: 14px auto 4px;
+            letter-spacing: 0.2px;
+        }
+        .s4-orientation strong { color: var(--text-dark); font-weight: 700; }
+
+        .s4-legend {
+            display: flex;
+            gap: 22px;
+            justify-content: center;
+            margin: 2px auto 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .s4-legend span { display: inline-flex; align-items: center; }
+        .s4-legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .kn-kpi-callout {
+            outline: 2px solid #FFD600;
+            outline-offset: 3px;
+        }
+
+        .kn-caption {
+            position: absolute;
+            width: 155px;
+            transform: translateX(-50%);
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            line-height: 1.35;
+            color: var(--text-muted);
+            text-align: center;
+            font-style: italic;
+            pointer-events: none;
+        }
 
         .s4-sizing-formula {
             font-family: 'IBM Plex Mono', 'SF Mono', monospace;
@@ -2097,50 +2155,59 @@ body::-webkit-scrollbar-thumb {
             <span style="color: var(--text-muted); font-size: 13px;">|</span>
             <span class="s4-label" style="letter-spacing: 1.5px;">Opportunity 2</span>
             <span style="color: var(--text-muted); font-size: 16px; margin-left: 4px;">—</span>
-            <h2 class="s4-title">Content Revenue Impact</h2>
+            <h2 class="s4-title">Optimized Campaigns per Month</h2>
         </div>
-        <div class="kpi-tree-container kpi-tree-container-2" style="height: 450px;">
-            <svg class="kpi-lines" viewBox="0 0 1160 450" preserveAspectRatio="xMidYMid meet"></svg>
-            <div class="kn kn-root" data-id="root2" style="left: 580px; top: 0;">CONTENT REVENUE<br>IMPACT</div>
-            <div class="kn kn-red" data-id="r1a" data-parent="root2" style="left: 190px; top: 95px;">Revenue per Impression</div>
-            <div class="kn kn-teal" data-id="r1b" data-parent="root2" style="left: 580px; top: 95px;">Audience Reach per<br>Asset</div>
-            <div class="kn kn-blue" data-id="r1c" data-parent="root2" style="left: 970px; top: 95px;">Content Volume Deployed</div>
-            <div class="kn kn-red-l" data-id="r2a1" data-parent="r1a" style="left: 115px; top: 185px;">Conversion Rate</div>
-            <div class="kn kn-red-l" data-parent="r1a" style="left: 265px; top: 185px;">Revenue per<br>Conversion</div>
-            <div class="kn kn-red-l" data-parent="r2a1" style="left: 60px; top: 275px; font-size: 9px; padding: 5px 8px;">Brand Compliance<br>Rate</div>
-            <div class="kn kn-red" data-id="r3a2" data-parent="r2a1" style="left: 175px; top: 275px; font-size: 9px; padding: 5px 8px;">Performance<br>Optimization Lift</div>
-            <div class="kn kn-red-l" data-parent="r3a2" style="left: 120px; top: 365px; font-size: 9px; padding: 5px 8px;">Prediction<br>Accuracy</div>
-            <div class="kn kn-red-l" data-parent="r3a2" style="left: 240px; top: 365px; font-size: 9px; padding: 5px 8px;">Feedback Loop<br>Speed</div>
-            <div class="kn kn-teal-l" data-parent="r1b" style="left: 500px; top: 185px;">Channels Activated<br>per Asset</div>
-            <div class="kn kn-teal" data-id="r2b2" data-parent="r1b" style="left: 660px; top: 185px; font-size: 10px; padding: 7px 11px;">Avg Impressions<br>per Channel</div>
-            <div class="kn kn-teal-l" data-parent="r2b2" style="left: 600px; top: 275px; font-size: 9px; padding: 5px 8px;">Personalized Variants<br>per Channel</div>
-            <div class="kn kn-teal-l" data-parent="r2b2" style="left: 730px; top: 275px; font-size: 9px; padding: 5px 8px;">Audience per<br>Variant</div>
-            <div class="kn kn-blue-l" data-id="r2c1" data-parent="r1c" style="left: 880px; top: 185px;">Active Creators<br>on Platform</div>
-            <div class="kn kn-blue" data-id="r2c2" data-parent="r1c" style="left: 1070px; top: 185px; font-size: 10px; padding: 7px 11px;">Assets Published<br>per Creator</div>
-            <div class="kn kn-blue-l" style="left: 830px; top: 275px; font-size: 9px; padding: 5px 8px;" data-parent="r2c1">Licensed<br>Seats</div>
-            <div class="kn kn-blue" data-id="r3c2" data-parent="r2c1" style="left: 910px; top: 275px; font-size: 9px; padding: 5px 8px;">Platform Adoption<br>Rate</div>
-            <div class="kn kn-blue-l" data-parent="r3c2" style="left: 855px; top: 365px; font-size: 9px; padding: 5px 8px;">% Exposed to<br>Key Features</div>
-            <div class="kn kn-blue-l" data-parent="r3c2" style="left: 975px; top: 365px; font-size: 9px; padding: 5px 8px;">Onboarding<br>Completion Rate</div>
-            <div class="kn kn-blue-l" data-parent="r2c2" style="left: 1030px; top: 275px; font-size: 9px; padding: 5px 8px;">Active Production<br>Days</div>
-            <div class="kn kn-blue-l" data-parent="r2c2" style="left: 1160px; top: 275px; font-size: 9px; padding: 5px 8px;">Assets Produced<br>per Day</div>
+
+        <div class="s4-orientation">Campaign Volume &nbsp;&times;&nbsp; Attribution Coverage Rate &nbsp;&times;&nbsp; Optimized Score Rate &nbsp;=&nbsp; <strong>Optimized Campaigns / Month</strong></div>
+
+        <div class="s4-legend">
+            <span><span class="s4-legend-dot" style="background:#1565C0;"></span>Volume &middot; campaigns/mo</span>
+            <span><span class="s4-legend-dot" style="background:#BF360C;"></span>Attribution &middot; Primary KPI</span>
+            <span><span class="s4-legend-dot" style="background:#00897B;"></span>Optimization &middot; Secondary KPI</span>
+            <span>&#9733; Hypothesis KPI</span>
         </div>
+
+        <div class="kpi-tree-container kpi-tree-container-2">
+            <svg class="kpi-lines" viewBox="0 0 1160 325" preserveAspectRatio="xMidYMid meet"></svg>
+
+            <div class="kn kn-root" data-id="root2" style="left: 580px; top: 0;">OPTIMIZED CAMPAIGNS<br>/ MONTH</div>
+
+            <div class="kn kn-blue" data-id="r1a" data-parent="root2" style="left: 190px; top: 105px;">Campaign Volume</div>
+            <div class="kn kn-red kn-kpi-callout" data-id="r1b" data-parent="root2" style="left: 580px; top: 105px;">&#9733; Attribution<br>Coverage Rate</div>
+            <div class="kn kn-teal" data-id="r1c" data-parent="root2" style="left: 970px; top: 105px;">Optimized Score Rate</div>
+
+            <div class="kn kn-blue-l" data-parent="r1a" style="left: 105px; top: 200px;">Active<br>Accounts</div>
+            <div class="kn kn-blue-l" data-parent="r1a" style="left: 275px; top: 200px;">Avg Campaigns<br>per Account</div>
+
+            <div class="kn kn-red-l" data-parent="r1b" style="left: 495px; top: 200px;">Connector<br>Active Rate</div>
+            <div class="kn kn-red-l" data-parent="r1b" style="left: 665px; top: 200px;">Auto-Tag<br>Rate</div>
+
+            <div class="kn kn-teal-l kn-kpi-callout" data-parent="r1c" style="left: 880px; top: 200px;">&#9733; Prediction<br>Accuracy</div>
+            <div class="kn kn-teal-l" data-parent="r1c" style="left: 1060px; top: 200px;">Application<br>Rate</div>
+
+            <div class="kn-caption" style="left: 495px; top: 258px;">% of performance channels wired to SFMC, CM360, Meta, Braze</div>
+            <div class="kn-caption" style="left: 665px; top: 258px;">% of published campaigns auto-tagged in Campaign Canvas</div>
+            <div class="kn-caption" style="left: 880px; top: 258px;">% of pre-publish scores whose predicted tier matches post-publish actual</div>
+            <div class="kn-caption" style="left: 1060px; top: 258px;">% of scored campaigns where the marketer followed the recommendation</div>
+        </div>
+
         <div class="s4-sizing">
-            <div class="s4-sizing-label">Opportunity Sizing</div>
+            <div class="s4-sizing-label">Opportunity Sizing — Optimized Campaigns per Month</div>
             <div class="s4-sizing-row">
-                <span class="s4-sizing-tag">Baseline</span>
+                <span class="s4-sizing-tag">Baseline<small>today's state</small></span>
                 <div>
-                    <div class="s4-sizing-formula">80-120 accts &times; 50% connector active &times; 60% tracked &times; 8-12 campaigns &times; 1.5 channels &times; 2 variants &times; $400-$600 rev/campaign &times; 55% attribution &times; 1.0 loop multiplier</div>
-                    <div class="s4-sizing-result">~$4M–$7M / month attributed content revenue across customer base</div>
+                    <div class="s4-sizing-formula">100 accts &times; 10 camp/acct &nbsp;&times;&nbsp; 50% connector &times; 60% auto-tag &nbsp;&times;&nbsp; 52% pred. accuracy &times; 40% application</div>
+                    <div class="s4-sizing-result">~62 optimized campaigns / month &nbsp;&middot;&nbsp; 30% attribution coverage</div>
                 </div>
             </div>
             <div class="s4-sizing-row" style="margin-top: 12px;">
-                <span class="s4-sizing-tag">Target</span>
+                <span class="s4-sizing-tag">Target<small>6 months post-launch</small></span>
                 <div>
-                    <div class="s4-sizing-formula">80-120 accts &times; 65% active &times; 72% tracked &times; 10-14 campaigns &times; 2.5 channels &times; 2.5 variants &times; $500-$700 rev &times; 70% attribution &times; 1.2 loop multiplier</div>
-                    <div class="s4-sizing-result">~$25M–$40M / month</div>
+                    <div class="s4-sizing-formula">100 accts &times; 12 camp/acct &nbsp;&times;&nbsp; 65% connector &times; 72% auto-tag &nbsp;&times;&nbsp; 75% pred. accuracy &times; 80% application</div>
+                    <div class="s4-sizing-result">~337 optimized campaigns / month &nbsp;&middot;&nbsp; 47% &rarr; 50%+ attribution coverage</div>
                 </div>
             </div>
-            <div class="s4-sizing-lift">~6–7x lift</div>
+            <div class="s4-sizing-lift">~5.4x optimized campaigns &nbsp;&middot;&nbsp; ~1.6x attribution coverage &rarr; CMO can cite content ROI</div>
         </div>
     </div>
 
