@@ -1531,8 +1531,14 @@ body::-webkit-scrollbar-thumb {
     max-height: 720px;
     min-height: 0;
     display: none;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
+}
+.deck-fit-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform-origin: 0 0;
 }
 
 .slide.active-slide {
@@ -2467,11 +2473,42 @@ document.addEventListener('DOMContentLoaded', function () {
     var progressText = document.getElementById('deck-progress-text');
     var prevBtn = document.getElementById('deck-prev');
     var nextBtn = document.getElementById('deck-next');
-    var verticalHint = document.getElementById('deck-vertical-hint');
     var currentIndex = 0;
     var wheelLocked = false;
     var touchStartX = 0;
     var touchStartY = 0;
+
+    // Wrap each slide's children in a .deck-fit-wrapper so we can zoom-fit content
+    function initSlideFit() {
+        slides.forEach(function (slide) {
+            var cs = window.getComputedStyle(slide);
+            var flexDir = cs.flexDirection || 'column';
+            var wrapper = document.createElement('div');
+            wrapper.className = 'deck-fit-wrapper';
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = flexDir;
+            while (slide.firstChild) {
+                wrapper.appendChild(slide.firstChild);
+            }
+            slide.appendChild(wrapper);
+        });
+    }
+
+    // Scale content down via CSS zoom so it always fits within the slide height
+    function fitActiveSlide() {
+        var slide = slides[currentIndex];
+        if (!slide) return;
+        var wrapper = slide.querySelector('.deck-fit-wrapper');
+        if (!wrapper) return;
+        wrapper.style.zoom = '1';
+        var slideH = slide.clientHeight;
+        var contentH = wrapper.scrollHeight;
+        if (contentH > slideH + 4) {
+            wrapper.style.zoom = (slideH / contentH).toFixed(4);
+        }
+    }
+
+    initSlideFit();
 
     function redrawVisibleTrees() {
         drawTreeLines('.kpi-tree-container:not(.kpi-tree-container-2)');
@@ -2486,37 +2523,19 @@ document.addEventListener('DOMContentLoaded', function () {
         if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
     }
 
-    function updateVerticalHint() {
-        if (!verticalHint) return;
-        var activeSlide = slides[currentIndex];
-        if (!activeSlide) {
-            verticalHint.classList.remove('show');
-            return;
-        }
-
-        var hasOverflow = (activeSlide.scrollHeight - activeSlide.clientHeight) > 16;
-        var nearBottom = (activeSlide.scrollTop + activeSlide.clientHeight) >= (activeSlide.scrollHeight - 16);
-
-        verticalHint.classList.toggle('show', hasOverflow && !nearBottom);
-    }
-
     function renderSlide(index) {
         if (index < 0 || index >= slides.length) return;
         currentIndex = index;
 
         slides.forEach(function (slide, idx) {
-            var isActive = idx === currentIndex;
-            slide.classList.toggle('active-slide', isActive);
-            if (isActive) {
-                slide.scrollTop = 0;
-            }
+            slide.classList.toggle('active-slide', idx === currentIndex);
         });
 
         updateDeckUi();
 
         requestAnimationFrame(function () {
+            fitActiveSlide();
             redrawVisibleTrees();
-            updateVerticalHint();
         });
     }
 
@@ -2588,20 +2607,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
 
     window.addEventListener('resize', function () {
+        fitActiveSlide();
         redrawVisibleTrees();
-        updateVerticalHint();
     });
 
     window.addEventListener('load', function () {
+        fitActiveSlide();
         redrawVisibleTrees();
-        updateVerticalHint();
-    });
-
-    slides.forEach(function (slide) {
-        slide.addEventListener('scroll', function () {
-            if (!slide.classList.contains('active-slide')) return;
-            updateVerticalHint();
-        }, { passive: true });
     });
 
     renderSlide(0);
