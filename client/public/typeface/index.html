@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typeface - Product Opportunity Assessment</title>
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "vp6im8t7qs");
+    </script>
+    <link rel="preconnect" href="https://www.clarity.ms" crossorigin>
+    <link rel="dns-prefetch" href="https://www.clarity.ms">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --typeface-red: #E8363A;
+            --typeface-red-light: rgba(232, 54, 58, 0.08);
+            --bg-white: #FFFFFF;
+            --bg-light: #F7F7F8;
+            --bg-panel: #FAFAFA;
+            --text-dark: #1A1A1A;
+            --text-mid: #4A4A4A;
+            --text-muted: #7A7A7A;
+            --border-light: #EBEBEB;
+        }
+
+        body {
+            background: #F0F0F2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 40px 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Slide container - 16:9 */
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: var(--bg-white);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Red accent bar on top */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--typeface-red);
+            z-index: 10;
+        }
+
+        /* Geometric decorative shapes - inspired by Typeface website cards */
+        .geo-shape {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .geo-shape-1 {
+            top: -40px;
+            right: 340px;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--typeface-red), #FF6B6B);
+            opacity: 0.06;
+            transform: rotate(15deg);
+        }
+
+        .geo-shape-2 {
+            bottom: 60px;
+            right: 380px;
+            width: 80px;
+            height: 80px;
+            background: var(--typeface-red);
+            opacity: 0.04;
+            transform: rotate(45deg);
+        }
+
+        .geo-shape-3 {
+            top: 160px;
+            right: 395px;
+            width: 8px;
+            height: 60px;
+            background: var(--typeface-red);
+            opacity: 0.12;
+        }
+
+        /* Left content area */
+        .slide-left {
+            flex: 1;
+            padding: 72px 64px 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-left-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Typeface logo mark */
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--typeface-red);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            letter-spacing: -0.2px;
+        }
+
+        /* Brand title */
+        .brand-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 68px;
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -1.5px;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-mid);
+            letter-spacing: -0.3px;
+            margin-bottom: 32px;
+        }
+
+        /* Red divider */
+        .divider {
+            width: 72px;
+            height: 3px;
+            background: var(--typeface-red);
+            margin-bottom: 36px;
+        }
+
+        /* Tagline */
+        .tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-mid);
+            line-height: 1.6;
+            max-width: 420px;
+        }
+
+        /* Author info */
+        .author-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .author-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .author-role {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        /* Right panel - The Landscape stats */
+        .slide-right {
+            width: 420px;
+            background: var(--bg-panel);
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+            border-left: 1px solid var(--border-light);
+        }
+
+        .landscape-header {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 32px;
+        }
+
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            flex: 1;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .stat-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .stat-value .arrow {
+            color: var(--typeface-red);
+            font-size: 20px;
+            margin: 0 4px;
+        }
+
+        .stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ===== SLIDE 2: How I Got Here ===== */
+        .slide-2 {
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .s2-top {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .s2-header {
+            position: absolute;
+            top: 28px;
+            left: 56px;
+            z-index: 5;
+        }
+
+        .s2-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        /* Left column - My Journey */
+        .s2-left {
+            flex: 1;
+            padding: 88px 40px 32px 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .s2-section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .s2-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .s2-entry {
+            display: flex;
+            gap: 16px;
+        }
+
+        .s2-date {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            white-space: nowrap;
+            min-width: 80px;
+            padding-top: 2px;
+        }
+
+        .s2-date-line {
+            width: 3px;
+            background: var(--typeface-red);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .s2-entry-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.65;
+        }
+
+        .s2-question {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--typeface-red);
+            line-height: 1.55;
+            margin-top: 20px;
+        }
+
+        /* Right column - What I Found */
+        .s2-right {
+            width: 440px;
+            background: var(--bg-panel);
+            border-left: 1px solid var(--border-light);
+            padding: 88px 36px 32px 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .s2-found-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .s2-found-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .s2-bullet {
+            width: 6px;
+            height: 6px;
+            background: var(--typeface-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        .s2-found-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .s2-found-highlight {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Bottom key insight bar */
+        .s2-bottom {
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-light);
+            padding: 20px 56px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .s2-insight-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .s2-insight-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 12.5px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .s2-sources {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        /* ===== SLIDE 3: Opportunity 1 - Unified Campaign Orchestration ===== */
+        .slide-3 {
+            flex-direction: column;
+            height: auto;
+            min-height: 720px;
+        }
+
+        .s3-header {
+            padding: 28px 56px 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .s3-opp-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 6px;
+        }
+
+        .s3-opp-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        /* Top row: 3 cards */
+        .s3-row-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .s3-card {
+            padding: 24px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .s3-card + .s3-card {
+            border-left: 1px solid var(--border-light);
+        }
+
+        .s3-card-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+        }
+
+        .s3-card-headline {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.35;
+        }
+
+        .s3-card-body {
+            font-family: 'Inter', sans-serif;
+            font-size: 12.5px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.65;
+        }
+
+        .s3-card-quote {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.55;
+            padding: 12px 16px;
+            background: var(--typeface-red-light);
+            border-left: 3px solid var(--typeface-red);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .s3-card-quote-src {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* Evidence list */
+        .s3-evidence-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .s3-evidence-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .s3-ev-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--typeface-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .s3-ev-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.55;
+        }
+
+        .s3-ev-src {
+            color: var(--text-muted);
+            font-size: 10px;
+            font-style: italic;
+        }
+
+        /* Bottom row: 2 cards */
+        .s3-row-bottom {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .s3-value-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .s3-value-col {
+            padding: 0 20px;
+        }
+
+        .s3-value-col + .s3-value-col {
+            border-left: 1px solid var(--border-light);
+        }
+
+        .s3-value-col-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .s3-value-item {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+
+        .s3-value-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--typeface-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .s3-value-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 11.5px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.55;
+        }
+
+        /* Bottom bar - builds on existing */
+        .s3-footer {
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-light);
+            padding: 18px 56px;
+        }
+
+        .s3-footer-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+
+        .s3-footer-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 11.5px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .s3-who-list {
+            font-family: 'Inter', sans-serif;
+            font-size: 12.5px;
+            color: var(--text-mid);
+            line-height: 1.65;
+            padding-left: 16px;
+            margin: 0;
+        }
+        .s3-who-list li {
+            margin-bottom: 8px;
+        }
+
+        .s3-row-bottom-slim {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-bottom: 1px solid var(--border-light);
+            padding: 20px 32px;
+        }
+
+        .s3-slim-left {
+            padding-right: 24px;
+            border-right: 1px solid var(--border-light);
+        }
+
+        .s3-slim-right {
+            padding-left: 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .s3-slim-headline {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 6px 0 8px;
+        }
+
+        .s3-slim-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ===== SLIDE 3B/5: Solution - Opportunity 1 ===== */
+        .slide-3b {
+            flex-direction: column;
+            height: auto;
+            min-height: 720px;
+        }
+
+        .s5-header {
+            padding: 28px 56px 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .s5-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.3px;
+            margin-top: 6px;
+        }
+
+        .s5-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* Horizontal 3-step flow */
+        .s5-flow {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 0;
+            padding: 32px 56px;
+            flex: 1;
+        }
+
+        .s5-step-card {
+            flex: 1;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .s5-step-num {
+            width: 28px;
+            height: 28px;
+            background: var(--typeface-red);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .s5-step-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .s5-step-time {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .s5-step-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .s5-arrow {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            color: var(--typeface-red);
+            font-weight: 700;
+            padding: 0 16px;
+            flex-shrink: 0;
+        }
+
+        /* Metrics row */
+        .s5-metrics-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .s5-metric-card {
+            padding: 16px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .s5-metric-card + .s5-metric-card {
+            border-left: 1px solid var(--border-light);
+        }
+
+        .s5-metric-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .s5-label-primary { color: var(--typeface-red); }
+        .s5-label-secondary { color: #1565C0; }
+        .s5-label-guardrail { color: #00897B; }
+
+        .s5-metric-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .s5-metric-val {
+            font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Validation strip */
+        .s5-validation-strip {
+            background: #1A1A1A;
+            padding: 20px 56px 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+
+        .s5-val-col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .s5-val-week {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .s5-val-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            color: #9A9A9A;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .s5-kill {
+            grid-column: 1 / -1;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--typeface-red);
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            margin-top: 4px;
+        }
+
+        .s3b-opp-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 8px;
+        }
+
+                /* ===== SLIDE 4: KPI Tree - Opportunity 1 ===== */
+        .slide-4 {
+            flex-direction: column;
+            height: auto;
+            min-height: 720px;
+        }
+
+        .s4-header {
+            padding: 28px 56px 16px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+        }
+
+        .s4-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+        }
+
+        .s4-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.3px;
+        }
+
+        .s4-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* KPI Tree — absolute positioned nodes with single SVG for all lines */
+        .kpi-tree-container {
+            position: relative;
+            width: 1160px;
+            height: 420px;
+            margin: 20px auto 0;
+            flex: 1;
+        }
+
+        .s4-tree-note {
+            width: 1160px;
+            margin: 8px auto 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-mid);
+            line-height: 1.55;
+            text-align: center;
+        }
+
+        .kpi-tree-container svg.kpi-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .kpi-tree-container .kn {
+            position: absolute;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            color: #fff;
+            line-height: 1.3;
+            white-space: nowrap;
+            transform: translateX(-50%);
+        }
+
+        .kn-root {
+            background: #4CAF50;
+            border: 2px solid #2E7D32;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .kn-business {
+            background: #FFFFFF;
+            border: 2px solid #1A1A1A;
+            color: #1A1A1A;
+            font-weight: 800;
+            font-size: 11px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .kn-red { background: #BF360C; border: 1px solid #8B2500; }
+        .kn-teal { background: #00897B; border: 1px solid #00695C; }
+        .kn-blue { background: #1565C0; border: 1px solid #0D47A1; }
+        .kn-red-l { background: #8B2500; border: 1px solid #5D1A00; font-weight: 400; font-size: 10px; }
+        .kn-teal-l { background: #00695C; border: 1px solid #004D40; font-weight: 400; font-size: 10px; }
+        .kn-blue-l { background: #0D47A1; border: 1px solid #082E6A; font-weight: 400; font-size: 10px; }
+
+        /* Opportunity Sizing Section */
+        .s4-sizing {
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-light);
+            padding: 24px 56px;
+        }
+
+        .s4-sizing-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--typeface-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .s4-sizing-row {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 8px;
+        }
+
+        .s4-sizing-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 70px;
+        }
+
+        .s4-sizing-formula {
+            font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .s4-sizing-result {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 2px;
+        }
+
+        .s4-sizing-lift {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--typeface-red);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .s4-sizing-bridge {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .s4-sizing-bridge span {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-mid);
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 1300px) {
+            .slide {
+                width: 960px;
+                height: 540px;
+            }
+            .brand-title { font-size: 52px; }
+            .subtitle { font-size: 20px; }
+            .slide-left { padding: 52px 48px 40px; }
+            .slide-right { width: 310px; padding: 36px 28px; }
+            .stat-value { font-size: 21px; }
+            .stats-container { gap: 14px; }
+            .stat-item { padding-bottom: 12px; }
+            .landscape-header { margin-bottom: 22px; }
+            .tagline { font-size: 15px; }
+        }
+
+        @media (max-width: 980px) {
+            .slide {
+                width: 100vw;
+                height: 56.25vw;
+            }
+        }
+
+/* ===== Why-strip for Solution slides ===== */
+.s5-why-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border-light);
+    padding: 16px 56px;
+    background: var(--typeface-red-light);
+}
+.s5-why-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 16px;
+}
+.s5-why-item + .s5-why-item {
+    border-left: 1px solid rgba(232, 54, 58, 0.15);
+}
+.s5-why-stat {
+    font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--typeface-red);
+}
+.s5-why-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-mid);
+}
+
+/* ===== SLIDE 9: Why These Two (Closing / Dark) ===== */
+.slide-closing {
+    flex-direction: column;
+    height: auto;
+    min-height: 720px;
+    background: #1A1A1A;
+    color: #FFFFFF;
+    padding: 48px 56px 40px;
+}
+.sc-header { margin-bottom: 24px; }
+.sc-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+}
+.sc-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    flex: 1;
+    margin-bottom: 24px;
+}
+.sc-card {
+    background: #2A2A2A;
+    border: 1px solid #3A3A3A;
+    border-radius: 10px;
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.sc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--typeface-red);
+}
+.sc-card-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--typeface-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+.sc-card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+.sc-card-body {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #C0C0C0;
+    line-height: 1.6;
+    margin: 0;
+}
+.sc-card-answer {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #E8E8E8;
+    margin: 0;
+    padding: 8px 12px;
+    background: #333;
+    border-radius: 6px;
+    border-left: 3px solid var(--typeface-red);
+}
+.sc-card-answer em { font-style: italic; color: #FFFFFF; }
+.sc-card-window {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #FF7070;
+    font-weight: 500;
+    margin: 0;
+}
+.sc-bottom {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.sc-bottom-headline {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0;
+}
+.sc-bottom-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #999;
+    line-height: 1.6;
+    margin: 0;
+}
+.sc-author {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #666;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ===== SLIDE 10: Appendix ===== */
+.slide-appendix {
+    flex-direction: column;
+    height: auto;
+    min-height: 720px;
+    padding: 48px 56px 40px;
+    gap: 24px;
+}
+.sa-header { border-bottom: 2px solid #E8E8E8; padding-bottom: 12px; }
+.sa-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--text-dark);
+    margin: 0;
+}
+.sa-sources {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+.sa-col-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--typeface-red);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--typeface-red);
+}
+.sa-source-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.sa-source-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: #444;
+    line-height: 1.4;
+    padding-left: 12px;
+    position: relative;
+}
+.sa-source-list li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: #BBB;
+}
+.sa-table-section { flex: 1; }
+.sa-table-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px;
+}
+.sa-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    border: 1px solid #E8E8E8;
+}
+.sa-table thead tr { background: #1A1A1A; color: #FFFFFF; }
+.sa-table thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+}
+.sa-table tbody tr:nth-child(odd) { background: #F7F7F7; }
+.sa-table tbody tr:nth-child(even) { background: #FFFFFF; }
+.sa-table td {
+    padding: 9px 14px;
+    color: #333;
+    border-bottom: 1px solid #EFEFEF;
+}
+.sa-table td:first-child { font-weight: 600; color: #1A1A1A; }
+.badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+}
+.badge-yes { background: #D4EDDA; color: #1E6B35; }
+.badge-partial { background: #FFF3CD; color: #856404; }
+.badge-roadmap { background: #E2ECFF; color: #1A4DA0; }
+.badge-none { background: #F0F0F0; color: #888; }
+.sa-footer {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: #AAA;
+    border-top: 1px solid #F0F0F0;
+    padding-top: 10px;
+}
+
+.s5-hypothesis {
+    padding: 16px 56px;
+    background: #F8F5F0;
+    border-bottom: 1px solid var(--border-light);
+}
+.s5-hyp-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--typeface-red);
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    margin-bottom: 6px;
+}
+.s5-hyp-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.65;
+    margin: 0;
+}
+.s5-hyp-text strong {
+    font-weight: 700;
+    color: var(--text-dark);
+}
+.s5-hyp-connects {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.s5-hyp-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.s5-hyp-kpi {
+    font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dark);
+    background: #FFFFFF;
+    border: 1px solid var(--border-light);
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+.s5-hyp-math {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #D8D0C4;
+}
+.s5-hyp-math-star {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--typeface-red);
+    flex-shrink: 0;
+    line-height: 1.5;
+}
+.s5-hyp-math-text {
+    font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+/* ===== Horizontal deck controls ===== */
+body {
+    display: block;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+    height: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(26, 26, 26, 0.08);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(26, 26, 26, 0.35);
+    border-radius: 999px;
+}
+
+.slide {
+    position: fixed;
+    top: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1280px, calc(100vw - 24px));
+    height: calc(100vh - 98px);
+    max-height: 720px;
+    min-height: 0;
+    display: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.slide.active-slide {
+    display: flex;
+}
+
+.deck-hint {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    z-index: 1200;
+    background: rgba(26, 26, 26, 0.9);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25px;
+}
+
+.deck-progress {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    z-index: 1200;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.deck-controls {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1200;
+    display: flex;
+    gap: 8px;
+}
+
+.deck-btn {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--text-dark);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.deck-btn[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.deck-vertical-hint {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%) translateY(8px);
+    z-index: 1200;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text-dark);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.deck-vertical-hint.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.s2-entry-text a {
+    color: var(--typeface-red);
+    font-weight: 600;
+}
+
+@media (max-width: 980px) {
+    .slide {
+        top: 42px;
+        left: 0;
+        transform: none;
+        width: 100vw;
+        height: calc(100vh - 96px);
+        max-height: none;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="deck-hint">Scroll right and left to move through slides</div>
+    <div class="deck-progress" id="deck-progress-text">Slide 1 of 10</div>
+    <div class="deck-controls">
+        <button class="deck-btn" id="deck-prev" type="button" aria-label="Previous slide">&larr; Prev</button>
+        <button class="deck-btn" id="deck-next" type="button" aria-label="Next slide">Next &rarr;</button>
+    </div>
+    <div class="deck-vertical-hint" id="deck-vertical-hint">↓ Scroll down for more</div>
+
+    <!-- SLIDE 1: Title Slide -->
+    <div class="slide" id="slide-1">
+        <!-- Decorative geometric shapes -->
+        <div class="geo-shape geo-shape-1"></div>
+        <div class="geo-shape geo-shape-2"></div>
+        <div class="geo-shape geo-shape-3"></div>
+
+        <div class="slide-left">
+            <div class="slide-left-content">
+                <div class="logo-mark">
+                    <div class="logo-icon">I</div>
+                    <span class="logo-text">Typeface</span>
+                </div>
+
+                <h1 class="brand-title">Typeface</h1>
+                <p class="subtitle">Product Opportunity Assessment</p>
+                <div class="divider"></div>
+                <p class="tagline">Two opportunities to unlock the Marketing Orchestration Engine's full potential</p>
+            </div>
+
+            <div class="author-info">
+                <span class="author-name">Aditi Parvati</span>
+                <span class="author-role">PM Internship Exercise &nbsp;|&nbsp; April 2026</span>
+            </div>
+        </div>
+
+        <div class="slide-right">
+            <div class="landscape-header">The Landscape</div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-value">$37B</span>
+                    <span class="stat-label">Enterprise gen AI spending annually</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">5x</span>
+                    <span class="stat-label">Content demand growth by 2026</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">7.7%</span>
+                    <span class="stat-label">Marketing budgets (Gartner, 2024)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">40%+</span>
+                    <span class="stat-label">Agentic AI projects to be canceled (Gartner)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">69%</span>
+                    <span class="stat-label">Still need 3-4 weeks per campaign</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">95%</span>
+                    <span class="stat-label">GenAI pilots that fail to scale</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: How I Got Here -->
+    <div class="slide slide-2" id="slide-2">
+        <div class="slide::before"></div>
+
+        <div class="s2-header">
+            <h2 class="s2-title">How I Got Here</h2>
+        </div>
+
+        <div class="s2-top">
+            <div class="s2-left">
+                <div class="s2-section-label">My Approach</div>
+                <div class="s2-timeline">
+                    <div class="s2-entry">
+                        <span class="s2-date">Feb 2026</span>
+                        <div class="s2-date-line"></div>
+                        <p class="s2-entry-text">
+                            Built and showcased an interactive prototype exploring brand voice setup and feedback loops. Content quality looked fine on the surface, yet the real gap sat between brand intelligence and measurable outcomes. Here is the prototype I created: <a href="https://typeface-brand-voice.vercel.app/" target="_blank" rel="noopener noreferrer">https://typeface-brand-voice.vercel.app/</a>
+                        </p>
+                    </div>
+                    <div class="s2-entry">
+                        <span class="s2-date">Mar 2026</span>
+                        <div class="s2-date-line"></div>
+                        <p class="s2-entry-text">
+                            Typeface shipped the Marketing Orchestration Engine and announced Arc Loop on the roadmap. My earlier prototypes validated the direction, which opened up a larger question:
+                        </p>
+                    </div>
+                </div>
+                <p class="s2-question">
+                    If the architecture is ready, how does a non-technical marketer adopt it, and how do we prove ROI?
+                </p>
+            </div>
+
+            <div class="s2-right">
+                <div class="s2-section-label">What I Found</div>
+                <div class="s2-found-list">
+                    <div class="s2-found-item">
+                        <div class="s2-bullet"></div>
+                        <p class="s2-found-text">
+                            Read 20+ Typeface blog posts, Signal Reports, Dreamforce announcements, product docs, customer case studies
+                        </p>
+                    </div>
+                    <div class="s2-found-item">
+                        <div class="s2-bullet"></div>
+                        <p class="s2-found-text">
+                            Competitive teardown across Jasper, Writer, Adobe GenStudio, Canva, Persado, and Anyword
+                        </p>
+                    </div>
+                    <div class="s2-found-item">
+                        <div class="s2-bullet"></div>
+                        <p class="s2-found-text">
+                            Built persona maps: CMOs, Brand Directors, Creative Directors, Marketing Ops, Content Strategists, IT/Security
+                        </p>
+                    </div>
+                    <div class="s2-found-item">
+                        <div class="s2-bullet"></div>
+                        <p class="s2-found-highlight">
+                            The architecture and moat are both strong. Two gaps remain: no clear entry point for casual users, and no hard numbers proving platform ROI.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="s2-bottom">
+            <span class="s2-insight-label">Key Insight</span>
+            <p class="s2-insight-text">
+                Arc Graph, Arc Agents, Arc Spaces, and Arc Forge each hold up independently. The content lifecycle cracks in two places: campaigns get assembled channel by channel instead of orchestrated end to end, and performance data from completed campaigns never feeds back into the next one. Both cracks show up the same way: campaign orchestration velocity drops
+            </p>
+            <p class="s2-sources">
+                Sources: Gartner CMO Spend Survey 2025, Adobe AI &amp; Digital Trends Report 2026, CMI Enterprise Report 2025, Forrester Wave Q1 2025, BCG Enterprise AI 2025, 62 reviews, competitive product pages. Full list in appendix.
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Opportunity 1 - Unified Campaign Orchestration -->
+    <div class="slide slide-3" id="slide-3">
+
+        <div class="s3-header">
+            <div class="s3-opp-label">Opportunity 1</div>
+            <h2 class="s3-opp-title">Unified Campaign Orchestration</h2>
+        </div>
+
+        <!-- Row 1: True Problem | Customers | Evidence -->
+        <div class="s3-row-top">
+
+            <!-- Card 1: What is the true problem? -->
+            <div class="s3-card">
+                <div class="s3-card-label">The Problem</div>
+                <div class="s3-card-headline">Typeface thinks in agents. Marketers think in campaigns.</div>
+                <p class="s3-card-body">
+                    No "Start a campaign" button exists. Users launch agents one at a time — Email, then Ad, then Web — or use a sequential Chat workflow with no parallel dispatch.
+                </p>
+                <div class="s3-card-quote">
+                    "Marketers don't have a content problem; they have a scale problem."
+                    <div class="s3-card-quote-src">- Timothy Young, CEO Jasper, Nov 2025</div>
+                </div>
+            </div>
+
+            <!-- Card 2: Who are the customers? -->
+            <div class="s3-card">
+                <div class="s3-card-label">Who Feels This</div>
+                <div class="s3-card-headline">Marketing teams running multi-channel campaigns</div>
+                <ul class="s3-who-list">
+                    <li>CMOs / Brand Directors — campaign live across 4+ channels in 1–2 weeks</li>
+                    <li>Marketing Ops — coordinating asset production across channels</li>
+                    <li>Content Strategists — brand consistency across 5+ touchpoints</li>
+                </ul>
+            </div>
+
+            <!-- Card 3: How do we know it's real? -->
+            <div class="s3-card">
+                <div class="s3-card-label">Evidence</div>
+                <div class="s3-evidence-list">
+                    <div class="s3-evidence-item">
+                        <div class="s3-ev-dot"></div>
+                        <p class="s3-ev-text">45% of martech leaders say existing vendor AI agents fail to deliver on promised business performance.<br><span class="s3-ev-src">Gartner, Oct 2025 (enterprise martech survey)</span></p>
+                    </div>
+                    <div class="s3-evidence-item">
+                        <div class="s3-ev-dot"></div>
+                        <p class="s3-ev-text">Jasper Grid (Nov 2025): one brief generates landing page + ads + email + social in parallel. CEO: "Marketers don't have a content problem; they have a scale problem."<br><span class="s3-ev-src">PR Newswire, Nov 4 2025</span></p>
+                    </div>
+                    <div class="s3-evidence-item">
+                        <div class="s3-ev-dot"></div>
+                        <p class="s3-ev-text">Forrester identifies orchestrated AI agents as the defining capability for content platforms. Vendors evaluated on orchestration, not isolated generation.<br><span class="s3-ev-src">Forrester Wave: Content Platforms, Q1 2025</span></p>
+                    </div>
+                    <div class="s3-evidence-item">
+                        <div class="s3-ev-dot"></div>
+                        <p class="s3-ev-text">53% of enterprise orgs say their content supply chain stays "largely linear and resource-intensive." Only 47% use AI for omnichannel activation.<br><span class="s3-ev-src">Adobe AI &amp; Digital Trends Report, 2026</span></p>
+                    </div>
+                    <div class="s3-evidence-item">
+                        <div class="s3-ev-dot"></div>
+                        <p class="s3-ev-text">"Scaling high-quality content" is the top AI objective for enterprise marketers, up 2.4x YoY. Scale and governance - not ideation - are the top barriers.<br><span class="s3-ev-src">Jasper State of AI in Marketing, 2025 (500+ marketers, 30% VP+)</span></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Row 2: Value Generated | Why Now -->
+        <div class="s3-row-bottom">
+
+            <!-- Card 4: Value generated -->
+            <div class="s3-card">
+                <div class="s3-card-label">Value Created</div>
+                <div class="s3-value-split">
+                    <div class="s3-value-col">
+                        <div class="s3-value-col-label">For Customers</div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">One brief in, all channels out. Campaign-first, not agent-first.</p>
+                        </div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">3-4 week cycles drop to under 1 week.</p>
+                        </div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">Non-power-users go multi-channel by default.</p>
+                        </div>
+                    </div>
+                    <div class="s3-value-col">
+                        <div class="s3-value-col-label">For the Business</div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">Full campaigns through Typeface = higher stickiness.</p>
+                        </div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">Multi-channel drives seat expansion.</p>
+                        </div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">Neutralizes Jasper Grid before their head start compounds.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Why now -->
+            <div class="s3-card" style="border-left: 1px solid var(--border-light);">
+                <div class="s3-card-label">Why Now</div>
+                <div class="s3-card-headline">6-9 months before this is table stakes</div>
+                <p class="s3-card-body">Jasper shipped Grid in Feb 2026. Every month widens the gap.</p>
+                <p class="s3-card-body" style="margin-top: 8px;">Arc Graph, Agents, Spaces all exist. This needs an orchestration layer - not a new system.</p>
+            </div>
+
+        </div>
+
+        <!-- Footer: Builds on existing -->
+        <div class="s3-footer">
+            <div class="s3-footer-label">Builds on Existing Infrastructure</div>
+            <p class="s3-footer-text">
+                Arc Graph + Arc Agents + Arc Spaces already exist. Add a campaign brief intake that dispatches to all agents in parallel.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- SLIDE 4: KPI Tree + Sizing - Opportunity 1 -->
+    <div class="slide slide-4" id="slide-4">
+
+        <div class="s4-header">
+            <span class="s4-label">KPI Tree</span>
+            <span style="color: var(--text-muted); font-size: 13px;">|</span>
+            <span class="s4-label" style="letter-spacing: 1.5px;">Opportunity 1</span>
+            <span style="color: var(--text-muted); font-size: 16px; margin-left: 4px;">—</span>
+            <h2 class="s4-title">Campaign Orchestration Velocity</h2>
+        </div>
+
+        <!-- KPI Tree: absolute-positioned nodes + single SVG for all connector lines -->
+        <div class="kpi-tree-container">
+
+            <!-- SVG lines drawn dynamically by JS to match actual node positions -->
+            <svg class="kpi-lines" viewBox="0 0 1160 420" preserveAspectRatio="xMidYMid meet"></svg>
+
+            <!-- Product Outcome Root -->
+            <div class="kn kn-root" data-id="root" style="left: 580px; top: 0;">CAMPAIGN<br>ORCHESTRATION<br>VELOCITY</div>
+
+            <!-- Level 1 -->
+            <div class="kn kn-red" data-id="l1a" data-parent="root" style="left: 190px; top: 105px;">Channels per Campaign</div>
+            <div class="kn kn-teal" data-id="l1b" data-parent="root" style="left: 580px; top: 105px;">Campaigns per Team</div>
+            <div class="kn kn-blue" data-id="l1c" data-parent="root" style="left: 970px; top: 105px;">Active Campaign Teams</div>
+
+            <!-- Red children -->
+            <div class="kn kn-red-l" data-id="l2a1" data-parent="l1a" style="left: 105px; top: 195px;">Agents Dispatched<br>per Brief</div>
+            <div class="kn kn-red" data-id="l2a2" data-parent="l1a" style="left: 275px; top: 195px; font-size: 10px; padding: 7px 11px;">Agent Publish<br>Success Rate</div>
+            <!-- Red grandchildren -->
+            <div class="kn kn-red-l" data-parent="l2a2" style="left: 215px; top: 290px; font-size: 9px; padding: 5px 8px;">Cross-Channel<br>Consistency Score</div>
+            <div class="kn kn-red-l" data-parent="l2a2" style="left: 340px; top: 290px; font-size: 9px; padding: 5px 8px;">First-Pass<br>Approval Rate</div>
+
+            <!-- Teal children -->
+            <div class="kn kn-teal-l" data-id="l2b1" data-parent="l1b" style="left: 495px; top: 195px;">Active Campaign<br>Days</div>
+            <div class="kn kn-teal" data-id="l2b2" data-parent="l1b" style="left: 665px; top: 195px; font-size: 10px; padding: 7px 11px;">Campaigns per<br>Active Day</div>
+            <!-- Teal grandchildren -->
+            <div class="kn kn-teal-l" data-parent="l2b2" style="left: 600px; top: 290px; font-size: 9px; padding: 5px 8px;">Briefs Submitted<br>per Day</div>
+            <div class="kn kn-teal-l" data-parent="l2b2" style="left: 730px; top: 290px; font-size: 9px; padding: 5px 8px;">Brief-to-Launch<br>Conversion Rate</div>
+
+            <!-- Blue children -->
+            <div class="kn kn-blue-l" data-id="l2c1" data-parent="l1c" style="left: 880px; top: 195px;">Licensed<br>Teams</div>
+            <div class="kn kn-blue" data-id="l2c2" data-parent="l1c" style="left: 1060px; top: 195px; font-size: 10px; padding: 7px 11px;">Campaign Mode<br>Adoption Rate</div>
+            <!-- Blue grandchildren -->
+            <div class="kn kn-blue-l" data-parent="l2c2" style="left: 985px; top: 290px; font-size: 9px; padding: 5px 8px;">% Teams Exposed to<br>Campaign Mode</div>
+            <div class="kn kn-blue-l" data-parent="l2c2" style="left: 1130px; top: 290px; font-size: 9px; padding: 5px 8px;">First Campaign<br>Completion Rate</div>
+
+        </div>
+
+        <div class="s4-tree-note">This tree shows how we'll know if Opportunity 1 is working. Each level down is a driver that multiplies to produce its parent: improve any leaf node and velocity compounds upward.</div>
+
+        <!-- Opportunity Sizing -->
+        <div class="s4-sizing">
+            <div class="s4-sizing-label">Opportunity Sizing</div>
+
+            <div class="s4-sizing-row">
+                <span class="s4-sizing-tag">Baseline</span>
+                <div>
+                    <div class="s4-sizing-formula">80-120 accts &times; 50% adoption &times; 55% conversion &times; 8-12 campaigns &times; 1.2 agents &times; 65% publish &times; 2.5 channels &times; 80% brand score &times; 70% completion</div>
+                    <div class="s4-sizing-result">~250-350 orchestrated channel-campaigns / month</div>
+                </div>
+            </div>
+
+            <div class="s4-sizing-row" style="margin-top: 12px;">
+                <span class="s4-sizing-tag">Target</span>
+                <div>
+                    <div class="s4-sizing-formula">80-120 accts &times; 70% adoption &times; 70% conversion &times; 10-14 campaigns &times; 1.5 agents &times; 80% publish &times; 3.5 channels &times; 90% brand score &times; 80% completion</div>
+                    <div class="s4-sizing-result">~1,500-2,000 orchestrated channel-campaigns / month</div>
+                </div>
+            </div>
+
+            <div class="s4-sizing-lift">~6x lift</div>
+        </div>
+
+    </div>
+
+    <!-- SLIDE 5: Solution - Opportunity 1 -->
+    <div class="slide slide-3b" id="slide-5">
+
+        <!-- Header -->
+        <div class="s5-header">
+            <div class="s3b-opp-label">Opportunity 1</div>
+            <h2 class="s5-title">Campaign Launch Mode in Arc Spaces</h2>
+        </div>
+
+        <div class="s5-hypothesis">
+            <div class="s5-hyp-label">Solution Hypothesis</div>
+            <p class="s5-hyp-text">Adding a <strong>Campaign Launch Mode</strong> (structured brief intake &rarr; parallel agent dispatch &rarr; unified campaign canvas) to Arc Spaces <strong>will increase multi-channel campaign rate from ~25% to 50%+</strong> for enterprise marketing teams currently running single-channel or sequential campaigns, <strong>within 90 days</strong> of launch.</p>
+            <div class="s5-hyp-connects">
+                <span class="s5-hyp-tag">Moves KPI</span>
+                <span class="s5-hyp-kpi">Channels per Campaign &uarr;</span>
+                <span class="s5-hyp-kpi">Campaigns per Team &uarr;</span>
+                <span class="s5-hyp-kpi">Campaign Mode Adoption &uarr;</span>
+            </div>
+            <div class="s5-hyp-math">
+                <span class="s5-hyp-math-star">*</span>
+                <span class="s5-hyp-math-text">Today 25% of Spaces use 3+ agents (all power users). Campaign Launch Mode targets the other 75%. Of those: 70% get exposed to Campaign Mode &times; 70% complete their first campaign = 49%. 49% of 75% = 37% new multi-channel users. 25% existing + 37% new = 62% total multi-channel rate. Target of 50%+ has ~12pt margin built in for slower-than-expected adoption.</span>
+            </div>
+        </div>
+
+        <!-- 3-step horizontal flow -->
+        <div class="s5-flow">
+            <div class="s5-step-card">
+                <div class="s5-step-num">1</div>
+                <div class="s5-step-name">Brief Intake</div>
+                <div class="s5-step-time">2 min</div>
+                <p class="s5-step-desc">Structured scaffold captures campaign name, objective, channels, audience, timeline. Upload a brief — Arc Graph auto-parses it.</p>
+            </div>
+            <div class="s5-arrow">&rarr;</div>
+            <div class="s5-step-card">
+                <div class="s5-step-num">2</div>
+                <div class="s5-step-name">Parallel Dispatch</div>
+                <div class="s5-step-time">2–4 min</div>
+                <p class="s5-step-desc">All agents fire simultaneously from one enriched brief. Same brand context, same audience, same messaging backbone across every channel.</p>
+            </div>
+            <div class="s5-arrow">&rarr;</div>
+            <div class="s5-step-card">
+                <div class="s5-step-num">3</div>
+                <div class="s5-step-name">Campaign Canvas</div>
+                <div class="s5-step-time">Review</div>
+                <p class="s5-step-desc">All outputs land in a unified, channel-organized canvas. Brand Agent pre-scores consistency. One-click approval routing.</p>
+            </div>
+        </div>
+
+        <!-- Metrics row -->
+        <div class="s5-metrics-row">
+            <div class="s5-metric-card">
+                <span class="s5-metric-label s5-label-primary">Primary</span>
+                <span class="s5-metric-name">Multi-Channel Campaign Rate</span>
+                <span class="s5-metric-val">~25% &rarr; 50%+</span>
+            </div>
+            <div class="s5-metric-card">
+                <span class="s5-metric-label s5-label-secondary">Secondary</span>
+                <span class="s5-metric-name">Brief-to-Publish-Ready Time</span>
+                <span class="s5-metric-val">2–5 days &rarr; &lt;4 hours</span>
+            </div>
+            <div class="s5-metric-card">
+                <span class="s5-metric-label s5-label-guardrail">Guardrail</span>
+                <span class="s5-metric-name">Cross-Channel Consistency</span>
+                <span class="s5-metric-val">Maintain / Improve</span>
+            </div>
+        </div>
+
+        <!-- Validation strip -->
+        <div class="s5-validation-strip">
+            <div class="s5-val-col">
+                <span class="s5-val-week">Wk 1: Shadow Sessions</span>
+                <p class="s5-val-desc">Problem validation &mdash; Observe 3 customers running real campaigns. Does the coordination bottleneck exist as described?</p>
+            </div>
+            <div class="s5-val-col">
+                <span class="s5-val-week">Wk 2: Concierge MVP</span>
+                <p class="s5-val-desc">Value prop test &mdash; Fake the mode (Google Form + manual dispatch). Does a unified canvas change how marketers review cross-channel output?</p>
+            </div>
+            <div class="s5-val-col">
+                <span class="s5-val-week">Wk 3: Instrumentation</span>
+                <p class="s5-val-desc">Feasibility check &mdash; Pull Arc Spaces data: % with 3+ agents, time gaps between agents. Can we measure the baseline?</p>
+            </div>
+            <div class="s5-kill">Kill signal: &lt;20% time on brief-to-asset &rarr; pivot to approval workflow automation</div>
+        </div>
+
+    </div>
+
+    <!-- SLIDE 6: Opportunity 2 - Content-to-Revenue Intelligence -->
+    <div class="slide slide-3" id="slide-6">
+        <div class="s3-header">
+            <div class="s3-opp-label">Opportunity 2</div>
+            <h2 class="s3-opp-title">Content-to-Revenue Intelligence</h2>
+        </div>
+        <div class="s3-row-top">
+            <div class="s3-card">
+                <div class="s3-card-label">The Problem</div>
+                <div class="s3-card-headline">Nobody can prove content drives revenue.</div>
+                <p class="s3-card-body">Over 40% of agentic AI projects are projected to be canceled by 2027 due to unclear ROI. Arc Loop is on the roadmap — what's missing is revenue attribution, predictive scoring, and a self-learning loop that makes every campaign smarter than the last.</p>
+                <div class="s3-card-quote">"53% of enterprise orgs say their content supply chain stays largely linear and resource-intensive. Only 47% use AI for omnichannel activation."<div class="s3-card-quote-src">— Adobe AI &amp; Digital Trends Report, 2026</div></div>
+            </div>
+            <div class="s3-card">
+                <div class="s3-card-label">Who Feels This</div>
+                <div class="s3-card-headline">CMOs who can't justify the spend</div>
+                <ul class="s3-who-list">
+                    <li>CMOs / VPs — proving ROI to CFOs with budgets at 7.7% of revenue (Gartner, 2024)</li>
+                    <li>Marketing Ops — no closed-loop measurement connecting content to pipeline</li>
+                    <li>Brand Directors — no data on which creative decisions actually drive conversions</li>
+                </ul>
+            </div>
+            <div class="s3-card">
+                <div class="s3-card-label">Evidence</div>
+                <div class="s3-evidence-list">
+                    <div class="s3-evidence-item"><div class="s3-ev-dot"></div><p class="s3-ev-text">Gartner predicts over 40% of agentic AI projects will be canceled by end of 2027 — escalating costs, unclear ROI, inadequate governance.<br><span class="s3-ev-src">Gartner, June 25, 2025</span></p></div>
+                    <div class="s3-evidence-item"><div class="s3-ev-dot"></div><p class="s3-ev-text">Arc Loop announced March 2026 as "our future vision." Still unshipped. No closed-loop performance system live today.<br><span class="s3-ev-src">CMSWire &amp; Demand Gen Report coverage, March 2026</span></p></div>
+                    <div class="s3-evidence-item"><div class="s3-ev-dot"></div><p class="s3-ev-text">Writer: 333% ROI (Forrester TEI). Jasper: 342% ROI (Forrester TEI). Typeface: zero published ROI evidence.<br><span class="s3-ev-src">Forrester Total Economic Impact studies, Q3 2025</span></p></div>
+                    <div class="s3-evidence-item"><div class="s3-ev-dot"></div><p class="s3-ev-text">Canva Grow: Purchase ROAS + CPM tracking live. Adobe GenStudio: Omnichannel insights. Anyword: 82% prediction accuracy.<br><span class="s3-ev-src">Canva Grow (Oct 2025), Adobe GenStudio (Mar 2026), Anyword (2025)</span></p></div>
+                    <div class="s3-evidence-item"><div class="s3-ev-dot"></div><p class="s3-ev-text">Only 28% of enterprise marketers rate content strategy as "extremely or very effective."<br><span class="s3-ev-src">Content Marketing Institute Enterprise Report, 2025</span></p></div>
+                </div>
+            </div>
+        </div>
+        <!-- Row 2: Value Generated | Why Now -->
+        <div class="s3-row-bottom">
+
+            <!-- Card 4: Value generated -->
+            <div class="s3-card">
+                <div class="s3-card-label">Value Created</div>
+                <div class="s3-value-split">
+                    <div class="s3-value-col">
+                        <div class="s3-value-col-label">For Customers</div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">CMO gets a revenue number for the CFO. Attributed, not vanity.</p>
+                        </div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">Predictive scoring flags weak content before it ships.</p>
+                        </div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">Each campaign trains the next one. Compounding, not linear.</p>
+                        </div>
+                    </div>
+                    <div class="s3-value-col">
+                        <div class="s3-value-col-label">For the Business</div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">Customers who prove ROI renew at 95%+ vs. 80-85% average.</p>
+                        </div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">Performance data compounds. Switching costs build with every campaign.</p>
+                        </div>
+                        <div class="s3-value-item">
+                            <div class="s3-value-dot"></div>
+                            <p class="s3-value-text">12-18 month head start. No competitor has closed this loop.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Why now -->
+            <div class="s3-card" style="border-left: 1px solid var(--border-light);">
+                <div class="s3-card-label">Why Now</div>
+                <div class="s3-card-headline">12-18 months before this is table stakes</div>
+                <p class="s3-card-body">Anyword: 82% prediction accuracy. Adobe: cross-channel insights. Canva: MangoAI acquisition. Whitespace is closing.</p>
+                <p class="s3-card-body" style="margin-top: 8px;">Content Explainability is live. Arc Graph knows the brand. What's missing: a way to pull revenue results back from SFMC, Meta, and Braze and connect them to the content that drove them.</p>
+            </div>
+
+        </div>
+
+        <!-- Footer: Builds on existing -->
+        <div class="s3-footer">
+            <div class="s3-footer-label">Builds on Existing Infrastructure</div>
+            <p class="s3-footer-text">Content Explainability scores content quality. Arc Graph stores performance signals. Performance Agent analyzes campaigns. Connect them — pull revenue results from SFMC, Meta, and Braze and tie them to the content that drove them.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: KPI Tree - Opportunity 2 -->
+    <div class="slide slide-4" id="slide-7">
+        <div class="s4-header">
+            <span class="s4-label">KPI Tree</span>
+            <span style="color: var(--text-muted); font-size: 13px;">|</span>
+            <span class="s4-label" style="letter-spacing: 1.5px;">Opportunity 2</span>
+            <span style="color: var(--text-muted); font-size: 16px; margin-left: 4px;">—</span>
+            <h2 class="s4-title">Content Revenue Impact</h2>
+        </div>
+        <div class="kpi-tree-container kpi-tree-container-2" style="height: 450px;">
+            <svg class="kpi-lines" viewBox="0 0 1160 450" preserveAspectRatio="xMidYMid meet"></svg>
+            <div class="kn kn-root" data-id="root2" style="left: 580px; top: 0;">CONTENT REVENUE<br>IMPACT</div>
+            <div class="kn kn-red" data-id="r1a" data-parent="root2" style="left: 190px; top: 95px;">Revenue per Impression</div>
+            <div class="kn kn-teal" data-id="r1b" data-parent="root2" style="left: 580px; top: 95px;">Audience Reach per<br>Asset</div>
+            <div class="kn kn-blue" data-id="r1c" data-parent="root2" style="left: 970px; top: 95px;">Content Volume Deployed</div>
+            <div class="kn kn-red-l" data-id="r2a1" data-parent="r1a" style="left: 115px; top: 185px;">Conversion Rate</div>
+            <div class="kn kn-red-l" data-parent="r1a" style="left: 265px; top: 185px;">Revenue per<br>Conversion</div>
+            <div class="kn kn-red-l" data-parent="r2a1" style="left: 60px; top: 275px; font-size: 9px; padding: 5px 8px;">Brand Compliance<br>Rate</div>
+            <div class="kn kn-red" data-id="r3a2" data-parent="r2a1" style="left: 175px; top: 275px; font-size: 9px; padding: 5px 8px;">Performance<br>Optimization Lift</div>
+            <div class="kn kn-red-l" data-parent="r3a2" style="left: 120px; top: 365px; font-size: 9px; padding: 5px 8px;">Prediction<br>Accuracy</div>
+            <div class="kn kn-red-l" data-parent="r3a2" style="left: 240px; top: 365px; font-size: 9px; padding: 5px 8px;">Feedback Loop<br>Speed</div>
+            <div class="kn kn-teal-l" data-parent="r1b" style="left: 500px; top: 185px;">Channels Activated<br>per Asset</div>
+            <div class="kn kn-teal" data-id="r2b2" data-parent="r1b" style="left: 660px; top: 185px; font-size: 10px; padding: 7px 11px;">Avg Impressions<br>per Channel</div>
+            <div class="kn kn-teal-l" data-parent="r2b2" style="left: 600px; top: 275px; font-size: 9px; padding: 5px 8px;">Personalized Variants<br>per Channel</div>
+            <div class="kn kn-teal-l" data-parent="r2b2" style="left: 730px; top: 275px; font-size: 9px; padding: 5px 8px;">Audience per<br>Variant</div>
+            <div class="kn kn-blue-l" data-id="r2c1" data-parent="r1c" style="left: 880px; top: 185px;">Active Creators<br>on Platform</div>
+            <div class="kn kn-blue" data-id="r2c2" data-parent="r1c" style="left: 1070px; top: 185px; font-size: 10px; padding: 7px 11px;">Assets Published<br>per Creator</div>
+            <div class="kn kn-blue-l" style="left: 830px; top: 275px; font-size: 9px; padding: 5px 8px;" data-parent="r2c1">Licensed<br>Seats</div>
+            <div class="kn kn-blue" data-id="r3c2" data-parent="r2c1" style="left: 910px; top: 275px; font-size: 9px; padding: 5px 8px;">Platform Adoption<br>Rate</div>
+            <div class="kn kn-blue-l" data-parent="r3c2" style="left: 855px; top: 365px; font-size: 9px; padding: 5px 8px;">% Exposed to<br>Key Features</div>
+            <div class="kn kn-blue-l" data-parent="r3c2" style="left: 975px; top: 365px; font-size: 9px; padding: 5px 8px;">Onboarding<br>Completion Rate</div>
+            <div class="kn kn-blue-l" data-parent="r2c2" style="left: 1030px; top: 275px; font-size: 9px; padding: 5px 8px;">Active Production<br>Days</div>
+            <div class="kn kn-blue-l" data-parent="r2c2" style="left: 1160px; top: 275px; font-size: 9px; padding: 5px 8px;">Assets Produced<br>per Day</div>
+        </div>
+        <div class="s4-sizing">
+            <div class="s4-sizing-label">Opportunity Sizing</div>
+            <div class="s4-sizing-row">
+                <span class="s4-sizing-tag">Baseline</span>
+                <div>
+                    <div class="s4-sizing-formula">80-120 accts &times; 50% connector active &times; 60% tracked &times; 8-12 campaigns &times; 1.5 channels &times; 2 variants &times; $400-$600 rev/campaign &times; 55% attribution &times; 1.0 loop multiplier</div>
+                    <div class="s4-sizing-result">~$4M–$7M / month attributed content revenue across customer base</div>
+                </div>
+            </div>
+            <div class="s4-sizing-row" style="margin-top: 12px;">
+                <span class="s4-sizing-tag">Target</span>
+                <div>
+                    <div class="s4-sizing-formula">80-120 accts &times; 65% active &times; 72% tracked &times; 10-14 campaigns &times; 2.5 channels &times; 2.5 variants &times; $500-$700 rev &times; 70% attribution &times; 1.2 loop multiplier</div>
+                    <div class="s4-sizing-result">~$25M–$40M / month</div>
+                </div>
+            </div>
+            <div class="s4-sizing-lift">~6–7x lift</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: Solution - Opportunity 2 -->
+    <div class="slide slide-3b" id="slide-8">
+        <div class="s5-header">
+            <div class="s3b-opp-label">Opportunity 2</div>
+            <h2 class="s5-title">Content-to-Revenue Intelligence</h2>
+        </div>
+
+        <div class="s5-hypothesis">
+            <div class="s5-hyp-label">Solution Hypothesis</div>
+            <p class="s5-hyp-text">Adding a <strong>closed-loop performance engine</strong> (revenue attribution dashboard &rarr; predictive content scoring &rarr; performance-to-intelligence feedback loop) to Arc Graph <strong>will enable content-attributed revenue tracking for 50%+ of campaigns</strong> and reach <strong>75%+ prediction accuracy</strong> for enterprise CMOs who currently cannot prove content ROI, <strong>within 6 months</strong> of launch.</p>
+            <div class="s5-hyp-connects">
+                <span class="s5-hyp-tag">Moves KPI</span>
+                <span class="s5-hyp-kpi">Prediction Accuracy &uarr;</span>
+                <span class="s5-hyp-kpi">Feedback Loop Speed &uarr;</span>
+                <span class="s5-hyp-kpi">Performance Optimization Lift &uarr;</span>
+            </div>
+            <div class="s5-hyp-math">
+                <span class="s5-hyp-math-star">*</span>
+                <span class="s5-hyp-math-text">50% attribution: Today 50% of accounts have connectors active &times; 60% of campaigns tracked = 30% coverage. Ship SFMC, CM360, Meta, Braze connectors &rarr; 65% active. Auto-tag in Campaign Canvas &rarr; 72% tracked. 65% &times; 72% = 47%. Round up with improved data quality = 50%+. 75% accuracy: Baseline is 52% (coin flip). Content Explainability adds +12pt (brand/audience signal, already live). Arc Graph historical data adds +11pt (performance patterns across campaigns). 52% + 12pt + 11pt = 75%. Benchmark: Anyword hits 82% on generic ad data with similar architecture.</span>
+            </div>
+        </div>
+
+        <div class="s5-why-strip">
+            <div class="s5-why-item">
+                <span class="s5-why-stat">40%+</span>
+                <span class="s5-why-label">Agentic AI projects predicted canceled by 2027 (Gartner)</span>
+            </div>
+            <div class="s5-why-item">
+                <span class="s5-why-stat">$0</span>
+                <span class="s5-why-label">Content-attributed revenue tracked today</span>
+            </div>
+            <div class="s5-why-item">
+                <span class="s5-why-stat">0 competitors</span>
+                <span class="s5-why-label">Have closed the cross-channel performance loop</span>
+            </div>
+        </div>
+        <div class="s5-flow">
+            <div class="s5-step-card">
+                <div class="s5-step-num">1</div>
+                <div class="s5-step-name">Performance Dashboard</div>
+                <div class="s5-step-time">Ship first (4–6 weeks)</div>
+                <p class="s5-step-desc">Pull performance data from channels Typeface already publishes to — SFMC, CM360, Meta, Braze. Map metrics to specific content pieces. Surface in Arc Spaces so the CMO has a number for the CFO.</p>
+            </div>
+            <div class="s5-arrow">&rarr;</div>
+            <div class="s5-step-card">
+                <div class="s5-step-num">2</div>
+                <div class="s5-step-name">Predictive Content Scoring</div>
+                <div class="s5-step-time">Ship second (4–8 weeks)</div>
+                <p class="s5-step-desc">Score content before publication using Arc Graph's historical data + audience signals. Content Explainability already scores 0–100. Extend it with performance-trained prediction. Anyword proves 82% accuracy is achievable.</p>
+            </div>
+            <div class="s5-arrow">&rarr;</div>
+            <div class="s5-step-card">
+                <div class="s5-step-num">3</div>
+                <div class="s5-step-name">Intelligence Loop</div>
+                <div class="s5-step-time">Ship third (8–12 weeks)</div>
+                <p class="s5-step-desc">Campaign results flow back into Arc Graph automatically. Which CTAs convert for which segments? Which visuals perform in Q1 vs Q4? Every campaign enriches the model. This is the flywheel that creates switching costs.</p>
+            </div>
+        </div>
+        <div class="s5-metrics-row">
+            <div class="s5-metric-card">
+                <span class="s5-metric-label s5-label-primary">Primary</span>
+                <span class="s5-metric-name">Content-Attributed Revenue</span>
+                <span class="s5-metric-val">Attribution for 50%+ campaigns</span>
+            </div>
+            <div class="s5-metric-card">
+                <span class="s5-metric-label s5-label-secondary">Secondary</span>
+                <span class="s5-metric-name">Prediction Accuracy</span>
+                <span class="s5-metric-val">~52% (random) &rarr; 75%+</span>
+            </div>
+            <div class="s5-metric-card">
+                <span class="s5-metric-label s5-label-guardrail">Guardrail</span>
+                <span class="s5-metric-name">Customer ROI Confidence</span>
+                <span class="s5-metric-val">60%+ can cite $ impact</span>
+            </div>
+        </div>
+        <div class="s5-validation-strip">
+            <div class="s5-val-col">
+                <span class="s5-val-week">Wk 1–2: Data Audit</span>
+                <p class="s5-val-desc">Problem validation &mdash; Analyze 5 customers' performance data. Does sufficient data exist to build attribution? Is the gap real?</p>
+            </div>
+            <div class="s5-val-col">
+                <span class="s5-val-week">Wk 3: Predictive A/B</span>
+                <p class="s5-val-desc">Feature test &mdash; Score upcoming content pre-publish, track post-publish. Does higher-scored content outperform? Target: 70%+ accuracy.</p>
+            </div>
+            <div class="s5-val-col">
+                <span class="s5-val-week">Wk 4: ROI Workshop</span>
+                <p class="s5-val-desc">Value prop test &mdash; Build revenue dashboards with 2 CMOs. Does seeing attributed revenue change renewal confidence?</p>
+            </div>
+            <div class="s5-kill">Kill signal: If Content Explainability scores show less than 60% correlation with post-publish performance outcomes across 3 customers, the scoring foundation needs rethinking before extending into predictive scoring.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: Why These Two, Why Now -->
+    <div class="slide slide-closing" id="slide-9">
+        <div class="sc-header">
+            <h2 class="sc-title">Why These Two, Why Now</h2>
+        </div>
+        <div class="sc-cards">
+            <div class="sc-card">
+                <div class="sc-card-icon">1</div>
+                <div class="sc-card-title">The Ignition Switch</div>
+                <p class="sc-card-body">Campaign Orchestration converts the architectural moat into visible, self-serve value that any marketer can experience in under 10 minutes.</p>
+                <p class="sc-card-answer">Answers: <em>"Can my team actually use this?"</em></p>
+                <p class="sc-card-window">Competitive window: 6–9 months before Jasper Grid has enterprise proof points.</p>
+            </div>
+            <div class="sc-card">
+                <div class="sc-card-icon">2</div>
+                <div class="sc-card-title">The Lock-In Mechanism</div>
+                <p class="sc-card-body">Content-to-Revenue Intelligence creates a compounding data advantage. Every campaign run enriches Arc Graph, making the platform smarter and harder to replace.</p>
+                <p class="sc-card-answer">Answers: <em>"Can I prove it's worth the spend?"</em></p>
+                <p class="sc-card-window">Competitive window: 12–18 months before any competitor closes the performance loop.</p>
+            </div>
+        </div>
+        <div class="sc-bottom">
+            <p class="sc-bottom-headline">Together, they answer the two questions every CMO asks before signing a $500K+ contract.</p>
+            <p class="sc-bottom-text">The architecture is built. The moat is real. Opportunity 1 is the ignition switch that makes it visible. Opportunity 2 is the intelligence loop that makes it irreplaceable. Validation is 3–4 weeks per opportunity. Builds are 6–16 weeks. The infrastructure already exists.</p>
+            <div class="sc-author">Aditi Parvati &nbsp;|&nbsp; PM Internship Exercise &nbsp;|&nbsp; April 2026</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: Appendix -->
+    <div class="slide slide-appendix" id="slide-10">
+        <div class="sa-header">
+            <h2 class="sa-title">Appendix: Sources &amp; Research</h2>
+        </div>
+        <div class="sa-sources">
+            <div class="sa-col">
+                <p class="sa-col-header">Typeface Primary Sources</p>
+                <ul class="sa-source-list">
+                    <li>Marketing Orchestration Engine launch blog (Mar 2026)</li>
+                    <li>Signal Report: Big Game Edition (Feb 2026)</li>
+                    <li>Feature Focus: December 2025, November 2025</li>
+                    <li>Brand Agent announcement blog</li>
+                    <li>Arc Agents, Arc Spaces, Arc Forge product pages</li>
+                    <li>Dreamforce 2025: Salesforce integration announcement</li>
+                    <li>Typeface Academy learning resources</li>
+                    <li>Customer quotes: Microsoft, ASICS, M&amp;S, Johnson Controls</li>
+                    <li>"Co-Creation Over Command" AI adoption playbook (Dec 2025)</li>
+                    <li>"4 Phases of Enterprise AI Rollout" blog</li>
+                    <li>Typeface on Typeface: AI email conversion case study</li>
+                </ul>
+            </div>
+            <div class="sa-col">
+                <p class="sa-col-header">Industry &amp; Competitive Sources</p>
+                <ul class="sa-source-list">
+                    <li>Gartner: 40%+ Agentic AI Projects Canceled by 2027 (June 2025)</li>
+                    <li>Gartner: 40% Enterprise Apps Embed AI Agents by 2026 (Aug 2025)</li>
+                    <li>Gartner CMO Spend Survey 2025 (n=402)</li>
+                    <li>Adobe 2026 AI &amp; Digital Trends Report</li>
+                    <li>CMI Enterprise Content Marketing Report 2025</li>
+                    <li>BCG 2025: Enterprise AI Scale Analysis</li>
+                    <li>Forrester TEI: Writer (333% ROI), Jasper (342% ROI), Q3 2025</li>
+                    <li>Forrester Wave: Content Platforms, Q1 2025</li>
+                    <li>Jasper Grid (Feb 2026), Writer Skills/Playbooks (Mar 2026)</li>
+                    <li>Adobe GenStudio &amp; Content Production Agent (Oct 2025)</li>
+                    <li>Canva Grow (Oct 2025), MangoAI acquisition (Feb 2026)</li>
+                    <li>Anyword (82% accuracy), Jacquard (94% beat rate)</li>
+                    <li>CMSWire, Demand Gen Report coverage (Mar 2026)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="sa-table-section">
+            <p class="sa-table-header">Competitive Capability Summary</p>
+            <table class="sa-table">
+                <thead><tr><th>Capability</th><th>Typeface</th><th>Jasper</th><th>Writer</th><th>Adobe</th></tr></thead>
+                <tbody>
+                    <tr><td>Brand Intelligence</td><td><span class="badge badge-yes">Yes — Arc Graph</span></td><td><span class="badge badge-partial">Manual — IQ</span></td><td><span class="badge badge-partial">Enterprise-broad</span></td><td><span class="badge badge-none">Validates only</span></td></tr>
+                    <tr><td>Cross-Channel Orchestration</td><td><span class="badge badge-partial">Agents — no UX</span></td><td><span class="badge badge-partial">Grid — new</span></td><td><span class="badge badge-partial">Playbooks</span></td><td><span class="badge badge-none">Beta</span></td></tr>
+                    <tr><td>Performance Loop</td><td><span class="badge badge-roadmap">Roadmap — Arc Loop</span></td><td><span class="badge badge-none">Embryonic</span></td><td><span class="badge badge-none">None</span></td><td><span class="badge badge-partial">Paid media only</span></td></tr>
+                    <tr><td>Multimodal</td><td><span class="badge badge-yes">Text + Image + Video</span></td><td><span class="badge badge-partial">Text-first</span></td><td><span class="badge badge-none">Text-only</span></td><td><span class="badge badge-partial">Firefly — test</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sa-footer">Research conducted April 2026. Competitive data based on publicly available product pages, blog announcements, and analyst reports.</div>
+    </div>
+
+<script>
+// Draw KPI tree connector lines based on actual rendered node positions
+function drawTreeLines(containerSelector) {
+    var container = document.querySelector(containerSelector);
+    if (!container) return;
+    var svg = container.querySelector('svg.kpi-lines');
+    if (!svg) return;
+    svg.innerHTML = '';
+    var ns = 'http://www.w3.org/2000/svg';
+    var cRect = container.getBoundingClientRect();
+
+    var w = cRect.width;
+    var h = cRect.height;
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
+
+    var nodesById = {};
+    container.querySelectorAll('.kn[data-id]').forEach(function (el) {
+        nodesById[el.dataset.id] = el;
+    });
+
+    var childrenByParent = {};
+    container.querySelectorAll('.kn[data-parent]').forEach(function (el) {
+        var pid = el.dataset.parent;
+        if (!childrenByParent[pid]) childrenByParent[pid] = [];
+        childrenByParent[pid].push(el);
+    });
+
+    function cx(el) {
+        var r = el.getBoundingClientRect();
+        return r.left + r.width / 2 - cRect.left;
+    }
+    function topOf(el) {
+        return el.getBoundingClientRect().top - cRect.top;
+    }
+    function botOf(el) {
+        var r = el.getBoundingClientRect();
+        return r.top + r.height - cRect.top;
+    }
+    function line(x1, y1, x2, y2) {
+        var l = document.createElementNS(ns, 'line');
+        l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+        l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+        l.setAttribute('stroke', '#ccc'); l.setAttribute('stroke-width', '1.5');
+        svg.appendChild(l);
+    }
+
+    Object.keys(childrenByParent).forEach(function (pid) {
+        var parent = nodesById[pid];
+        if (!parent) return;
+        var children = childrenByParent[pid];
+        var pCx = cx(parent);
+        var pBot = botOf(parent);
+
+        var childCenters = children.map(function (c) {
+            return { x: cx(c), t: topOf(c) };
+        });
+
+        var midY = pBot + (childCenters[0].t - pBot) / 2;
+
+        line(pCx, pBot, pCx, midY);
+
+        var xs = childCenters.map(function (c) { return c.x; });
+        var minX = Math.min.apply(null, xs);
+        var maxX = Math.max.apply(null, xs);
+        line(minX, midY, maxX, midY);
+
+        childCenters.forEach(function (c) {
+            line(c.x, midY, c.x, c.t);
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var progressText = document.getElementById('deck-progress-text');
+    var prevBtn = document.getElementById('deck-prev');
+    var nextBtn = document.getElementById('deck-next');
+    var verticalHint = document.getElementById('deck-vertical-hint');
+    var currentIndex = 0;
+    var wheelLocked = false;
+    var touchStartX = 0;
+    var touchStartY = 0;
+
+    function redrawVisibleTrees() {
+        drawTreeLines('.kpi-tree-container:not(.kpi-tree-container-2)');
+        drawTreeLines('.kpi-tree-container-2');
+    }
+
+    function updateDeckUi() {
+        if (progressText) {
+            progressText.textContent = 'Slide ' + (currentIndex + 1) + ' of ' + slides.length;
+        }
+        if (prevBtn) prevBtn.disabled = currentIndex === 0;
+        if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
+    }
+
+    function updateVerticalHint() {
+        if (!verticalHint) return;
+        var activeSlide = slides[currentIndex];
+        if (!activeSlide) {
+            verticalHint.classList.remove('show');
+            return;
+        }
+
+        var hasOverflow = (activeSlide.scrollHeight - activeSlide.clientHeight) > 16;
+        var nearBottom = (activeSlide.scrollTop + activeSlide.clientHeight) >= (activeSlide.scrollHeight - 16);
+
+        verticalHint.classList.toggle('show', hasOverflow && !nearBottom);
+    }
+
+    function renderSlide(index) {
+        if (index < 0 || index >= slides.length) return;
+        currentIndex = index;
+
+        slides.forEach(function (slide, idx) {
+            var isActive = idx === currentIndex;
+            slide.classList.toggle('active-slide', isActive);
+            if (isActive) {
+                slide.scrollTop = 0;
+            }
+        });
+
+        updateDeckUi();
+
+        requestAnimationFrame(function () {
+            redrawVisibleTrees();
+            updateVerticalHint();
+        });
+    }
+
+    function goToSlide(index) {
+        if (index < 0 || index >= slides.length || index === currentIndex) return;
+        renderSlide(index);
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+            goToSlide(currentIndex - 1);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+            goToSlide(currentIndex + 1);
+        });
+    }
+
+    document.addEventListener('keydown', function (event) {
+        var tagName = event.target && event.target.tagName ? event.target.tagName.toLowerCase() : '';
+        if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) return;
+
+        if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            goToSlide(currentIndex + 1);
+        } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            goToSlide(currentIndex - 1);
+        }
+    });
+
+    window.addEventListener('wheel', function (event) {
+        var horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY) && Math.abs(event.deltaX) > 22;
+        if (!horizontalIntent) return;
+
+        event.preventDefault();
+        if (wheelLocked) return;
+        wheelLocked = true;
+
+        if (event.deltaX > 0) {
+            goToSlide(currentIndex + 1);
+        } else {
+            goToSlide(currentIndex - 1);
+        }
+
+        setTimeout(function () {
+            wheelLocked = false;
+        }, 220);
+    }, { passive: false });
+
+    window.addEventListener('touchstart', function (event) {
+        if (!event.touches || event.touches.length === 0) return;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchend', function (event) {
+        if (!event.changedTouches || event.changedTouches.length === 0) return;
+        var dx = event.changedTouches[0].clientX - touchStartX;
+        var dy = event.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+        if (dx < 0) {
+            goToSlide(currentIndex + 1);
+        } else {
+            goToSlide(currentIndex - 1);
+        }
+    }, { passive: true });
+
+    window.addEventListener('resize', function () {
+        redrawVisibleTrees();
+        updateVerticalHint();
+    });
+
+    window.addEventListener('load', function () {
+        redrawVisibleTrees();
+        updateVerticalHint();
+    });
+
+    slides.forEach(function (slide) {
+        slide.addEventListener('scroll', function () {
+            if (!slide.classList.contains('active-slide')) return;
+            updateVerticalHint();
+        }, { passive: true });
+    });
+
+    renderSlide(0);
+});
+</script>
+</body>
+</html>
