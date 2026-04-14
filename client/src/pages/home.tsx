@@ -20,6 +20,8 @@ import libraryClaudePhoto from "@assets/library-claude-session.jpeg";
 import bakerLibraryPhoto from "@assets/baker-library-day.jpeg";
 import tuckPhoto from "@assets/tuck-school.jpeg";
 import bostonPhoto from "@assets/boston-charles-river.jpeg";
+import echoHardwareImg from "@assets/echo-hardware.png";
+import territorySlicer from "@assets/territory-slicer.png";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -348,33 +350,59 @@ export default function Home() {
     { href: "#contact", label: "Contact" },
   ];
 
-  const featuredStrategyProjects = [
+  const showcaseProjects = [
     {
-      title: "Galaxy: Institutional API Onboarding Prototype",
-      role: "Portfolio Case Study",
-      period: "March 2026",
-      desc: "Public-facing product prototype focused on reducing onboarding friction from account setup to first API-driven institutional workflow.",
-      tags: ["API Product", "User Journeys", "PRD + Launch Plan"],
-      liveUrl: "/galaxy/intro",
-      metric: "Copied from original private endpoint"
+      title: "AI-Guided Echocardiography",
+      type: "IEEE Published · Team Lead",
+      href: "https://docs.google.com/presentation/d/1w_JfiRj93nNbuG2_TPsFGCGu_8X2yk7s9Yz3uqdNBVc/edit?usp=sharing",
+      external: true,
+      image: echoHardwareImg,
+      bg: "bg-gradient-to-br from-slate-700 via-slate-800 to-blue-950",
+      accent: "text-blue-300",
     },
+    {
+      title: "Territory Slicer",
+      type: "Live Demo · TypeScript",
+      href: "https://territory-slicer-two.vercel.app/",
+      external: true,
+      image: territorySlicer,
+      bg: "bg-gradient-to-br from-gray-900 via-zinc-900 to-neutral-800",
+      accent: "text-green-400",
+    },
+    {
+      title: "Kriyo AI",
+      type: "AI Builder · Salesforce NLP",
+      href: "#projects",
+      external: false,
+      bg: "bg-gradient-to-br from-emerald-900 via-green-900 to-teal-900",
+      accent: "text-emerald-300",
+    },
+    {
+      title: "Capital One AI Strategy",
+      type: "PM · Tuck School",
+      href: "#projects",
+      external: false,
+      bg: "bg-gradient-to-br from-red-950 via-rose-950 to-red-900",
+      accent: "text-red-300",
+    },
+  ];
+
+  const featuredStrategyProjects = [
     {
       title: "Profound: WebMCP Product Strategy",
       role: "Portfolio Case Study",
       period: "March 2026",
-      desc: "Public-facing version of my Profound strategic teardown. Internship ask removed and reframed as a product roadmap case study.",
+      desc: "How an LLM observability startup can own the agent analytics layer. A deep-dive into Profound's WebMCP product opportunity — market timing, competitive positioning, and a phased roadmap for the agent-native enterprise.",
       tags: ["AI Strategy", "Agent Analytics", "Competitive Intel"],
       liveUrl: "/projects/profound",
-      metric: "Copied from original private endpoint"
     },
     {
       title: "Ooma: AI Opportunity Teardown",
       role: "Portfolio Case Study",
       period: "March 2026",
-      desc: "Public-facing version of my Ooma analysis focused on market gap, product packaging, and execution opportunities.",
+      desc: "A structured breakdown of Ooma's AI opportunity across market gap, product packaging, and execution. Maps where Ooma should build, buy, or partner — and what a defensible AI-native product motion looks like for a legacy telecom.",
       tags: ["Product Strategy", "Market Mapping", "Build vs Buy"],
       liveUrl: "/projects/ooma",
-      metric: "Copied from original private endpoint"
     }
   ];
 
@@ -630,6 +658,69 @@ export default function Home() {
       </div>
 
       <main className="container mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-20 max-w-5xl">
+
+        {/* Featured Projects Showcase */}
+        <section className="mb-20 sm:mb-28">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex items-end justify-between mb-6 gap-4"
+          >
+            <div>
+              <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">Selected Work</p>
+              <h2 className="font-serif text-2xl sm:text-3xl">Projects Worth Seeing</h2>
+            </div>
+            <a
+              href="#projects"
+              onClick={() => trackFunnel("showcase", "view_all_projects")}
+              className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+            >
+              View all <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            {showcaseProjects.map((p, i) => (
+              <motion.a
+                key={i}
+                href={p.href}
+                target={p.external ? "_blank" : undefined}
+                rel={p.external ? "noreferrer" : undefined}
+                onClick={() => trackFunnel("showcase", `project_${p.title.toLowerCase().replace(/\s+/g, "_")}`)}
+                className="group relative overflow-hidden rounded-xl aspect-[4/3] block"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.09, duration: 0.5 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -4, scale: 1.02 }}
+              >
+                {"image" in p && (p as any).image ? (
+                  <img
+                    src={(p as any).image}
+                    alt={p.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className={`w-full h-full ${p.bg} transition-all duration-500 group-hover:brightness-110`} />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                  <p className={`text-[10px] sm:text-xs font-mono ${p.accent} opacity-90 mb-0.5`}>{p.type}</p>
+                  <h3 className="text-white font-serif text-sm sm:text-base font-medium leading-snug">{p.title}</h3>
+                </div>
+                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {p.external ? (
+                    <ExternalLink className="h-3.5 w-3.5 text-white/70" />
+                  ) : (
+                    <ArrowRight className="h-3.5 w-3.5 text-white/70" />
+                  )}
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </section>
 
         {/* Journey Section */}
         <section id="journey" className="mb-20 sm:mb-28">
@@ -976,11 +1067,7 @@ export default function Home() {
           <div className="mb-8 sm:mb-10">
             <div className="flex items-center justify-between gap-3 mb-3">
               <h3 className="font-serif text-xl sm:text-2xl">Company Product Breakdowns</h3>
-              <Badge className="bg-primary/10 text-primary border-primary/20 text-[10px] sm:text-xs">Public Portfolio Copies</Badge>
             </div>
-            <p className="text-muted-foreground text-xs sm:text-sm mb-4">
-              These are copied portfolio-safe versions of my company-specific analyses. The original private endpoints remain unchanged.
-            </p>
             <div className="grid gap-4 md:grid-cols-2">
               {featuredStrategyProjects.map((project, i) => (
                 <motion.div
@@ -997,9 +1084,6 @@ export default function Home() {
                       <p className="text-xs text-muted-foreground mt-1">{project.role} &bull; {project.period}</p>
                     </div>
                   </div>
-                  <Badge className="bg-gold/10 text-gold-foreground border-gold/20 text-xs font-mono mb-3">
-                    {project.metric}
-                  </Badge>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{project.desc}</p>
                   <div className="flex flex-wrap gap-1.5 mt-3">
                     {project.tags.map((tag: string, ti: number) => (

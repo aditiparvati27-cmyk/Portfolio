@@ -79,6 +79,36 @@ export default function ProfoundPortfolio() {
           WebMCP, live in Chrome 146 since March 10, makes that measurable.
           <strong> No competitor has built it. Adobe is one sprint away.</strong>
         </p>
+        <a
+          href="https://webmcp-demo-bay.vercel.app/#catalogue"
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "6px",
+            marginTop: "20px",
+            fontSize: "11px",
+            fontWeight: 600,
+            letterSpacing: ".12em",
+            textTransform: "uppercase",
+            color: "#EDE9E1",
+            border: "1px solid rgba(255,255,255,.3)",
+            padding: "7px 16px",
+            textDecoration: "none",
+            transition: "background .2s, border-color .2s",
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,.08)";
+            (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,.55)";
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+            (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,.3)";
+          }}
+        >
+          ↗ Live WebMCP Demo
+        </a>
       </div>
       <div className="s1-stats">
         <div className="ss"><div className="ss-n">$262B</div><div className="ss-l">AI-influenced retail sales, holiday 2025</div></div>
