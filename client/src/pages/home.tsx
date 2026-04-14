@@ -468,17 +468,17 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section — compact so thumbnails appear above the fold */}
+      {/* Hero Section */}
       <section className="pt-16">
-        <div className="container mx-auto px-4 sm:px-6 max-w-5xl py-6 sm:py-8">
+        <div className="container mx-auto px-4 sm:px-6 max-w-5xl pt-7 sm:pt-9 pb-4">
 
-          {/* Top: Intro text + compact profile photo */}
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 md:gap-10 items-center">
+          {/* Top: Intro text + profile photo — balanced 2-col */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-2.5 relative z-10"
+              className="space-y-3 relative z-10"
             >
               <motion.p
                 initial={{ opacity: 0 }}
@@ -489,25 +489,29 @@ export default function Home() {
                 Bengaluru &rarr; Hanover, NH &#9992;&#65039;
               </motion.p>
 
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium leading-[1.1] tracking-tight">
+              <h1 className="font-serif text-4xl sm:text-5xl font-medium leading-[1.1] tracking-tight">
                 <span className="text-primary">Hi, I'm Aditi.</span> <span className="inline-block">&#128075;</span>
               </h1>
-              <p className="font-serif text-base sm:text-lg text-foreground/80 leading-snug">
-                Product Manager. Dartmouth MEM '26.{" "}
-                <span className="text-muted-foreground text-sm sm:text-base">(Yes, I survived the winter.)</span>
+              <p className="font-serif text-lg sm:text-xl text-foreground/80 leading-snug">
+                Product Manager. Dartmouth MEM '26.<br />
+                <span className="text-muted-foreground text-base sm:text-lg">(Yes, I survived the winter.)</span>
               </p>
 
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-lg">
-                I build products that drive real revenue — SaaS, fintech, AI — and I've been doing it with AI before it was cool. Currently powered by Mochas, Claude Code, and a deeply questionable amount of optimism.
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                I moved from Bangalore's beautiful chaos to a town where the Appalachian Trail
+                starts on the main street, the average age is 23, and people describe -20&deg;C
+                winters as "brisk." I build products that drive real revenue and I've been doing
+                it with AI before it was cool. Currently powered by Mochas, Claude Code, and a
+                deeply questionable amount of optimism.
               </p>
 
-              <div className="flex flex-wrap gap-2 pt-1">
-                <Button className="rounded-full px-5 h-9 text-sm" asChild>
+              <div className="flex flex-wrap gap-2.5 pt-1">
+                <Button className="rounded-full px-6 h-10 text-sm" asChild>
                   <a href="#contact" onClick={() => trackFunnel("hero", "cta_contact")}>
                     Let's Talk <ArrowRight className="ml-2 h-3.5 w-3.5" />
                   </a>
                 </Button>
-                <Button variant="outline" className="rounded-full px-5 h-9 text-sm" asChild>
+                <Button variant="outline" className="rounded-full px-6 h-10 text-sm" asChild>
                   <a href="#experience" onClick={() => trackFunnel("hero", "cta_experience")}>
                     See My Work <ArrowDown className="ml-2 h-3.5 w-3.5" />
                   </a>
@@ -524,18 +528,18 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Profile Photo — smaller */}
+            {/* Profile Photo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
               animate={{ opacity: 1, scale: 1, rotate: -2 }}
               whileHover={{ rotate: 0, scale: 1.02 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="hidden md:flex justify-center items-center relative flex-none"
+              className="hidden md:flex justify-center items-center relative"
             >
               <img
                 src={profilePhoto}
                 alt="Aditi Parvati"
-                className="w-40 h-48 md:w-44 md:h-52 object-cover rounded-2xl shadow-xl border-2 border-border/30"
+                className="w-52 h-64 object-cover rounded-2xl shadow-xl border-2 border-border/30"
                 fetchPriority="high"
                 decoding="async"
               />
@@ -543,23 +547,23 @@ export default function Home() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 }}
-                className="absolute -bottom-2 -left-3 bg-card border border-border rounded-full px-2.5 py-1 shadow-md"
+                className="absolute -bottom-3 -left-3 bg-card border border-border rounded-full px-3 py-1.5 shadow-md"
               >
-                <span className="text-xs">&#9749; Powered by Mochas</span>
+                <span className="text-sm">&#9749; Powered by Mochas</span>
               </motion.div>
             </motion.div>
           </div>
 
-          {/* Selected Work label */}
-          <div className="flex items-center justify-between mt-6 mb-2.5">
+          {/* Selected Work strip */}
+          <div className="flex items-center justify-between mt-7 mb-3">
             <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Selected Work</p>
             <a href="#projects" onClick={() => trackFunnel("hero", "view_all_projects")} className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 font-medium">
               View all <ArrowRight className="h-3 w-3" />
             </a>
           </div>
 
-          {/* Project Thumbnails — fixed height so they look good */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 sm:gap-3 h-44 sm:h-52">
+          {/* Project Thumbnails */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 sm:gap-3 h-44 sm:h-48">
             {showcaseProjects.map((p, i) => (
               <motion.a
                 key={i}
@@ -601,7 +605,7 @@ export default function Home() {
       </section>
 
       {/* Stats Bar */}
-      <div className="container mx-auto px-4 sm:px-6 max-w-5xl mt-10 sm:mt-14">
+      <div className="container mx-auto px-4 sm:px-6 max-w-5xl mt-6 sm:mt-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
