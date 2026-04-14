@@ -356,8 +356,8 @@ export default function Home() {
     {
       title: "AI-Guided Echocardiography",
       type: "IEEE Published · Team Lead",
-      href: "https://docs.google.com/presentation/d/1w_JfiRj93nNbuG2_TPsFGCGu_8X2yk7s9Yz3uqdNBVc/edit?usp=sharing",
-      external: true,
+      href: "#projects",
+      external: false,
       image: echoHardwareImg,
       bg: "bg-gradient-to-br from-slate-700 via-slate-800 to-blue-950",
       accent: "text-blue-300",
@@ -365,8 +365,8 @@ export default function Home() {
     {
       title: "Territory Slicer",
       type: "Live Demo · TypeScript",
-      href: "https://territory-slicer-two.vercel.app/",
-      external: true,
+      href: "#projects",
+      external: false,
       image: territorySlicer,
       bg: "bg-gradient-to-br from-gray-900 via-zinc-900 to-neutral-800",
       accent: "text-green-400",
@@ -374,7 +374,7 @@ export default function Home() {
     {
       title: "WebMCP Strategy Analysis",
       type: "AI Strategy · Profound",
-      href: "/projects/profound",
+      href: "#projects",
       external: false,
       image: webmcpImg,
       bg: "bg-gradient-to-br from-violet-900 via-purple-900 to-indigo-950",
