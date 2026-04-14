@@ -469,11 +469,11 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Hero Section — compact so thumbnails appear above the fold */}
-      <section className="h-screen flex flex-col pt-16 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 max-w-5xl flex flex-col h-full py-4 sm:py-5 gap-4">
+      <section className="pt-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-5xl py-6 sm:py-8">
 
           {/* Top: Intro text + compact profile photo */}
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 md:gap-8 items-center flex-none">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 md:gap-10 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -550,8 +550,16 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Bottom: Project Thumbnails — fill remaining viewport height */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 sm:gap-3 flex-1 min-h-0 pb-2">
+          {/* Selected Work label */}
+          <div className="flex items-center justify-between mt-6 mb-2.5">
+            <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Selected Work</p>
+            <a href="#projects" onClick={() => trackFunnel("hero", "view_all_projects")} className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 font-medium">
+              View all <ArrowRight className="h-3 w-3" />
+            </a>
+          </div>
+
+          {/* Project Thumbnails — fixed height so they look good */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 sm:gap-3 h-44 sm:h-52">
             {showcaseProjects.map((p, i) => (
               <motion.a
                 key={i}
@@ -559,7 +567,7 @@ export default function Home() {
                 target={p.external ? "_blank" : undefined}
                 rel={p.external ? "noreferrer" : undefined}
                 onClick={() => trackFunnel("showcase", `project_${p.title.toLowerCase().replace(/\s+/g, "_")}`)}
-                className="group relative overflow-hidden rounded-xl block h-full"
+                className="group relative overflow-hidden rounded-xl block w-full h-full"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + i * 0.07, duration: 0.5 }}
