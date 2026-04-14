@@ -22,6 +22,8 @@ import tuckPhoto from "@assets/tuck-school.jpeg";
 import bostonPhoto from "@assets/boston-charles-river.jpeg";
 import echoHardwareImg from "@assets/echo-hardware.png";
 import territorySlicer from "@assets/territory-slicer.png";
+import bankImg from "@assets/bank.jpg";
+import webmcpImg from "@assets/Webmcp.png";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -370,6 +372,15 @@ export default function Home() {
       accent: "text-green-400",
     },
     {
+      title: "WebMCP Strategy Analysis",
+      type: "AI Strategy · Profound",
+      href: "/projects/profound",
+      external: false,
+      image: webmcpImg,
+      bg: "bg-gradient-to-br from-violet-900 via-purple-900 to-indigo-950",
+      accent: "text-violet-300",
+    },
+    {
       title: "Kriyo AI",
       type: "AI Builder · Salesforce NLP",
       href: "#projects",
@@ -382,6 +393,7 @@ export default function Home() {
       type: "PM · Tuck School",
       href: "#projects",
       external: false,
+      image: bankImg,
       bg: "bg-gradient-to-br from-red-950 via-rose-950 to-red-900",
       accent: "text-red-300",
     },
@@ -389,7 +401,7 @@ export default function Home() {
 
   const featuredStrategyProjects = [
     {
-      title: "Profound: WebMCP Product Strategy",
+      title: "WebMCP Strategy Analysis",
       role: "Portfolio Case Study",
       period: "March 2026",
       desc: "How an LLM observability startup can own the agent analytics layer. A deep-dive into Profound's WebMCP product opportunity — market timing, competitive positioning, and a phased roadmap for the agent-native enterprise.",
@@ -456,51 +468,48 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center pt-16 pb-0">
-        <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Text Content */}
+      {/* Hero Section — compact so thumbnails appear above the fold */}
+      <section className="h-screen flex flex-col pt-16 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 max-w-5xl flex flex-col h-full py-4 sm:py-5 gap-4">
+
+          {/* Top: Intro text + compact profile photo */}
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 md:gap-8 items-center flex-none">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-5 relative z-10"
+              className="space-y-2.5 relative z-10"
             >
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-xs sm:text-sm font-mono text-muted-foreground tracking-wider uppercase"
+                className="text-xs font-mono text-muted-foreground tracking-wider uppercase"
               >
                 Bengaluru &rarr; Hanover, NH &#9992;&#65039;
               </motion.p>
 
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-medium leading-[1.1] tracking-tight">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium leading-[1.1] tracking-tight">
                 <span className="text-primary">Hi, I'm Aditi.</span> <span className="inline-block">&#128075;</span>
               </h1>
-              <p className="font-serif text-xl sm:text-2xl text-foreground/80 leading-snug">
-                Product Manager. Dartmouth MEM '26.<br />
-                <span className="text-muted-foreground text-lg sm:text-xl">(Yes, I survived the winter.)</span>
+              <p className="font-serif text-base sm:text-lg text-foreground/80 leading-snug">
+                Product Manager. Dartmouth MEM '26.{" "}
+                <span className="text-muted-foreground text-sm sm:text-base">(Yes, I survived the winter.)</span>
               </p>
 
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                I moved from Bangalore's beautiful chaos to a town where the Appalachian Trail
-                starts on the main street, the average age is 23, and people describe -20&deg;C
-                winters as "brisk." I build products that drive real revenue and I've been doing
-                it with AI before it was cool. Currently powered by Mochas, Claude Code, and a
-                deeply questionable amount of optimism.
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-lg">
+                I build products that drive real revenue — SaaS, fintech, AI — and I've been doing it with AI before it was cool. Currently powered by Mochas, Claude Code, and a deeply questionable amount of optimism.
               </p>
 
-              <div className="flex flex-wrap gap-3 pt-3">
-                <Button className="rounded-full px-6 py-5 text-sm" asChild>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <Button className="rounded-full px-5 h-9 text-sm" asChild>
                   <a href="#contact" onClick={() => trackFunnel("hero", "cta_contact")}>
-                    Let's Talk <ArrowRight className="ml-2 h-4 w-4" />
+                    Let's Talk <ArrowRight className="ml-2 h-3.5 w-3.5" />
                   </a>
                 </Button>
-                <Button variant="outline" className="rounded-full px-6 py-5 text-sm" asChild>
+                <Button variant="outline" className="rounded-full px-5 h-9 text-sm" asChild>
                   <a href="#experience" onClick={() => trackFunnel("hero", "cta_experience")}>
-                    See My Work <ArrowDown className="ml-2 h-4 w-4" />
+                    See My Work <ArrowDown className="ml-2 h-3.5 w-3.5" />
                   </a>
                 </Button>
                 <a
@@ -515,18 +524,18 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Profile Photo */}
+            {/* Profile Photo — smaller */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
               animate={{ opacity: 1, scale: 1, rotate: -2 }}
               whileHover={{ rotate: 0, scale: 1.02 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="hidden md:flex justify-center items-center relative"
+              className="hidden md:flex justify-center items-center relative flex-none"
             >
               <img
                 src={profilePhoto}
                 alt="Aditi Parvati"
-                className="w-72 h-80 md:w-80 md:h-[22rem] object-cover rounded-2xl shadow-xl border-2 border-border/30"
+                className="w-40 h-48 md:w-44 md:h-52 object-cover rounded-2xl shadow-xl border-2 border-border/30"
                 fetchPriority="high"
                 decoding="async"
               />
@@ -534,154 +543,15 @@ export default function Home() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 }}
-                className="absolute -bottom-3 -left-3 bg-card border border-border rounded-full px-3 py-1.5 shadow-md"
+                className="absolute -bottom-2 -left-3 bg-card border border-border rounded-full px-2.5 py-1 shadow-md"
               >
-                <span className="text-sm">&#9749; Powered by Mochas</span>
+                <span className="text-xs">&#9749; Powered by Mochas</span>
               </motion.div>
             </motion.div>
           </div>
 
-          {/* Stats Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 mt-16 sm:mt-20 border border-border/50 rounded-xl bg-card/50 backdrop-blur-sm"
-          >
-            <StatCard icon="&#128176;" value={6} prefix="$" suffix="M" label="ARR Driven" />
-            <StatCard icon="&#128200;" value={4} suffix="x" label="ACV Growth" />
-            <StatCard icon="&#129302;" value="3+" suffix="" label="AI Tools Built" />
-            <StatCard icon="&#127795;" value="1M+" label="Trees in Hanover" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="mt-5 sm:mt-7 border border-border/50 rounded-xl bg-card/60 backdrop-blur-sm p-4 sm:p-5"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-              <div>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground">45-Second Portfolio Snapshot</p>
-                <h3 className="font-serif text-lg sm:text-xl">Quick signal, then choose your depth</h3>
-              </div>
-              <div className="inline-flex rounded-full border border-border/60 bg-background p-1">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setRoleView("impact");
-                    trackFunnel("hero", "lens_toggle_impact");
-                  }}
-                  className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "impact"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"}`}
-                >
-                  Impact First
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setRoleView("thinking");
-                    trackFunnel("hero", "lens_toggle_thinking");
-                  }}
-                  className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "thinking"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"}`}
-                >
-                  How I Think
-                </button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-              {(roleView === "impact" ? [
-                {
-                  title: "Business outcomes",
-                  body: "$6M ARR influenced, $1.5M upsell unlocked, $800K strategic investment influenced."
-                },
-                {
-                  title: "Core fit",
-                  body: "Product management + product marketing blend: market analysis, positioning, and execution."
-                },
-                {
-                  title: "Speed",
-                  body: "From ambiguous problem to recommendation prototype in tight timelines."
-                }
-              ] : [
-                {
-                  title: "Outcome quality",
-                  body: "Repeated record of tying product decisions to revenue, retention, and adoption signals."
-                },
-                {
-                  title: "PM + PMM operating model",
-                  body: "Discovery, segmentation, positioning, build-vs-buy, roadmap prioritization, and launch narrative."
-                },
-                {
-                  title: "Execution depth",
-                  body: "Comfortable moving between strategy docs, wireframes, experiment plans, and metric reviews."
-                }
-              ]).map((item, i) => (
-                <div key={i} className="p-3 sm:p-4 rounded-lg border border-border/50 bg-background/70">
-                  <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1">{item.title}</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{item.body}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#projects"
-                onClick={() => trackFunnel("hero", "snapshot_view_projects")}
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
-              >
-                <Globe className="h-3.5 w-3.5" /> View Strategy Projects
-              </a>
-              <a
-                href="https://drive.google.com/file/d/18mv8p3-WhrCs02XOsn6nT5eHB37VCLMU/view"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => trackFunnel("hero", "snapshot_view_resume")}
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
-              >
-                <FileText className="h-3.5 w-3.5" /> View Resume
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Scrolling Ticker */}
-      <div className="mt-12 sm:mt-16">
-        <Ticker />
-      </div>
-
-      <main className="container mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-20 max-w-5xl">
-
-        {/* Featured Projects Showcase */}
-        <section className="mb-20 sm:mb-28">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex items-end justify-between mb-6 gap-4"
-          >
-            <div>
-              <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">Selected Work</p>
-              <h2 className="font-serif text-2xl sm:text-3xl">Projects Worth Seeing</h2>
-            </div>
-            <a
-              href="#projects"
-              onClick={() => trackFunnel("showcase", "view_all_projects")}
-              className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
-            >
-              View all <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          {/* Bottom: Project Thumbnails — fill remaining viewport height */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 sm:gap-3 flex-1 min-h-0 pb-2">
             {showcaseProjects.map((p, i) => (
               <motion.a
                 key={i}
@@ -689,12 +559,11 @@ export default function Home() {
                 target={p.external ? "_blank" : undefined}
                 rel={p.external ? "noreferrer" : undefined}
                 onClick={() => trackFunnel("showcase", `project_${p.title.toLowerCase().replace(/\s+/g, "_")}`)}
-                className="group relative overflow-hidden rounded-xl aspect-[4/3] block"
+                className="group relative overflow-hidden rounded-xl block h-full"
                 initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.09, duration: 0.5 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -4, scale: 1.02 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.07, duration: 0.5 }}
+                whileHover={{ y: -3, scale: 1.015 }}
               >
                 {"image" in p && (p as any).image ? (
                   <img
@@ -706,21 +575,140 @@ export default function Home() {
                   <div className={`w-full h-full ${p.bg} transition-all duration-500 group-hover:brightness-110`} />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
-                  <p className={`text-[10px] sm:text-xs font-mono ${p.accent} opacity-90 mb-0.5`}>{p.type}</p>
-                  <h3 className="text-white font-serif text-sm sm:text-base font-medium leading-snug">{p.title}</h3>
+                <div className="absolute bottom-0 left-0 right-0 p-2.5 sm:p-3">
+                  <p className={`text-[9px] sm:text-[10px] font-mono ${p.accent} opacity-90 mb-0.5`}>{p.type}</p>
+                  <h3 className="text-white font-serif text-xs sm:text-sm font-medium leading-snug">{p.title}</h3>
                 </div>
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   {p.external ? (
-                    <ExternalLink className="h-3.5 w-3.5 text-white/70" />
+                    <ExternalLink className="h-3 w-3 text-white/70" />
                   ) : (
-                    <ArrowRight className="h-3.5 w-3.5 text-white/70" />
+                    <ArrowRight className="h-3 w-3 text-white/70" />
                   )}
                 </div>
               </motion.a>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <div className="container mx-auto px-4 sm:px-6 max-w-5xl mt-10 sm:mt-14">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 border border-border/50 rounded-xl bg-card/50 backdrop-blur-sm"
+        >
+          <StatCard icon="&#128176;" value={6} prefix="$" suffix="M" label="ARR Driven" />
+          <StatCard icon="&#128200;" value={4} suffix="x" label="ACV Growth" />
+          <StatCard icon="&#129302;" value="3+" suffix="" label="AI Tools Built" />
+          <StatCard icon="&#127795;" value="1M+" label="Trees in Hanover" />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="mt-4 sm:mt-5 border border-border/50 rounded-xl bg-card/60 backdrop-blur-sm p-4 sm:p-5"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+            <div>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">45-Second Portfolio Snapshot</p>
+              <h3 className="font-serif text-lg sm:text-xl">Quick signal, then choose your depth</h3>
+            </div>
+            <div className="inline-flex rounded-full border border-border/60 bg-background p-1">
+              <button
+                type="button"
+                onClick={() => {
+                  setRoleView("impact");
+                  trackFunnel("hero", "lens_toggle_impact");
+                }}
+                className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "impact"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"}`}
+              >
+                Impact First
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setRoleView("thinking");
+                  trackFunnel("hero", "lens_toggle_thinking");
+                }}
+                className={`px-3 py-1.5 text-xs rounded-full transition-all ${roleView === "thinking"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"}`}
+              >
+                How I Think
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+            {(roleView === "impact" ? [
+              {
+                title: "Business outcomes",
+                body: "$6M ARR influenced, $1.5M upsell unlocked, $800K strategic investment influenced."
+              },
+              {
+                title: "Core fit",
+                body: "Product management + product marketing blend: market analysis, positioning, and execution."
+              },
+              {
+                title: "Speed",
+                body: "From ambiguous problem to recommendation prototype in tight timelines."
+              }
+            ] : [
+              {
+                title: "Outcome quality",
+                body: "Repeated record of tying product decisions to revenue, retention, and adoption signals."
+              },
+              {
+                title: "PM + PMM operating model",
+                body: "Discovery, segmentation, positioning, build-vs-buy, roadmap prioritization, and launch narrative."
+              },
+              {
+                title: "Execution depth",
+                body: "Comfortable moving between strategy docs, wireframes, experiment plans, and metric reviews."
+              }
+            ]).map((item, i) => (
+              <div key={i} className="p-3 sm:p-4 rounded-lg border border-border/50 bg-background/70">
+                <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1">{item.title}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="#projects"
+              onClick={() => trackFunnel("hero", "snapshot_view_projects")}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+            >
+              <Globe className="h-3.5 w-3.5" /> View Strategy Projects
+            </a>
+            <a
+              href="https://drive.google.com/file/d/18mv8p3-WhrCs02XOsn6nT5eHB37VCLMU/view"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackFunnel("hero", "snapshot_view_resume")}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+            >
+              <FileText className="h-3.5 w-3.5" /> View Resume
+            </a>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Scrolling Ticker */}
+      <div className="mt-10 sm:mt-14">
+        <Ticker />
+      </div>
+
+      <main className="container mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-20 max-w-5xl">
 
         {/* Journey Section */}
         <section id="journey" className="mb-20 sm:mb-28">
