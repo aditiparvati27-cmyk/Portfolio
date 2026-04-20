@@ -6,13 +6,14 @@ import { Chatbot } from "@/components/chatbot";
 import { Ticker } from "@/components/ticker";
 import { StatCard } from "@/components/stat-card";
 import { ProductSpecCard } from "@/components/product-spec-card";
+import { VideoThumbnail } from "@/components/video-thumbnail";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { track } from "@vercel/analytics";
 import {
   Mail, Linkedin, FileText, Download, ArrowRight, ArrowDown, BookOpen,
-  ExternalLink, TrendingUp, Users, Github, Globe, FileCode2, Menu, X, Phone
+  ExternalLink, TrendingUp, Users, Github, Globe, FileCode2, Menu, X, Phone, GraduationCap
 } from "lucide-react";
 import profilePhoto from "@assets/professional-headshot.jpeg";
 import jiraScreenshot from "@assets/image_1766854017021.png";
@@ -24,6 +25,10 @@ import echoHardwareImg from "@assets/echo-hardware.png";
 import territorySlicer from "@assets/territory-slicer.png";
 import bankImg from "@assets/bank.jpg";
 import webmcpImg from "@assets/Webmcp.png";
+import webmcpVideoThumb from "@assets/webmcp-video-thumb.png";
+import oomaVideoThumb from "@assets/ooma-video-thumb.png";
+import typefaceVideoThumb from "@assets/typeface-video-thumb.png";
+import capitaloneVideoThumb from "@assets/capitalone-video-thumb.png";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -194,7 +199,9 @@ export default function Home() {
       insight: "The best product thinking isn't about adding. It's about narrowing.",
       pdfUrl: "/llm-marketing-presentation.pdf",
       tags: ["AI/LLM", "Strategy", "Market Research"],
-      metric: "$800K investment influenced"
+      metric: "$800K investment influenced",
+      videoUrl: "https://drive.google.com/file/d/1k0hi2dSkyiCNSacoXyXUO-vyurFofXLG/view?usp=sharing",
+      videoThumb: capitaloneVideoThumb
     },
     {
       title: "Kriyo AI: Salesforce Natural Language Query Tool",
@@ -212,7 +219,8 @@ export default function Home() {
       desc: "Rural India has a severe shortage of echocardiography operators. Led 12 engineers across electronics, medical electronics, and CS to design an AI-guided ultrasound solution. 2+ years of research.",
       insight: "Engineering isn't just about circuits. It's about the person at the end of the wire.",
       tags: ["AI", "Healthcare", "IEEE"],
-      metric: "IEEE published"
+      metric: "IEEE published",
+      ieeeUrl: "https://ieeexplore.ieee.org/document/10842865"
     },
     {
       title: "Sentiment Stream",
@@ -407,6 +415,8 @@ export default function Home() {
       desc: "How an LLM observability startup can own the agent analytics layer. A deep-dive into Profound's WebMCP product opportunity — market timing, competitive positioning, and a phased roadmap for the agent-native enterprise.",
       tags: ["AI Strategy", "Agent Analytics", "Competitive Intel"],
       liveUrl: "/projects/profound",
+      videoUrl: "https://drive.google.com/file/d/10V8zaxLS0ctqm4FFhgxRiTS7yLiWxYwc/view?usp=sharing",
+      videoThumb: webmcpVideoThumb,
     },
     {
       title: "Ooma: AI Opportunity Teardown",
@@ -415,6 +425,18 @@ export default function Home() {
       desc: "A structured breakdown of Ooma's AI opportunity across market gap, product packaging, and execution. Maps where Ooma should build, buy, or partner — and what a defensible AI-native product motion looks like for a legacy telecom.",
       tags: ["Product Strategy", "Market Mapping", "Build vs Buy"],
       liveUrl: "/projects/ooma",
+      videoUrl: "https://drive.google.com/file/d/11fYYhjZzcRlj97ToLUYRrxzdbjnJSRRB/view?usp=sharing",
+      videoThumb: oomaVideoThumb,
+    },
+    {
+      title: "Typeface: Brand Voice Intelligence",
+      role: "Portfolio Case Study",
+      period: "March 2026",
+      desc: "A product opportunity assessment for Typeface's AI-powered content platform. Analyzes the Brand Voice Intelligence loop — how enterprises can enforce brand consistency at scale through AI-generated content with real-time style scoring.",
+      tags: ["AI Content", "Brand Strategy", "Product Assessment"],
+      liveUrl: "/projects/typeface",
+      videoUrl: "https://drive.google.com/file/d/1MCXgSzrEfNu_pSGwjjWuPESfdH2DlxYW/view?usp=sharing",
+      videoThumb: typefaceVideoThumb,
     }
   ];
 
@@ -1068,7 +1090,7 @@ export default function Home() {
             <div className="flex items-center justify-between gap-3 mb-3">
               <h3 className="font-serif text-xl sm:text-2xl">Company Product Breakdowns</h3>
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-5 md:grid-cols-3">
               {featuredStrategyProjects.map((project, i) => (
                 <motion.div
                   key={`featured-${i}`}
@@ -1076,30 +1098,44 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: i * 0.08 }}
                   viewport={{ once: true }}
-                  className="p-4 sm:p-5 bg-card border border-primary/20 rounded-lg"
+                  whileHover={{ y: -4, boxShadow: "0 12px 30px rgba(45, 106, 79, 0.1)" }}
+                  className="bg-card border border-primary/20 rounded-xl overflow-hidden flex flex-col transition-all"
                 >
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div>
-                      <h4 className="font-serif text-base sm:text-lg">{project.title}</h4>
-                      <p className="text-xs text-muted-foreground mt-1">{project.role} &bull; {project.period}</p>
+                  {/* Video Thumbnail */}
+                  {(project as any).videoThumb && (project as any).videoUrl && (
+                    <VideoThumbnail
+                      thumbnailSrc={(project as any).videoThumb}
+                      videoUrl={(project as any).videoUrl}
+                      title={project.title}
+                      className="h-40 sm:h-48"
+                    />
+                  )}
+
+                  {/* Content */}
+                  <div className="p-4 sm:p-5 flex flex-col flex-1">
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <div>
+                        <h4 className="font-serif text-base sm:text-lg font-semibold">{project.title}</h4>
+                        <p className="text-xs text-muted-foreground mt-1">{project.role} &bull; {project.period}</p>
+                      </div>
                     </div>
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{project.desc}</p>
-                  <div className="flex flex-wrap gap-1.5 mt-3">
-                    {project.tags.map((tag: string, ti: number) => (
-                      <Badge key={ti} variant="secondary" className="text-xs py-0.5 px-2 font-normal bg-secondary/40">{tag}</Badge>
-                    ))}
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-border/40">
-                    <a
-                      href={project.liveUrl}
-                      onMouseEnter={() => prefetchProjectRoute(project.liveUrl)}
-                      onFocus={() => prefetchProjectRoute(project.liveUrl)}
-                      onClick={() => trackFunnel("project", `featured_${project.title.toLowerCase().replace(/\s+/g, "_")}`)}
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
-                    >
-                      <Globe className="h-3.5 w-3.5" /> Open Case Study
-                    </a>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed flex-1">{project.desc}</p>
+                    <div className="flex flex-wrap gap-1.5 mt-3">
+                      {project.tags.map((tag: string, ti: number) => (
+                        <Badge key={ti} variant="secondary" className="text-xs py-0.5 px-2 font-normal bg-secondary/40">{tag}</Badge>
+                      ))}
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-border/40 flex items-center gap-4">
+                      <a
+                        href={project.liveUrl}
+                        onMouseEnter={() => prefetchProjectRoute(project.liveUrl)}
+                        onFocus={() => prefetchProjectRoute(project.liveUrl)}
+                        onClick={() => trackFunnel("project", `featured_${project.title.toLowerCase().replace(/\s+/g, "_")}`)}
+                        className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+                      >
+                        <Globe className="h-3.5 w-3.5" /> Open Case Study
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -1115,57 +1151,74 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -4, boxShadow: "0 10px 25px rgba(45, 106, 79, 0.08)" }}
-                className="group relative p-4 sm:p-6 bg-card border border-border/50 hover:border-primary/30 transition-all rounded-lg flex flex-col"
+                className="group relative bg-card border border-border/50 hover:border-primary/30 transition-all rounded-xl overflow-hidden flex flex-col"
               >
-                <div className="flex justify-between items-start mb-3 sm:mb-4 gap-2">
-                  <div className="flex-1">
-                    <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground mt-1">{project.role} &bull; {project.period}</p>
-                  </div>
-                </div>
-                {(project as any).metric && (
-                  <div className="mb-3 inline-flex">
-                    <Badge className="bg-gold/10 text-gold-foreground border-gold/20 text-xs font-mono">
-                      {(project as any).metric}
-                    </Badge>
-                  </div>
+                {/* Video Thumbnail (if available) */}
+                {(project as any).videoThumb && (project as any).videoUrl && (
+                  <VideoThumbnail
+                    thumbnailSrc={(project as any).videoThumb}
+                    videoUrl={(project as any).videoUrl}
+                    title={project.title}
+                    className="h-36 sm:h-44"
+                  />
                 )}
-                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed flex-1">
-                  {project.desc}
-                </p>
-                {(project as any).insight && (
-                  <p className="text-xs text-primary/80 italic mt-3 border-l-2 border-gold/40 pl-3">
-                    {(project as any).insight}
+
+                <div className="p-4 sm:p-6 flex flex-col flex-1">
+                  <div className="flex justify-between items-start mb-3 sm:mb-4 gap-2">
+                    <div className="flex-1">
+                      <h3 className="font-serif text-base sm:text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground mt-1">{project.role} &bull; {project.period}</p>
+                    </div>
+                  </div>
+                  {(project as any).metric && (
+                    <div className="mb-3 inline-flex">
+                      <Badge className="bg-gold/10 text-gold-foreground border-gold/20 text-xs font-mono">
+                        {(project as any).metric}
+                      </Badge>
+                    </div>
+                  )}
+                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed flex-1">
+                    {project.desc}
                   </p>
-                )}
-                {project.tags && (
-                  <div className="flex flex-wrap gap-1.5 mt-4">
-                    {project.tags.map((tag: string, ti: number) => (
-                      <Badge key={ti} variant="secondary" className="text-xs py-0.5 px-2 font-normal bg-secondary/40">{tag}</Badge>
-                    ))}
+                  {(project as any).insight && (
+                    <p className="text-xs text-primary/80 italic mt-3 border-l-2 border-gold/40 pl-3">
+                      {(project as any).insight}
+                    </p>
+                  )}
+                  {project.tags && (
+                    <div className="flex flex-wrap gap-1.5 mt-4">
+                      {project.tags.map((tag: string, ti: number) => (
+                        <Badge key={ti} variant="secondary" className="text-xs py-0.5 px-2 font-normal bg-secondary/40">{tag}</Badge>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/30">
+                    {(project as any).githubUrl && (
+                      <a href={(project as any).githubUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_github`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                        <Github className="h-3.5 w-3.5" /> GitHub
+                      </a>
+                    )}
+                    {(project as any).liveUrl && (
+                      <a href={(project as any).liveUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_live`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                        <Globe className="h-3.5 w-3.5" /> Live Demo
+                      </a>
+                    )}
+                    {(project as any).docsUrl && (
+                      <a href={(project as any).docsUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_docs`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                        <FileCode2 className="h-3.5 w-3.5" /> Algorithm Deep Dive
+                      </a>
+                    )}
+                    {(project as any).pdfUrl && (
+                      <a href={(project as any).pdfUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_pdf`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                        <FileText className="h-3.5 w-3.5" /> View Presentation
+                      </a>
+                    )}
+                    {(project as any).ieeeUrl && (
+                      <a href={(project as any).ieeeUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_ieee`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
+                        <GraduationCap className="h-3.5 w-3.5" /> IEEE Publication
+                      </a>
+                    )}
                   </div>
-                )}
-                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/30">
-                  {(project as any).githubUrl && (
-                    <a href={(project as any).githubUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_github`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
-                      <Github className="h-3.5 w-3.5" /> GitHub
-                    </a>
-                  )}
-                  {(project as any).liveUrl && (
-                    <a href={(project as any).liveUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_live`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
-                      <Globe className="h-3.5 w-3.5" /> Live Demo
-                    </a>
-                  )}
-                  {(project as any).docsUrl && (
-                    <a href={(project as any).docsUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_docs`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
-                      <FileCode2 className="h-3.5 w-3.5" /> Algorithm Deep Dive
-                    </a>
-                  )}
-                  {(project as any).pdfUrl && (
-                    <a href={(project as any).pdfUrl} target="_blank" rel="noreferrer" onClick={(e) => { e.stopPropagation(); trackFunnel("project", `${project.title.toLowerCase().replace(/\s+/g, "_")}_pdf`); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-medium">
-                      <FileText className="h-3.5 w-3.5" /> View Presentation
-                    </a>
-                  )}
                 </div>
               </motion.div>
             ))}
